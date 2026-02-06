@@ -335,7 +335,7 @@ const Home: React.FC = () => {
                 href="https://www.youtube.com/@ElevatewithYoanaNin" 
                 target="_blank" 
                 rel="noopener noreferrer" 
-                className="btn btn-secondary"
+                className="btn btn-primary"
                 style={{marginTop: '1rem'}}
               >
                 Visit My YouTube Channel

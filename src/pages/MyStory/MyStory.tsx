@@ -29,6 +29,9 @@ const MyStory: React.FC = () => {
           <p className={styles.heroDescription}>
             Some journeys start with certainty. Mine started with a suitcase, $10,000, an accent, and a dream that felt bigger than my reality.
           </p>
+          <p className={styles.heroDescription} style={{paddingTop: '1.5rem'}}>
+            Life had a bigger plan — one that would break me open, strip me down, rebuild me completely, and eventually reveal the woman I was meant to become.
+          </p>
           
           {/* Film Reel - Mobile/Tablet Only */}
           <div className={styles.filmReel}>
