@@ -1,0 +1,124 @@
+.credibilityStrip {
+  background: linear-gradient(135deg, var(--color-navy) 0%, #1a2942 100%);
+  padding: 1.5rem 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.iconsGrid {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.credentialItem {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  background: var(--bg-primary);
+  border: 3px solid white;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.credentialItem::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  transform: rotate(45deg);
+  transition: all 0.5s ease;
+  opacity: 0;
+}
+
+.credentialItem:hover {
+  transform: translateY(-8px) scale(1.05);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.25);
+  border-color: rgba(255, 255, 255, 0.9);
+}
+
+.credentialItem:hover::before {
+  opacity: 1;
+  animation: shine 0.6s ease;
+}
+
+.credentialIcon {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 50%;
+  filter: none;
+  transition: all 0.3s ease;
+  z-index: 1;
+}
+
+.credentialItem:hover .credentialIcon {
+  transform: scale(1.02);
+}
+
+@keyframes shine {
+  0% {
+    transform: translateX(-100%) translateY(-100%) rotate(45deg);
+  }
+  100% {
+    transform: translateX(100%) translateY(100%) rotate(45deg);
+  }
+}
+
+/* Desktop - Larger badges */
+@media (min-width: 768px) {
+  .credibilityStrip {
+    padding: 1rem 0;
+  }
+  
+  .iconsGrid {
+    gap: 3rem;
+  }
+  
+  .credentialItem {
+    width: 140px;
+    height: 140px;
+  }
+  
+  .credentialIcon {
+    width: 120px;
+    height: 120px;
+  }
+}
+
+/* Mobile - Smaller badges */
+@media (max-width: 640px) {
+  .iconsGrid {
+    gap: 1.5rem;
+  }
+  
+  .credentialItem {
+    width: 120px;
+    height: 120px;
+  }
+  
+  .credentialIcon {
+    width: 120px;
+    height: 120px;
+  }
+  
+  .credibilityStrip {
+    padding: 2rem 0;
+  }
+}
