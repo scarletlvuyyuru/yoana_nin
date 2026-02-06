@@ -247,7 +247,11 @@ const Home: React.FC = () => {
                   This is your invitation to step into a community of women where vulnerability 
                   is strength and you're never alone.
                 </p>
-                <Link to="/coaching" className={`${styles.cardLink} ${styles.blog}`}>
+                <Link 
+                  to="/blog" 
+                  className={`${styles.cardLink} ${styles.blog}`}
+                  onClick={() => window.scrollTo(0, 0)}
+                >
                   → Join the Community
                 </Link>
               </div>
