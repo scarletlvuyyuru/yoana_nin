@@ -56,7 +56,7 @@
 
 .heroDescription {
   font-size: 1.1rem;
-  line-height: 1.6;
+  line-height: 1.5;
   opacity: 0.9;
   max-width: 600px;
   margin: 0 auto;
@@ -79,7 +79,7 @@
 
 .heroDescription {
   font-size: 1.1rem;
-  line-height: 1.6;
+  line-height: 1.5;
   opacity: 0.9;
   max-width: 600px;
   margin: 0 auto;
@@ -269,7 +269,7 @@
   text-decoration: none;
   font-size: 1.3rem;
   font-weight: 600;
-  line-height: 1.3;
+  line-height: 1.5;
   transition: color 0.3s ease;
 }
 
@@ -279,7 +279,7 @@
 
 .cardExcerpt {
   color: var(--text-secondary);
-  line-height: 1.6;
+  line-height: 1.5;
   margin-bottom: 1.5rem;
 }
 

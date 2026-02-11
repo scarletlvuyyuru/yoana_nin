@@ -125,6 +125,7 @@ const Contact: React.FC = () => {
                 <option value="Looking for a Home (Real Estate)">Looking for a Home (Real Estate)</option>
                 <option value="Looking for a Community">Looking to build your Village (Community)</option>
                 <option value="Media/Speaking Inquiry">Media/Speaking Inquiry</option>
+                <option value="Submit a question">Submit a Question</option>
               </select>
             </div>
 

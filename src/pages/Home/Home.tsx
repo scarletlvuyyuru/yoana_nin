@@ -28,7 +28,7 @@ const Home: React.FC = () => {
   const faqData: FaqItem[] = [
     {
       question: "What makes your coaching approach different?",
-      answer: "My approach combines spiritual wellness, practical strategies, and lived experience as an expat and entrepreneur. I specialize in working with ADHD entrepreneurs and expats, understanding the unique challenges of building a life and business while navigating new cultures and neurodivergent traits."
+      answer: "My approach combines hollistic purpose-driven business strategies, practical mindset tools, and lived experience as an expat and entrepreneur. I specialize in working with ADHD entrepreneurs and expats, understanding the unique challenges of building meaningful businesses while navigating new cultures and neurodivergent traits."
     },
     {
       question: "Do you work with clients virtually or in-person?",
@@ -72,15 +72,15 @@ const Home: React.FC = () => {
             </div>
             <div className={styles.heroTextSection}>
               <h1 className={styles.heroTitle}>
-                Align Your Life for Joy, Gratitude, and Prosperity
+                Build a Purpose-Driven Business That Creates Impact and Fulfillment
               </h1>
               <p className={styles.heroSubtitle}>
-                Expat Life Coach, Author, and Founder of The Prosperous Agency
+                Entrepreneur Success Coach, Author, and Founder of The Prosperous Agency
               </p>
               <p className={styles.heroDescription}>
-                Life isn't meant to be survived—it's meant to be felt, lived, and built with intention. 
-                You deserve a life that brings you home to yourself: joyful, abundant, grounded, 
-                and unapologetically aligned with who you were meant to be. Stop settling for a life you merely survive. <br /><em><strong>Let’s build the one you were born to lead.</strong></em>  
+                Your business isn't just about profit—it's about purpose, impact, and creating meaningful change in the world. 
+                You deserve a business that brings fulfillment: profitable, sustainable, aligned with your values, 
+                and unapologetically designed around the impact you were meant to make. Stop building a business you merely manage. <br /><em><strong>Let's build the one that changes everything.</strong></em>  
               </p>
               <Link to="/contact" className="btn btn-primary" style={{marginTop: '1rem', fontSize: 'var(--font-size-lg)', padding: '1rem 2rem'}}>
               Claim Your Safe Space (Free 30-Min Call)
@@ -97,7 +97,7 @@ const Home: React.FC = () => {
       <section className={styles.problemSolution}>
         <div className={styles.container}>
           <h2 className={styles.healingTitle}>
-            Healing isn't a leap... <br /> It's a series of small, intentional steps.
+            Success isn't an accident... <br /> It's a series of purposeful, values-driven decisions.
           </h2>
           <div className={styles.healingContent}>
             <div className={styles.stepsContainer}>
@@ -110,9 +110,9 @@ const Home: React.FC = () => {
                   />
                 </div>
                 <div className={styles.stepContent}>
-                  <h3 className={styles.stepTitle}>Notice (The Awareness)</h3>
+                  <h3 className={styles.stepTitle}>Clarity (The Foundation)</h3>
                   <p className={styles.stepDescription}>
-                    We begin by gently identifying the old patterns and survival habits that no longer serve you.
+                    We begin by identifying your core values and vision for meaningful success that serves both you and others.
                   </p>
                 </div>
               </div>
@@ -130,9 +130,9 @@ const Home: React.FC = () => {
                   />
                 </div>
                 <div className={styles.stepContent}>
-                  <h3 className={styles.stepTitle}>Shift (The Pivot)</h3>
+                  <h3 className={styles.stepTitle}>Purpose (The Direction)</h3>
                   <p className={styles.stepDescription}>
-                    We intentionally move your focus from the weight of the past to the potential of the present moment.
+                    We align your business strategies with your deeper purpose and commitment to creating positive impact in the world.
                   </p>
                 </div>
               </div>
@@ -151,9 +151,9 @@ const Home: React.FC = () => {
                   
                 </div>
                 <div className={styles.stepContent}>
-                  <h3 className={styles.stepTitle}>Rewire (The Transformation)</h3>
+                  <h3 className={styles.stepTitle}>Impact (The Legacy)</h3>
                   <p className={styles.stepDescription}>
-                    Through consistent practice, we strengthen your conscious mind and turn new, empowering habits into your natural way of being.
+                    Through consistent, values-driven action, we build a business that creates lasting positive change and meaningful results.
                   </p>
                 </div>
               </div>
@@ -161,7 +161,7 @@ const Home: React.FC = () => {
 
             <div className={styles.mapTechniqueSection}>
               <p className={styles.healingText}>
-                Using the <em className={styles.mapTechnique}>MAP technique</em> (Mastery, Application, and Practice), we strengthen your conscious mind so you can take the wheel and direct your life toward positive change.
+                Using the <em className={styles.mapTechnique}>SERVE methodology</em> (Strategic thinking, Execution with purpose, Relationships that matter, Values-driven decisions, and Exponential impact), we build businesses that don't just succeed—they serve.
               </p>
             </div>
           </div>
@@ -175,7 +175,7 @@ const Home: React.FC = () => {
            How We Can Begin Your Journey Together
           </h2>
           <h3 className={styles.sectionSubtitle}>
-            Whether you are redefining your mindset, searching for your sanctuary, or rebuilding your life after a storm, you are in the right place to awaken your spiritual gifts. < br /><em>Let me help guide the way...</em>
+            Whether you are redefining your mindset, searching for your sanctuary, or rebuilding your business after setbacks, you are in the right place to unlock your entrepreneurial potential and create meaningful impact. < br /><em>Let me help guide the way...</em>
           </h3>
           <div className={styles.pathsGrid}>
             <div className={`${styles.pathCard} ${styles.coaching}`}>
@@ -275,7 +275,20 @@ const Home: React.FC = () => {
                   >
                     <span>{faq.question}</span>
                     <span className={`${styles.faqIcon} ${expandedFaq === index ? styles.faqIconExpanded : ''}`}>
-                      +
+                      <svg
+                        width="16"
+                        height="16"
+                        viewBox="0 0 16 16"
+                        fill="none"
+                      >
+                        <path
+                          d="M4 6L8 10L12 6"
+                          stroke="currentColor"
+                          strokeWidth="2.5"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
                     </span>
                   </button>
                 </h3>
@@ -291,56 +304,6 @@ const Home: React.FC = () => {
                 </div>
               </div>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* YouTube Channel Section */}
-      <section className={styles.youtubeSection}>
-        <div className={styles.container}>
-          <h2 className={styles.youtubeTitle}>Elevate with Yoana Nin</h2>
-          <div className={styles.youtubeContent}>
-            <div className={styles.youtubeIntro}>
-              <h3 className={styles.youtubeSubtitle}>Boost Your Confidence with Every Incredible Guest! </h3>
-              <p className={styles.youtubeDescription}>
-                Welcome to my channel where we explore inspiring success stories, women's empowerment, financial wisdom, and career development. Each conversation provides deep insights into what it takes to thrive in competitive environments while staying focused, energized, and working on your mindset daily.
-              </p>
-            </div>
-            
-            <div className={styles.youtubeHighlights}>
-              <div className={styles.highlight}>
-                <h3 className={styles.highlightTitle}> 🔥 Inspiring Stories</h3>
-               
-              </div>
-              <div className={styles.highlight}>
-                <h3 className={styles.highlightTitle}> 🔥 Women's Empowerment</h3>
-               
-              </div>
-              <div className={styles.highlight}>
-                <h3 className={styles.highlightTitle}> 🔥Financial Empowerment</h3>
-             
-              </div>
-              <div className={styles.highlight}>
-                <h3 className={styles.highlightTitle}> 🔥Career Development</h3>
-               
-              </div>
-            </div>
-
-            <div className={styles.recentVideos}>
-              <h3 className={styles.videosTitle}>Latest Episodes</h3>
-              <p className={styles.videosPlaceholder}>
-                Recent YouTube videos will be displayed here once the Blog page is built and connected to the YouTube channel.
-              </p>
-              <a 
-                href="https://www.youtube.com/@ElevatewithYoanaNin" 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                className="btn btn-primary"
-                style={{marginTop: '1rem'}}
-              >
-                Visit My YouTube Channel
-              </a>
-            </div>
           </div>
         </div>
       </section>
@@ -361,43 +324,28 @@ const Home: React.FC = () => {
                 <div className={styles.speakingOption}>
                   <h4 className={styles.optionTitle}>🎤 Book Me to Speak</h4>
                   <p className={styles.optionText}>Engaging presentations on entrepreneurship, wellness, expat experiences, and building resilience through life's transitions.</p>
+                  <Link to="/contact" className="btn btn-primary" style={{marginTop: '1rem', padding: '0.5rem 1rem', fontSize: 'var(--font-size-sm)', width: '200px', textAlign: 'center'}}>
+                    Explore Speaking Opportunities
+                  </Link>
                 </div>
                 <div className={styles.speakingOption}>
                   <h4 className={styles.optionTitle}>📺 Join My YouTube Channel</h4>
                   <p className={styles.optionText}>Share your inspiring journey and connect with our community of women breaking barriers and building businesses.</p>
+                  <a 
+                    href="https://www.youtube.com/@ElevatewithYoanaNin" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="btn btn-primary" 
+                    style={{marginTop: '1rem', padding: '0.5rem 1rem', fontSize: 'var(--font-size-sm)', width: '200px', textAlign: 'center'}}
+                  >
+                    Visit My YouTube Channel
+                  </a>
                 </div>
               </div>
-              <Link to="/contact" className="btn btn-primary" style={{marginTop: '1.5rem'}}>
-                Explore Speaking Opportunities
-              </Link>
             </div>
           </div>
         </div>
       </section>
-      {/* 4 C's of Trust Section */}
-      <section className={styles.trustSection}>
-        <div className={styles.container}>
-          <h2 className={styles.trustTitle}>
-            Building Community with Integrity in the Triangle
-          </h2>
-          <h3 className={styles.trustSubtitle}>
-            Co-Owner of The Prosperous Agency
-          </h3>
-          <p className={styles.trustDescription}>
-            Whether I'm helping you find a home or helping you rise from a difficult chapter, my work begins with Integrity. I utilize the 4 C's of Trust (Competence, Care, Character, and Consistency) to ensure every interaction is meaningful and every relationship is authentic. Community is built through openhearted leadership—this is the foundation of everything I do. If your're not looking to buy a home but looking for community consider joining our community group here: <a href="https://www.facebook.com/groups/yoananincommunity" target="_blank" rel="noopener noreferrer" className={styles.communityLink}>Yoana Nin Community Group Holder link</a>
-          </p>
-          
-          <div className={styles.infographicContainer}>
-            <img 
-              src={fourCInfographic} 
-              alt="4 C's of Trust Infographic - Competence, Care, Character, and Consistency" 
-              className={styles.infographicImage}
-            />
-          </div>
-        </div>
-      </section>
-      
-
       {/* Final CTA Section */}
       <section className={styles.finalCta}>
         <div className={styles.container}>

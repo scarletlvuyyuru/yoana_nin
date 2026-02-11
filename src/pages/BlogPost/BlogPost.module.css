@@ -56,7 +56,7 @@
 
 .postTitle {
   font-size: 2.5rem;
-  line-height: 1.2;
+  line-height: 1.5;
   margin-bottom: 1.5rem;
   color: var(--text-primary);
   font-weight: 700;
@@ -86,7 +86,7 @@
 }
 
 .postContent {
-  line-height: 1.7;
+  line-height: 1.5;
   color: var(--text-primary);
   font-size: 1.1rem;
   margin-bottom: 4rem;

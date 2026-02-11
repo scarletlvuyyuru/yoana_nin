@@ -15,7 +15,7 @@ const navigationItems: NavigationItem[] = [
     name: 'My Story',
     path: '/my-story',
     sections: [
-      { name: 'Romania to Raleigh', id: 'top' },
+      { name: 'My Story', id: 'top' },
       { name: 'Authorship', id: 'authorship' },
       { name: 'My Approach', id: 'my-approach' }
     ]
@@ -54,6 +54,7 @@ const navigationItems: NavigationItem[] = [
 const Navigation: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
+  const [isScrolled, setIsScrolled] = useState(false);
   const { theme, toggleTheme } = useTheme();
   const location = useLocation();
 
@@ -61,6 +62,16 @@ const Navigation: React.FC = () => {
     setIsOpen(false);
     setActiveDropdown(null);
   }, [location]);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollTop = window.scrollY;
+      setIsScrolled(scrollTop > 50);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const scrollToSection = (sectionId: string, targetPath: string) => {
     if (sectionId === 'top') {
@@ -86,20 +97,46 @@ const Navigation: React.FC = () => {
 
   return (
     <>
+      {/* Top Banner */}
+      <div className={styles.topBanner}>
+        <div className={styles.bannerContainer}>
+          {/* Social Links - Left Side */}
+          <div className={styles.socialLinks}>
+            {/* Social icons will go here */}
+          </div>
+
+          {/* Banner Buttons - Right Side */}
+          <div className={styles.bannerButtons}>
+            <button
+              onClick={toggleTheme}
+              className={styles.bannerThemeToggle}
+              aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
+            >
+              {theme === 'light' ? '🌙' : '☀️'}
+            </button>
+            <Link to="/contact" className={`${styles.bannerButton} ${styles.primary}`}>
+              Contact
+            </Link>
+            <a 
+              href="#community" 
+              className={`${styles.bannerButton} ${styles.blue}`}
+              onClick={(e) => {
+                e.preventDefault();
+                // Add your community link logic here
+              }}
+            >
+              Join Community
+            </a>
+          </div>
+        </div>
+      </div>
+
       <nav className={styles.navigation} role="navigation" aria-label="Main navigation">
         <div className={styles.container}>
-          <Link to="/" className={styles.logo} aria-label="Yoana - Home">
-            <img 
-              src={logo} 
-              alt="Yoana Coaching Logo" 
-              className={styles.logoImage}
-            />
-          </Link>
-
-          {/* Desktop Navigation */}
-          <div className={styles.navDesktop}>
+          {/* Left Navigation */}
+          <div className={styles.navLeft}>
             <ul className={styles.navList}>
-              {navigationItems.map((item) => (
+              {navigationItems.slice(0, 2).map((item) => (
                 <li key={item.name} className={styles.navItem}>
                   {item.sections ? (
                     <div>
@@ -121,7 +158,7 @@ const Navigation: React.FC = () => {
                           <path
                             d="M2.5 4.5L6 8L9.5 4.5"
                             stroke="currentColor"
-                            strokeWidth="1.5"
+                            strokeWidth="2.5"
                             strokeLinecap="round"
                             strokeLinejoin="round"
                           />
@@ -158,19 +195,79 @@ const Navigation: React.FC = () => {
                 </li>
               ))}
             </ul>
-            
-            {/* Contact Button */}
-            <Link to="/contact" className={styles.contactButton}>
-              Contact
-            </Link>
-            
-            <button
-              onClick={toggleTheme}
-              className={styles.themeToggle}
-              aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
-            >
-              {theme === 'light' ? '🌙' : '☀️'}
-            </button>
+          </div>
+
+          {/* Centered Logo */}
+          <Link to="/" className={`${styles.logo} ${isScrolled ? styles.logoScrolled : ''}`} aria-label="Yoana - Home">
+            <img 
+              src={logo} 
+              alt="Yoana Coaching Logo" 
+              className={styles.logoImage}
+            />
+          </Link>
+
+          {/* Right Navigation */}
+          <div className={styles.navRight}>
+            <ul className={styles.navList}>
+              {navigationItems.slice(2).map((item) => (
+                <li key={item.name} className={styles.navItem}>
+                  {item.sections ? (
+                    <div>
+                      <button
+                        onClick={() => setActiveDropdown(activeDropdown === item.name ? null : item.name)}
+                        className={styles.dropdownButton}
+                        aria-expanded={activeDropdown === item.name}
+                        aria-haspopup="true"
+                      >
+                        {item.name}
+                        <svg
+                          width="12"
+                          height="12"
+                          viewBox="0 0 12 12"
+                          fill="none"
+                          className={`${styles.dropdownIcon} ${activeDropdown === item.name ? styles.open : ''}`}
+                          aria-hidden="true"
+                        >
+                          <path
+                            d="M2.5 4.5L6 8L9.5 4.5"
+                            stroke="currentColor"
+                            strokeWidth="2.5"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          />
+                        </svg>
+                      </button>
+                      {activeDropdown === item.name && (
+                        <ul className={styles.dropdown} role="menu">
+                          {item.sections.map((section) => (
+                            <li key={section.id} role="none">
+                              <Link
+                                to={item.path}
+                                onClick={() => {
+                                  setTimeout(() => scrollToSection(section.id, item.path), 100);
+                                  setActiveDropdown(null);
+                                }}
+                                className={styles.dropdownItem}
+                                role="menuitem"
+                              >
+                                {section.name}
+                              </Link>
+                            </li>
+                          ))}
+                        </ul>
+                      )}
+                    </div>
+                  ) : (
+                    <Link
+                      to={item.path}
+                      className={`${styles.navLink} ${location.pathname === item.path ? styles.active : ''}`}
+                    >
+                      {item.name}
+                    </Link>
+                  )}
+                </li>
+              ))}
+            </ul>
           </div>
 
           {/* Mobile Menu Button */}

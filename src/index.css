@@ -7,7 +7,7 @@
   --color-pink-light: #FFE4FF;
   --color-pink-soft: #FF99FF;
   --color-blue-light: #77c3ea;
-  --color-blue: #006DBC;
+  --color-blue: #004aad;
   --color-navy: #1a2a42;  /* Adjusted to better complement light blue */
   --color-yellow-brand: #faf71d;
   --color-sage: #94AF9F;
@@ -95,7 +95,7 @@ html {
 body {
   font-family: var(--font-body);
   font-size: var(--font-size-base);
-  line-height: 1.6;
+  line-height: 1.5;
   color: var(--text-primary);
   background-color: var(--bg-primary);
   transition: background-color 0.3s ease, color 0.3s ease;
@@ -105,7 +105,7 @@ body {
 
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading);
-  line-height: 1.2;
+  line-height: 1.5;
   color: var(--text-primary);
   margin-bottom: 0.5em;
 }

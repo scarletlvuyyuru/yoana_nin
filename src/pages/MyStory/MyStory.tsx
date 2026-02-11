@@ -123,7 +123,7 @@ const MyStory: React.FC = () => {
       </section>
 
       {/* Credentials Section */}
-      <section className={styles.credentialsSection}>
+      <section id="my-approach" className={styles.credentialsSection}>
         <div className={styles.container}>
           <h2 className={styles.credentialsTitle}>How I turn Empathy into Action</h2>
           <h3 className={styles.credentialsSubtitle}>Because I had to rebuild my own life from the ashes, I became obsessed with the science and soul of transformation. Today, I combine these certifications to help you do the same.</h3>

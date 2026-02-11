@@ -1,3 +1,87 @@
+/* Top Banner */
+.topBanner {
+  background-color: var(--color-navy);
+  color: white;
+  padding: 0.75rem 0;
+  font-size: 0.875rem;
+}
+
+.bannerContainer {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.socialLinks {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.bannerButtons {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.bannerThemeToggle {
+  background: none;
+  border: none;
+  font-size: 1.1rem;
+  cursor: pointer;
+  padding: 0.4rem;
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+  color: white;
+}
+
+.bannerThemeToggle:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.bannerButton {
+  background: transparent;
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 0.4rem 0.8rem;
+  border-radius: 20px;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+}
+
+.bannerButton:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.6);
+  transform: translateY(-1px);
+}
+
+.bannerButton.primary {
+  background: linear-gradient(135deg, var(--color-orange-coral, #ff6b6b), var(--color-orange-warm, #ffa500));
+  border-color: transparent;
+}
+
+.bannerButton.blue {
+  background: var(--color-blue);
+  border-color: transparent;
+  color: white;
+}
+
+.bannerButton.primary:hover {
+  background: linear-gradient(135deg, var(--color-orange-bright, #ff5252), var(--color-orange-amber, #ff9500));
+  color: white;
+  transform: translateY(-1px);
+}
+
 .navigation {
   position: sticky;
   top: 0;
@@ -14,7 +98,10 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 70px;
+  min-height: 70px;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  transition: all 0.3s ease;
 }
 
 .logo {
@@ -25,32 +112,60 @@
   text-decoration: none;
   display: flex;
   align-items: center;
+  margin: 0.75rem 0;
+  transition: all 0.3s ease;
+}
+
+.logoScrolled {
+  margin: 0.25rem 0;
 }
 
 .logoImage {
-  height: 50px;
+  height: 60px;
   width: auto;
-  max-width: 250px;
+  max-width: 280px;
   object-fit: contain;
-  transition: transform 0.2s ease;
+  transition: all 0.3s ease;
 }
 
-/* Desktop overhanging logo effect */
+.logoScrolled .logoImage {
+  height: 35px;
+  max-width: 200px;
+}
+
+/* Desktop split layout */
 @media (min-width: 969px) {
   .logo {
     position: relative;
     z-index: 101;
+    margin: 1rem 0;
+  }
+  
+  .logoScrolled {
+    margin: 0.5rem 0;
   }
   
   .logoImage {
-    height: 80px;
+    height: 85px;
     max-width: 350px;
-    transform: translateY(20px);
     filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.15));
   }
   
+  .logoScrolled .logoImage {
+    height: 45px;
+    max-width: 250px;
+  }
+  
   .logoImage:hover {
-    transform: translateY(20px) scale(1.02);
+    transform: scale(1.02);
+  }
+  
+  .navLink {
+    font-size: var(--font-size-3xl);
+  }
+
+  .dropdownButton {
+    font-size: var(--font-size-3xl);
   }
 }
 
@@ -63,6 +178,12 @@
 }
 
 .navDesktop {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.navLeft, .navRight {
   display: flex;
   align-items: center;
   gap: 2rem;
@@ -82,12 +203,13 @@
 }
 
 .dropdownButton {
-  color: var(--text-secondary);
+  color: var(--color-magenta-accesible);
   border: none;
   background: none;
   cursor: pointer;
   font-family: inherit;
-  font-size: inherit;
+  font-size: var(--font-size-lg);
+  font-weight: 600;
   padding: 0.5rem 0;
   display: flex;
   align-items: center;
@@ -96,6 +218,7 @@
 
 .dropdownIcon {
   transition: transform 0.2s ease;
+  color: var(--color-magenta);
 }
 
 .dropdownIcon.open {
@@ -133,7 +256,8 @@
 .navLink {
   color: var(--text-secondary);
   text-decoration: none;
-  font-weight: 500;
+  font-weight: 600;
+  font-size: var(--font-size-lg);
   padding: 0.5rem 0;
   transition: color 0.2s ease;
 }
@@ -146,18 +270,23 @@
 .contactButton {
   background: linear-gradient(135deg, var(--color-orange-coral, #ff6b6b), var(--color-orange-warm, #ffa500));
   color: white;
-  padding: 0.75rem 1.5rem;
+  padding: 0.5rem 1rem;
   border-radius: 50px;
   text-decoration: none;
   font-weight: 600;
-  font-size: 1.1rem;
+  font-size: 0.9rem;
   text-transform: uppercase;
   letter-spacing: 1px;
   transition: all 0.3s ease;
   display: inline-flex;
   align-items: center;
-  min-height: 44px;
+  min-height: 38px;
   box-shadow: 0 8px 25px rgba(255, 107, 107, 0.3);
+}
+
+/* Hide contact button in main nav, now in banner */
+.navRight .contactButton {
+  display: none;
 }
 
 .contactButton:hover {
@@ -181,10 +310,19 @@
   background-color: var(--bg-accent);
 }
 
+/* Desktop theme toggle positioning - now in banner */
+.themeToggleWrapper {
+  display: none;
+}
+
 .navMobile {
   display: none;
   align-items: center;
   gap: 1rem;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  z-index: 102;
 }
 
 .mobileMenuButton {
@@ -260,7 +398,36 @@
 
 /* Responsive Design */
 @media (max-width: 768px) {
+  .topBanner {
+    padding: 0.5rem 0;
+  }
+  
+  .bannerContainer {
+    flex-direction: column-reverse;
+    gap: 0.75rem;
+  }
+  
+  .bannerButtons {
+    justify-content: center;
+    gap: 0.75rem;
+  }
+  
+  .bannerButton {
+    font-size: 0.75rem;
+    padding: 0.35rem 0.7rem;
+  }
+  
+  .container {
+    min-height: 80px;
+    gap: 0.5rem;
+    position: relative;
+  }
+  
   .navDesktop {
+    display: none;
+  }
+  
+  .navLeft, .navRight {
     display: none;
   }
   
@@ -269,13 +436,14 @@
   }
   
   .logoImage {
-    height: 35px;
-    max-width: 150px;
+    height: 40px;
+    max-width: 200px;
+    margin: 0.25rem 0;
   }
 }
 
 @media (min-width: 769px) {
-  .navDesktop {
+  .navLeft, .navRight {
     display: flex;
   }
   
