@@ -1,6 +1,15 @@
 import React, { useState } from 'react';
 import styles from './Contact.module.css';
 
+// Import all icons for proper Vite build handling
+import personalizedApproachIcon from '../../assets/images/Personalized_Approach.webp';
+import provenResultsIcon from '../../assets/images/Proven_Results.webp';
+import holisticSupportIcon from '../../assets/images/Holistic_Support.webp';
+import masterMindsetIcon from '../../assets/images/masterMindset.webp';
+import sanctuaryIcon from '../../assets/images/Sanctuary.webp';
+import buildCommunityIcon from '../../assets/images/buildYourCommuntiy.webp';
+import speakingArrangementsIcon from '../../assets/images/SpeakingArrangementsBanner.webp';
+
 const Contact: React.FC = () => {
   const [formData, setFormData] = useState({
     inquiry: '',
@@ -47,7 +56,7 @@ const Contact: React.FC = () => {
                 <div className={styles.benefit}>
                   <div className={styles.benefitIcon}>
                     <img 
-                      src="/src/assets/images/Personalized_Approach.webp" 
+                      src={personalizedApproachIcon} 
                       alt="Personalized Approach" 
                       className={styles.benefitIconImage}
                     />
@@ -60,7 +69,7 @@ const Contact: React.FC = () => {
                 <div className={styles.benefit}>
                   <div className={styles.benefitIcon}>
                     <img 
-                      src="/src/assets/images/Proven_Results.webp" 
+                      src={provenResultsIcon} 
                       alt="Proven Results" 
                       className={styles.benefitIconImage}
                     />
@@ -73,7 +82,7 @@ const Contact: React.FC = () => {
                 <div className={styles.benefit}>
                   <div className={styles.benefitIcon}>
                     <img 
-                      src="/src/assets/images/Holistic_Support.webp" 
+                      src={holisticSupportIcon} 
                       alt="Holistic Support" 
                       className={styles.benefitIconImage}
                     />
@@ -221,7 +230,7 @@ const Contact: React.FC = () => {
             <div className={styles.infoCard}>
               <div className={styles.cardImageContainer}>
                 <img 
-                  src="/src/assets/images/masterMindset.webp" 
+                  src={masterMindsetIcon} 
                   alt="Coaching & Mentorship" 
                   className={styles.cardImage}
                 />
@@ -235,7 +244,7 @@ const Contact: React.FC = () => {
             <div className={styles.infoCard}>
               <div className={styles.cardImageContainer}>
                 <img 
-                  src="/src/assets/images/Sanctuary.webp" 
+                  src={sanctuaryIcon} 
                   alt="Real Estate Services" 
                   className={styles.cardImage}
                 />
@@ -249,7 +258,7 @@ const Contact: React.FC = () => {
             <div className={styles.infoCard}>
               <div className={styles.cardImageContainer}>
                 <img 
-                  src="/src/assets/images/buildYourCommuntiy.webp" 
+                  src={buildCommunityIcon} 
                   alt="Community" 
                   className={styles.cardImage}
                 />
@@ -263,7 +272,7 @@ const Contact: React.FC = () => {
             <div className={styles.infoCard}>
               <div className={styles.cardImageContainer}>
                 <img 
-                  src="/src/assets/images/SpeakingArrangementsBanner.webp" 
+                  src={speakingArrangementsIcon} 
                   alt="Speaking & Media" 
                   className={styles.cardImage}
                 />

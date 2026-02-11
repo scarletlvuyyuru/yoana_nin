@@ -5,7 +5,6 @@ import heroImage from '../../assets/images/yoana_nin_leaning_in.webp';
 import eyeIconforNotice from '../../assets/images/eyeIconforNotice.webp';
 import compassIconforShift from '../../assets/images/compassIconforShift.webp';
 import brainIconforRewire from '../../assets/images/brainIconforRewire.webp';
-import fourCInfographic from '../../assets/images/4cInfographic.webp';
 import coachingImage from '../../assets/images/masterMindset.webp';
 import realEstateImage from '../../assets/images/Sanctuary.webp';
 import blogImage from '../../assets/images/buildYourCommuntiy.webp';
