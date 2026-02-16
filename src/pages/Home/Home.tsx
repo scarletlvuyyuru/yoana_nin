@@ -2,12 +2,10 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './Home.module.css';
 import heroImage from '../../assets/images/yoana_nin_leaning_in.webp';
-import eyeIconforNotice from '../../assets/images/eyeIconforNotice.webp';
-import compassIconforShift from '../../assets/images/compassIconforShift.webp';
-import brainIconforRewire from '../../assets/images/brainIconforRewire.webp';
 import coachingImage from '../../assets/images/masterMindset.webp';
 import realEstateImage from '../../assets/images/Sanctuary.webp';
 import blogImage from '../../assets/images/buildYourCommuntiy.webp';
+import bulletPoint from '../../assets/images/bulletPoint.webp';
 import CredibilityStrip from '../../components/CredibilityStrip/CredibilityStrip';
 import Testimonials from '../../components/Testimonials/Testimonials';
 
@@ -71,15 +69,14 @@ const Home: React.FC = () => {
             </div>
             <div className={styles.heroTextSection}>
               <h1 className={styles.heroTitle}>
-                Build a Purpose-Driven Business That Creates Impact and Fulfillment
+                Turn Your ADHD Into Your Entrepreneurial Superpower
               </h1>
               <p className={styles.heroSubtitle}>
-                Entrepreneur Success Coach, Author, and Founder of The Prosperous Agency
+                Coach for ADHD Women Entrepreneurs | Author | Founder
               </p>
               <p className={styles.heroDescription}>
-                Your business isn't just about profit—it's about purpose, impact, and creating meaningful change in the world. 
-                You deserve a business that brings fulfillment: profitable, sustainable, aligned with your values, 
-                and unapologetically designed around the impact you were meant to make. Stop building a business you merely manage. <br /><em><strong>Let's build the one that changes everything.</strong></em>  
+                Stop fighting your ADHD brain. Start building WITH it. <br />
+                Create a business that works for your unique wiring—not against it. <br /><em><strong>Your ADHD is your advantage.</strong></em>  
               </p>
               <Link to="/contact" className="btn btn-primary" style={{marginTop: '1rem', fontSize: 'var(--font-size-lg)', padding: '1rem 2rem'}}>
               Claim Your Safe Space (Free 30-Min Call)
@@ -92,89 +89,15 @@ const Home: React.FC = () => {
       {/* Credibility Strip */}
       <CredibilityStrip />
 
-      {/* Problem Solution Section */}
-      <section className={styles.problemSolution}>
-        <div className={styles.container}>
-          <h2 className={styles.healingTitle}>
-            Success isn't an accident... <br /> It's a series of purposeful, values-driven decisions.
-          </h2>
-          <div className={styles.healingContent}>
-            <div className={styles.stepsContainer}>
-              <div className={`${styles.step} ${styles.stepNotice}`}>
-                <div className={styles.stepIcon}>
-                  <img 
-                    src={eyeIconforNotice} 
-                    alt="Notice - Awareness Icon of an Eye with eyelashes." 
-                    className={styles.stepIconImage}
-                  />
-                </div>
-                <div className={styles.stepContent}>
-                  <h3 className={styles.stepTitle}>Clarity (The Foundation)</h3>
-                  <p className={styles.stepDescription}>
-                    We begin by identifying your core values and vision for meaningful success that serves both you and others.
-                  </p>
-                </div>
-              </div>
-
-              <div className={styles.stepArrow}>
-                <div className={styles.arrowDown}>↓</div>
-              </div>
-
-              <div className={`${styles.step} ${styles.stepShift}`}>
-                <div className={styles.stepIcon}>
-                  <img 
-                    src={compassIconforShift} 
-                    alt="Shift - Pivot Icon of a Compass" 
-                    className={styles.stepIconImage}
-                  />
-                </div>
-                <div className={styles.stepContent}>
-                  <h3 className={styles.stepTitle}>Purpose (The Direction)</h3>
-                  <p className={styles.stepDescription}>
-                    We align your business strategies with your deeper purpose and commitment to creating positive impact in the world.
-                  </p>
-                </div>
-              </div>
-
-              <div className={styles.stepArrow}>
-                <div className={styles.arrowDown}>↓</div>
-              </div>
-
-              <div className={`${styles.step} ${styles.stepRewire}`}>
-                <div className={styles.stepIcon}>
-                  <img 
-                    src={brainIconforRewire} 
-                    alt="Rewire - Transformation Icon of a black brain with a pink arrow circling through the middle of it." 
-                    className={styles.stepIconImage}
-                  />
-                  
-                </div>
-                <div className={styles.stepContent}>
-                  <h3 className={styles.stepTitle}>Impact (The Legacy)</h3>
-                  <p className={styles.stepDescription}>
-                    Through consistent, values-driven action, we build a business that creates lasting positive change and meaningful results.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div className={styles.mapTechniqueSection}>
-              <p className={styles.healingText}>
-                Using the <em className={styles.mapTechnique}>SERVE methodology</em> (Strategic thinking, Execution with purpose, Relationships that matter, Values-driven decisions, and Exponential impact), we build businesses that don't just succeed—they serve.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Three Paths Section */}
       <section id="three-paths" className={styles.section}>
         <div className={styles.container}>
+          <p className="taglineDark">Let me help guide the way</p>
           <h2 className={styles.sectionTitle}>
            How We Can Begin Your Journey Together
           </h2>
           <h3 className={styles.sectionSubtitle}>
-            Whether you are redefining your mindset, searching for your sanctuary, or rebuilding your business after setbacks, you are in the right place to unlock your entrepreneurial potential and create meaningful impact. < br /><em>Let me help guide the way...</em>
+            Three ways to stop surviving and start thriving—whether you're rebuilding confidence, finding home, or getting inspired.
           </h3>
           <div className={styles.pathsGrid}>
             <div className={`${styles.pathCard} ${styles.coaching}`}>
@@ -186,16 +109,29 @@ const Home: React.FC = () => {
                 />
                 <div className={styles.cardHeaderOverlay}>
                   <h3 className={`${styles.cardTitle} ${styles.coaching}`}>
-                    Master Your Mindset (Coaching)
+                    Overwhelmed to Prosperous<br/>(Coaching)
                   </h3>
                 </div>
               </div>
               <div className={styles.cardContent}>
-                <p className={styles.cardText}>
-                  Rebuild your confidence, reclaim your time, and finally live with clarity. 
-                  For ADHD entrepreneurs, expat high-achievers, and women tired of "holding it together" 
-                  while life feels heavy.
-                </p>
+                <div className={styles.cardText}>
+                  <div className={styles.bulletItem}>
+                    <img src={bulletPoint} alt="" className={styles.bulletIcon} />
+                    <span>Community-Driven Transformation</span>
+                  </div>
+                  <div className={styles.bulletItem}>
+                    <img src={bulletPoint} alt="" className={styles.bulletIcon} />
+                    <span>6-Month Focused Founder Framework</span>
+                  </div>
+                  <div className={styles.bulletItem}>
+                    <img src={bulletPoint} alt="" className={styles.bulletIcon} />
+                    <span>Transform Shame Into Self-Trust & Self-Leadership</span>
+                  </div>
+                  <div className={styles.bulletItem}>
+                    <img src={bulletPoint} alt="" className={styles.bulletIcon} />
+                    <span>Build Systems That Match Your ADHD Energy</span>
+                  </div>
+                </div>
                 <Link to="/coaching" className={`${styles.cardLink} ${styles.coaching}`}>
                   → Explore Coaching
                 </Link>
@@ -209,18 +145,31 @@ const Home: React.FC = () => {
                   alt="Real Estate - Find Your Sanctuary" 
                   className={styles.cardHeaderImage}
                 />
-                <div className={styles.cardHeaderOverlay}>
+                <div className={styles.cardHeaderOverlay} style={{background: 'linear-gradient(135deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.1) 50%, rgba(0,0,0,0.2) 100%)'}}>
                   <h3 className={`${styles.cardTitle} ${styles.realEstate}`}>
-                    Find Your Sanctuary (Real Estate)
+                    Find Your Sanctuary<br/>(Real Estate)
                   </h3>
                 </div>
               </div>
               <div className={styles.cardContent}>
-                <p className={styles.cardText}>
-                  Your home shapes your energy, your peace, and your future. 
-                  I help families & relocators find more than just a house. Together we find a sacred sanctuary that feels 
-                  deeply aligned and prosperous.
-                </p>
+                <div className={styles.cardText}>
+                  <div className={styles.bulletItem}>
+                    <img src={bulletPoint} alt="" className={styles.bulletIcon} />
+                    <span>Serving NC Triangle Area</span>
+                  </div>
+                  <div className={styles.bulletItem}>
+                    <img src={bulletPoint} alt="" className={styles.bulletIcon} />
+                    <span>Relocation Specialist</span>
+                  </div>
+                  <div className={styles.bulletItem}>
+                    <img src={bulletPoint} alt="" className={styles.bulletIcon} />
+                    <span>Find Your Sacred Sanctuary</span>
+                  </div>
+                  <div className={styles.bulletItem}>
+                    <img src={bulletPoint} alt="" className={styles.bulletIcon} />
+                    <span>Home That Matches Your Energy</span>
+                  </div>
+                </div>
                 <Link to="/real-estate" className={`${styles.cardLink} ${styles.realEstate}`}>
                   → Explore Real Estate
                 </Link>
@@ -236,28 +185,56 @@ const Home: React.FC = () => {
                 />
                 <div className={styles.cardHeaderOverlay}>
                   <h3 className={`${styles.cardTitle} ${styles.blog}`}>
-                    Build Your Village (Community)
+                    Inspiration & Resources<br/>(Blog)
                   </h3>
                 </div>
               </div>
               <div className={styles.cardContent}>
-                <p className={styles.cardText}>
-                  From surviving alone to thriving together, rediscover the power of belonging. 
-                  This is your invitation to step into a community of women where vulnerability 
-                  is strength and you're never alone.
-                </p>
+                <div className={styles.cardText}>
+                  <div className={styles.bulletItem}>
+                    <img src={bulletPoint} alt="" className={styles.bulletIcon} />
+                    <span>Weekly ADHD Business Tips</span>
+                  </div>
+                  <div className={styles.bulletItem}>
+                    <img src={bulletPoint} alt="" className={styles.bulletIcon} />
+                    <span>Entrepreneurial Success Stories</span>
+                  </div>
+                  <div className={styles.bulletItem}>
+                    <img src={bulletPoint} alt="" className={styles.bulletIcon} />
+                    <span>Free Resources & Guides</span>
+                  </div>
+                  <div className={styles.bulletItem}>
+                    <img src={bulletPoint} alt="" className={styles.bulletIcon} />
+                    <span>Practical Strategies That Work</span>
+                  </div>
+                </div>
                 <Link 
                   to="/blog" 
                   className={`${styles.cardLink} ${styles.blog}`}
                   onClick={() => window.scrollTo(0, 0)}
                 >
-                  → Join the Community
+                  → Get Weekly Inspiration
                 </Link>
               </div>
             </div>
           </div>
         </div>
       </section>
+
+      {/* Inspirational Quote Section */}
+      <section className={styles.quoteSection}>
+        <div className={styles.container}>
+          <blockquote className={styles.quote}>
+            <p className={styles.quoteText}>
+              "And the day came when the risk to remain tight in a bud was more painful than the risk it took to blossom"
+            </p>
+            <cite className={styles.quoteAuthor}>— Anaïs Nin</cite>
+          </blockquote>
+        </div>
+      </section>
+
+      {/* Section Divider */}
+      <div className={styles.sectionDivider}></div>
 
       {/* FAQ Section */}
       <section className={styles.faqSection}>
@@ -312,12 +289,12 @@ const Home: React.FC = () => {
      {/* Speaking Arrangements Section */}
       <section className={styles.speakingSection}>
         <div className={styles.container}>
-          <h2 className={styles.speakingTitle}>Share Your Story, Amplify Your Voice</h2>
+          <p className="taglineDark">Share Your Story, Amplify Your Voice</p>
           <div className={styles.speakingContent}>
             <div className={styles.speakingText}>
-              <h3 className={styles.speakingSubtitle}>Speaking Opportunities & Media Collaborations</h3>
+              <h2 className={styles.speakingSubtitle}>Speaking Opportunities & Media Collaborations</h2>
               <p className={styles.speakingDescription}>
-                Looking to inspire others or be inspired? I'm passionate about creating platforms for meaningful conversations that elevate and empower. Whether you're seeking a speaker for your event or want to share your transformational story on my YouTube channel, let's explore how we can amplify voices that matter.
+                Ready to share your story or book an inspiring speaker? Let's create conversations that matter and amplify voices that inspire change.
               </p>
               <div className={styles.speakingOptions}>
                 <div className={styles.speakingOption}>
@@ -349,9 +326,9 @@ const Home: React.FC = () => {
       <section className={styles.finalCta}>
         <div className={styles.container}>
           <div className={styles.ctaContent}>
-            <p className={styles.ctaTagline}>
+            <h2 className="tagline">
               You don't have to do this alone
-            </p>
+            </h2>
             <p className={styles.ctaText}>
               If you're ready to stop surviving and start truly living, <br /><em className={styles.ctaEmphasis}>let's find your path together.</em>
             </p>

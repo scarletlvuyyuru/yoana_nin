@@ -85,13 +85,36 @@
   transform: translateY(-3px);
   box-shadow: 0 12px 35px rgba(255, 107, 107, 0.4);
   background: linear-gradient(135deg, #ff5252, #ff9500);
+  color: white;
+}
+
+/* Hero Bullets */
+.heroBullets {
+  margin: 2rem 0;
+  text-align: left;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.bulletItem {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+}
+
+.bulletIcon {
+  width: 16px;
+  height: 16px;
+  margin-right: 0.75rem;
+  flex-shrink: 0;
+  margin-top: 2px;
 }
 
 /* Section Base Styles */
 .momsSection,
 .tpaSection,
 .trustSection,
-.environmentSection,
 .relocationSection,
 .finalCta {
   padding: 5rem 0;
@@ -111,10 +134,6 @@
   color: white;
 }
 
-.environmentSection {
-  background: linear-gradient(135deg, #f1f8e9 0%, #dcedc8 100%);
-}
-
 .relocationSection {
   background: var(--bg-secondary);
 }
@@ -127,7 +146,6 @@
 /* Content Layouts */
 .momsContent,
 .tpaContent,
-.environmentContent,
 .relocationContent {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -137,14 +155,12 @@
 
 .momsTextSection,
 .tpaTextSection,
-.environmentTextSection,
 .relocationTextSection {
   padding: 2rem;
 }
 
 .momsImageSection,
 .tpaImageSection,
-.environmentImageSection,
 .relocationImageSection {
   position: relative;
   overflow: hidden;
@@ -154,7 +170,6 @@
 
 .momsImage,
 .tpaImage,
-.environmentImage,
 .relocationImage {
   width: 100%;
   height: 800px;
@@ -165,7 +180,6 @@
 
 .momsImageSection:hover .momsImage,
 .tpaImageSection:hover .tpaImage,
-.environmentImageSection:hover .environmentImage,
 .relocationImageSection:hover .relocationImage {
   transform: scale(1.05);
 }
@@ -187,7 +201,7 @@
   font-size: clamp(1.2rem, 2.5vw, 1.5rem);
   font-weight: 600;
   margin-bottom: 1.5rem;
-  color: var(--accent-color, #ff6b6b);
+  color: #c63946;
   line-height: 1.5;
 }
 
@@ -199,7 +213,7 @@
   font-size: 1.1rem;
   line-height: 1.5;
   margin-bottom: 2rem;
-  color: var(--text-medium, #555);
+  color: #000000;
   opacity: 0.9;
 }
 
@@ -211,13 +225,14 @@
 /* Lists */
 .featuresList,
 .servicesList {
-  list-style: none;
+  margin: 2rem 0;
   padding: 0;
-  margin: 0;
 }
 
 .featureItem,
 .serviceItem {
+  display: flex;
+  align-items: flex-start;
   margin-bottom: 1.5rem;
   padding: 1.5rem;
   background: rgba(255, 255, 255, 0.8);
@@ -237,7 +252,7 @@
 
 .featureItem strong,
 .serviceItem strong {
-  color: #ff6b6b;
+  color: #c63946;
   font-weight: 600;
 }
 
@@ -420,6 +435,7 @@
   transform: translateY(-3px);
   box-shadow: 0 12px 35px rgba(255, 107, 107, 0.4);
   background: linear-gradient(135deg, #ff5252, #ff9500);
+  color: white;
 }
 
 .secondaryButton {
@@ -461,7 +477,6 @@
 
   .momsContent,
   .tpaContent,
-  .environmentContent,
   .relocationContent {
     grid-template-columns: 1fr;
     gap: 3rem;
@@ -469,7 +484,6 @@
 
   .momsTextSection,
   .tpaTextSection,
-  .environmentTextSection,
   .relocationTextSection {
     padding: 1rem;
     text-align: center;
@@ -477,7 +491,6 @@
 
   .momsImage,
   .tpaImage,
-  .environmentImage,
   .relocationImage {
     height: 300px;
   }
@@ -512,7 +525,6 @@
   .momsSection,
   .tpaSection,
   .trustSection,
-  .environmentSection,
   .relocationSection,
   .finalCta {
     padding: 3rem 0;

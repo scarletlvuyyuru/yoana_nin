@@ -274,7 +274,7 @@
 }
 
 .titleLink:hover {
-  color: #ff6b6b;
+  color: #c63946;
 }
 
 .cardExcerpt {
@@ -300,7 +300,7 @@
 }
 
 .readMore {
-  color: #ff6b6b;
+  color: #c63946;
   text-decoration: none;
   font-weight: 600;
   font-size: 0.9rem;

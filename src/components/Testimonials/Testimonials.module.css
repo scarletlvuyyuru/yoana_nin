@@ -20,11 +20,12 @@
 
 .tagline {
   font-size: var(--font-size-sm);
-  color: rgba(255, 255, 255, 0.85);
+  color: var(--color-orange-amber);
   text-transform: uppercase;
   letter-spacing: 2px;
   margin: 0 0 1rem 0;
   font-weight: 500;
+  font-family: var(--font-body);
 }
 
 .title {
