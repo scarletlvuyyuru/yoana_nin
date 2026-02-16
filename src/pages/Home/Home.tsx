@@ -69,17 +69,16 @@ const Home: React.FC = () => {
             </div>
             <div className={styles.heroTextSection}>
               <h1 className={styles.heroTitle}>
-                Turn Your ADHD Into Your Entrepreneurial Superpower
+                Creating Clarity & Connection
               </h1>
-              <p className={styles.heroSubtitle}>
-                Coach for ADHD Women Entrepreneurs | Author | Founder
-              </p>
+              <h2 className={styles.tagline}>
+                Your Partner in Life's Biggest Transitions
+              </h2>
               <p className={styles.heroDescription}>
-                Stop fighting your ADHD brain. Start building WITH it. <br />
-                Create a business that works for your unique wiring—not against it. <br /><em><strong>Your ADHD is your advantage.</strong></em>  
+                Whether you're navigating entrepreneurship with ADHD, relocating to a new country, or finding your dream home in the Triangle area—I'm here to guide you with clarity and connection.
               </p>
               <Link to="/contact" className="btn btn-primary" style={{marginTop: '1rem', fontSize: 'var(--font-size-lg)', padding: '1rem 2rem'}}>
-              Claim Your Safe Space (Free 30-Min Call)
+              Start Your Journey (Free 30-Min Call)
               </Link>
             </div>
           </div>
