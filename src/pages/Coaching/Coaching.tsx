@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styles from './Coaching.module.css';
-import masterMindset from '../../assets/images/masterMindset.webp';
+import buildYourCommunityImage from '../../assets/images/buildYourCommuntiy.webp';
 import brainIconforRewire from '../../assets/images/brainIconforRewire.webp';
 import compassIconforShift from '../../assets/images/compassIconforShift.webp';
 import rocketicon from '../../assets/images/rocketicon.webp';
@@ -14,7 +14,7 @@ const Coaching: React.FC = () => {
   return (
     <div className="main-content">
       {/* Hero Section */}
-      <section className={styles.heroSection} style={{backgroundImage: `url(${masterMindset})`}}>
+      <section className={styles.heroSection} style={{backgroundImage: `url(${buildYourCommunityImage})`}}>
         <div className={styles.container}>
           <p className="tagline">From Overwhelmed to Prosperous</p>
           <h1 className={`playfair-bold ${styles.heroTitle}`}>

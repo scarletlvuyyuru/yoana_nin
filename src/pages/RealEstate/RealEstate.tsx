@@ -18,22 +18,22 @@ const RealEstate: React.FC = () => {
         <div className={styles.container}>
           <div className={styles.heroContent}>
             <h1 className={styles.heroTitle}>
-              Find Your Sanctuary In The Triangle
+              Find Your Sanctuary in the Raleigh Triangle
             </h1>
             <p className={styles.heroDescription}>
               More than just real estate—we help you build a life that works.
             </p>
             <div className={styles.heroBullets}>
               <div className={styles.bulletItem}>
-                <img src={bulletPoint} alt="" className={styles.bulletIcon} />
+                <img src={bulletPoint} alt="Pink Star Custom Bullet Point" className={styles.bulletIcon} />
                 <span>Find Homes That Support Your Lifestyle</span>
               </div>
               <div className={styles.bulletItem}>
-                <img src={bulletPoint} alt="" className={styles.bulletIcon} />
+                <img src={bulletPoint} alt="Pink Star Custom Bullet Point" className={styles.bulletIcon} />
                 <span>Integrate Into Meaningful Communities</span>
               </div>
               <div className={styles.bulletItem}>
-                <img src={bulletPoint} alt="" className={styles.bulletIcon} />
+                <img src={bulletPoint} alt="Pink Star Custom Bullet Point" className={styles.bulletIcon} />
                 <span>Relocation Support For Global Families</span>
               </div>
             </div>
@@ -43,7 +43,7 @@ const RealEstate: React.FC = () => {
               rel="noopener noreferrer"
               className={styles.heroButton}
             >
-              → Search Triangle Homes
+              → Search Raleigh Triangle Homes
             </a>
           </div>
         </div>
@@ -56,31 +56,35 @@ const RealEstate: React.FC = () => {
             <div className={styles.momsImageSection}>
               <img 
                 src={familyParkImage} 
-                alt="Family enjoying Triangle area parks and green spaces" 
+                alt="Family enjoying Raleigh Triangle area parks and green spaces" 
                 className={styles.momsImage}
               />
             </div>
             <div className={styles.momsTextSection}>
-              <h2 className={styles.sectionTitle}>Living The Triangle Life</h2>
-              <h3 className={styles.sectionSubtitle}>Lifestyle, Connection & Wellness</h3>
+              <h2 className={`taglineDark ${styles.taglineDarkLeft}`}>
+                The Raleigh Triangle Living Life Balance
+              </h2>
+              <h3 className={`${styles.sectionTitle} ${styles.sectionTitleLeft}`}>
+                Lifestyle, Connection & Wellness
+              </h3>
               <p className={styles.sectionText}>
                 As someone who built a new beginning in the Triangle, I know home is where your life rhythm begins.
               </p>
               <div className={styles.featuresList}>
                 <div className={styles.bulletItem}>
-                  <img src={bulletPoint} alt="" className={styles.bulletIcon} />
+                  <img src={bulletPoint} alt="Pink Star Custom Bullet Point" className={styles.bulletIcon} />
                   <div>
                     <strong>Wellness & Outdoors:</strong> Find homes near Triangle's extensive trails and parks
                   </div>
                 </div>
                 <div className={styles.bulletItem}>
-                  <img src={bulletPoint} alt="" className={styles.bulletIcon} />
+                  <img src={bulletPoint} alt="Pink Star Custom Bullet Point" className={styles.bulletIcon} />
                   <div>
                     <strong>Peace of Mind:</strong> Neighborhoods that align with your specific lifestyle needs
                   </div>
                 </div>
                 <div className={styles.bulletItem}>
-                  <img src={bulletPoint} alt="" className={styles.bulletIcon} />
+                  <img src={bulletPoint} alt="Pink Star Custom Bullet Point" className={styles.bulletIcon} />
                   <div>
                     <strong>The Joy Factor:</strong> Vibrant communities with cultural opportunities & local energy
                   </div>
@@ -96,8 +100,12 @@ const RealEstate: React.FC = () => {
         <div className={styles.container}>
           <div className={styles.tpaContent}>
             <div className={styles.tpaTextSection}>
-              <h2 className={styles.sectionTitle}>The Prosperous Agency Difference</h2>
-              <h3 className={styles.sectionSubtitle}>Integrity-First Approach</h3>
+              <p className={`taglineDark ${styles.taglineDarkLeft}`}>
+                The Prosperous Agency Difference
+              </p>
+              <h2 className={`${styles.sectionTitle} ${styles.sectionTitleLeft}`}>
+                Integrity-First Approach
+              </h2>
               <p className={styles.sectionText}>
                 Quality life starts with trust. Every interaction is rooted in reliability.
               </p>
@@ -105,7 +113,7 @@ const RealEstate: React.FC = () => {
             <div className={styles.tpaImageSection}>
               <img 
                 src={teamOfficeImage} 
-                alt="The Prosperous Agency team" 
+                alt="The Prosperous Agency Team Lead Yoana Nin " 
                 className={styles.tpaImage}
               />
             </div>
@@ -172,20 +180,24 @@ const RealEstate: React.FC = () => {
         <div className={styles.container}>
           <div className={styles.relocationContent}>
             <div className={styles.relocationTextSection}>
-              <h2 className={styles.sectionTitle}>Relocation For Global Families</h2>
-              <h3 className={styles.sectionSubtitle}>Comprehensive Support & Services</h3>
+              <p className={`taglineDark ${styles.taglineDarkLeft}`}>
+                Relocation For Global Families
+              </p>
+              <h2 className={`${styles.sectionTitle} ${styles.sectionTitleLeft}`}>
+                Comprehensive Support & Services
+              </h2>
               <p className={styles.sectionText}>
-                I moved from Romania → LA → Raleigh. I know international relocation challenges.
+                I moved from Romania → LA → Raleigh. I know international relocation challenges. We can support your move. 
               </p>
               <div className={styles.servicesList}>
                 <div className={styles.bulletItem}>
-                  <img src={bulletPoint} alt="" className={styles.bulletIcon} />
+                  <img src={bulletPoint} alt="Pink Star Custom Bullet Point" className={styles.bulletIcon} />
                   <div>
                     <strong>Full-Service Integration:</strong> Airport coordination to closing assistance
                   </div>
                 </div>
                 <div className={styles.bulletItem}>
-                  <img src={bulletPoint} alt="" className={styles.bulletIcon} />
+                  <img src={bulletPoint} alt="Pink Star Custom Bullet Point" className={styles.bulletIcon} />
                   <div>
                     <strong>Strategic Marketing:</strong> Proven strategies to showcase & attract qualified buyers
                   </div>
@@ -215,10 +227,16 @@ const RealEstate: React.FC = () => {
           <div className={styles.ctaContent}>
             <h2 className={styles.ctaTitle}>Let's Find Your Sanctuary</h2>
             <p className={styles.ctaText}>
-              Ready to find your ideal Triangle home? <br />We make your transition smooth & successful.
+              Ready to find your ideal Raleigh Area home? <br />We make your transition smooth & successful.
             </p>
             <div className={styles.ctaButtons}>
-              <Link to="/contact" className={styles.primaryButton}>
+              <Link 
+                to="/contact" 
+                className={styles.primaryButton}
+                onClick={() => {
+                  setTimeout(() => window.scrollTo(0, 0), 100);
+                }}
+              >
                 Schedule Consultation
               </Link>
               <a 

@@ -177,22 +177,6 @@
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-/* Community Section */
-.communitySection {
-  padding: 5rem 0;
-  background-color: var(--bg-primary);
-  text-align: center;
-}
-
-.communityTitle {
-  font-family: var(--font-heading);
-  font-size: var(--font-size-4xl);
-  font-weight: 600;
-  color: var(--text-primary);
-  margin-bottom: 2rem;
-  text-align: center;
-}
-
 /* Blog Section */
 .blogSection {
   padding: 5rem 0;
@@ -246,10 +230,6 @@
 /* Category-specific colors */
 .blogCard[data-category="Real Estate"] .category {
   background: var(--color-sage-dark);
-}
-
-.blogCard[data-category="Community"] .category {
-  background: var(--color-blue);
 }
 
 .blogCard[data-category="Coaching"] .category {

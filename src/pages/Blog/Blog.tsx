@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './Blog.module.css';
-import buildYourCommunityImage from '../../assets/images/buildYourCommuntiy.webp';
+import masterMindsetImage from '../../assets/images/masterMindset.webp';
 
 // Blog post data structure (will be replaced with CMS data)
 interface BlogPost {
@@ -33,18 +33,6 @@ const Blog: React.FC = () => {
     },
     {
       id: '2',
-      title: 'Building Your Village: A Guide to Finding Community as an Expat in the Triangle',
-      excerpt: 'Moving to a new place as an expat can feel isolating. Here\'s your gentle guide to creating meaningful connections in North Carolina\'s Triangle area.',
-      content: '',
-      author: 'Yoana Nin',
-      date: '2026-01-26',
-      category: 'Community',
-      tags: ['Expat Life', 'Triangle Area', 'Community', 'Connection'],
-      featured: true,
-      slug: 'expat-community-triangle-area'
-    },
-    {
-      id: '3',
       title: 'What to Expect from Holistic Life Coaching: Your Journey to Wholeness',
       excerpt: 'Curious about holistic life coaching? Let\'s explore what this transformative approach looks like and how it can support your entire being.',
       content: '',
@@ -56,7 +44,7 @@ const Blog: React.FC = () => {
       slug: 'holistic-life-coaching-guide'
     },
     {
-      id: '4',
+      id: '3',
       title: 'Finding a Real Estate Professional Who Truly Understands Relocating Families',
       excerpt: 'Moving with your family is about more than finding a house—it\'s about finding home. Here\'s what to look for in a real estate professional who gets it.',
       content: '',
@@ -74,24 +62,24 @@ const Blog: React.FC = () => {
   return (
     <div className={styles.blogPage}>
       {/* Hero Section */}
-      <section className={styles.hero} style={{backgroundImage: `url(${buildYourCommunityImage})`}}>
+      <section className={styles.hero} style={{backgroundImage: `url(${masterMindsetImage})`}}>
         <div className={styles.container}>
           <div className={styles.heroContent}>
-            <h1 className={styles.heroTitle}>Grow and Connect</h1>
+            <h1 className={styles.heroTitle}>Inspiration and Resources</h1>
             <h2 className={styles.heroSubtitle}>
-              Inspiration, Community and Insights for Your Journey to Alignment
+              Inspiration and Insights for Your Journey to Alignment
             </h2>
          
           </div>
         </div>
       </section>
 
-      {/* Inspiration Section */}
+      {/* Coffee & Coaching Section */}
       <section id="inspiration" className={styles.inspirationSection}>
         <div className={styles.container}>
-          <h2 className={styles.sectionTitle}>Inspiration</h2>
+          <h2 className={styles.sectionTitle}>Coffee & Coaching</h2>
           <p className={styles.sectionDescription}>
-            Get inspired with powerful stories and insights from our community
+            Join me for casual conversations about life, business, and finding your path forward
           </p>
           <div className={styles.inspirationGrid}>
             {/* Facebook embeds will be added here */}
@@ -99,13 +87,6 @@ const Blog: React.FC = () => {
               <p>Facebook video embeds will be added here</p>
             </div>
           </div>
-        </div>
-      </section>
-
-      {/* Community Section */}
-      <section id="community" className={styles.communitySection}>
-        <div className={styles.container}>
-          <h2 className={styles.communityTitle}>Community</h2>
         </div>
       </section>
 

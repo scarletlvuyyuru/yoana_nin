@@ -36,16 +36,14 @@ const navigationItems: NavigationItem[] = [
       { name: 'Triangle Living', id: 'triangle-living' },
       { name: 'The Prosperous Difference', id: 'prosperous-difference' },
       { name: 'The Foundation of Trust', id: 'foundation-trust' },
-      { name: 'Spaces That Support', id: 'spaces-support' },
       { name: 'Global Integration', id: 'global-integration' }
     ]
   },
   {
-    name: 'Grow and Connect',
+    name: 'Inspiration and Resources',
     path: '/blog',
     sections: [
       { name: 'Inspiration', id: 'inspiration' },
-      { name: 'Community', id: 'community' },
       { name: 'Insights', id: 'insights' }
     ]
   }

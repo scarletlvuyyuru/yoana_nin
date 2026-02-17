@@ -67,6 +67,7 @@
 
 .heroSubtitle {
   font-size: clamp(1.5rem, 4vw, 2.5rem);
+  
   font-weight: 600;
   color: white;
   margin-bottom: 2rem;
@@ -866,7 +867,7 @@
   }
 }
 
-/* Left-aligned tagline for coaching page ADHD-friendly design */
+/* Center-aligned tagline for Phase sections on coaching page */
 .taglineDarkLeft {
   font-size: var(--font-size-md);
   color: var(--color-blue);
@@ -875,7 +876,7 @@
   margin: 0 0 1rem 0;
   font-weight: 700;
   font-family: var(--font-body);
-  text-align: left;
+  text-align: center;
 }
 
 /* Mobile Responsive */

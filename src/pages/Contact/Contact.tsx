@@ -2,12 +2,8 @@ import React, { useState } from 'react';
 import styles from './Contact.module.css';
 
 // Import all icons for proper Vite build handling
-import personalizedApproachIcon from '../../assets/images/Personalized_Approach.webp';
-import provenResultsIcon from '../../assets/images/Proven_Results.webp';
-import holisticSupportIcon from '../../assets/images/Holistic_Support.webp';
 import masterMindsetIcon from '../../assets/images/masterMindset.webp';
 import sanctuaryIcon from '../../assets/images/Sanctuary.webp';
-import buildCommunityIcon from '../../assets/images/buildYourCommuntiy.webp';
 import speakingArrangementsIcon from '../../assets/images/SpeakingArrangementsBanner.webp';
 
 const Contact: React.FC = () => {
@@ -32,65 +28,64 @@ const Contact: React.FC = () => {
       <div className={styles.container}>
         {/* Main Title */}
         <div className={styles.mainTitle}>
+          <p className="taglineDark">Ready to Begin Your Journey?</p>
           <h1 className={styles.title}>Connect with Yoana</h1>
+          <p className={styles.description}>
+            Whether you're rebuilding confidence through coaching, finding your dream home in the Triangle, or exploring speaking opportunities—let's start with a simple conversation.
+          </p>
         </div>
 
         {/* Split Content Layout */}
         <div className={styles.splitLayout}>
           {/* Left Side - How Can I Support You */}
           <div className={styles.leftContent}>
-            <div className={styles.supportSection}>
-              <h2 className={styles.subtitle}>How Can I Support You?</h2>
-              <p className={styles.description}>
-                Ready to take the next step in your journey? Whether you're looking to unlock your potential through personalized coaching, find your dream home in the Triangle, build meaningful connections, or explore speaking opportunities—I'm here to guide you.
-              </p>
-              <div className={styles.heroHighlight}>
-                <span className={styles.highlightText}>✨ Your transformation starts with a simple conversation</span>
-              </div>
-            </div>
-
-            {/* Why Work With Me */}
-            <div className={styles.whySection}>
-              <h2 className={styles.whyTitle}>Why Work With Me?</h2>
-              <div className={styles.benefitsList}>
-                <div className={styles.benefit}>
-                  <div className={styles.benefitIcon}>
+            {/* Journey Section */}
+            <div className={styles.journeySection}>
+              <p className="taglineDark">Let me help guide the way</p>
+              <h2 className={styles.servicesTitle}>Let's Get Started</h2>
+              
+              <div className={styles.infoGrid}>
+                <div className={styles.infoCard}>
+                  <div className={styles.cardImageContainer}>
                     <img 
-                      src={personalizedApproachIcon} 
-                      alt="Personalized Approach" 
-                      className={styles.benefitIconImage}
+                      src={masterMindsetIcon} 
+                      alt="Coaching & Community" 
+                      className={styles.cardImage}
                     />
                   </div>
-                  <div className={styles.benefitContent}>
-                    <h3 className={styles.benefitTitle}>Personalized Approach</h3>
-                    <p className={styles.benefitText}>Every strategy is tailored to your unique goals and circumstances.</p>
-                  </div>
+                 
+                  <h3 className={styles.infoTitle}>Coaching & Community</h3>
+                  <p className={styles.infoDescription}>
+                    Specialized support for ADHD entrepreneurs, expats, and those ready to create clarity in life's biggest transitions.
+                  </p>
                 </div>
-                <div className={styles.benefit}>
-                  <div className={styles.benefitIcon}>
+                <div className={styles.infoCard}>
+                  <div className={styles.cardImageContainer}>
                     <img 
-                      src={provenResultsIcon} 
-                      alt="Proven Results" 
-                      className={styles.benefitIconImage}
+                      src={sanctuaryIcon} 
+                      alt="Real Estate Services" 
+                      className={styles.cardImage}
                     />
                   </div>
-                  <div className={styles.benefitContent}>
-                    <h3 className={styles.benefitTitle}>Proven Results</h3>
-                    <p className={styles.benefitText}>Experience the transformation that comes from dedicated guidance and support.</p>
-                  </div>
+                
+                  <h3 className={styles.infoTitle}>Real Estate Services</h3>
+                  <p className={styles.infoDescription}>
+                    Find your sanctuary in the Raleigh Triangle—home buying, selling, and relocation support that considers your whole life, not just the transaction.
+                  </p>
                 </div>
-                <div className={styles.benefit}>
-                  <div className={styles.benefitIcon}>
+                <div className={styles.infoCard}>
+                  <div className={styles.cardImageContainer}>
                     <img 
-                      src={holisticSupportIcon} 
-                      alt="Holistic Support" 
-                      className={styles.benefitIconImage}
+                      src={speakingArrangementsIcon} 
+                      alt="Speaking & Media" 
+                      className={styles.cardImage}
                     />
                   </div>
-                  <div className={styles.benefitContent}>
-                    <h3 className={styles.benefitTitle}>Holistic Support</h3>
-                    <p className={styles.benefitText}>Addressing your whole life—not just isolated pieces.</p>
-                  </div>
+                 
+                  <h3 className={styles.infoTitle}>Speaking & Media</h3>
+                  <p className={styles.infoDescription}>
+                    Engaging presentations on entrepreneurship, spiritual wellness, and building resilience through life's major transitions.
+                  </p>
                 </div>
               </div>
             </div>
@@ -99,6 +94,9 @@ const Contact: React.FC = () => {
           {/* Right Side - Contact Form */}
           <div className={styles.rightContent}>
             <div className={styles.formSection}>
+              <p className="taglineDark">Your information is private and secure</p>
+              <h2 className={styles.formTitle}>Let's Connect</h2>
+              
           <form 
             name="contact"
             method="POST"
@@ -132,7 +130,6 @@ const Contact: React.FC = () => {
                 <option value="">Please select an option</option>
                 <option value="Looking for a Coach (Entrepreneur/Expat/ADHD)">Looking for a Coach (Entrepreneur/Expat/ADHD)</option>
                 <option value="Looking for a Home (Real Estate)">Looking for a Home (Real Estate)</option>
-                <option value="Looking for a Community">Looking to build your Village (Community)</option>
                 <option value="Media/Speaking Inquiry">Media/Speaking Inquiry</option>
                 <option value="Submit a question">Submit a Question</option>
               </select>
@@ -222,69 +219,6 @@ const Contact: React.FC = () => {
         </div>
       </div>
     </div>
-
-        {/* Additional Info */}
-        <div className={styles.additionalInfo}>
-          <h2 className={styles.servicesTitle}>Ways I Can Help You Thrive</h2>
-          <div className={styles.infoGrid}>
-            <div className={styles.infoCard}>
-              <div className={styles.cardImageContainer}>
-                <img 
-                  src={masterMindsetIcon} 
-                  alt="Coaching & Mentorship" 
-                  className={styles.cardImage}
-                />
-              </div>
-             
-              <h3 className={styles.infoTitle}>Coaching & Mentorship</h3>
-              <p className={styles.infoDescription}>
-                Specialized support for ADHD entrepreneurs, expats, and those seeking personal transformation through proven frameworks and personalized guidance.
-              </p>
-            </div>
-            <div className={styles.infoCard}>
-              <div className={styles.cardImageContainer}>
-                <img 
-                  src={sanctuaryIcon} 
-                  alt="Real Estate Services" 
-                  className={styles.cardImage}
-                />
-              </div>
-            
-              <h3 className={styles.infoTitle}>Real Estate Services</h3>
-              <p className={styles.infoDescription}>
-                Triangle area home buying, selling, and relocation support with a holistic approach that considers your lifestyle and long-term goals.
-              </p>
-            </div>
-            <div className={styles.infoCard}>
-              <div className={styles.cardImageContainer}>
-                <img 
-                  src={buildCommunityIcon} 
-                  alt="Community" 
-                  className={styles.cardImage}
-                />
-              </div>
-             
-              <h3 className={styles.infoTitle}>Community</h3>
-              <p className={styles.infoDescription}>
-                Join a supportive network of like-minded individuals focused on growth, wellness, and creating meaningful connections in the Triangle area.
-              </p>
-            </div>
-            <div className={styles.infoCard}>
-              <div className={styles.cardImageContainer}>
-                <img 
-                  src={speakingArrangementsIcon} 
-                  alt="Speaking & Media" 
-                  className={styles.cardImage}
-                />
-              </div>
-           
-              <h3 className={styles.infoTitle}>Speaking & Media</h3>
-              <p className={styles.infoDescription}>
-                Engaging presentations on entrepreneurship, spiritual wellness, the expat experience, and building resilience in life's major transitions.
-              </p>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   );
