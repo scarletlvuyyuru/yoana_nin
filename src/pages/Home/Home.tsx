@@ -297,14 +297,28 @@ const Home: React.FC = () => {
               </p>
               <div className={styles.speakingOptions}>
                 <div className={styles.speakingOption}>
-                  <h4 className={styles.optionTitle}>🎤 Book Me to Speak</h4>
+                  <h4 className={styles.optionTitle}>
+                    <img 
+                      src="/src/assets/images/microphoneIcon.webp" 
+                      alt="Microphone" 
+                      style={{width: '24px', height: '24px', marginRight: '0.5rem', verticalAlign: 'middle'}} 
+                    /> 
+                    Book Me to Speak
+                  </h4>
                   <p className={styles.optionText}>Engaging presentations on entrepreneurship, wellness, expat experiences, and building resilience through life's transitions.</p>
                   <Link to="/contact" className="btn btn-primary" style={{marginTop: '1rem', padding: '0.5rem 1rem', fontSize: 'var(--font-size-sm)', width: '200px', textAlign: 'center'}}>
                     Explore Speaking Opportunities
                   </Link>
                 </div>
                 <div className={styles.speakingOption}>
-                  <h4 className={styles.optionTitle}>📺 Join My YouTube Channel</h4>
+                  <h4 className={styles.optionTitle}>
+                    <img 
+                      src="/src/assets/images/youtubeLikesIcon.webp" 
+                      alt="YouTube" 
+                      style={{width: '24px', height: '24px', marginRight: '0.5rem', verticalAlign: 'middle'}} 
+                    /> 
+                    Join My YouTube Channel
+                  </h4>
                   <p className={styles.optionText}>Share your inspiring journey and connect with our community of women breaking barriers and building businesses.</p>
                   <a 
                     href="https://www.youtube.com/@ElevatewithYoanaNin" 
