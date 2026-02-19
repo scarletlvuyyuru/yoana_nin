@@ -50,7 +50,7 @@ const MyStory: React.FC = () => {
       <section className={styles.actsSection}>
         <div className={styles.container}>
           {/* Act I */}
-          <div className={styles.actContent}>
+          <div className={styles.actContent} id="my-journey">
             <div className={styles.actNumber}>I</div>
             <div className={styles.actText}>
               <h2 className={styles.actTitle}>The American Dream & The Hollywood Hustle</h2>

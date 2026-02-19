@@ -1,0 +1,73 @@
+/* Privacy Policy Page Styles */
+
+.privacyPage {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  min-height: 100vh;
+  padding: 8rem 1.5rem 4rem;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 3rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.title {
+  font-family: var(--font-heading);
+  font-size: 2.5rem;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+}
+
+.lastUpdated {
+  color: var(--text-secondary);
+  font-size: var(--font-size-sm);
+  font-style: italic;
+}
+
+.content {
+  line-height: 1.6;
+}
+
+.section {
+  margin-bottom: 2.5rem;
+}
+
+.section h2 {
+  font-family: var(--font-heading);
+  color: var(--color-magenta);
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+}
+
+.section p {
+  margin-bottom: 1rem;
+  color: var(--text-primary);
+}
+
+.section ul {
+  margin-left: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.section li {
+  margin-bottom: 0.5rem;
+  color: var(--text-primary);
+}
+
+.section a {
+  color: var(--color-magenta);
+  text-decoration: underline;
+  transition: color 0.2s ease;
+}
+
+.section a:hover {
+  color: var(--color-magenta-light);
+}

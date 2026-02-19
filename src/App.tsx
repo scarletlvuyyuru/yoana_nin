@@ -13,6 +13,8 @@ const RealEstate = React.lazy(() => import('./pages/RealEstate/RealEstate'));
 const Blog = React.lazy(() => import('./pages/Blog/Blog'));
 const BlogPost = React.lazy(() => import('./pages/BlogPost/BlogPost'));
 const Contact = React.lazy(() => import('./pages/Contact/Contact'));
+const Privacy = React.lazy(() => import('./pages/Privacy/Privacy'));
+const Terms = React.lazy(() => import('./pages/Terms/Terms'));
 
 function App() {
   const { theme } = useTheme();
@@ -34,6 +36,8 @@ function App() {
               <Route path="/blog" element={<Blog />} />
               <Route path="/blog/:slug" element={<BlogPost />} />
               <Route path="/contact" element={<Contact />} />
+              <Route path="/privacy" element={<Privacy />} />
+              <Route path="/terms" element={<Terms />} />
             </Routes>
           </Suspense>
         </main>

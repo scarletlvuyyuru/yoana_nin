@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './Blog.module.css';
 import masterMindsetImage from '../../assets/images/masterMindset.webp';
 
@@ -15,6 +15,229 @@ interface BlogPost {
   featured: boolean;
   slug: string;
 }
+
+// Instagram post data structure
+interface InstagramPost {
+  id: string;
+  media_type: 'IMAGE' | 'VIDEO' | 'CAROUSEL_ALBUM';
+  media_url: string;
+  thumbnail_url?: string;
+  permalink: string;
+  caption: string;
+  timestamp: string;
+}
+
+// Instagram Feed Component
+const InstagramFeed: React.FC = () => {
+  // 🚩 CLIENT APPROVAL NEEDED: Instagram integration pending client approval
+  const INSTAGRAM_ENABLED = false; // Set to true after client approves Instagram integration
+  
+  const [posts, setPosts] = useState<InstagramPost[]>([]);
+  const [loading, setLoading] = useState(false); // Start as false since we're showing demo
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  useEffect(() => {
+    if (INSTAGRAM_ENABLED) {
+      fetchInstagramPosts();
+    } else {
+      // Show demo data for client preview
+      setDemoContent();
+    }
+  }, []);
+
+  const fetchInstagramPosts = async () => {
+    try {
+      setLoading(true);
+      // Call Netlify function to get Instagram posts
+      const response = await fetch('/.netlify/functions/instagram-feed');
+      const data = await response.json();
+      setPosts(data.slice(0, 6)); // Limit to 6 most recent posts
+      setLoading(false);
+    } catch (error) {
+      console.error('Error fetching Instagram posts:', error);
+      setLoading(false);
+    }
+  };
+
+  const setDemoContent = () => {
+    // Demo content to show client what Instagram integration would look like
+    const demoVideos: InstagramPost[] = [
+      {
+        id: 'demo1',
+        media_type: 'VIDEO',
+        media_url: 'https://picsum.photos/400/400?random=1',
+        thumbnail_url: 'https://picsum.photos/400/400?random=1',
+        permalink: '#',
+        caption: 'Quick insights on building confidence as an entrepreneur...',
+        timestamp: new Date().toISOString(),
+      },
+      {
+        id: 'demo2',
+        media_type: 'VIDEO',
+        media_url: 'https://picsum.photos/400/400?random=2',
+        thumbnail_url: 'https://picsum.photos/400/400?random=2',
+        permalink: '#',
+        caption: 'Daily motivation: 3 steps to overcome ADHD overwhelm...',
+        timestamp: new Date().toISOString(),
+      },
+      {
+        id: 'demo3',
+        media_type: 'IMAGE',
+        media_url: 'https://picsum.photos/400/400?random=3',
+        permalink: '#',
+        caption: 'Weekly wisdom for holistic life balance...',
+        timestamp: new Date().toISOString(),
+      },
+      {
+        id: 'demo4',
+        media_type: 'VIDEO',
+        media_url: 'https://picsum.photos/400/400?random=4',
+        thumbnail_url: 'https://picsum.photos/400/400?random=4',
+        permalink: '#',
+        caption: 'Behind the scenes: My morning routine for productivity...',
+        timestamp: new Date().toISOString(),
+      },
+      {
+        id: 'demo5',
+        media_type: 'VIDEO',
+        media_url: 'https://picsum.photos/400/400?random=5',
+        thumbnail_url: 'https://picsum.photos/400/400?random=5',
+        permalink: '#',
+        caption: 'Client success story: From chaos to clarity in 30 days...',
+        timestamp: new Date().toISOString(),
+      },
+      {
+        id: 'demo6',
+        media_type: 'IMAGE',
+        media_url: 'https://picsum.photos/400/400?random=6',
+        permalink: '#',
+        caption: 'Affirmation Monday: You are capable of amazing things...',
+        timestamp: new Date().toISOString(),
+      },
+    ];
+    setPosts(demoVideos);
+  };
+
+  const nextSlide = () => {
+    setCurrentIndex((prevIndex) => 
+      prevIndex === posts.length - 1 ? 0 : prevIndex + 1
+    );
+  };
+
+  const prevSlide = () => {
+    setCurrentIndex((prevIndex) => 
+      prevIndex === 0 ? posts.length - 1 : prevIndex - 1
+    );
+  };
+
+  if (loading) {
+    return (
+      <div className={styles.instagramFeed}>
+        <div className={styles.loadingSpinner}>Loading insights...</div>
+      </div>
+    );
+  }
+
+  if (posts.length === 0) {
+    return (
+      <div className={styles.instagramFeed}>
+        <p>No insights available at the moment.</p>
+      </div>
+    );
+  }
+
+  return (
+    <div className={styles.instagramFeed}>
+      <div className={styles.feedContainer}>
+        <button 
+          className={`${styles.navButton} ${styles.prevButton}`}
+          onClick={prevSlide}
+          aria-label="Previous insight"
+        >
+          ←
+        </button>
+        
+        <div className={styles.feedScroll}>
+          <div 
+            className={styles.feedTrack}
+            style={{ 
+              transform: `translateX(-${currentIndex * (100 / Math.min(posts.length, 3))}%)` 
+            }}
+          >
+            {posts.map((post) => (
+              <div key={post.id} className={styles.instagramPost}>
+                <a 
+                  href={post.permalink} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className={styles.postLink}
+                >
+                  {post.media_type === 'VIDEO' ? (
+                    <video 
+                      className={styles.postMedia}
+                      poster={post.thumbnail_url}
+                      muted
+                      loop
+                      playsInline
+                      onMouseOver={(e) => {
+                        const video = e.currentTarget;
+                        const playPromise = video.play();
+                        if (playPromise !== undefined) {
+                          playPromise.catch(() => {
+                            // Autoplay was prevented, ignore the error
+                          });
+                        }
+                      }}
+                      onMouseOut={(e) => {
+                        try {
+                          e.currentTarget.pause();
+                        } catch (error) {
+                          // Ignore pause errors
+                        }
+                      }}
+                    >
+                      <source src={post.media_url} type="video/mp4" />
+                    </video>
+                  ) : (
+                    <img 
+                      src={post.media_url} 
+                      alt="Instagram insight"
+                      className={styles.postMedia}
+                    />
+                  )}
+                  <div className={styles.postOverlay}>
+                    <p className={styles.postCaption}>
+                      {post.caption ? post.caption.substring(0, 100) + '...' : 'View on Instagram'}
+                    </p>
+                  </div>
+                </a>
+              </div>
+            ))}
+          </div>
+        </div>
+        
+        <button 
+          className={`${styles.navButton} ${styles.nextButton}`}
+          onClick={nextSlide}
+          aria-label="Next insight"
+        >
+          →
+        </button>
+      </div>
+      
+      <div className={styles.feedDots}>
+        {Array.from({ length: Math.max(1, posts.length - 2) }).map((_, index) => (
+          <button
+            key={index}
+            className={`${styles.dot} ${index === currentIndex ? styles.activeDot : ''}`}
+            onClick={() => setCurrentIndex(index)}
+            aria-label={`Go to insight ${index + 1}`}
+          />
+        ))}
+      </div>
+    </div>
+  );
+};
 
 const Blog: React.FC = () => {
   // Sample blog posts - these will be replaced with CMS content
@@ -67,33 +290,30 @@ const Blog: React.FC = () => {
           <div className={styles.heroContent}>
             <h1 className={styles.heroTitle}>Inspiration and Resources</h1>
             <h2 className={styles.heroSubtitle}>
-              Inspiration and Insights for Your Journey to Alignment
+              Inspiration and Insights for ADHD Entrepreneurs
             </h2>
          
           </div>
         </div>
       </section>
 
-      {/* Coffee & Coaching Section */}
-      <section id="inspiration" className={styles.inspirationSection}>
+      {/* Quick Insights Section */}
+      <section className={styles.inspirationSection}>
         <div className={styles.container}>
-          <h2 className={styles.sectionTitle}>Coffee & Coaching</h2>
+          <div id="inspiration" style={{ position: 'relative', top: '-100px' }}></div>
+          <h2 className={styles.sectionTitle}>Quick Insights</h2>
           <p className={styles.sectionDescription}>
-            Join me for casual conversations about life, business, and finding your path forward
+            Bite-sized learning moments and insights to inspire your journey forward
           </p>
-          <div className={styles.inspirationGrid}>
-            {/* Facebook embeds will be added here */}
-            <div className={styles.embedPlaceholder}>
-              <p>Facebook video embeds will be added here</p>
-            </div>
-          </div>
+          <InstagramFeed />
         </div>
       </section>
 
       {/* Featured Blog Posts */}
       <section className={styles.blogSection}>
         <div className={styles.container}>
-          <h2 className={styles.sectionTitle}>Featured Stories & Insights</h2>
+          <div id="featured-stories" style={{ position: 'relative', top: '-100px' }}></div>
+          <h2 className={styles.sectionTitle}>Featured Stories</h2>
           <div className={styles.blogGrid}>
             {featuredPosts.map((post) => (
               <article key={post.id} className={styles.blogCard} data-category={post.category}>

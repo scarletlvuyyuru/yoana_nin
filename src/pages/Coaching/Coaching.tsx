@@ -54,6 +54,7 @@ const Coaching: React.FC = () => {
 
       {/* Phase Overview */}
       <section className={styles.phaseOverview}>
+        <div id="coaching-overview" style={{ position: 'relative', top: '-100px' }}></div>
         <div className={styles.container}>
           <p className="taglineDark" style={{textAlign: 'center'}}>Your transformation roadmap</p>
           <h2 className={styles.phaseOverviewTitle}>
@@ -137,7 +138,8 @@ const Coaching: React.FC = () => {
       </section>
 
       {/* Phase 1 - Personal Development */}
-      <section className={styles.phase1Section} id="phase1-details">
+      <section className={styles.phase1Section}>
+        <div id="phase1-details" style={{ position: 'relative', top: '-100px' }}></div>
         <div className={styles.container}>
           <div className={styles.phaseHeader}>
             <p className={styles.taglineDarkLeft}>Phase 1</p>
@@ -219,7 +221,8 @@ const Coaching: React.FC = () => {
       </section>
 
       {/* Phase 2 - Planning */}
-      <section className={styles.phase2Section} id="phase2-details">
+      <section className={styles.phase2Section}>
+        <div id="phase2-details" style={{ position: 'relative', top: '-100px' }}></div>
         <div className={styles.container}>
           <div className={styles.phaseHeader}>
             <p className={styles.taglineDarkLeft}>Phase 2</p>
@@ -304,7 +307,8 @@ const Coaching: React.FC = () => {
       </section>
 
       {/* Phase 3 - Execution */}
-      <section className={styles.phase3Section} id="phase3-details">
+      <section className={styles.phase3Section}>
+        <div id="phase3-details" style={{ position: 'relative', top: '-100px' }}></div>
         <div className={styles.container}>
           <div className={styles.phaseHeader}>
             <p className={styles.taglineDarkLeft}>Phase 3</p>
@@ -387,6 +391,7 @@ const Coaching: React.FC = () => {
 
       {/* Call to Action */}
       <section className={styles.ctaSection}>
+        <div id="coaching-pricing" style={{ position: 'relative', top: '-100px' }}></div>
         <div className={styles.container}>
           <p className="taglineDark">Your transformation starts here</p>
           <h2 className={styles.ctaTitle}>

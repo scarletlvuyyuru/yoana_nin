@@ -31,10 +31,31 @@ const Footer: React.FC = () => {
     transition: 'color 0.2s ease'
   };
 
+  const socialStyle = {
+    display: 'flex',
+    gap: '1rem',
+    marginTop: '1rem'
+  };
+
+  const socialLinkStyle = {
+    color: 'var(--footer-text-secondary)',
+    textDecoration: 'none',
+    padding: '0.5rem',
+    borderRadius: '50%',
+    border: '1px solid var(--border-color)',
+    transition: 'all 0.2s ease',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '40px',
+    height: '40px'
+  };
+
   return (
     <footer style={footerStyle}>
       <div style={containerStyle}>
         <div style={gridStyle}>
+          {/* Brand Section */}
           <div>
             <div style={{
               display: 'flex',
@@ -61,10 +82,17 @@ const Footer: React.FC = () => {
               </h3>
             </div>
             <p style={{ color: 'var(--footer-text-secondary)', marginBottom: '1rem' }}>
-              Spiritual Coach & Real Estate Professional helping women align their lives for joy, gratitude, and prosperity.
+              Life Coach & Real Estate Professional helping women align their lives for joy, gratitude, and prosperity.
             </p>
+            {/* Social Media Links */}
+            <div style={socialStyle}>
+              <a href="#" style={socialLinkStyle} aria-label="Instagram">📷</a>
+              <a href="#" style={socialLinkStyle} aria-label="LinkedIn">💼</a>
+              <a href="#" style={socialLinkStyle} aria-label="Facebook">📘</a>
+            </div>
           </div>
           
+          {/* Services Section */}
           <div>
             <h4 style={{ 
               color: 'var(--footer-text-primary)', 
@@ -73,36 +101,41 @@ const Footer: React.FC = () => {
             }}>
               Services
             </h4>
-            <Link to="/coaching" style={linkStyle}>Spiritual Coaching</Link>
-            <Link to="/coaching" style={linkStyle}>ADHD Coaching</Link>
-            <Link to="/real-estate" style={linkStyle}>Real Estate</Link>
-            <Link to="/real-estate" style={linkStyle}>Relocation Services</Link>
+            <Link to="/coaching" style={linkStyle} onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>Life Coaching</Link>
+            <Link to="/coaching" style={linkStyle} onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>ADHD Coaching</Link>
+            <Link to="/coaching" style={linkStyle} onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>Entrepreneur Guidance</Link>
+            <Link to="/real-estate" style={linkStyle} onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>Real Estate</Link>
+            <Link to="/real-estate" style={linkStyle} onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>Relocation Services</Link>
           </div>
           
+          {/* Quick Links Section */}
           <div>
             <h4 style={{ 
               color: 'var(--footer-text-primary)', 
               marginBottom: '1rem',
               fontSize: 'var(--font-size-lg)'
             }}>
-              Resources
+              Quick Links
             </h4>
-            <Link to="/blog" style={linkStyle}>Insights & Inspiration</Link>
-            <Link to="/my-story" style={linkStyle}>My Story</Link>
-            <a href="#faq" style={linkStyle}>FAQ</a>
-            <Link to="/contact" style={linkStyle}>Contact</Link>
+            <Link to="/my-story" style={linkStyle} onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>My Story</Link>
+            <Link to="/blog" style={linkStyle} onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>Insights & Inspiration</Link>
+            <Link to="/contact" style={linkStyle} onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>Contact</Link>
+            <Link to="/privacy" style={linkStyle} onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>Privacy Policy</Link>
+            <Link to="/terms" style={linkStyle} onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>Terms & Conditions</Link>
           </div>
           
+          {/* Contact Section */}
           <div>
             <h4 style={{ 
               color: 'var(--footer-text-primary)', 
               marginBottom: '1rem',
               fontSize: 'var(--font-size-lg)'
             }}>
-              Triangle Area
+              Get In Touch
             </h4>
-            <p style={{ color: 'var(--footer-text-secondary)', marginBottom: '0.5rem' }}>Serving Raleigh, Cary, Apex</p>
-            <p style={{ color: 'var(--footer-text-secondary)', marginBottom: '1rem' }}>& relocators worldwide</p>
+            <p style={{ color: 'var(--footer-text-secondary)', marginBottom: '0.5rem' }}>
+              Serving Raleigh, Cary, Apex & relocators worldwide
+            </p>
             <a 
               href="mailto:yoana@yoananin.com" 
               style={linkStyle}
@@ -111,17 +144,45 @@ const Footer: React.FC = () => {
             >
               yoana@yoananin.com
             </a>
+            <p style={{ color: 'var(--footer-text-secondary)', fontSize: 'var(--font-size-sm)', marginTop: '0.5rem' }}>
+              Licensed in North Carolina
+            </p>
           </div>
         </div>
         
+        {/* Bottom Section */}
         <div style={{
           borderTop: '1px solid var(--border-color)',
           paddingTop: '2rem',
-          textAlign: 'center' as const,
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          flexWrap: 'wrap' as const,
+          gap: '1rem',
           color: 'var(--footer-text-secondary)',
           fontSize: 'var(--font-size-sm)'
         }}>
-          <p>© {new Date().getFullYear()} Yoana. All rights reserved. Built with accessibility and performance in mind.</p>
+          <p style={{ margin: '0' }}>
+            © {new Date().getFullYear()} Yoana. All rights reserved. Built with accessibility and performance in mind.
+          </p>
+          <p style={{ margin: '0' }}>
+            <a 
+              href="https://scarletcodes.com" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              style={{
+                color: 'var(--footer-text-secondary)',
+                textDecoration: 'none',
+                fontSize: 'var(--font-size-xs)',
+                opacity: 0.8,
+                transition: 'opacity 0.2s ease'
+              }}
+              onMouseOver={(e) => e.currentTarget.style.opacity = '1'}
+              onMouseOut={(e) => e.currentTarget.style.opacity = '0.8'}
+            >
+              Coded by Scarlet Codes LLC
+            </a>
+          </p>
         </div>
       </div>
     </footer>

@@ -15,7 +15,7 @@ const navigationItems: NavigationItem[] = [
     name: 'My Story',
     path: '/my-story',
     sections: [
-      { name: 'My Story', id: 'top' },
+      { name: 'My Journey', id: 'my-journey' },
       { name: 'Authorship', id: 'authorship' },
       { name: 'My Approach', id: 'my-approach' }
     ]
@@ -25,7 +25,10 @@ const navigationItems: NavigationItem[] = [
     path: '/coaching',
     sections: [
       { name: 'Coaching Overview', id: 'coaching-overview' },
-      { name: 'Coaching Tiers', id: 'coaching-tiers' }
+      { name: 'Phase 1: Personal Development', id: 'phase1-details' },
+      { name: 'Phase 2: Planning', id: 'phase2-details' },
+      { name: 'Phase 3: Execution', id: 'phase3-details' },
+      { name: 'Coaching Pricing', id: 'coaching-pricing' }
     ]
   },
   {
@@ -43,8 +46,8 @@ const navigationItems: NavigationItem[] = [
     name: 'Inspiration and Resources',
     path: '/blog',
     sections: [
-      { name: 'Inspiration', id: 'inspiration' },
-      { name: 'Insights', id: 'insights' }
+      { name: 'Quick Insights', id: 'inspiration' },
+      { name: 'Featured Stories', id: 'featured-stories' }
     ]
   }
 ];
@@ -79,17 +82,48 @@ const Navigation: React.FC = () => {
     
     const attemptScroll = () => {
       const element = document.getElementById(sectionId);
+      
       if (element) {
-        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        const rect = element.getBoundingClientRect();
+        const elementTop = rect.top + window.pageYOffset;
+        const offsetPosition = elementTop - 120;
+        
+        // Use requestAnimationFrame to ensure scroll happens after any other scroll resets
+        requestAnimationFrame(() => {
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
+          });
+        });
+      } else {
+        // Retry after a short delay if element not found
+        setTimeout(() => {
+          const retryElement = document.getElementById(sectionId);
+          if (retryElement) {
+            const rect = retryElement.getBoundingClientRect();
+            const elementTop = rect.top + window.pageYOffset;
+            const offsetPosition = elementTop - 120;
+            
+            requestAnimationFrame(() => {
+              window.scrollTo({
+                top: offsetPosition,
+                behavior: 'smooth'
+              });
+            });
+          }
+        }, 200);
       }
     };
     
     // If we're already on the target page, scroll immediately
     if (location.pathname === targetPath) {
-      attemptScroll();
+      // Use multiple attempts to overcome any scroll resets
+      setTimeout(attemptScroll, 50);
+      setTimeout(attemptScroll, 200);
     } else {
-      // If navigating to a different page, wait for navigation then scroll
-      setTimeout(attemptScroll, 300);
+      // If navigating to a different page, wait longer and make multiple attempts
+      setTimeout(attemptScroll, 800);
+      setTimeout(attemptScroll, 1200);
     }
   };
 
@@ -164,6 +198,21 @@ const Navigation: React.FC = () => {
                       </button>
                       {activeDropdown === item.name && (
                         <ul className={styles.dropdown} role="menu">
+                          {/* Main page link */}
+                          <li role="none">
+                            <Link
+                              to={item.path}
+                              onClick={() => {
+                                window.scrollTo({ top: 0, behavior: 'smooth' });
+                                setActiveDropdown(null);
+                              }}
+                              className={`${styles.dropdownItem} ${styles.mainPageLink}`}
+                              role="menuitem"
+                            >
+                              {item.name}
+                            </Link>
+                          </li>
+                          {/* Sub-sections */}
                           {item.sections.map((section) => (
                             <li key={section.id} role="none">
                               <Link
@@ -172,7 +221,7 @@ const Navigation: React.FC = () => {
                                   setTimeout(() => scrollToSection(section.id, item.path), 100);
                                   setActiveDropdown(null);
                                 }}
-                                className={styles.dropdownItem}
+                                className={`${styles.dropdownItem} ${styles.subSection}`}
                                 role="menuitem"
                               >
                                 {section.name}
@@ -196,7 +245,12 @@ const Navigation: React.FC = () => {
           </div>
 
           {/* Centered Logo */}
-          <Link to="/" className={`${styles.logo} ${isScrolled ? styles.logoScrolled : ''}`} aria-label="Yoana - Home">
+          <Link 
+            to="/" 
+            className={`${styles.logo} ${isScrolled ? styles.logoScrolled : ''}`} 
+            aria-label="Yoana - Home"
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          >
             <img 
               src={logo} 
               alt="Yoana Coaching Logo" 
@@ -237,6 +291,21 @@ const Navigation: React.FC = () => {
                       </button>
                       {activeDropdown === item.name && (
                         <ul className={styles.dropdown} role="menu">
+                          {/* Main page link */}
+                          <li role="none">
+                            <Link
+                              to={item.path}
+                              onClick={() => {
+                                window.scrollTo({ top: 0, behavior: 'smooth' });
+                                setActiveDropdown(null);
+                              }}
+                              className={`${styles.dropdownItem} ${styles.mainPageLink}`}
+                              role="menuitem"
+                            >
+                              {item.name}
+                            </Link>
+                          </li>
+                          {/* Sub-sections */}
                           {item.sections.map((section) => (
                             <li key={section.id} role="none">
                               <Link
@@ -245,7 +314,7 @@ const Navigation: React.FC = () => {
                                   setTimeout(() => scrollToSection(section.id, item.path), 100);
                                   setActiveDropdown(null);
                                 }}
-                                className={styles.dropdownItem}
+                                className={`${styles.dropdownItem} ${styles.subSection}`}
                                 role="menuitem"
                               >
                                 {section.name}

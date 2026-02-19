@@ -253,6 +253,33 @@
   color: var(--text-primary);
 }
 
+/* Main page link in dropdown - bold and stands out */
+.mainPageLink {
+  font-weight: 700 !important;
+  color: var(--text-primary) !important;
+  border-bottom: 1px solid var(--border-color);
+  margin-bottom: 0.25rem;
+  padding-bottom: 0.75rem !important;
+}
+
+.mainPageLink:hover {
+  background-color: var(--color-blue-light);
+  color: var(--color-blue) !important;
+}
+
+/* Sub-section links - indented and lighter */
+.subSection {
+  padding-left: 2rem !important;
+  font-size: 0.9rem;
+  color: var(--text-secondary) !important;
+}
+
+.subSection:hover {
+  background-color: var(--bg-accent);
+  color: var(--text-primary) !important;
+  padding-left: 2.25rem !important;
+}
+
 .navLink {
   color: var(--text-secondary);
   text-decoration: none;

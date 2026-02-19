@@ -154,32 +154,185 @@
 
 /* Inspiration Section */
 .inspirationSection {
-  padding: 5rem 0;
+  padding: 3rem 0 2rem;
   background-color: #f8f9fa;
 }
 
-.inspirationGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-  gap: 2rem;
+/* Instagram Feed */
+.instagramFeed {
   margin-top: 3rem;
 }
 
-.embedPlaceholder {
-  height: 400px;
-  background: linear-gradient(135deg, var(--color-blue-light) 0%, var(--color-blue) 100%);
+.feedContainer {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.feedScroll {
+  overflow: hidden;
+  width: 100%;
+  border-radius: 12px;
+}
+
+.feedTrack {
+  display: flex;
+  transition: transform 0.3s ease;
+  gap: 1rem;
+}
+
+.instagramPost {
+  flex: 0 0 auto;
+  width: calc(20% - 0.8rem); /* 5 posts on desktop */
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.instagramPost:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.postLink {
+  display: block;
+  position: relative;
+  text-decoration: none;
+  color: inherit;
+}
+
+.postMedia {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  display: block;
+}
+
+.postOverlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+  padding: 2rem 1rem 1rem;
+  color: white;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.instagramPost:hover .postOverlay {
+  opacity: 1;
+}
+
+.postCaption {
+  font-size: 0.9rem;
+  line-height: 1.4;
+  margin: 0;
+  color: white;
+  font-weight: 500;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+}
+
+.navButton {
+  background: white;
+  border: 2px solid var(--color-blue);
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white;
-  font-size: 1.1rem;
-  border-radius: 12px;
+  font-size: 1.5rem;
+  color: var(--color-blue);
+  cursor: pointer;
+  transition: all 0.3s ease;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+}
+
+.navButton:hover {
+  background: var(--color-blue);
+  color: white;
+  transform: scale(1.1);
+}
+
+.navButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.feedDots {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 2rem;
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: none;
+  background: #ddd;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.activeDot {
+  background: var(--color-blue);
+}
+
+.loadingSpinner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 300px;
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .instagramPost {
+    width: calc(50% - 0.5rem); /* 2 posts on mobile */
+  }
+  
+  .postMedia {
+    height: 250px;
+  }
+  
+  .navButton {
+    width: 40px;
+    height: 40px;
+    font-size: 1.2rem;
+  }
+  
+  .feedContainer {
+    gap: 0.5rem;
+  }
+
+  .feedTrack {
+    gap: 0.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .instagramPost {
+    width: calc(100% - 0rem); /* 1 post on small mobile */
+  }
+  
+  .postMedia {
+    height: 200px;
+  }
 }
 
 /* Blog Section */
 .blogSection {
-  padding: 5rem 0;
+  padding: 2rem 0 5rem;
   background-color: var(--bg-primary);
 }
 
