@@ -157,7 +157,7 @@ const Terms: React.FC = () => {
           </section>
 
           <section className={styles.section}>
-            <h2>Group Coaching Agreement</h2>
+            <h2 className={styles.centerHeading}>Group Coaching Agreement</h2>
             <h3>Our Mission Statement:</h3>
             <p>
               Creating a group that helps members live their best lives by taking steps to 

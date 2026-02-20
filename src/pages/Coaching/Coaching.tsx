@@ -17,7 +17,7 @@ const Coaching: React.FC = () => {
       <section className={styles.heroSection} style={{backgroundImage: `url(${buildYourCommunityImage})`}}>
         <div className={styles.container}>
           <p className="tagline">From Overwhelmed to Prosperous</p>
-          <h1 className={`playfair-bold ${styles.heroTitle}`}>
+          <h1 className={`playfair-bold ${styles.heroTitle} brand-gradient-text`}>
             Community Driven Transformation
           </h1>
           <h2 className={styles.heroSubtitle}>
@@ -57,7 +57,7 @@ const Coaching: React.FC = () => {
         <div id="coaching-overview" style={{ position: 'relative', top: '-100px' }}></div>
         <div className={styles.container}>
           <p className="taglineDark" style={{textAlign: 'center'}}>Your transformation roadmap</p>
-          <h2 className={styles.phaseOverviewTitle}>
+          <h2 className={`${styles.phaseOverviewTitle} brand-gradient-text`}>
             Here's Our Three Phase Journey
           </h2>
           <div className={styles.phaseOverviewContent}>
@@ -394,7 +394,7 @@ const Coaching: React.FC = () => {
         <div id="coaching-pricing" style={{ position: 'relative', top: '-100px' }}></div>
         <div className={styles.container}>
           <p className="taglineDark">Your transformation starts here</p>
-          <h2 className={styles.ctaTitle}>
+          <h2 className={`${styles.ctaTitle} brand-gradient-text`}>
             Transform Your ADHD into Your Entrepreneurial Superpower
           </h2>
           <h3 className={styles.ctaSubtitle}>
@@ -414,16 +414,18 @@ const Coaching: React.FC = () => {
             </div>
           </div>
 
-          <button 
-            className={`btn btn-secondary ${styles.ctaBtnSecondary}`}
-            onClick={handleTransformationClick}
-          >
-            START YOUR TRANSFORMATION
-          </button>
-          
-          <Link to="/contact" className={`btn ${styles.ctaBtnPrimary}`}>
-            SCHEDULE A CALL
-          </Link>
+          <div className={styles.ctaButtonContainer}>
+            <button 
+              className={`btn btn-secondary ${styles.ctaBtnSecondary}`}
+              onClick={handleTransformationClick}
+            >
+              START YOUR TRANSFORMATION
+            </button>
+            
+            <Link to="/contact" className={`btn ${styles.ctaBtnPrimary}`}>
+              SCHEDULE A CALL
+            </Link>
+          </div>
         </div>
       </section>
     </div>

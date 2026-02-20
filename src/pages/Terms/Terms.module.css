@@ -21,9 +21,10 @@
 
 .title {
   font-family: var(--font-heading);
-  font-size: 2.5rem;
-  color: var(--text-primary);
+  font-size: var(--font-size-5xl);
+  color: var(--color-navy);
   margin-bottom: 0.5rem;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 .lastUpdated {
@@ -42,9 +43,17 @@
 
 .section h2 {
   font-family: var(--font-heading);
-  color: var(--color-magenta);
+  color: var(--color-navy);
   margin-bottom: 1rem;
-  font-size: 1.5rem;
+  font-size: var(--font-size-2xl);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.centerHeading {
+  text-align: center !important;
+  margin-bottom: 2rem !important;
+  padding-top: 1rem;
+  font-size: var(--font-size-3xl);
 }
 
 .section p {
@@ -70,4 +79,21 @@
 
 .section a:hover {
   color: var(--color-magenta-light);
+}
+
+/* Dark mode gradient effects for headings */
+[data-theme="dark"] .title {
+  background: linear-gradient(135deg, #77c3ea 0%, #9bb8ff 50%, #c3a6ff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: none;
+}
+
+[data-theme="dark"] .section h2 {
+  background: linear-gradient(135deg, #77c3ea 0%, #9bb8ff 50%, #c3a6ff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: none;
 }

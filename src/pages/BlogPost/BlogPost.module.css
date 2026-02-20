@@ -23,7 +23,7 @@
   align-items: center;
   gap: 1rem;
   margin-bottom: 1rem;
-  font-size: 0.9rem;
+  font-size: var(--font-size-base);
 }
 
 .category {
@@ -33,7 +33,7 @@
   border-radius: 15px;
   font-weight: 500;
   text-transform: uppercase;
-  font-size: 0.8rem;
+  font-size: var(--font-size-sm);
   letter-spacing: 0.5px;
 }
 
@@ -55,11 +55,12 @@
 }
 
 .postTitle {
-  font-size: 2.5rem;
+  font-size: var(--font-size-5xl);
   line-height: 1.5;
   margin-bottom: 1.5rem;
-  color: var(--text-primary);
+  color: var(--color-navy);
   font-weight: 700;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 .postInfo {
@@ -81,27 +82,27 @@
   color: #495057;
   padding: 0.3rem 0.7rem;
   border-radius: 12px;
-  font-size: 0.8rem;
+  font-size: var(--font-size-sm);
   border: 1px solid #e9ecef;
 }
 
 .postContent {
   line-height: 1.5;
   color: var(--text-primary);
-  font-size: 1.1rem;
+  font-size: var(--font-size-lg);
   margin-bottom: 4rem;
 }
 
 .postContent h2 {
   color: var(--text-primary);
-  font-size: 1.8rem;
+  font-size: var(--font-size-3xl);
   margin: 2.5rem 0 1rem;
   font-weight: 600;
 }
 
 .postContent h3 {
   color: var(--text-primary);
-  font-size: 1.4rem;
+  font-size: var(--font-size-2xl);
   margin: 2rem 0 0.8rem;
   font-weight: 600;
 }
@@ -177,7 +178,7 @@
 
 .callToAction h3 {
   margin-bottom: 1rem;
-  font-size: 1.5rem;
+  font-size: var(--font-size-2xl);
 }
 
 .callToAction p {
@@ -195,7 +196,7 @@
   color: var(--color-navy);
   text-decoration: none;
   font-weight: 600;
-  font-size: 1.1rem;
+  font-size: var(--font-size-lg);
   transition: color 0.3s ease;
 }
 
@@ -246,7 +247,7 @@
 /* Mobile Responsiveness */
 @media (max-width: 768px) {
   .postTitle {
-    font-size: 2rem;
+    font-size: var(--font-size-4xl);
   }
   
   .postInfo {
@@ -255,7 +256,7 @@
   }
   
   .postContent {
-    font-size: 1rem;
+    font-size: var(--font-size-base);
   }
   
   .callToAction {
@@ -269,7 +270,7 @@
   }
   
   .postTitle {
-    font-size: 1.8rem;
+    font-size: var(--font-size-3xl);
   }
   
   .postMeta {
@@ -278,10 +279,46 @@
   }
   
   .postContent h2 {
-    font-size: 1.5rem;
+    font-size: var(--font-size-2xl);
   }
   
   .postContent h3 {
-    font-size: 1.3rem;
+    font-size: var(--font-size-2xl);
   }
+}
+
+/* Dark Mode Overrides */
+[data-theme="dark"] .blogPost {
+  background: var(--bg-primary);
+}
+
+[data-theme="dark"] .postHeader {
+  border-bottom-color: var(--border-color);
+  background: rgba(45, 55, 72, 0.05);
+}
+
+[data-theme="dark"] .postContent {
+  background: rgba(45, 55, 72, 0.05);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 2rem;
+}
+
+[data-theme="dark"] .relatedPosts {
+  background: rgba(45, 55, 72, 0.1);
+  border: 1px solid var(--border-color);
+}
+
+[data-theme="dark"] .callToAction {
+  background: rgba(45, 55, 72, 0.15);
+  border: 1px solid var(--border-color);
+}
+
+/* Dark mode gradient effects for headings */
+[data-theme="dark"] .postTitle {
+  background: linear-gradient(135deg, #77c3ea 0%, #9bb8ff 50%, #c3a6ff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: none;
 }

@@ -125,7 +125,7 @@
 
 .testimonialText::before {
   content: '"';
-  font-size: 4rem;
+  font-size: clamp(2.5rem, 8vw, 4rem);
   color: var(--color-pink-brand);
   position: absolute;
   top: -1rem;
@@ -218,7 +218,7 @@
   }
 
   .testimonialText::before {
-    font-size: 3rem;
+    font-size: clamp(2rem, 6vw, 3rem);
     top: -0.5rem;
     left: -1rem;
   }
@@ -258,4 +258,11 @@
   100% {
     transform: translateX(100%);
   }
+}
+
+/* Dark Mode Overrides */
+[data-theme="dark"] .testimonialsSection {
+  background: linear-gradient(135deg, #1a1a1a 0%, #2d2d30 50%, #1a1a1a 100%);
+  border-top: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
 }

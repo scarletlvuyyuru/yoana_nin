@@ -16,6 +16,11 @@
   box-sizing: border-box;
 }
 
+/* Ensure all elements use border-box sizing */
+* {
+  box-sizing: border-box;
+}
+
 /* Main Title */
 .mainTitle {
   text-align: center;
@@ -26,10 +31,11 @@
 .title {
   font-size: clamp(2.5rem, 5vw, 4rem);
   font-weight: 700;
-  color: var(--text-primary);
+  color: var(--color-navy);
   margin: 0;
   line-height: 1.5;
   position: relative;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 .title::after {
@@ -80,7 +86,7 @@
 }
 
 .description {
-  font-size: 1.2rem;
+  font-size: var(--font-size-xl);
   line-height: 1.5;
   color: var(--text-secondary);
   margin-bottom: 2rem;
@@ -110,7 +116,7 @@
 }
 
 .highlightText {
-  font-size: 1.1rem;
+  font-size: var(--font-size-lg);
   font-weight: 600;
   background: linear-gradient(135deg, var(--color-blue, #006DBC), var(--color-pink-brand, #f26ac3));
   background-clip: text;
@@ -129,11 +135,12 @@
 }
 
 .whyTitle {
-  font-size: 1.5rem;
+  font-size: var(--font-size-2xl);
   font-weight: 700;
-  color: var(--text-primary);
+  color: var(--color-navy);
   margin-bottom: 1.5rem;
   text-align: center;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 .benefitsList {
@@ -158,7 +165,7 @@
 }
 
 .benefitIcon {
-  font-size: 2rem;
+  font-size: var(--font-size-4xl);
   flex-shrink: 0;
   margin-top: 0.25rem;
 }
@@ -176,14 +183,14 @@
 }
 
 .benefitTitle {
-  font-size: 1.1rem;
+  font-size: var(--font-size-lg);
   font-weight: 600;
   color: var(--text-primary);
   margin: 0 0 0.5rem 0;
 }
 
 .benefitText {
-  font-size: 0.95rem;
+  font-size: var(--font-size-base);
   line-height: 1.5;
   color: var(--text-secondary);
   margin: 0;
@@ -210,6 +217,9 @@
   border: 1px solid rgba(255, 255, 255, 0.2);
   position: sticky;
   top: 2rem;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 .formSection::before {
@@ -228,10 +238,11 @@
 .formTitle {
   font-size: clamp(1.8rem, 3vw, 2.5rem);
   font-weight: 700;
-  color: var(--text-primary);
+  color: var(--color-navy);
   margin: 0 0 3rem 0;
   text-align: center;
   position: relative;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 .formTitle::after {
@@ -245,7 +256,7 @@
 }
 
 .formSubtext {
-  font-size: 0.95rem;
+  font-size: var(--font-size-base);
   color: var(--text-secondary);
   text-align: center;
   margin: 0 0 2rem 0;
@@ -256,6 +267,8 @@
   display: flex;
   flex-direction: column;
   gap: 2rem;
+  width: 100%;
+  max-width: 100%;
 }
 
 /* Form Groups */
@@ -263,6 +276,7 @@
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  width: 100%;
 }
 
 /* Honeypot - Hidden from users but visible to bots */
@@ -279,7 +293,7 @@
 
 .label {
   font-weight: 600;
-  font-size: 1rem;
+  font-size: var(--font-size-base);
   color: var(--text-primary);
   margin-bottom: 0.5rem;
 }
@@ -296,11 +310,14 @@
   padding: 1rem 1.5rem;
   border: 2px solid var(--color-navy, #2B4C8C);
   border-radius: 15px;
-  font-size: 1rem;
+  font-size: var(--font-size-base);
   font-family: var(--font-body);
   transition: all 0.3s ease;
   background: var(--bg-primary);
   color: var(--text-primary);
+  width: 100%;
+  box-sizing: border-box;
+  max-width: 100%;
 }
 
 .input:focus,
@@ -353,7 +370,7 @@
   border-radius: 50px;
   font-family: var(--font-heading);
   font-weight: 600;
-  font-size: 1.1rem;
+  font-size: var(--font-size-lg);
   text-transform: uppercase;
   letter-spacing: 1px;
   cursor: pointer;
@@ -382,7 +399,7 @@
 }
 
 .infoText {
-  font-size: 1rem;
+  font-size: var(--font-size-base);
   color: var(--text-secondary);
   margin: 0;
 }
@@ -409,9 +426,10 @@
   text-align: center;
   font-size: clamp(1.8rem, 3vw, 2.5rem);
   font-weight: 700;
-  color: var(--text-primary);
+  color: var(--color-navy);
   margin-bottom: 3rem;
   position: relative;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 .servicesTitle::after {
@@ -501,17 +519,18 @@
 
 
 .infoTitle {
-  font-size: 1.4rem;
+  font-size: var(--font-size-2xl);
   font-weight: 700;
-  color: var(--text-primary);
+  color: var(--color-navy);
 
   position: relative;
   z-index: 1;
   padding: 1rem 1rem;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 .infoDescription {
-  font-size: 1.05rem;
+  font-size: var(--font-size-lg);
   line-height: 1.5;
   color: var(--text-secondary);
   margin: 0;
@@ -545,6 +564,8 @@
 @media (max-width: 768px) {
   .container {
     padding: 0 1rem;
+    max-width: 100vw;
+    overflow-x: hidden;
   }
 
   .mainTitle {
@@ -567,12 +588,23 @@
   .rightContent {
     padding: 0;
     order: 1; /* Show first on mobile - contact form priority */
+    width: 100%;
+    max-width: 100%;
   }
 
   .formSection {
-    padding: 2rem 1.5rem;
+    padding: 1.5rem 1rem;
     margin: 0;
     border-radius: 15px;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    position: static;
+  }
+
+  .contactForm {
+    width: 100%;
+    max-width: 100%;
   }
 
   .whySection {
@@ -584,23 +616,26 @@
   }
 
   .benefitIcon {
-    font-size: 1.5rem;
+    font-size: var(--font-size-2xl);
   }
 
   .input,
   .select,
   .textarea {
-    padding: 1rem 1.25rem;
+    padding: 0.875rem 1rem;
     font-size: 16px; /* Prevents zoom on iOS */
     border-radius: 12px;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
   }
 
   .submitButton {
     padding: 1.2rem 2rem;
-    font-size: 1rem;
-    min-width: 200px;
+    font-size: var(--font-size-base);
     width: 100%;
-    max-width: 300px;
+    max-width: 100%;
+    box-sizing: border-box;
   }
 
   .title {
@@ -614,32 +649,39 @@
 
 @media (max-width: 480px) {
   .container {
-    padding: 0 1rem;
+    padding: 0 0.75rem;
+    max-width: 100vw;
   }
 
   .formSection {
-    padding: 1.5rem 1rem;
+    padding: 1.25rem 0.75rem;
     margin: 0;
     border-radius: 12px;
+    width: 100%;
+    max-width: 100%;
   }
 
   .contactForm {
     gap: 1.25rem;
+    width: 100%;
   }
 
   .input,
   .select,
   .textarea {
-    padding: 1rem;
+    padding: 0.875rem 0.75rem;
     font-size: 16px;
     border-radius: 10px;
+    width: 100%;
+    max-width: 100%;
   }
 
   .submitButton {
     width: 100%;
     min-width: auto;
+    max-width: 100%;
     padding: 1.2rem 1rem;
-    font-size: 0.9rem;
+    font-size: var(--font-size-base);
   }
 
   .mainTitle {
@@ -659,7 +701,7 @@
   }
 
   .benefitIcon {
-    font-size: 1.25rem;
+    font-size: var(--font-size-xl);
     margin-top: 0;
   }
 
@@ -672,7 +714,7 @@
   }
 
   .description {
-    font-size: 1rem;
+    font-size: var(--font-size-base);
     line-height: 1.5;
   }
 }
@@ -714,8 +756,8 @@
   }
 
   .container {
-    padding: 0 1rem;
-    max-width: 100%;
+    padding: 0 0.5rem;
+    max-width: 100vw;
     overflow-x: hidden;
   }
 
@@ -749,53 +791,33 @@
   .rightContent {
     padding: 0;
     width: 100%;
-  }
-
-  .supportSection {
-    margin-bottom: 1.5rem;
-  }
-
-  .subtitle {
-    font-size: clamp(1.3rem, 7vw, 1.8rem);
-    margin-bottom: 1rem;
-    line-height: 1.5;
-  }
-
-  .description {
-    font-size: 0.95rem;
-    line-height: 1.5;
-    margin-bottom: 1rem;
-  }
-
-  .heroHighlight {
-    padding: 0.75rem 1rem;
-    margin-bottom: 1rem;
-    border-radius: 40px;
-  }
-
-  .highlightText {
-    font-size: 0.9rem;
+    max-width: 100%;
   }
 
   .formSection {
-    padding: 1.25rem 1rem;
+    padding: 1rem 0.5rem;
     margin: 0;
     border-radius: 10px;
     width: 100%;
+    max-width: 100%;
     box-sizing: border-box;
   }
 
   .contactForm {
     gap: 1rem;
+    width: 100%;
   }
 
   .input,
   .select,
   .textarea {
-    padding: 0.875rem 1rem;
+    padding: 0.75rem 0.5rem;
     font-size: 16px;
     border-radius: 8px;
     border: 2px solid var(--color-navy, #2B4C8C);
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
   }
 
   .textarea {
@@ -803,10 +825,12 @@
   }
 
   .submitButton {
-    padding: 1rem 0.75rem;
-    font-size: 0.875rem;
+    padding: 1rem 0.5rem;
+    font-size: var(--font-size-sm);
     width: 100%;
+    max-width: 100%;
     border-radius: 8px;
+    box-sizing: border-box;
   }
 
   .whySection {
@@ -814,7 +838,7 @@
   }
 
   .whyTitle {
-    font-size: 1.25rem;
+    font-size: var(--font-size-xl);
     margin-bottom: 1rem;
   }
 
@@ -824,20 +848,20 @@
   }
 
   .benefitIcon {
-    font-size: 1.1rem;
+    font-size: var(--font-size-lg);
   }
 
   .benefitTitle {
-    font-size: 1rem;
+    font-size: var(--font-size-base);
   }
 
   .benefitText {
-    font-size: 0.875rem;
+    font-size: var(--font-size-sm);
     line-height: 1.5;
   }
 
   .description {
-    font-size: 0.95rem;
+    font-size: var(--font-size-base);
     line-height: 1.5;
   }
 
@@ -848,7 +872,7 @@
   }
 
   .highlightText {
-    font-size: 0.95rem;
+    font-size: var(--font-size-base);
   }
 
   .additionalInfo {
@@ -872,12 +896,145 @@
 
 
   .infoTitle {
-    font-size: 1.2rem;
+    font-size: var(--font-size-xl);
     margin-bottom: 1rem;
   }
 
   .infoDescription {
-    font-size: 0.95rem;
+    font-size: var(--font-size-base);
     line-height: 1.5;
   }
+}
+
+/* Dark Mode Overrides */
+[data-theme="dark"] .contactPage {
+  background: linear-gradient(135deg, var(--color-navy) 0%, #2D3748 50%, var(--bg-secondary) 100%);
+}
+
+[data-theme="dark"] .formContainer {
+  background: rgba(45, 55, 72, 0.6);
+  border: 1px solid var(--border-color);
+}
+
+[data-theme="dark"] .formContainer:hover {
+  background: rgba(45, 55, 72, 0.8);
+}
+
+[data-theme="dark"] .input, 
+[data-theme="dark"] .textarea {
+  background: rgba(45, 55, 72, 0.95);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+}
+
+[data-theme="dark"] .input:focus,
+[data-theme="dark"] .textarea:focus {
+  background: rgba(45, 55, 72, 1);
+  border-color: var(--text-accent);
+}
+
+[data-theme="dark"] .infoCard {
+  background: rgba(45, 55, 72, 0.7);
+  border: 1px solid var(--border-color);
+}
+
+[data-theme="dark"] .infoCard:hover {
+  background: rgba(45, 55, 72, 0.9);
+}
+
+/* Dark mode gradient effects for headings */
+[data-theme="dark"] .title {
+  background: linear-gradient(135deg, #77c3ea 0%, #9bb8ff 50%, #c3a6ff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: none;
+}
+
+[data-theme="dark"] .whyTitle {
+  background: linear-gradient(135deg, #77c3ea 0%, #9bb8ff 50%, #c3a6ff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: none;
+}
+
+[data-theme="dark"] .formTitle {
+  background: linear-gradient(135deg, #77c3ea 0%, #9bb8ff 50%, #c3a6ff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: none;
+}
+
+[data-theme="dark"] .servicesTitle {
+  background: linear-gradient(135deg, #77c3ea 0%, #9bb8ff 50%, #c3a6ff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: none;
+}
+
+[data-theme="dark"] .infoTitle {
+  background: linear-gradient(135deg, #77c3ea 0%, #9bb8ff 50%, #c3a6ff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: none;
+}
+
+/* Dark mode form section */
+[data-theme="dark"] .formSection {
+  background: rgba(45, 55, 72, 0.95);
+  border: 1px solid var(--border-color);
+  backdrop-filter: blur(15px);
+}
+
+[data-theme="dark"] .formSection::before {
+  background: linear-gradient(135deg, rgba(119, 195, 234, 0.05) 0%, rgba(155, 184, 255, 0.05) 100%);
+}
+
+/* Dark mode select dropdown */
+[data-theme="dark"] .select {
+  background: rgba(45, 55, 72, 0.95);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+}
+
+[data-theme="dark"] .select:focus {
+  background: rgba(45, 55, 72, 1);
+  border-color: var(--text-accent);
+}
+
+[data-theme="dark"] .select:hover {
+  border-color: var(--text-accent);
+}
+
+/* Dark mode labels */
+[data-theme="dark"] .label {
+  color: var(--text-primary);
+}
+
+/* Dark mode contact info */
+[data-theme="dark"] .contactInfo {
+  border-top: 1px solid var(--border-color);
+}
+
+[data-theme="dark"] .infoText {
+  color: var(--text-secondary);
+}
+
+[data-theme="dark"] .emailLink {
+  color: var(--text-accent);
+}
+
+[data-theme="dark"] .emailLink:hover {
+  color: #77c3ea;
+}
+
+/* Dark mode placeholder text */
+[data-theme="dark"] .input::placeholder,
+[data-theme="dark"] .textarea::placeholder {
+  color: var(--text-secondary);
+  opacity: 0.7;
 }

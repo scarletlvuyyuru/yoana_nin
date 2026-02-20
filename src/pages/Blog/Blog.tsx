@@ -45,6 +45,20 @@ const InstagramFeed: React.FC = () => {
     }
   }, []);
 
+  // Handle screen resize to reset carousel position if needed
+  useEffect(() => {
+    const handleResize = () => {
+      // Reset to first slide when screen size changes to prevent out-of-bounds positioning
+      const maxIndex = Math.max(0, posts.length - getVisiblePosts());
+      if (currentIndex > maxIndex) {
+        setCurrentIndex(0);
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, [currentIndex, posts.length]);
+
   const fetchInstagramPosts = async () => {
     try {
       setLoading(true);
@@ -119,15 +133,34 @@ const InstagramFeed: React.FC = () => {
   };
 
   const nextSlide = () => {
-    setCurrentIndex((prevIndex) => 
-      prevIndex === posts.length - 1 ? 0 : prevIndex + 1
-    );
+    setCurrentIndex((prevIndex) => {
+      const maxIndex = Math.max(0, posts.length - getVisiblePosts());
+      return prevIndex >= maxIndex ? 0 : prevIndex + 1;
+    });
   };
 
   const prevSlide = () => {
-    setCurrentIndex((prevIndex) => 
-      prevIndex === 0 ? posts.length - 1 : prevIndex - 1
-    );
+    setCurrentIndex((prevIndex) => {
+      const maxIndex = Math.max(0, posts.length - getVisiblePosts());
+      return prevIndex === 0 ? maxIndex : prevIndex - 1;
+    });
+  };
+
+  // Helper function to determine how many posts are visible based on screen size
+  const getVisiblePosts = () => {
+    if (typeof window !== 'undefined') {
+      if (window.innerWidth <= 480) return 1; // Small mobile: 1 post
+      if (window.innerWidth <= 768) return 2; // Mobile: 2 posts  
+      return 3; // Desktop: 3 posts (or adjust as needed)
+    }
+    return 3; // Default for server-side rendering
+  };
+
+  // Calculate the correct transform percentage
+  const getTransformPercentage = () => {
+    const visiblePosts = getVisiblePosts();
+    const movePercentage = 100 / visiblePosts;
+    return currentIndex * movePercentage;
   };
 
   if (loading) {
@@ -152,6 +185,7 @@ const InstagramFeed: React.FC = () => {
         <button 
           className={`${styles.navButton} ${styles.prevButton}`}
           onClick={prevSlide}
+          disabled={currentIndex === 0}
           aria-label="Previous insight"
         >
           ←
@@ -161,7 +195,7 @@ const InstagramFeed: React.FC = () => {
           <div 
             className={styles.feedTrack}
             style={{ 
-              transform: `translateX(-${currentIndex * (100 / Math.min(posts.length, 3))}%)` 
+              transform: `translateX(-${getTransformPercentage()}%)` 
             }}
           >
             {posts.map((post) => (
@@ -219,6 +253,7 @@ const InstagramFeed: React.FC = () => {
         <button 
           className={`${styles.navButton} ${styles.nextButton}`}
           onClick={nextSlide}
+          disabled={currentIndex >= Math.max(0, posts.length - getVisiblePosts())}
           aria-label="Next insight"
         >
           →
@@ -226,7 +261,7 @@ const InstagramFeed: React.FC = () => {
       </div>
       
       <div className={styles.feedDots}>
-        {Array.from({ length: Math.max(1, posts.length - 2) }).map((_, index) => (
+        {Array.from({ length: Math.max(1, posts.length - getVisiblePosts() + 1) }).map((_, index) => (
           <button
             key={index}
             className={`${styles.dot} ${index === currentIndex ? styles.activeDot : ''}`}

@@ -1,6 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../../assets/yoana_nin_coaching_logo.webp';
+import facebookIcon from '../../assets/images/icon_fb_wht.webp';
+import instagramIcon from '../../assets/images/icon_instagram.webp';
+import linkedinIcon from '../../assets/images/icon_linkedin.webp';
 
 const Footer: React.FC = () => {
   const footerStyle = {
@@ -40,15 +43,15 @@ const Footer: React.FC = () => {
   const socialLinkStyle = {
     color: 'var(--footer-text-secondary)',
     textDecoration: 'none',
-    padding: '0.5rem',
+    padding: '0.75rem',
     borderRadius: '50%',
-    border: '1px solid var(--border-color)',
+    backgroundColor: 'var(--color-navy)',
     transition: 'all 0.2s ease',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    width: '40px',
-    height: '40px'
+    width: '45px',
+    height: '45px'
   };
 
   return (
@@ -78,17 +81,45 @@ const Footer: React.FC = () => {
                 margin: '0',
                 fontSize: 'var(--font-size-xl)'
               }}>
-                Yoana
+                Yoana Nin Coaching
               </h3>
             </div>
             <p style={{ color: 'var(--footer-text-secondary)', marginBottom: '1rem' }}>
-              Life Coach & Real Estate Professional helping women align their lives for joy, gratitude, and prosperity.
+           Accredited Life Coach For Women Entrepreneurs (ADHD Focus)
             </p>
             {/* Social Media Links */}
             <div style={socialStyle}>
-              <a href="#" style={socialLinkStyle} aria-label="Instagram">📷</a>
-              <a href="#" style={socialLinkStyle} aria-label="LinkedIn">💼</a>
-              <a href="#" style={socialLinkStyle} aria-label="Facebook">📘</a>
+              <a 
+                href="#" 
+                style={socialLinkStyle} 
+                aria-label="Facebook"
+                onMouseOver={(e) => e.currentTarget.style.backgroundColor = 'rgba(13, 37, 71, 0.8)'}
+                onMouseOut={(e) => e.currentTarget.style.backgroundColor = 'var(--color-navy)'}
+              >
+                <img src={facebookIcon} alt="Facebook" style={{width: '20px', height: '20px'}} />
+              </a>
+              <a 
+                href="https://www.instagram.com/yoananincoaching/" 
+                style={socialLinkStyle} 
+                aria-label="Instagram"
+                target="_blank"
+                rel="noopener noreferrer"
+                onMouseOver={(e) => e.currentTarget.style.backgroundColor = 'rgba(13, 37, 71, 0.8)'}
+                onMouseOut={(e) => e.currentTarget.style.backgroundColor = 'var(--color-navy)'}
+              >
+                <img src={instagramIcon} alt="Instagram" style={{width: '20px', height: '20px'}} />
+              </a>
+              <a 
+                href="https://www.linkedin.com/in/yoananin" 
+                style={socialLinkStyle} 
+                aria-label="LinkedIn"
+                target="_blank"
+                rel="noopener noreferrer"
+                onMouseOver={(e) => e.currentTarget.style.backgroundColor = 'rgba(13, 37, 71, 0.8)'}
+                onMouseOut={(e) => e.currentTarget.style.backgroundColor = 'var(--color-navy)'}
+              >
+                <img src={linkedinIcon} alt="LinkedIn" style={{width: '20px', height: '20px'}} />
+              </a>
             </div>
           </div>
           

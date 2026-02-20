@@ -132,32 +132,40 @@ const RealEstate: React.FC = () => {
           <div className={styles.trustContent}>
             <div className={styles.trustGrid}>
               <div className={styles.trustCard}>
-                <div className={styles.trustNumber}>1</div>
-                <h4 className={styles.trustCardTitle}>Competence</h4>
+                <div className={styles.trustCardHeader}>
+                  <div className={styles.trustNumber}>1</div>
+                  <h4 className={styles.trustCardTitle}>Competence</h4>
+                </div>
                 <p className={styles.trustCardText}>
                   Deep market knowledge & technical skills for sound investments.
                 </p>
               </div>
               
               <div className={styles.trustCard}>
-                <div className={styles.trustNumber}>2</div>
-                <h4 className={styles.trustCardTitle}>Care</h4>
+                <div className={styles.trustCardHeader}>
+                  <div className={styles.trustNumber}>2</div>
+                  <h4 className={styles.trustCardTitle}>Care</h4>
+                </div>
                 <p className={styles.trustCardText}>
                   Focus on your family's growth, not just the transaction.
                 </p>
               </div>
               
               <div className={styles.trustCard}>
-                <div className={styles.trustNumber}>3</div>
-                <h4 className={styles.trustCardTitle}>Character</h4>
+                <div className={styles.trustCardHeader}>
+                  <div className={styles.trustNumber}>3</div>
+                  <h4 className={styles.trustCardTitle}>Character</h4>
+                </div>
                 <p className={styles.trustCardText}>
                   Highest professional standards & ethical principles every time.
                 </p>
               </div>
               
               <div className={styles.trustCard}>
-                <div className={styles.trustNumber}>4</div>
-                <h4 className={styles.trustCardTitle}>Consistency</h4>
+                <div className={styles.trustCardHeader}>
+                  <div className={styles.trustNumber}>4</div>
+                  <h4 className={styles.trustCardTitle}>Consistency</h4>
+                </div>
                 <p className={styles.trustCardText}>
                   Stable standards & promises throughout your entire move.
                 </p>
@@ -245,7 +253,7 @@ const RealEstate: React.FC = () => {
                 rel="noopener noreferrer"
                 className={styles.secondaryButton}
               >
-                Browse Properties
+                Browse<br />Properties
               </a>
             </div>
           </div>

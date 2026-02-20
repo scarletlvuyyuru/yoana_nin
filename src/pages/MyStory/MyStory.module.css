@@ -4,7 +4,7 @@
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  padding: 8rem 1.5rem 6rem 1.5rem;
+  padding: 4rem 1.5rem 6rem 1.5rem;
   text-align: center;
   position: relative;
   overflow: hidden;
@@ -36,24 +36,17 @@
   margin-bottom: 1.5rem;
   line-height: 1.5;
   letter-spacing: -0.02em;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 .heroSubtitle {
   font-family: var(--font-heading);
   font-size: var(--font-size-2xl);
-  color: var(--color-navy);
+  color: var(--text-secondary);
   margin-bottom: 2rem;
   font-weight: 400;
   line-height: 1.5;
   letter-spacing: -0.01em;
-}
-
-[data-theme="dark"] .heroTitle {
-  color: var(--color-navy);
-}
-
-[data-theme="dark"] .heroSubtitle {
-  color: var(--color-navy);
 }
 
 .heroDescription {
@@ -64,10 +57,6 @@
   margin: 0 auto;
   line-height: 1.5;
   font-style: italic;
-}
-
-[data-theme="dark"] .heroDescription {
-  color: var(--color-navy);
 }
 
 /* Film Reel - Hidden on desktop */
@@ -153,7 +142,7 @@
 
 .actNumber {
   font-family: var(--font-heading);
-  font-size: 6rem;
+  font-size: clamp(3rem, 12vw, 6rem);
   font-weight: 200;
   color: var(--color-magenta);
   line-height: 0.8;
@@ -171,6 +160,7 @@
   font-weight: 300;
   line-height: 1.5;
   letter-spacing: -0.01em;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 .actDescription {
@@ -181,10 +171,6 @@
   max-width: 700px;
   font-weight: 300;
   margin: 0;
-}
-
-[data-theme="dark"] .actTitle {
-  color: var(--color-navy);
 }
 
 [data-theme="dark"] .actDescription {
@@ -311,6 +297,7 @@
   margin-bottom: 1rem;
   font-weight: 300;
   letter-spacing: -0.02em;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 .credentialsSubtitle {
@@ -327,12 +314,57 @@
   font-style: italic;
 }
 
-[data-theme="dark"] .credentialsTitle {
-  color: var(--color-navy);
+[data-theme="dark"] .heroTitle {
+  background: linear-gradient(135deg, var(--color-blue-light) 0%, #ff6bff 35%, var(--color-pink-soft) 65%, var(--color-blue-light) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: none;
 }
 
-[data-theme="dark"] .credentialsSubtitle {
-  color: var(--color-navy);
+[data-theme="dark"] .actTitle {
+  background: linear-gradient(135deg, var(--color-navy) 0%, var(--color-magenta) 50%, var(--color-navy) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: none;
+}
+
+[data-theme="dark"] .credentialsTitle {
+  background: linear-gradient(135deg, var(--color-navy) 0%, var(--color-magenta) 50%, var(--color-navy) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: none;
+}
+
+[data-theme="dark"] .heroSubtitle {
+  color: white;
+}
+
+[data-theme="dark"] .credentialTitle {
+  background: linear-gradient(135deg, #77c3ea 0%, #9bb8ff 50%, #c3a6ff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: none;
+}
+
+/* Dark mode overrides for light background sections */
+[data-theme="dark"] .hero .heroSubtitle {
+  color: white !important;
+}
+
+[data-theme="dark"] .hero .heroDescription {
+  color: #E2E8F0 !important;
+}
+
+[data-theme="dark"] .actsSection .actDescription {
+  color: var(--color-navy) !important;
+}
+
+[data-theme="dark"] .credentialsSection .credentialsSubtitle {
+  color: var(--color-navy) !important;
 }
 
 .credentialsLayout {
@@ -413,14 +445,10 @@
 .credentialTitle {
   font-family: var(--font-heading);
   font-size: var(--font-size-lg);
-  color: var(--color-navy);
+  color: var(--text-primary);
   margin-bottom: 1rem;
   font-weight: 500;
   line-height: 1.5;
-}
-
-[data-theme="dark"] .credentialTitle {
-  color: var(--text-secondary);
 }
 
 .credentialDescription {
@@ -480,6 +508,7 @@
 @media (max-width: 768px) {
   .hero {
     background-image: none !important;
+    text-align: left;
   }
   
   .filmReel {
@@ -487,19 +516,22 @@
   }
   
   .hero {
-    padding: 6rem 1rem 4rem 1rem;
+    padding: 3rem 1rem 4rem 1rem;
   }
   
   .heroTitle {
     font-size: var(--font-size-4xl);
+    text-align: left;
   }
   
   .heroSubtitle {
     font-size: var(--font-size-2xl);
+    text-align: left;
   }
   
   .heroDescription {
     font-size: var(--font-size-lg);
+    text-align: left;
   }
   
   .actSection, .actSectionAlt {
@@ -509,13 +541,18 @@
   .actContent {
     grid-template-columns: 1fr;
     gap: 2rem;
-    text-align: center;
+    text-align: left;
   }
   
   .actNumber {
     font-size: 4rem;
     margin: 0 auto 1rem auto;
     top: 0;
+    text-align: center;
+  }
+  
+  .actText {
+    text-align: left;
   }
   
   .bookSection {
@@ -525,6 +562,10 @@
   .bookContent {
     grid-template-columns: 1fr;
     gap: 2rem;
+    text-align: left;
+  }
+  
+  .bookImageSection {
     text-align: center;
   }
   
@@ -545,7 +586,19 @@
   .credentialsLayout {
     grid-template-columns: 1fr;
     gap: 3rem;
+    text-align: left;
+  }
+  
+  .credentialsImageSection {
     text-align: center;
+  }
+  
+  .credentialsTitle {
+    text-align: left;
+  }
+  
+  .credentialsSubtitle {
+    text-align: left;
   }
   
   .credentialsImage {
@@ -564,7 +617,7 @@
   
   .credentialContent {
     flex-direction: column;
-    text-align: center;
+    text-align: left;
     gap: 1rem;
   }
   
@@ -572,6 +625,10 @@
     align-self: center;
     width: 60px;
     height: 60px;
+  }
+  
+  .credentialText {
+    text-align: left;
   }
   
   .finalCta {
@@ -585,7 +642,7 @@
 
 @media (max-width: 480px) {
   .actNumber {
-    font-size: 3rem;
+    font-size: clamp(2.5rem, 10vw, 4rem);
   }
   
   .actTitle {
@@ -604,4 +661,44 @@
     padding: 0.75rem 1.5rem;
     font-size: var(--font-size-sm);
   }
+}
+
+/* Dark Mode Overrides */
+[data-theme="dark"] .hero {
+  background: linear-gradient(135deg, #2D3748 0%, var(--color-navy) 100%);
+}
+
+[data-theme="dark"] .actCard {
+  background: rgba(45, 55, 72, 0.15);
+  border: 1px solid var(--border-color);
+}
+
+[data-theme="dark"] .actCard:hover {
+  background: rgba(45, 55, 72, 0.3);
+}
+
+[data-theme="dark"] .credentialCard {
+  background: rgba(45, 55, 72, 0.8);
+  border: 1px solid var(--border-color);
+}
+
+[data-theme="dark"] .credentialCard:hover {
+  background: rgba(45, 55, 72, 0.9);
+}
+
+[data-theme="dark"] .credentialTitle {
+  color: #FFFFFF;
+}
+
+[data-theme="dark"] .credentialDescription {
+  color: #E2E8F0;
+}
+
+[data-theme="dark"] .bookSection {
+  background: rgba(45, 55, 72, 0.05);
+  border: 1px solid var(--border-color);
+}
+
+[data-theme="dark"] .ctaSection {
+  background: linear-gradient(135deg, rgba(45, 55, 72, 0.1) 0%, rgba(45, 55, 72, 0.15) 100%);
 }

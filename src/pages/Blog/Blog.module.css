@@ -39,7 +39,7 @@
 }
 
 .heroTitle {
-  font-size: 3.5rem;
+  font-size: var(--font-size-5xl);
   font-weight: 700;
    margin-top: 10rem;
   margin-bottom: 1rem;
@@ -48,14 +48,14 @@
 }
 
 .heroSubtitle {
-  font-size: 1.5rem;
+  font-size: var(--font-size-2xl);
   font-weight: 300;
   opacity: 0.95;
   color: white;
 }
 
 .heroDescription {
-  font-size: 1.1rem;
+  font-size: var(--font-size-lg);
   line-height: 1.5;
   opacity: 0.9;
   max-width: 600px;
@@ -64,21 +64,21 @@
 }
 
 .heroTitle {
-  font-size: 3.5rem;
+  font-size: var(--font-size-5xl);
   font-weight: 700;
   margin-bottom: 1rem;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .heroSubtitle {
-  font-size: 1.5rem;
+  font-size: var(--font-size-2xl);
   font-weight: 300;
   margin-bottom: 1.5rem;
   opacity: 0.95;
 }
 
 .heroDescription {
-  font-size: 1.1rem;
+  font-size: var(--font-size-lg);
   line-height: 1.5;
   opacity: 0.9;
   max-width: 600px;
@@ -92,16 +92,17 @@
 }
 
 .sectionTitle {
-  font-size: 2.5rem;
+  font-size: var(--font-size-5xl);
   text-align: center;
   margin-bottom: 1rem;
-  color: var(--text-primary);
+  color: var(--color-navy);
   font-weight: 600;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 
 .sectionDescription {
   text-align: center;
-  font-size: 1.1rem;
+  font-size: var(--font-size-lg);
   color: var(--text-secondary);
   margin-bottom: 3rem;
   max-width: 600px;
@@ -135,7 +136,7 @@
   align-items: center;
   justify-content: center;
   color: white;
-  font-size: 1.1rem;
+  font-size: var(--font-size-lg);
 }
 
 .youtubeCallout {
@@ -148,7 +149,7 @@
 
 .youtubeCallout p {
   margin-bottom: 1.5rem;
-  font-size: 1.1rem;
+  font-size: var(--font-size-lg);
   color: var(--text-primary);
 }
 
@@ -178,13 +179,13 @@
 
 .feedTrack {
   display: flex;
-  transition: transform 0.3s ease;
+  transition: transform 0.4s ease-out;
   gap: 1rem;
 }
 
 .instagramPost {
   flex: 0 0 auto;
-  width: calc(20% - 0.8rem); /* 5 posts on desktop */
+  width: calc(33.333% - 0.67rem); /* 3 posts on desktop for better carousel behavior */
   position: relative;
   border-radius: 12px;
   overflow: hidden;
@@ -228,7 +229,7 @@
 }
 
 .postCaption {
-  font-size: 0.9rem;
+  font-size: var(--font-size-base);
   line-height: 1.4;
   margin: 0;
   color: white;
@@ -245,7 +246,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.5rem;
+  font-size: var(--font-size-2xl);
   color: var(--color-blue);
   cursor: pointer;
   transition: all 0.3s ease;
@@ -253,7 +254,7 @@
   z-index: 10;
 }
 
-.navButton:hover {
+.navButton:hover:not(:disabled) {
   background: var(--color-blue);
   color: white;
   transform: scale(1.1);
@@ -291,7 +292,7 @@
   align-items: center;
   justify-content: center;
   height: 300px;
-  font-size: 1.1rem;
+  font-size: var(--font-size-lg);
   color: var(--text-secondary);
 }
 
@@ -366,7 +367,7 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 1rem;
-  font-size: 0.9rem;
+  font-size: var(--font-size-base);
 }
 
 .category {
@@ -376,7 +377,7 @@
   border-radius: 15px;
   font-weight: 500;
   text-transform: uppercase;
-  font-size: 0.8rem;
+  font-size: var(--font-size-sm);
   letter-spacing: 0.5px;
 }
 
@@ -400,7 +401,7 @@
 .titleLink {
   color: var(--text-primary);
   text-decoration: none;
-  font-size: 1.3rem;
+  font-size: var(--font-size-2xl);
   font-weight: 600;
   line-height: 1.5;
   transition: color 0.3s ease;
@@ -428,7 +429,7 @@
   color: #495057;
   padding: 0.3rem 0.7rem;
   border-radius: 12px;
-  font-size: 0.8rem;
+  font-size: var(--font-size-sm);
   border: 1px solid #e9ecef;
 }
 
@@ -436,7 +437,7 @@
   color: #c63946;
   text-decoration: none;
   font-weight: 600;
-  font-size: 0.9rem;
+  font-size: var(--font-size-base);
   transition: color 0.3s ease;
 }
 
@@ -458,13 +459,13 @@
 }
 
 .newsletterTitle {
-  font-size: 2.5rem;
+  font-size: var(--font-size-5xl);
   margin-bottom: 1rem;
   font-weight: 600;
 }
 
 .newsletterDescription {
-  font-size: 1.1rem;
+  font-size: var(--font-size-lg);
   margin-bottom: 2rem;
   opacity: 0.9;
 }
@@ -481,7 +482,7 @@
   padding: 1rem;
   border: none;
   border-radius: 8px;
-  font-size: 1rem;
+  font-size: var(--font-size-base);
   outline: none;
 }
 
@@ -492,15 +493,15 @@
 /* Mobile Responsiveness */
 @media (max-width: 768px) {
   .heroTitle {
-    font-size: 2.5rem;
+    font-size: var(--font-size-5xl);
   }
   
   .heroSubtitle {
-    font-size: 1.2rem;
+    font-size: var(--font-size-xl);
   }
   
   .sectionTitle {
-    font-size: 2rem;
+    font-size: var(--font-size-4xl);
   }
   
   .blogGrid {
@@ -524,11 +525,11 @@
   }
   
   .heroTitle {
-    font-size: 2rem;
+    font-size: var(--font-size-4xl);
   }
   
   .heroSubtitle {
-    font-size: 1.1rem;
+    font-size: var(--font-size-lg);
   }
   
   .youtubeSection,
@@ -538,6 +539,89 @@
   }
   
   .sectionTitle {
-    font-size: 1.8rem;
+    font-size: var(--font-size-3xl);
   }
+}
+
+/* Dark Mode Overrides */
+[data-theme="dark"] .blogPage {
+  background: var(--bg-primary);
+}
+
+[data-theme="dark"] .hero {
+  background: linear-gradient(135deg, #2D3748 0%, var(--color-navy) 100%);
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+}
+
+[data-theme="dark"] .instagramSection {
+  background: rgba(45, 55, 72, 0.05);
+}
+
+[data-theme="dark"] .myStoriesSection {
+  background: rgba(45, 55, 72, 0.1);
+}
+
+[data-theme="dark"] .blogSection {
+  background: rgba(45, 55, 72, 0.05);
+}
+
+[data-theme="dark"] .newsletterSection {
+  background: rgba(45, 55, 72, 0.1);
+  border: 1px solid var(--border-color);
+}
+
+[data-theme="dark"] .card {
+  background: rgba(45, 55, 72, 0.15);
+  border: 1px solid var(--border-color);
+}
+
+[data-theme="dark"] .card:hover {
+  background: rgba(45, 55, 72, 0.3);
+}
+
+[data-theme="dark"] .newsletterCard {
+  background: rgba(45, 55, 72, 0.2);
+  border: 1px solid var(--border-color);
+}
+
+[data-theme="dark"] .instagramCard {
+  background: rgba(45, 55, 72, 0.1);
+  border: 1px solid var(--border-color);
+}
+
+[data-theme="dark"] .inspirationSection .sectionTitle {
+  color: var(--color-navy);
+}
+
+[data-theme="dark"] .inspirationSection .sectionDescription {
+  color: var(--color-navy);
+}
+
+[data-theme="dark"] .blogCard {
+  background: rgba(45, 55, 72, 0.8);
+  border: 1px solid var(--border-color);
+}
+
+[data-theme="dark"] .titleLink {
+  color: #FFFFFF;
+}
+
+[data-theme="dark"] .titleLink:hover {
+  color: var(--color-orange-warm);
+}
+
+[data-theme="dark"] .cardExcerpt {
+  color: #E2E8F0;
+}
+
+[data-theme="dark"] .date {
+  color: #E2E8F0;
+}
+
+[data-theme="dark"] .tag {
+  background: rgba(45, 55, 72, 0.6);
+  color: #E2E8F0;
+  border: 1px solid var(--border-color);
 }

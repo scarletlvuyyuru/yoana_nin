@@ -3,6 +3,9 @@ import { Link, useLocation } from 'react-router-dom';
 import { useTheme } from '../../context/ThemeContext';
 import styles from './Navigation.module.css';
 import logo from '../../assets/yoana_nin_coaching_logo.webp';
+import facebookIcon from '../../assets/images/icon_fb_wht.webp';
+import instagramIcon from '../../assets/images/icon_instagram.webp';
+import linkedinIcon from '../../assets/images/icon_linkedin.webp';
 
 interface NavigationItem {
   name: string;
@@ -134,18 +137,37 @@ const Navigation: React.FC = () => {
         <div className={styles.bannerContainer}>
           {/* Social Links - Left Side */}
           <div className={styles.socialLinks}>
-            {/* Social icons will go here */}
+            <a 
+              href="#" 
+              className={styles.socialIcon}
+              aria-label="Follow us on Facebook"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img src={facebookIcon} alt="Facebook" className={styles.socialIconImage} />
+            </a>
+            <a 
+              href="https://www.instagram.com/yoananincoaching/" 
+              className={styles.socialIcon}
+              aria-label="Follow us on Instagram"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img src={instagramIcon} alt="Instagram" className={styles.socialIconImage} />
+            </a>
+            <a 
+              href="https://www.linkedin.com/in/yoananin" 
+              className={styles.socialIcon}
+              aria-label="Connect with us on LinkedIn"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img src={linkedinIcon} alt="LinkedIn" className={styles.socialIconImage} />
+            </a>
           </div>
 
           {/* Banner Buttons - Right Side */}
           <div className={styles.bannerButtons}>
-            <button
-              onClick={toggleTheme}
-              className={styles.bannerThemeToggle}
-              aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
-            >
-              {theme === 'light' ? '🌙' : '☀️'}
-            </button>
             <Link to="/contact" className={`${styles.bannerButton} ${styles.primary}`}>
               Contact
             </Link>
