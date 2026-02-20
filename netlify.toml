@@ -13,12 +13,10 @@
   status = 200
 
 # Function-specific settings
-[[functions]]
-  name = "instagram-feed"
+[functions.instagram-feed]
   timeout = 10
 
-[[functions]]  
-  name = "instagram-webhook"
+[functions.instagram-webhook]
   timeout = 10
 
 # Headers for better performance
