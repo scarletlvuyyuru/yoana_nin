@@ -96,7 +96,7 @@ const Home: React.FC = () => {
            How We Can Begin Your Journey Together
           </h2>
           <h3 className={styles.sectionSubtitle}>
-            Three ways to stop surviving and start thriving—whether you're rebuilding confidence, finding home, or getting inspired.
+            Three ways to stop surviving and start thriving, whether you're rebuilding confidence, finding home, or getting inspired.
           </h3>
           <div className={styles.pathsGrid}>
             <div className={`${styles.pathCard} ${styles.coaching}`}>
