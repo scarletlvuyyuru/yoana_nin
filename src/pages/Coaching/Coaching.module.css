@@ -885,17 +885,17 @@
 /* CTA Button Container */
 .ctaButtonContainer {
   display: flex;
-  flex-direction: column;
+  flex-direction: row; /* Changed from column to row */
+  justify-content: center; /* Center the buttons */
   align-items: center;
   gap: 1rem;
   margin-top: 2rem;
 }
 
-/* Mobile: Side by side buttons */
+/* Mobile: Stack buttons on smaller screens */
 @media (max-width: 768px) {
   .ctaButtonContainer {
-    flex-direction: row;
-    justify-content: center;
+    flex-direction: column; /* Stack them on mobile */
     gap: 1rem;
     max-width: 100%;
   }
@@ -904,8 +904,8 @@
   .ctaButtonContainer .ctaBtnPrimary {
     flex: 1;
     margin: 0;
-    min-width: 140px;
-    max-width: 180px;
+    width: 100%; /* Make buttons full width on mobile */
+    max-width: 320px; /* Optional: constrain max width on mobile */
     font-size: var(--font-size-sm);
     padding: 0.75rem 0.5rem;
   }
