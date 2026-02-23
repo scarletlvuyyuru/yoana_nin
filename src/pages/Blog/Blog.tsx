@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './Blog.module.css';
 import masterMindsetImage from '../../assets/images/masterMindset.webp';
 
@@ -16,235 +16,96 @@ interface BlogPost {
   slug: string;
 }
 
-// Instagram post data structure
-interface InstagramPost {
-  id: string;
-  media_type: 'IMAGE' | 'VIDEO' | 'CAROUSEL_ALBUM';
-  media_url: string;
-  thumbnail_url?: string;
-  permalink: string;
-  caption: string;
-  timestamp: string;
-}
+// New, reliable TikTok Embed Component
+const TikTokEmbed: React.FC<{ url: string }> = ({ url }) => {
+  const videoId = url.substring(url.lastIndexOf('/') + 1);
 
-// Instagram Feed Component
-const InstagramFeed: React.FC = () => {
-  // 🚩 CLIENT APPROVAL NEEDED: Instagram integration pending client approval
-  const INSTAGRAM_ENABLED = false; // Set to true after client approves Instagram integration
-  
-  const [posts, setPosts] = useState<InstagramPost[]>([]);
-  const [loading, setLoading] = useState(false); // Start as false since we're showing demo
+  return (
+    <blockquote
+      className="tiktok-embed"
+      cite={url}
+      data-video-id={videoId}
+      style={{ maxWidth: '100%', minWidth: 'auto' }}
+    >
+      <section>
+        <a target="_blank" rel="noopener noreferrer" href={url}>
+          Loading TikTok video...
+        </a>
+      </section>
+    </blockquote>
+  );
+};
+
+// TikTok Feed Component
+const TikTokFeed: React.FC = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
+  // Load the TikTok embed script once and trigger load
   useEffect(() => {
-    if (INSTAGRAM_ENABLED) {
-      fetchInstagramPosts();
-    } else {
-      // Show demo data for client preview
-      setDemoContent();
+    const scriptId = 'tiktok-embed-script';
+    if (document.getElementById(scriptId)) {
+      if (window.tiktok) {
+        window.tiktok.load();
+      }
+      return;
     }
-  }, []);
 
-  // Handle screen resize to reset carousel position if needed
-  useEffect(() => {
-    const handleResize = () => {
-      // Reset to first slide when screen size changes to prevent out-of-bounds positioning
-      const maxIndex = Math.max(0, posts.length - getVisiblePosts());
-      if (currentIndex > maxIndex) {
-        setCurrentIndex(0);
+    const script = document.createElement('script');
+    script.id = scriptId;
+    script.src = 'https://www.tiktok.com/embed.js';
+    script.async = true;
+    script.onload = () => {
+      if (window.tiktok) {
+        window.tiktok.load();
       }
     };
+    document.head.appendChild(script);
 
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, [currentIndex, posts.length]);
+    return () => {
+      const existingScript = document.getElementById(scriptId);
+      if (existingScript) {
+        // In a single-page app, you might want to remove it on final unmount
+        // but for this component, we'll leave it.
+      }
+    };
+  }, []);
 
-  const fetchInstagramPosts = async () => {
-    try {
-      setLoading(true);
-      // Call Netlify function to get Instagram posts
-      const response = await fetch('/.netlify/functions/instagram-feed');
-      const data = await response.json();
-      setPosts(data.slice(0, 6)); // Limit to 6 most recent posts
-      setLoading(false);
-    } catch (error) {
-      console.error('Error fetching Instagram posts:', error);
-      setLoading(false);
-    }
-  };
-
-  const setDemoContent = () => {
-    // Demo content to show client what Instagram integration would look like
-    const demoVideos: InstagramPost[] = [
-      {
-        id: 'demo1',
-        media_type: 'VIDEO',
-        media_url: 'https://picsum.photos/400/400?random=1',
-        thumbnail_url: 'https://picsum.photos/400/400?random=1',
-        permalink: '#',
-        caption: 'Quick insights on building confidence as an entrepreneur...',
-        timestamp: new Date().toISOString(),
-      },
-      {
-        id: 'demo2',
-        media_type: 'VIDEO',
-        media_url: 'https://picsum.photos/400/400?random=2',
-        thumbnail_url: 'https://picsum.photos/400/400?random=2',
-        permalink: '#',
-        caption: 'Daily motivation: 3 steps to overcome ADHD overwhelm...',
-        timestamp: new Date().toISOString(),
-      },
-      {
-        id: 'demo3',
-        media_type: 'IMAGE',
-        media_url: 'https://picsum.photos/400/400?random=3',
-        permalink: '#',
-        caption: 'Weekly wisdom for holistic life balance...',
-        timestamp: new Date().toISOString(),
-      },
-      {
-        id: 'demo4',
-        media_type: 'VIDEO',
-        media_url: 'https://picsum.photos/400/400?random=4',
-        thumbnail_url: 'https://picsum.photos/400/400?random=4',
-        permalink: '#',
-        caption: 'Behind the scenes: My morning routine for productivity...',
-        timestamp: new Date().toISOString(),
-      },
-      {
-        id: 'demo5',
-        media_type: 'VIDEO',
-        media_url: 'https://picsum.photos/400/400?random=5',
-        thumbnail_url: 'https://picsum.photos/400/400?random=5',
-        permalink: '#',
-        caption: 'Client success story: From chaos to clarity in 30 days...',
-        timestamp: new Date().toISOString(),
-      },
-      {
-        id: 'demo6',
-        media_type: 'IMAGE',
-        media_url: 'https://picsum.photos/400/400?random=6',
-        permalink: '#',
-        caption: 'Affirmation Monday: You are capable of amazing things...',
-        timestamp: new Date().toISOString(),
-      },
-    ];
-    setPosts(demoVideos);
-  };
+  const tiktokUrls = [
+    "https://www.tiktok.com/@yoanathecoach/video/7606489409122258189",
+    "https://www.tiktok.com/@yoanathecoach/video/7610093975864691982",
+    "https://www.tiktok.com/@yoanathecoach/video/7609391564971838734",
+    "https://www.tiktok.com/@yoanathecoach/video/7609006324688391437",
+    "https://www.tiktok.com/@yoanathecoach/video/7608758618502024461",
+    "https://www.tiktok.com/@yoanathecoach/video/7606769413743758605"
+  ];
 
   const nextSlide = () => {
-    setCurrentIndex((prevIndex) => {
-      const maxIndex = Math.max(0, posts.length - getVisiblePosts());
-      return prevIndex >= maxIndex ? 0 : prevIndex + 1;
-    });
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % tiktokUrls.length);
   };
 
   const prevSlide = () => {
-    setCurrentIndex((prevIndex) => {
-      const maxIndex = Math.max(0, posts.length - getVisiblePosts());
-      return prevIndex === 0 ? maxIndex : prevIndex - 1;
-    });
+    setCurrentIndex((prevIndex) => (prevIndex - 1 + tiktokUrls.length) % tiktokUrls.length);
   };
-
-  // Helper function to determine how many posts are visible based on screen size
-  const getVisiblePosts = () => {
-    if (typeof window !== 'undefined') {
-      if (window.innerWidth <= 480) return 1; // Small mobile: 1 post
-      if (window.innerWidth <= 768) return 2; // Mobile: 2 posts  
-      return 3; // Desktop: 3 posts (or adjust as needed)
-    }
-    return 3; // Default for server-side rendering
-  };
-
-  // Calculate the correct transform percentage
-  const getTransformPercentage = () => {
-    const visiblePosts = getVisiblePosts();
-    const movePercentage = 100 / visiblePosts;
-    return currentIndex * movePercentage;
-  };
-
-  if (loading) {
-    return (
-      <div className={styles.instagramFeed}>
-        <div className={styles.loadingSpinner}>Loading insights...</div>
-      </div>
-    );
-  }
-
-  if (posts.length === 0) {
-    return (
-      <div className={styles.instagramFeed}>
-        <p>No insights available at the moment.</p>
-      </div>
-    );
-  }
 
   return (
-    <div className={styles.instagramFeed}>
-      <div className={styles.feedContainer}>
+    <div className={styles.tiktokCarousel}>
+      <div className={styles.carouselContainer}>
         <button 
           className={`${styles.navButton} ${styles.prevButton}`}
           onClick={prevSlide}
-          disabled={currentIndex === 0}
-          aria-label="Previous insight"
+          aria-label="Previous TikTok video"
         >
           ←
         </button>
         
-        <div className={styles.feedScroll}>
+        <div className={styles.carouselTrackContainer}>
           <div 
-            className={styles.feedTrack}
-            style={{ 
-              transform: `translateX(-${getTransformPercentage()}%)` 
-            }}
+            className={styles.carouselTrack}
+            style={{ transform: `translateX(-${currentIndex * 100}%)` }}
           >
-            {posts.map((post) => (
-              <div key={post.id} className={styles.instagramPost}>
-                <a 
-                  href={post.permalink} 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className={styles.postLink}
-                >
-                  {post.media_type === 'VIDEO' ? (
-                    <video 
-                      className={styles.postMedia}
-                      poster={post.thumbnail_url}
-                      muted
-                      loop
-                      playsInline
-                      onMouseOver={(e) => {
-                        const video = e.currentTarget;
-                        const playPromise = video.play();
-                        if (playPromise !== undefined) {
-                          playPromise.catch(() => {
-                            // Autoplay was prevented, ignore the error
-                          });
-                        }
-                      }}
-                      onMouseOut={(e) => {
-                        try {
-                          e.currentTarget.pause();
-                        } catch (error) {
-                          // Ignore pause errors
-                        }
-                      }}
-                    >
-                      <source src={post.media_url} type="video/mp4" />
-                    </video>
-                  ) : (
-                    <img 
-                      src={post.media_url} 
-                      alt="Instagram insight"
-                      className={styles.postMedia}
-                    />
-                  )}
-                  <div className={styles.postOverlay}>
-                    <p className={styles.postCaption}>
-                      {post.caption ? post.caption.substring(0, 100) + '...' : 'View on Instagram'}
-                    </p>
-                  </div>
-                </a>
+            {tiktokUrls.map((url, index) => (
+              <div key={index} className={styles.carouselSlide}>
+                <TikTokEmbed url={url} />
               </div>
             ))}
           </div>
@@ -253,20 +114,19 @@ const InstagramFeed: React.FC = () => {
         <button 
           className={`${styles.navButton} ${styles.nextButton}`}
           onClick={nextSlide}
-          disabled={currentIndex >= Math.max(0, posts.length - getVisiblePosts())}
-          aria-label="Next insight"
+          aria-label="Next TikTok video"
         >
           →
         </button>
       </div>
       
-      <div className={styles.feedDots}>
-        {Array.from({ length: Math.max(1, posts.length - getVisiblePosts() + 1) }).map((_, index) => (
+      <div className={styles.carouselDots}>
+        {tiktokUrls.map((_, index) => (
           <button
             key={index}
             className={`${styles.dot} ${index === currentIndex ? styles.activeDot : ''}`}
             onClick={() => setCurrentIndex(index)}
-            aria-label={`Go to insight ${index + 1}`}
+            aria-label={`Go to video ${index + 1}`}
           />
         ))}
       </div>
@@ -340,7 +200,7 @@ const Blog: React.FC = () => {
           <p className={styles.sectionDescription}>
             Bite-sized learning moments and insights to inspire your journey forward
           </p>
-          <InstagramFeed />
+          <TikTokFeed />
         </div>
       </section>
 
