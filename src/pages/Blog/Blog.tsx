@@ -2,6 +2,14 @@ import React, { useState, useEffect } from 'react';
 import styles from './Blog.module.css';
 import masterMindsetImage from '../../assets/images/masterMindset.webp';
 
+declare global {
+  interface Window {
+    tiktok?: {
+      load: () => void;
+    };
+  }
+}
+
 // Blog post data structure (will be replaced with CMS data)
 interface BlogPost {
   id: string;

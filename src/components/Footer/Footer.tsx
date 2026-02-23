@@ -4,6 +4,7 @@ import logo from '../../assets/yoana_nin_coaching_logo.webp';
 import facebookIcon from '../../assets/images/icon_fb_wht.webp';
 import instagramIcon from '../../assets/images/icon_instagram.webp';
 import linkedinIcon from '../../assets/images/icon_linkedin.webp';
+import tiktokIcon from '../../assets/images/icon_tiktok_wht.webp';
 
 const Footer: React.FC = () => {
   const footerStyle = {
@@ -119,6 +120,17 @@ const Footer: React.FC = () => {
                 onMouseOut={(e) => e.currentTarget.style.backgroundColor = 'var(--color-navy)'}
               >
                 <img src={linkedinIcon} alt="LinkedIn" style={{width: '20px', height: '20px'}} />
+              </a>
+              <a 
+                href="https://www.tiktok.com/@yoanathecoach" 
+                style={socialLinkStyle} 
+                aria-label="TikTok"
+                target="_blank"
+                rel="noopener noreferrer"
+                onMouseOver={(e) => e.currentTarget.style.backgroundColor = 'rgba(13, 37, 71, 0.8)'}
+                onMouseOut={(e) => e.currentTarget.style.backgroundColor = 'var(--color-navy)'}
+              >
+                <img src={tiktokIcon} alt="TikTok" style={{width: '20px', height: '20px'}} />
               </a>
             </div>
           </div>

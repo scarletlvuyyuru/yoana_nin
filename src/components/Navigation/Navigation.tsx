@@ -6,6 +6,7 @@ import logo from '../../assets/yoana_nin_coaching_logo.webp';
 import facebookIcon from '../../assets/images/icon_fb_wht.webp';
 import instagramIcon from '../../assets/images/icon_instagram.webp';
 import linkedinIcon from '../../assets/images/icon_linkedin.webp';
+import tiktokIcon from '../../assets/images/icon_tiktok_wht.webp';
 
 interface NavigationItem {
   name: string;
@@ -163,6 +164,15 @@ const Navigation: React.FC = () => {
               rel="noopener noreferrer"
             >
               <img src={linkedinIcon} alt="LinkedIn" className={styles.socialIconImage} />
+            </a>
+            <a 
+              href="https://www.tiktok.com/@yoanathecoach" 
+              className={styles.socialIcon}
+              aria-label="Follow us on TikTok"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img src={tiktokIcon} alt="TikTok" className={styles.socialIconImage} />
             </a>
           </div>
 
