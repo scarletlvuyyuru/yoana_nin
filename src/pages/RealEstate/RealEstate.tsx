@@ -3,10 +3,11 @@ import { Link } from 'react-router-dom';
 import styles from './RealEstate.module.css';
 import fourCInfographic from '../../assets/images/4cInfographic.webp';
 import bulletPoint from '../../assets/images/bulletPoint.webp';
-// Import placeholder images - replace with actual images when available
+import yoanaPrideFlag from '../../assets/images/yoanaPrideFlag.webp';
+
 import triangleHeroImage from '../../assets/images/Sanctuary.webp'; // Hero background
 import familyParkImage from '../../assets/images/familyGroupImage.webp'; // Mom's perspective
-import teamOfficeImage from '../../assets/images/yoana-nin-realestateshot.webp'; // TPA team
+import teamOfficeImage from '../../assets/images/yoana_nin_the_prosperous_agency.webp'; 
 
 import relocationImage from '../../assets/images/GlobalFamilies.webp'; // Relocation services
 
@@ -34,7 +35,7 @@ const RealEstate: React.FC = () => {
               </div>
               <div className={styles.bulletItem}>
                 <img src={bulletPoint} alt="Pink Star Custom Bullet Point" className={styles.bulletIcon} />
-                <span>Relocation Support For Global Families</span>
+                <span>Relocation Support For Global Clients</span>
               </div>
             </div>
             <a 
@@ -189,7 +190,7 @@ const RealEstate: React.FC = () => {
           <div className={styles.relocationContent}>
             <div className={styles.relocationTextSection}>
               <p className={`taglineDark ${styles.taglineDarkLeft}`}>
-                Relocation For Global Families
+                Relocation For Global Clients
               </p>
               <h2 className={`${styles.sectionTitle} ${styles.sectionTitleLeft}`}>
                 Comprehensive Support & Services
@@ -229,6 +230,48 @@ const RealEstate: React.FC = () => {
         </div>
       </section>
 
+      {/* Welcoming All Families Section */}
+      <section className={styles.inclusivitySection}>
+        <div className={styles.container}>
+          <div className={styles.inclusivityContent}>
+            <div className={styles.inclusivityImageSection}>
+              <img 
+                src={yoanaPrideFlag} 
+                alt="Yoana Nin proudly supporting LGBTQ+ community" 
+                className={styles.inclusivityImage}
+              />
+            </div>
+            <div className={styles.inclusivityText}>
+              <p className={`taglineDark ${styles.taglineDarkLeft}`}>
+                Open Doors For All Families
+              </p>
+              <h2 className={`${styles.sectionTitle} ${styles.sectionTitleLeft}`}>
+                Welcoming All Families Home
+              </h2>
+              <p className={styles.sectionText}>
+                Every client deserves to find their perfect sanctuary. As a proud LGBTQ+ ally, 
+                I'm committed to helping everyone find not just a house, 
+                but a true home where they can be themselves and thrive.
+              </p>
+              <div className={styles.inclusivityFeatures}>
+                <div className={styles.bulletItem}>
+                  <img src={bulletPoint} alt="Pink Star Custom Bullet Point" className={styles.bulletIcon} />
+                  <span>Safe, welcoming environment for all </span>
+                </div>
+                <div className={styles.bulletItem}>
+                  <img src={bulletPoint} alt="Pink Star Custom Bullet Point" className={styles.bulletIcon} />
+                  <span>Understanding of diverse family needs</span>
+                </div>
+                <div className={styles.bulletItem}>
+                  <img src={bulletPoint} alt="Pink Star Custom Bullet Point" className={styles.bulletIcon} />
+                  <span>Connections to inclusive community resources</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Final CTA Section */}
       <section className={styles.finalCta}>
         <div className={styles.container}>
@@ -245,7 +288,7 @@ const RealEstate: React.FC = () => {
                   setTimeout(() => window.scrollTo(0, 0), 100);
                 }}
               >
-                Schedule Consultation
+                Schedule<br />Consultation
               </Link>
               <a 
                 href="https://www.theprosperousagency.com/" 

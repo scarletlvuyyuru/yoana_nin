@@ -3,7 +3,7 @@
 .container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 1rem;
+  padding: 0 2rem;
 }
 
 /* Left-aligned tagline for real estate sections */
@@ -153,6 +153,63 @@
 .finalCta {
   background: linear-gradient(135deg, var(--color-navy) 0%, #1a2942 100%);
   color: white;
+}
+
+/* Inclusivity Section */
+.inclusivitySection {
+  background: linear-gradient(135deg, #f8f9ff 0%, #e8f4fd 100%);
+  padding: 5rem 0;
+}
+
+.inclusivityContent {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.inclusivityText {
+  padding: 2rem;
+}
+
+.inclusivityTitle {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  color: var(--color-navy);
+  line-height: 1.2;
+}
+
+.inclusivityDescription {
+  font-size: var(--font-size-lg);
+  line-height: 1.6;
+  margin-bottom: 2.5rem;
+  color: #000000;
+  opacity: 0.9;
+}
+
+.inclusivityFeatures {
+  margin: 2rem 0;
+}
+
+.inclusivityImageSection {
+  position: relative;
+  overflow: hidden;
+  border-radius: 20px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+.inclusivityImage {
+  width: 100%;
+  height: 500px;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 20px;
+  transition: transform 0.3s ease;
+}
+
+.inclusivityImageSection:hover .inclusivityImage {
+  transform: scale(1.05);
 }
 
 /* Content Layouts */
@@ -494,23 +551,30 @@
     padding: 2rem 0;
   }
 
+  .container {
+    padding: 0 1.5rem;
+  }
+
   .momsContent,
   .tpaContent,
-  .relocationContent {
+  .relocationContent,
+  .inclusivityContent {
     grid-template-columns: 1fr;
     gap: 3rem;
   }
 
   .momsTextSection,
   .tpaTextSection,
-  .relocationTextSection {
+  .relocationTextSection,
+  .inclusivityText {
     padding: 1rem;
     text-align: left;
   }
 
   .momsImage,
   .tpaImage,
-  .relocationImage {
+  .relocationImage,
+  .inclusivityImage {
     height: 350px;
     object-position: center 30%;
   }
@@ -550,6 +614,7 @@
   .tpaSection,
   .trustSection,
   .relocationSection,
+  .inclusivitySection,
   .finalCta {
     padding: 3rem 0;
   }
@@ -557,7 +622,7 @@
 
 @media (max-width: 480px) {
   .container {
-    padding: 0 0.5rem;
+    padding: 0 1rem;
   }
 
   .heroButton {
@@ -630,6 +695,23 @@
 
 [data-theme="dark"] .momsSection {
   background: rgba(45, 55, 72, 0.05);
+}
+
+[data-theme="dark"] .inclusivitySection {
+  background: rgba(45, 55, 72, 0.05);
+}
+
+[data-theme="dark"] .inclusivityTitle {
+  background: linear-gradient(135deg, var(--color-orange-coral, #ff6b6b), var(--color-pink-brand, #f26ac3));
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  font-weight: 700;
+}
+
+[data-theme="dark"] .inclusivityDescription {
+  color: #E2E8F0;
 }
 
 [data-theme="dark"] .sectionText {

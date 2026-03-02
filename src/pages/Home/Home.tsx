@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './Home.module.css';
-import heroImage from '../../assets/images/yoana_nin_leaning_in.webp';
+import heroImage from '../../assets/images/yoanaHero1.webp';
 import coachingImage from '../../assets/images/masterMindset.webp';
 import realEstateImage from '../../assets/images/Sanctuary.webp';
 import blogImage from '../../assets/images/buildYourCommuntiy.webp';
@@ -57,28 +57,43 @@ const Home: React.FC = () => {
     <>
       {/* Hero Section */}
       <section className={styles.hero}>
-        <div className={styles.container}>
-          <div className={styles.heroContent}>
-            <div className={styles.heroImageSection}>
-              <img 
-                src={heroImage}
-                alt="Yoana - Spiritual Coach and Real Estate Professional"
-                className={styles.heroImage}
-                loading="eager"
-              />
+        <div className={styles.heroContent}>
+          <div className={styles.heroImageSection}>
+            <img 
+              src={heroImage}
+              alt="Yoana Nin - ADHD Powerhouse Coach and Raleigh Real Estate Expert"
+              className={styles.heroImage}
+              loading="eager"
+            />
+            <div className={styles.heroImageOverlay}></div>
+          </div>
+          <div className={styles.heroTextSection}>
+            <div className={styles.serviceBadge}>
+              ADHD Powerhouse Coaching + Raleigh Real Estate
             </div>
-            <div className={styles.heroTextSection}>
-              <h1 className={styles.heroTitle}>
-                Creating Clarity & Connection
-              </h1>
-              <h2 className={styles.tagline}>
-                Your Partner in Life's Biggest Transitions
-              </h2>
-              <p className={styles.heroDescription}>
-                Whether you're navigating entrepreneurship with ADHD, relocating to a new country, or finding your dream home in the Triangle area—I'm here to guide you with clarity and connection.
-              </p>
-              <Link to="/contact" className="btn btn-primary" style={{marginTop: '1rem', fontSize: 'var(--font-size-lg)', padding: '1rem 2rem'}}>
-              Start Your Journey (Free 30-Min Call)
+            <h1 className={styles.heroTitle}>
+              Brilliant mind. Overloaded life.
+            </h1>
+            <h2 className={styles.heroSubtitle}>
+              Let's fix the system — not you.
+            </h2>
+            <div className={styles.heroValueProps}>
+              <div className={styles.valueItem}>
+                <span className={styles.valueHighlight}>Build the business.</span>
+              </div>
+              <div className={styles.valueItem}>
+                <span className={styles.valueHighlight}>Calm the chaos.</span>
+              </div>
+              <div className={styles.valueItem}>
+                <span className={styles.valueHighlight}>Make your ADHD your unfair advantage.</span>
+              </div>
+            </div>
+            <p className={styles.raleighText}>
+              And if Raleigh, NC is calling? Let's build your next chapter there, too.
+            </p>
+            <div className={styles.heroCtas}>
+              <Link to="/contact" className={`btn btn-primary ${styles.primaryCta}`}>
+                Transform Your ADHD Into Your Business Superpower
               </Link>
             </div>
           </div>
@@ -108,28 +123,32 @@ const Home: React.FC = () => {
                 />
                 <div className={styles.cardHeaderOverlay}>
                   <h3 className={`${styles.cardTitle} ${styles.coaching}`}>
-                    Overwhelmed to Prosperous<br/>(Coaching)
+                    Master Your ADHD Power<br/>(Coaching)
                   </h3>
                 </div>
               </div>
               <div className={styles.cardContent}>
+                <p className={styles.cardDescription}>
+                  Build the business. Calm the chaos.
+                </p>
                 <div className={styles.cardText}>
                   <div className={styles.bulletItem}>
-                    <img src={bulletPoint} alt="" className={styles.bulletIcon} />
+                    <img src={bulletPoint} alt="pink bullet point star" className={styles.bulletIcon} />
                     <span>Community-Driven Transformation</span>
                   </div>
                   <div className={styles.bulletItem}>
-                    <img src={bulletPoint} alt="" className={styles.bulletIcon} />
+                    <img src={bulletPoint} alt="pink bullet point star" className={styles.bulletIcon} />
                     <span>6-Month Focused Founder Framework</span>
                   </div>
                   <div className={styles.bulletItem}>
-                    <img src={bulletPoint} alt="" className={styles.bulletIcon} />
-                    <span>Transform Shame Into Self-Trust & Self-Leadership</span>
+                    <img src={bulletPoint} alt="pink bullet point star" className={styles.bulletIcon} />
+                    <span>Create Structure that Works for Your Brain</span>
                   </div>
-                  <div className={styles.bulletItem}>
-                    <img src={bulletPoint} alt="" className={styles.bulletIcon} />
-                    <span>Build Systems That Match Your ADHD Energy</span>
+                     <div className={styles.bulletItem}>
+                    <img src={bulletPoint} alt="pink bullet point star" className={styles.bulletIcon} />
+                    <span>Emotional Regulation for Consistency</span>
                   </div>
+                  
                 </div>
                 <Link to="/coaching" className={`${styles.cardLink} ${styles.coaching}`}>
                   → Explore Coaching
@@ -151,22 +170,26 @@ const Home: React.FC = () => {
                 </div>
               </div>
               <div className={styles.cardContent}>
+                <p className={styles.cardDescription}>
+                  Spaces that fuel focus—not drain it.
+                </p>
                 <div className={styles.cardText}>
                   <div className={styles.bulletItem}>
-                    <img src={bulletPoint} alt="" className={styles.bulletIcon} />
-                    <span>Serving NC Triangle Area</span>
+                    <img src={bulletPoint} alt="pink bullet point star" className={styles.bulletIcon} />
+                    <span>Serving NC Triangle Area since 2013</span>
                   </div>
                   <div className={styles.bulletItem}>
-                    <img src={bulletPoint} alt="" className={styles.bulletIcon} />
+                    <img src={bulletPoint} alt="pink bullet point star" className={styles.bulletIcon} />
                     <span>Relocation Specialist</span>
                   </div>
                   <div className={styles.bulletItem}>
-                    <img src={bulletPoint} alt="" className={styles.bulletIcon} />
-                    <span>Find Your Sacred Sanctuary</span>
+                    <img src={bulletPoint} alt="pink bullet point star" className={styles.bulletIcon} />
+                    <span>Precision Scouting for layouts designed for focus
+                    </span>
                   </div>
                   <div className={styles.bulletItem}>
-                    <img src={bulletPoint} alt="" className={styles.bulletIcon} />
-                    <span>Home That Matches Your Energy</span>
+                    <img src={bulletPoint} alt="pink bullet point star" className={styles.bulletIcon} />
+                    <span>Find a Home That Matches Your Energy</span>
                   </div>
                 </div>
                 <Link to="/real-estate" className={`${styles.cardLink} ${styles.realEstate}`}>
@@ -189,6 +212,9 @@ const Home: React.FC = () => {
                 </div>
               </div>
               <div className={styles.cardContent}>
+                <p className={styles.cardDescription}>
+                  Inspiring stories fueling action. 
+                </p>
                 <div className={styles.cardText}>
                   <div className={styles.bulletItem}>
                     <img src={bulletPoint} alt="" className={styles.bulletIcon} />
@@ -234,6 +260,9 @@ const Home: React.FC = () => {
 
       {/* Section Divider */}
       <div className={styles.sectionDivider}></div>
+
+      {/* Testimonials Section */}
+      <Testimonials />
 
       {/* FAQ Section */}
       <section className={styles.faqSection}>
@@ -283,8 +312,9 @@ const Home: React.FC = () => {
         </div>
       </section>
 
-      {/* Testimonials Section */}
-      <Testimonials />
+      {/* Section Divider */}
+      <div className={styles.sectionDivider}></div>
+
      {/* Speaking Arrangements Section */}
       <section className={styles.speakingSection}>
         <div className={styles.container}>
@@ -345,7 +375,11 @@ const Home: React.FC = () => {
             <p className={styles.ctaText}>
               If you're ready to stop surviving and start truly living, <br /><em className={styles.ctaEmphasis}>let's find your path together.</em>
             </p>
-            <Link to="/contact" className="btn btn-primary" style={{fontSize: 'var(--font-size-lg)', padding: '1rem 2.5rem'}}>
+            <Link 
+              to="/contact#top" 
+              className="btn btn-primary" 
+              style={{fontSize: 'var(--font-size-lg)', padding: '1rem 2.5rem'}}
+            >
               Let's Connect
             </Link>
           </div>
