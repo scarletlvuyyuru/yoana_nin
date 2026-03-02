@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './Home.module.css';
-import heroImage from '../../assets/images/yoanaHero1.webp';
+import heroImage from '../../assets/images/YoanaHero1.webp';
 import coachingImage from '../../assets/images/masterMindset.webp';
 import realEstateImage from '../../assets/images/Sanctuary.webp';
 import blogImage from '../../assets/images/buildYourCommuntiy.webp';
