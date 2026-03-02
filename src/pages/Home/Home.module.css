@@ -378,9 +378,30 @@
 
 /* Quote Section */
 .quoteSection {
-  background: var(--bg-accent);
+  background-image: url('../../assets/images/sunsetBackground.webp');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  position: relative;
   padding: 4rem 0;
   text-align: center;
+}
+
+.quoteSection::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(148, 175, 159, 0.2);
+  z-index: 1;
+}
+
+.quoteSection .container {
+  position: relative;
+  z-index: 2;
 }
 
 .quote {
@@ -395,42 +416,41 @@
 }
 
 .quote::before {
-  content: '"';
+  content: '';
   position: absolute;
-  top: -10px;
-  left: 20px;
-  font-size: clamp(2.5rem, 8vw, 4rem);
-  color: var(--color-orange-coral);
-  font-family: 'Playfair Display', serif;
-  line-height: 1;
-  font-weight: bold;
-}
-
-.quote::after {
-  content: '"';
-  position: absolute;
-  bottom: -30px;
-  right: 20px;
-  font-size: clamp(2.5rem, 8vw, 4rem);
-  color: var(--color-pink-soft);
-  font-family: 'Playfair Display', serif;
-  line-height: 1;
-  font-weight: bold;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 110%;
+  height: 130%;
+  background: rgba(255, 255, 255, 0.92);
+  border-radius: 50%;
+  z-index: 0;
 }
 
 .quoteText {
-  font-size: var(--font-size-2xl);
+  position: relative;
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
   font-style: italic;
   color: var(--text-primary);
-  line-height: 1.6;
-  margin-bottom: 1rem;
+  line-height: 1.4;
+  margin-bottom: 2rem;
   font-family: 'Playfair Display', serif;
+  font-weight: 500;
+  z-index: 2;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.03);
+  letter-spacing: 0.5px;
 }
 
 .quoteAuthor {
+  position: relative;
   font-size: var(--font-size-lg);
   color: var(--text-secondary);
   font-weight: 600;
+  z-index: 2;
+  font-family: 'Inter', sans-serif;
+  letter-spacing: 1px;
+  margin-top: 1rem;
 }
 
 @media (max-width: 768px) {
@@ -443,10 +463,127 @@
   }
 }
 
+/* I See You Section */
+.iSeeYouSection {
+  background: var(--bg-secondary);
+  padding: 5rem 0;
+}
+
+.iSeeYouContent {
+  display: grid;
+  grid-template-columns: 45% 55%;
+  gap: 4rem;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.iSeeYouImageSection {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.iSeeYouImage {
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+  border-radius: 20px;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.iSeeYouImage:hover {
+  transform: scale(1.02);
+}
+
+.iSeeYouTextSection {
+  padding: 2rem 0;
+}
+
+.iSeeYouTitle {
+  font-size: clamp(2.5rem, 6vw, 3.5rem);
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--color-orange-coral), var(--color-orange-warm));
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  margin-bottom: 1.5rem;
+  font-family: 'Playfair Display', serif;
+}
+
+.iSeeYouText {
+  font-size: var(--font-size-xl);
+  color: var(--text-primary);
+  line-height: 1.7;
+  margin-bottom: 1.5rem;
+  font-weight: 400;
+}
+
+.iSeeYouTransition {
+  font-size: var(--font-size-lg);
+  color: var(--text-secondary);
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+}
+
+.iSeeYouLink {
+  display: inline-flex;
+  align-items: center;
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+  color: var(--color-orange-coral);
+  text-decoration: none;
+  transition: all 0.3s ease;
+  margin-top: 0.5rem;
+}
+
+.iSeeYouLink:hover {
+  color: var(--color-sage-dark);
+  transform: translateX(4px);
+}
+
+@media (max-width: 968px) {
+  .iSeeYouSection {
+    padding: 4rem 0;
+  }
+  
+  .iSeeYouContent {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+    text-align: center;
+  }
+  
+  .iSeeYouTitle {
+    font-size: clamp(2rem, 8vw, 2.5rem);
+  }
+  
+  .iSeeYouText {
+    font-size: var(--font-size-lg);
+  }
+}
+
+@media (max-width: 640px) {
+  .iSeeYouSection {
+    padding: 3rem 0;
+  }
+  
+  .iSeeYouContent {
+    gap: 2rem;
+  }
+  
+  .iSeeYouImage {
+    max-width: 300px;
+  }
+}
+
 /* Section Divider */
 .sectionDivider {
   height: 80px;
-  background: linear-gradient(135deg, var(--bg-accent) 0%, var(--color-orange-coral) 30%, var(--color-pink-soft) 70%, var(--bg-secondary) 100%);
+  background: linear-gradient(135deg, var(--color-sage) 0%, var(--color-orange-coral) 30%, var(--color-blue-light) 70%, var(--bg-secondary) 100%);
   position: relative;
   overflow: hidden;
 }
@@ -469,7 +606,7 @@
   left: 0;
   right: 0;
   height: 100%;
-  background: linear-gradient(135deg, var(--color-orange-coral) 0%, var(--color-pink-soft) 50%, var(--color-sage-green) 100%);
+  background: linear-gradient(135deg, var(--color-orange-coral) 0%, var(--color-blue-light) 50%, var(--color-sage) 100%);
   clip-path: polygon(0% 0%, 100% 40%, 100% 0%);
   opacity: 0.7;
 }
@@ -658,7 +795,7 @@
 }
 
 .ctaEmphasis {
-  color: var(--color-yellow-brand);
+  color: var(--color-blue-light);
   font-style: italic;
   font-weight: 700;
 }

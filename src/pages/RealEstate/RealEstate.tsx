@@ -19,7 +19,7 @@ const RealEstate: React.FC = () => {
         <div className={styles.container}>
           <div className={styles.heroContent}>
             <h1 className={styles.heroTitle}>
-              Find Your Sanctuary in the Raleigh Triangle
+              Find Your Sanctuary in the Raleigh Triangle Area
             </h1>
             <p className={styles.heroDescription}>
               More than just real estate—we help you build a life that works.

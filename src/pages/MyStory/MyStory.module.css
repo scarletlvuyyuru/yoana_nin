@@ -489,7 +489,7 @@
 }
 
 .ctaEmphasis {
-  color: var(--color-yellow-brand);
+  color: var(--color-blue-light);
   font-style: italic;
   font-weight: 700;
 }

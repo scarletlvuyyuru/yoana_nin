@@ -125,7 +125,7 @@ const MyStory: React.FC = () => {
       {/* Credentials Section */}
       <section id="my-approach" className={styles.credentialsSection}>
         <div className={styles.container}>
-          <h2 className={styles.credentialsTitle}>How I turn Empathy into Action</h2>
+          <h2 className={styles.credentialsTitle}>The Powerhouse Toolkit </h2>
           <h3 className={styles.credentialsSubtitle}>Because I had to rebuild my own life from the ashes, I became obsessed with the science and soul of transformation. Today, I combine these certifications to help you do the same.</h3>
           
           <div className={styles.credentialsLayout}>
@@ -148,7 +148,7 @@ const MyStory: React.FC = () => {
                 <div className={styles.credentialText}>
                   <h3 className={styles.credentialTitle}>Certified ADHD Life Coach</h3>
                   <p className={styles.credentialDescription}>
-                    Specializing in overwhelmed achievers and high performers with racing minds. I use the ABC Framework to help you perform a Life Audit and establish a "ladder to success" that respects how your brain actually works.
+                    Specializing in overwhelmed achievers and high performers with racing minds. I can use the ABC Framework to help you perform a Life Audit and establish a "ladder to success" that respects how your brain actually works.
                   </p>
                 </div>
               </div>

@@ -6,6 +6,7 @@ import coachingImage from '../../assets/images/masterMindset.webp';
 import realEstateImage from '../../assets/images/Sanctuary.webp';
 import blogImage from '../../assets/images/buildYourCommuntiy.webp';
 import bulletPoint from '../../assets/images/bulletPoint.webp';
+import lookingThroughFingersImage from '../../assets/images/YoanaIseeYou.webp';
 import CredibilityStrip from '../../components/CredibilityStrip/CredibilityStrip';
 import Testimonials from '../../components/Testimonials/Testimonials';
 
@@ -74,9 +75,9 @@ const Home: React.FC = () => {
             <h1 className={styles.heroTitle}>
               Brilliant mind. Overloaded life.
             </h1>
-            <h2 className={styles.heroSubtitle}>
+            <p className={styles.heroSubtitle}>
               Let's fix the system — not you.
-            </h2>
+            </p>
             <div className={styles.heroValueProps}>
               <div className={styles.valueItem}>
                 <span className={styles.valueHighlight}>Build the business.</span>
@@ -122,9 +123,9 @@ const Home: React.FC = () => {
                   className={styles.cardHeaderImage}
                 />
                 <div className={styles.cardHeaderOverlay}>
-                  <h3 className={`${styles.cardTitle} ${styles.coaching}`}>
+                  <h4 className={`${styles.cardTitle} ${styles.coaching}`}>
                     Master Your ADHD Power<br/>(Coaching)
-                  </h3>
+                  </h4>
                 </div>
               </div>
               <div className={styles.cardContent}>
@@ -164,9 +165,9 @@ const Home: React.FC = () => {
                   className={styles.cardHeaderImage}
                 />
                 <div className={styles.cardHeaderOverlay} style={{background: 'linear-gradient(135deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.1) 50%, rgba(0,0,0,0.2) 100%)'}}>
-                  <h3 className={`${styles.cardTitle} ${styles.realEstate}`}>
+                  <h4 className={`${styles.cardTitle} ${styles.realEstate}`}>
                     Find Your Sanctuary<br/>(Real Estate)
-                  </h3>
+                  </h4>
                 </div>
               </div>
               <div className={styles.cardContent}>
@@ -206,9 +207,9 @@ const Home: React.FC = () => {
                   className={styles.cardHeaderImage}
                 />
                 <div className={styles.cardHeaderOverlay}>
-                  <h3 className={`${styles.cardTitle} ${styles.blog}`}>
+                  <h4 className={`${styles.cardTitle} ${styles.blog}`}>
                     Inspiration & Resources<br/>(Blog)
-                  </h3>
+                  </h4>
                 </div>
               </div>
               <div className={styles.cardContent}>
@@ -258,6 +259,37 @@ const Home: React.FC = () => {
         </div>
       </section>
 
+      {/* I See You Section */}
+      <section className={styles.iSeeYouSection}>
+        <div className={styles.container}>
+          <div className={styles.iSeeYouContent}>
+            <div className={styles.iSeeYouImageSection}>
+              <img 
+                src={lookingThroughFingersImage} 
+                alt="Yoana looking through her fingers in a playful manner" 
+                className={styles.iSeeYouImage}
+              />
+            </div>
+            <div className={styles.iSeeYouTextSection}>
+              <h2 className={styles.iSeeYouTitle}>I see you.</h2>
+              <p className={styles.iSeeYouText}>
+                I've been where you are—overloaded, brilliant, and ready for a system that actually works.
+              </p>
+              <p className={styles.iSeeYouTransition}>
+                Today, I use these tools to help you build your next chapter:
+              </p>
+              <Link 
+                to="/my-story" 
+                className={styles.iSeeYouLink}
+                onClick={() => window.scrollTo(0, 0)}
+              >
+                → Discover My Story
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Section Divider */}
       <div className={styles.sectionDivider}></div>
 
@@ -298,7 +330,7 @@ const Home: React.FC = () => {
                 </h3>
                 <div className={`${styles.faqAnswer} ${expandedFaq === index ? styles.faqAnswerExpanded : ''}`}>
                   <div className={styles.faqAnswerContent}>
-                    <h4 className={styles.faqAnswerHeading}>{faq.answer}</h4>
+                    <p className={styles.faqAnswerHeading}>{faq.answer}</p>
                     {faq.hasButton && (
                       <Link to="/contact" className="btn btn-secondary" style={{marginTop: '1rem'}}>
                         Submit Your Question
@@ -327,28 +359,28 @@ const Home: React.FC = () => {
               </p>
               <div className={styles.speakingOptions}>
                 <div className={styles.speakingOption}>
-                  <h4 className={styles.optionTitle}>
+                  <h3 className={styles.optionTitle}>
                     <img 
                       src="/src/assets/images/microphoneIcon.webp" 
                       alt="Microphone" 
                       style={{width: '24px', height: '24px', marginRight: '0.5rem', verticalAlign: 'middle'}} 
                     /> 
                     Book Me to Speak
-                  </h4>
+                  </h3>
                   <p className={styles.optionText}>Engaging presentations on entrepreneurship, wellness, expat experiences, and building resilience through life's transitions.</p>
                   <Link to="/contact" className="btn btn-primary" style={{marginTop: '1rem', padding: '0.5rem 1rem', fontSize: 'var(--font-size-sm)', width: '200px', textAlign: 'center'}}>
                     Explore Speaking Opportunities
                   </Link>
                 </div>
                 <div className={styles.speakingOption}>
-                  <h4 className={styles.optionTitle}>
+                  <h3 className={styles.optionTitle}>
                     <img 
                       src="/src/assets/images/youtubeLikesIcon.webp" 
                       alt="YouTube" 
                       style={{width: '24px', height: '24px', marginRight: '0.5rem', verticalAlign: 'middle'}} 
                     /> 
                     Join My YouTube Channel
-                  </h4>
+                  </h3>
                   <p className={styles.optionText}>Share your inspiring journey and connect with our community of women breaking barriers and building businesses.</p>
                   <a 
                     href="https://www.youtube.com/@ElevatewithYoanaNin" 
