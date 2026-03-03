@@ -3,6 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import { useTheme } from './context/ThemeContext';
 import Navigation from './components/Navigation/Navigation';
 import Footer from './components/Footer/Footer';
+import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary';
 import LoadingSpinner from './components/UI/LoadingSpinner';
 
 // Lazy load pages for performance
@@ -15,6 +16,7 @@ const BlogPost = React.lazy(() => import('./pages/BlogPost/BlogPost'));
 const Contact = React.lazy(() => import('./pages/Contact/Contact'));
 const Privacy = React.lazy(() => import('./pages/Privacy/Privacy'));
 const Terms = React.lazy(() => import('./pages/Terms/Terms'));
+const NotFound = React.lazy(() => import('./pages/NotFound/NotFound'));
 
 function App() {
   const { actualTheme } = useTheme();
@@ -26,21 +28,25 @@ function App() {
       </a>
       <div className={`app ${actualTheme}`}>
         <Navigation />
-        <main id="main-content" className="main-content">
-          <Suspense fallback={<LoadingSpinner />}>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/my-story" element={<MyStory />} />
-              <Route path="/coaching" element={<Coaching />} />
-              <Route path="/real-estate" element={<RealEstate />} />
-              <Route path="/blog" element={<Blog />} />
-              <Route path="/blog/:slug" element={<BlogPost />} />
-              <Route path="/contact" element={<Contact />} />
-              <Route path="/privacy" element={<Privacy />} />
-              <Route path="/terms" element={<Terms />} />
-            </Routes>
-          </Suspense>
-        </main>
+        <ErrorBoundary>
+          <main id="main-content" className="main-content">
+            <Suspense fallback={<LoadingSpinner />}>
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/my-story" element={<MyStory />} />
+                <Route path="/coaching" element={<Coaching />} />
+                <Route path="/real-estate" element={<RealEstate />} />
+                <Route path="/blog" element={<Blog />} />
+                <Route path="/blog/:slug" element={<BlogPost />} />
+                <Route path="/contact" element={<Contact />} />
+                <Route path="/privacy" element={<Privacy />} />
+                <Route path="/terms" element={<Terms />} />
+                {/* Catch-all route for 404 */}
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </Suspense>
+          </main>
+        </ErrorBoundary>
         <Footer />
       </div>
     </>

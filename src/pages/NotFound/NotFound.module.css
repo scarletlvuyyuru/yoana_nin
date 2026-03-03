@@ -1,0 +1,115 @@
+.notFound {
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+  background: linear-gradient(135deg, var(--color-cream) 0%, #f8f5f2 100%);
+}
+
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.title {
+  font-size: clamp(4rem, 12vw, 8rem);
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--color-orange-bright) 0%, var(--color-magenta) 50%, var(--color-blue-light) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 1rem;
+  font-family: var(--font-heading);
+}
+
+.subtitle {
+  font-size: var(--font-size-2xl);
+  color: var(--text-primary);
+  margin-bottom: 1rem;
+  font-family: var(--font-heading);
+}
+
+.message {
+  font-size: var(--font-size-lg);
+  color: var(--text-secondary);
+  margin-bottom: 2.5rem;
+  line-height: 1.6;
+}
+
+.actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-bottom: 3rem;
+  flex-wrap: wrap;
+}
+
+.homeButton, .contactButton {
+  min-width: 150px;
+}
+
+.suggestions {
+  text-align: left;
+  max-width: 300px;
+  margin: 0 auto;
+}
+
+.suggestions h3 {
+  font-size: var(--font-size-lg);
+  color: var(--text-primary);
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.suggestions ul {
+  list-style: none;
+  padding: 0;
+}
+
+.suggestions li {
+  margin-bottom: 0.5rem;
+}
+
+.suggestions a {
+  color: var(--color-orange-bright);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.suggestions a:hover {
+  color: var(--color-magenta);
+  text-decoration: underline;
+}
+
+/* Dark mode styles */
+[data-theme="dark"] .notFound {
+  background: linear-gradient(135deg, #2D3748 0%, var(--color-navy) 100%);
+}
+
+[data-theme="dark"] .subtitle {
+  color: white;
+}
+
+[data-theme="dark"] .message {
+  color: #E2E8F0;
+}
+
+[data-theme="dark"] .suggestions h3 {
+  color: white;
+}
+
+/* Mobile responsive */
+@media (max-width: 640px) {
+  .actions {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .homeButton, .contactButton {
+    width: 100%;
+    max-width: 250px;
+  }
+}
