@@ -32,11 +32,13 @@
   font-family: var(--font-heading);
   font-size: var(--font-size-5xl);
   font-weight: 600;
-  color: var(--text-primary);
+  background: linear-gradient(135deg, var(--color-navy) 0%, var(--color-magenta) 50%, var(--color-navy) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
   margin-bottom: 1.5rem;
   line-height: 1.5;
   letter-spacing: -0.02em;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 .heroSubtitle {
@@ -315,11 +317,10 @@
 }
 
 [data-theme="dark"] .heroTitle {
-  background: linear-gradient(135deg, var(--color-blue-light) 0%, #ff6bff 35%, var(--color-pink-soft) 65%, var(--color-blue-light) 100%);
+  background: linear-gradient(135deg, var(--color-navy) 0%, var(--color-magenta) 50%, var(--color-navy) 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  text-shadow: none;
 }
 
 [data-theme="dark"] .actTitle {
@@ -352,11 +353,11 @@
 
 /* Dark mode overrides for light background sections */
 [data-theme="dark"] .hero .heroSubtitle {
-  color: white !important;
+  color: var(--color-navy) !important;
 }
 
 [data-theme="dark"] .hero .heroDescription {
-  color: #E2E8F0 !important;
+  color: var(--color-navy) !important;
 }
 
 [data-theme="dark"] .actsSection .actDescription {
@@ -488,9 +489,11 @@
   font-family: var(--font-body);
 }
 
-.ctaEmphasis {
-  color: var(--color-blue-light);
-  font-style: italic;
+.ctaGradientText {
+  background: linear-gradient(135deg, var(--color-orange-bright) 0%, var(--color-magenta) 35%, var(--color-blue-light) 70%, var(--color-orange-coral) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
   font-weight: 700;
 }
 
@@ -665,7 +668,9 @@
 
 /* Dark Mode Overrides */
 [data-theme="dark"] .hero {
-  background: linear-gradient(135deg, #2D3748 0%, var(--color-navy) 100%);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 [data-theme="dark"] .actCard {

@@ -21,11 +21,14 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
   };
 
   const [theme, setTheme] = useState<Theme>(() => {
-    const savedTheme = localStorage.getItem('theme') as Theme;
-    return savedTheme || 'system';
+    // Clear any stored theme to ensure system detection works
+    localStorage.removeItem('theme');
+    return 'system';
   });
 
-  const [systemTheme, setSystemTheme] = useState<'light' | 'dark'>(getSystemTheme);
+  const [systemTheme, setSystemTheme] = useState<'light' | 'dark'>(() => {
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  });
 
   // Calculate the actual theme being used
   const actualTheme = theme === 'system' ? systemTheme : theme;
@@ -37,6 +40,9 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
     const handleSystemThemeChange = (e: MediaQueryListEvent) => {
       setSystemTheme(e.matches ? 'dark' : 'light');
     };
+
+    // Set initial system theme and ensure document is updated
+    setSystemTheme(mediaQuery.matches ? 'dark' : 'light');
 
     // Add listener for system preference changes
     mediaQuery.addEventListener('change', handleSystemThemeChange);

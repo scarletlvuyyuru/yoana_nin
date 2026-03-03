@@ -17,14 +17,14 @@ const Privacy = React.lazy(() => import('./pages/Privacy/Privacy'));
 const Terms = React.lazy(() => import('./pages/Terms/Terms'));
 
 function App() {
-  const { theme } = useTheme();
+  const { actualTheme } = useTheme();
 
   return (
     <>
       <a href="#main-content" className="skip-link">
         Skip to main content
       </a>
-      <div className={`app ${theme}`} data-theme={theme}>
+      <div className={`app ${actualTheme}`}>
         <Navigation />
         <main id="main-content" className="main-content">
           <Suspense fallback={<LoadingSpinner />}>

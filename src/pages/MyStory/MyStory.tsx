@@ -211,10 +211,10 @@ const MyStory: React.FC = () => {
         <div className={styles.container}>
           <div className={styles.ctaContent}>
             <p className={styles.ctaTagline}>
-              The next chapter awaits
+              Fix My System
             </p>
             <p className={styles.ctaText}>
-              Your story is still being written. <br /><em className={styles.ctaEmphasis}>Let's find your next chapter together.</em>
+              <span className={styles.ctaGradientText}>Stop the overwhelm. Start the strategy.</span>
             </p>
             <Link to="/contact" className="btn btn-primary" style={{fontSize: 'var(--font-size-lg)', padding: '1rem 2.5rem'}}>
               Connect with Yoana
