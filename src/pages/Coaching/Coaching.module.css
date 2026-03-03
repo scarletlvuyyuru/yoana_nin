@@ -1059,7 +1059,7 @@
 }
 
 [data-theme="dark"] .ctaTitle {
-  background: linear-gradient(135deg, #FF1493, #FF69B4);
+  background: linear-gradient(135deg, #E212E2, #C71585);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -1088,7 +1088,7 @@
   left: -3px;
   right: -3px;
   bottom: -3px;
-  background: linear-gradient(135deg, #FF1493, #FF6347, #FFA500, #FF69B4);
+  background: linear-gradient(135deg, #FF1493, #E212E2, #FFA500, #FF69B4);
   border-radius: 24px;
   z-index: -1;
 }
