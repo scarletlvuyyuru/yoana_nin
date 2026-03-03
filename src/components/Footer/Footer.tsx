@@ -91,7 +91,7 @@ const Footer: React.FC = () => {
             {/* Social Media Links */}
             <div style={socialStyle}>
               <a 
-                href="#" 
+                href="https://www.facebook.com/Nin.Yoana/" 
                 style={socialLinkStyle} 
                 aria-label="Facebook"
                 onMouseOver={(e) => e.currentTarget.style.backgroundColor = 'rgba(13, 37, 71, 0.8)'}
@@ -122,7 +122,7 @@ const Footer: React.FC = () => {
                 <img src={linkedinIcon} alt="LinkedIn" style={{width: '20px', height: '20px'}} />
               </a>
               <a 
-                href="https://www.tiktok.com/@yoanathecoach" 
+                href="https://www.tiktok.com/@yoananincoaching" 
                 style={socialLinkStyle} 
                 aria-label="TikTok"
                 target="_blank"
@@ -206,7 +206,7 @@ const Footer: React.FC = () => {
           fontSize: 'var(--font-size-sm)'
         }}>
           <p style={{ margin: '0' }}>
-            © {new Date().getFullYear()} Yoana. All rights reserved. Built with accessibility and performance in mind.
+            © {new Date().getFullYear()} Yoana. All rights reserved. 
           </p>
           <p style={{ margin: '0' }}>
             <a 

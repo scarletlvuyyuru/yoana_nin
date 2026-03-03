@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { useTheme } from '../../context/ThemeContext';
 import styles from './Navigation.module.css';
 import logo from '../../assets/yoana_nin_coaching_logo.webp';
 import facebookIcon from '../../assets/images/icon_fb_wht.webp';
@@ -60,7 +59,6 @@ const Navigation: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const [isScrolled, setIsScrolled] = useState(false);
-  const { theme, toggleTheme } = useTheme();
   const location = useLocation();
 
   useEffect(() => {
@@ -139,7 +137,7 @@ const Navigation: React.FC = () => {
           {/* Social Links - Left Side */}
           <div className={styles.socialLinks}>
             <a 
-              href="#" 
+              href="https://www.facebook.com/Nin.Yoana/" 
               className={styles.socialIcon}
               aria-label="Follow us on Facebook"
               target="_blank"
@@ -166,7 +164,7 @@ const Navigation: React.FC = () => {
               <img src={linkedinIcon} alt="LinkedIn" className={styles.socialIconImage} />
             </a>
             <a 
-              href="https://www.tiktok.com/@yoanathecoach" 
+              href="https://www.tiktok.com/@yoananincoaching" 
               className={styles.socialIcon}
               aria-label="Follow us on TikTok"
               target="_blank"
@@ -371,13 +369,6 @@ const Navigation: React.FC = () => {
 
           {/* Mobile Menu Button */}
           <div className={styles.navMobile}>
-            <button
-              onClick={toggleTheme}
-              className={styles.themeToggle}
-              aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
-            >
-              {theme === 'light' ? '🌙' : '☀️'}
-            </button>
             <button
               onClick={() => setIsOpen(!isOpen)}
               className={styles.mobileMenuButton}

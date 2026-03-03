@@ -127,6 +127,7 @@
   margin: 0.25rem 0;
 }
 
+/* Default logo sizes (for desktop) */
 .logoImage {
   height: 60px;
   width: auto;
@@ -351,12 +352,13 @@
 
 .navMobile {
   display: none;
-  align-items: center;
-  gap: 1rem;
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  z-index: 102;
+}
+
+/* Hide theme toggle on mobile devices */
+@media (max-width: 768px) {
+  .themeToggle {
+    display: none;
+  }
 }
 
 .mobileMenuButton {
@@ -464,9 +466,14 @@
   }
   
   .container {
-    min-height: 80px;
+    min-height: 60px;
     gap: 0.5rem;
     position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center !important; /* Center logo initially on mobile */
+    transition: all 0.3s ease;
+    padding: 0.5rem; /* Reduced padding */
   }
   
   .navDesktop {
@@ -479,12 +486,38 @@
   
   .navMobile {
     display: flex;
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    z-index: 102;
+    align-items: center;
+    gap: 1rem;
+  }
+  
+  /* Mobile logo overrides */
+  .logo {
+    transition: all 0.3s ease;
   }
   
   .logoImage {
-    height: 40px;
-    max-width: 200px;
-    margin: 0.25rem 0;
+    height: 60px !important;
+    max-width: 280px !important;
+    margin: 0;
+    transition: all 0.3s ease;
+  }
+  
+  /* Scrolled logo for mobile */
+  .logoScrolled .logoImage {
+    height: 50px !important;
+    max-width: 240px !important;
+  }
+  
+  /* When scrolled, move logo to left on mobile */
+  .logoScrolled .container {
+    justify-content: flex-start !important;
+    padding-left: 0.75rem !important;
+    padding-top: 0.5rem !important;
+    padding-bottom: 0.5rem !important;
   }
 }
 
