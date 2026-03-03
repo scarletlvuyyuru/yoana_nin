@@ -1,10 +1,6 @@
 import React, { createContext, useContext, useState, useEffect, type ReactNode } from 'react';
 
-type Theme = 'light' | 'dark' | 'system';
-
 interface ThemeContextType {
-  theme: Theme;
-  toggleTheme: () => void;
   actualTheme: 'light' | 'dark'; // The actual theme being used
 }
 
@@ -20,18 +16,10 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
     return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
   };
 
-  const [theme, setTheme] = useState<Theme>(() => {
-    // Clear any stored theme to ensure system detection works
-    localStorage.removeItem('theme');
-    return 'system';
-  });
+  const [systemTheme, setSystemTheme] = useState<'light' | 'dark'>(getSystemTheme);
 
-  const [systemTheme, setSystemTheme] = useState<'light' | 'dark'>(() => {
-    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-  });
-
-  // Calculate the actual theme being used
-  const actualTheme = theme === 'system' ? systemTheme : theme;
+  // Always use system theme
+  const actualTheme = systemTheme;
 
   useEffect(() => {
     // Listen for system dark mode changes
@@ -42,7 +30,7 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
     };
 
     // Set initial system theme and ensure document is updated
-    setSystemTheme(mediaQuery.matches ? 'dark' : 'light');
+    setSystemTheme(getSystemTheme());
 
     // Add listener for system preference changes
     mediaQuery.addEventListener('change', handleSystemThemeChange);
@@ -52,26 +40,11 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
   }, []);
 
   useEffect(() => {
-    localStorage.setItem('theme', theme);
     document.documentElement.setAttribute('data-theme', actualTheme);
-  }, [theme, actualTheme]);
-
-  const toggleTheme = () => {
-    setTheme(prev => {
-      if (prev === 'system') {
-        // If currently on system, switch to the opposite of current system theme
-        return systemTheme === 'dark' ? 'light' : 'dark';
-      } else if (prev === 'light') {
-        return 'dark';
-      } else {
-        // If on dark, go back to system
-        return 'system';
-      }
-    });
-  };
+  }, [actualTheme]);
 
   return (
-    <ThemeContext.Provider value={{ theme, toggleTheme, actualTheme }}>
+    <ThemeContext.Provider value={{ actualTheme }}>
       {children}
     </ThemeContext.Provider>
   );
