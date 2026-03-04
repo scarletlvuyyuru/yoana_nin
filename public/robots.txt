@@ -1,0 +1,9 @@
+# https://www.robotstxt.org/robotstxt.html
+User-agent: *
+Allow: /
+
+# Host
+Host: https://yoananin.com
+
+# Sitemaps
+Sitemap: https://yoananin.com/sitemap.xml
