@@ -12,6 +12,7 @@ const Coaching: React.FC = () => {
     <div className="main-content">
       {/* Hero Section */}
       <section className={styles.heroSection} style={{backgroundImage: `url(${buildYourCommunityImage})`}}>
+        <div id="top" style={{ position: 'relative', top: '-100px' }}></div>
         <div className={styles.container}>
           <p className="tagline">From Overwhelmed to Prosperous</p>
           <h1 className={`playfair-bold ${styles.heroTitle} brand-gradient-text`}>
