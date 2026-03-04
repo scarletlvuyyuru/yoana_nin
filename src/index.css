@@ -319,9 +319,10 @@ a[aria-label*="Home"]:focus-visible {
 }
 
 .btn-secondary:hover, .btn-secondary:focus {
-  background-color: var(--color-sage-dark);
+  background: linear-gradient(135deg, var(--color-orange-coral, #ff6b6b), var(--color-orange-warm, #ffa500));
   color: white;
   transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 107, 107, 0.3);
   outline: 2px solid var(--color-magenta);
   outline-offset: 2px;
 }
