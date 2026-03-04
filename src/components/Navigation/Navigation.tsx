@@ -283,6 +283,8 @@ const Navigation: React.FC = () => {
               src={logo} 
               alt="Yoana Coaching Logo" 
               className={styles.logoImage}
+              width="32"
+              height="32"
             />
           </Link>
 

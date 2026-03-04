@@ -190,6 +190,7 @@ const Contact: React.FC = () => {
                 required
                 className={styles.input}
                 placeholder="Your full name"
+                autoComplete="name"
               />
             </div>
 
@@ -205,6 +206,7 @@ const Contact: React.FC = () => {
                 required
                 className={styles.input}
                 placeholder="your.email@example.com"
+                autoComplete="email"
               />
             </div>
 
@@ -219,6 +221,7 @@ const Contact: React.FC = () => {
                 name="phone"
                 className={styles.input}
                 placeholder="(555) 123-4567"
+                autoComplete="tel"
               />
             </div>
 
