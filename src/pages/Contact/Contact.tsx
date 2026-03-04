@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './Contact.module.css';
 
 // Import all icons for proper Vite build handling
@@ -9,6 +9,17 @@ import speakingArrangementsIcon from '../../assets/images/SpeakingArrangementsBa
 const Contact: React.FC = () => {
   const [showSuccess, setShowSuccess] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  // Auto-dismiss success message after 8 seconds
+  useEffect(() => {
+    if (showSuccess) {
+      const timer = setTimeout(() => {
+        setShowSuccess(false);
+      }, 8000);
+
+      return () => clearTimeout(timer);
+    }
+  }, [showSuccess]);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
