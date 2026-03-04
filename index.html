@@ -58,6 +58,32 @@
   </head>
   <body>
     <div id="root"></div>
+    
+    <!-- Hidden form for Netlify detection -->
+    <form 
+      name="contact" 
+      method="POST" 
+      data-netlify="true" 
+      data-netlify-honeypot="bot-field"
+      action="/contact-success"
+      style="display: none;"
+    >
+      <input type="hidden" name="form-name" value="contact" />
+      <input type="hidden" name="subject" value="New Contact Form Submission - Yoana Nin" />
+      <input type="text" name="bot-field" />
+      <select name="inquiry">
+        <option value="">Please select an option</option>
+        <option value="Looking for a Coach (Entrepreneur/Expat/ADHD)">Looking for a Coach (Entrepreneur/Expat/ADHD)</option>
+        <option value="Looking for a Home (Real Estate)">Looking for a Home (Real Estate)</option>
+        <option value="Media/Speaking Inquiry">Media/Speaking Inquiry</option>
+        <option value="Submit a question">Submit a Question</option>
+      </select>
+      <input type="text" name="fullName" />
+      <input type="email" name="email" />
+      <input type="tel" name="phone" />
+      <textarea name="message"></textarea>
+    </form>
+    
     <script type="module" src="/src/main.tsx"></script>
     
     <!-- Netlify Identity redirect handling -->
