@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import styles from './Contact.module.css';
 
 // Import all icons for proper Vite build handling
@@ -8,18 +8,37 @@ import speakingArrangementsIcon from '../../assets/images/SpeakingArrangementsBa
 
 const Contact: React.FC = () => {
   const [showSuccess, setShowSuccess] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  useEffect(() => {
-    // Check if user was redirected from successful form submission
-    const urlParams = new URLSearchParams(window.location.search);
-    if (urlParams.get('contact') === 'success') {
-      setShowSuccess(true);
-      // Scroll to success message
-      setTimeout(() => {
-        document.getElementById('contact-success')?.scrollIntoView({ behavior: 'smooth' });
-      }, 100);
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+    
+    try {
+      const response = await fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams(formData as any).toString(),
+      });
+      
+      if (response.ok) {
+        setShowSuccess(true);
+        form.reset();
+        setTimeout(() => {
+          document.getElementById('contact-success')?.scrollIntoView({ behavior: 'smooth' });
+        }, 100);
+      } else {
+        throw new Error('Form submission failed');
+      }
+    } catch (error) {
+      alert('There was an error submitting your message. Please try again or email directly.');
+    } finally {
+      setIsSubmitting(false);
     }
-  }, []);
+  };
 
   return (
     <div className={styles.contactPage}>
@@ -117,7 +136,7 @@ const Contact: React.FC = () => {
             data-netlify="true"
             data-netlify-honeypot="bot-field"
             className={styles.contactForm}
-            action="/contact-success"
+            onSubmit={handleSubmit}
           >
             {/* Netlify form detection */}
             <input type="hidden" name="form-name" value="contact" />
@@ -207,8 +226,8 @@ const Contact: React.FC = () => {
             </div>
 
             {/* Submit Button */}
-            <button type="submit" className={styles.submitButton}>
-              Send Message
+            <button type="submit" className={styles.submitButton} disabled={isSubmitting}>
+              {isSubmitting ? 'Sending...' : 'Send Message'}
             </button>
 
             {/* Contact Info */}

@@ -13,11 +13,6 @@
 
 # Redirect rules for SPA
 [[redirects]]
-  from = "/contact-success"
-  to = "/?contact=success#contact-success"
-  status = 302
-
-[[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
