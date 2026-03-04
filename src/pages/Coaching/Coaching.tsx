@@ -8,9 +8,6 @@ import rocketicon from '../../assets/images/rocketicon.webp';
 import bulletPoint from '../../assets/images/bulletPoint.webp';
 
 const Coaching: React.FC = () => {
-  const handleTransformationClick = () => {
-    alert('Portal link needs to be added here - please contact Scarlet of Scarlet Codes LLC to integrate the client portal.');
-  };
   return (
     <div className="main-content">
       {/* Hero Section */}
@@ -42,12 +39,14 @@ const Coaching: React.FC = () => {
                 BONUS: 1-Hour Community Talk Every Month
               </div>
             </div>
-            <button 
+            <a 
+              href="https://link.fastpaydirect.com/payment-link/69a78cca84b2d7d9935cc76c"
               className={`btn btn-secondary ${styles.buttonSpacing}`}
-              onClick={handleTransformationClick}
+              target="_blank"
+              rel="noopener noreferrer"
             >
               JOIN THE COMMUNITY
-            </button>
+            </a>
           </div>
         </div>
       </section>
@@ -415,12 +414,14 @@ const Coaching: React.FC = () => {
           </div>
 
           <div className={styles.ctaButtonContainer}>
-            <button 
+            <a 
+              href="https://link.fastpaydirect.com/payment-link/69a78cca84b2d7d9935cc76c"
               className={`btn btn-secondary ${styles.ctaBtnSecondary}`}
-              onClick={handleTransformationClick}
+              target="_blank"
+              rel="noopener noreferrer"
             >
               START YOUR TRANSFORMATION
-            </button>
+            </a>
             
             <Link to="/contact" className={`btn ${styles.ctaBtnPrimary}`}>
               SCHEDULE A CALL

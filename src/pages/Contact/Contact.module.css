@@ -1038,3 +1038,83 @@
   color: var(--text-secondary);
   opacity: 0.7;
 }
+
+/* Success Message Styles */
+.successMessage {
+  background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+  border: 2px solid #28a745;
+  border-radius: 12px;
+  padding: 2rem;
+  margin: 2rem 0;
+  text-align: center;
+  box-shadow: 0 4px 15px rgba(40, 167, 69, 0.2);
+  animation: slideIn 0.5s ease-out;
+}
+
+.successIcon {
+  font-size: 3rem;
+  color: #28a745;
+  margin-bottom: 1rem;
+}
+
+.successMessage h2 {
+  color: #155724;
+  margin: 1rem 0;
+  font-size: 1.8rem;
+}
+
+.successMessage p {
+  color: #155724;
+  margin: 0.5rem 0;
+  font-size: 1.1rem;
+}
+
+.dismissButton {
+  background: #28a745;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+  margin-top: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.dismissButton:hover {
+  background: #218838;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Dark mode success message */
+[data-theme="dark"] .successMessage {
+  background: linear-gradient(135deg, #1e3a2b 0%, #2a4d35 100%);
+  border-color: #4caf50;
+}
+
+[data-theme="dark"] .successMessage h2,
+[data-theme="dark"] .successMessage p {
+  color: #e8f5e8;
+}
+
+[data-theme="dark"] .successIcon {
+  color: #4caf50;
+}
+
+[data-theme="dark"] .dismissButton {
+  background: #4caf50;
+}
+
+[data-theme="dark"] .dismissButton:hover {
+  background: #45a049;
+}

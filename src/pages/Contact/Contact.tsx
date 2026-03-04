@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './Contact.module.css';
 
 // Import all icons for proper Vite build handling
@@ -7,21 +7,19 @@ import sanctuaryIcon from '../../assets/images/Sanctuary.webp';
 import speakingArrangementsIcon from '../../assets/images/SpeakingArrangementsBanner.webp';
 
 const Contact: React.FC = () => {
-  const [formData, setFormData] = useState({
-    inquiry: '',
-    fullName: '',
-    email: '',
-    phone: '',
-    message: ''
-  });
+  const [showSuccess, setShowSuccess] = useState(false);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
-  };
+  useEffect(() => {
+    // Check if user was redirected from successful form submission
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('contact') === 'success') {
+      setShowSuccess(true);
+      // Scroll to success message
+      setTimeout(() => {
+        document.getElementById('contact-success')?.scrollIntoView({ behavior: 'smooth' });
+      }, 100);
+    }
+  }, []);
 
   return (
     <div className={styles.contactPage}>
@@ -34,6 +32,22 @@ const Contact: React.FC = () => {
             Whether you're rebuilding confidence through coaching, finding your dream home in the Triangle, or exploring speaking opportunities—let's start with a simple conversation.
           </p>
         </div>
+
+        {/* Success Message */}
+        {showSuccess && (
+          <div id="contact-success" className={styles.successMessage}>
+            <div className={styles.successIcon}>✓</div>
+            <h2>Thank You!</h2>
+            <p>Your message has been successfully sent. I'll get back to you within 24-48 hours.</p>
+            <p>Looking forward to connecting with you!</p>
+            <button 
+              onClick={() => setShowSuccess(false)} 
+              className={styles.dismissButton}
+            >
+              Continue Browsing
+            </button>
+          </div>
+        )}
 
         {/* Split Content Layout */}
         <div className={styles.splitLayout}>
@@ -101,6 +115,7 @@ const Contact: React.FC = () => {
             name="contact"
             method="POST"
             data-netlify="true"
+            data-netlify-honeypot="bot-field"
             className={styles.contactForm}
             action="/contact-success"
           >
@@ -122,8 +137,6 @@ const Contact: React.FC = () => {
               <select
                 id="inquiry"
                 name="inquiry"
-                value={formData.inquiry}
-                onChange={handleChange}
                 required
                 className={styles.select}
               >
@@ -144,8 +157,6 @@ const Contact: React.FC = () => {
                 type="text"
                 id="fullName"
                 name="fullName"
-                value={formData.fullName}
-                onChange={handleChange}
                 required
                 className={styles.input}
                 placeholder="Your full name"
@@ -161,8 +172,6 @@ const Contact: React.FC = () => {
                 type="email"
                 id="email"
                 name="email"
-                value={formData.email}
-                onChange={handleChange}
                 required
                 className={styles.input}
                 placeholder="your.email@example.com"
@@ -178,8 +187,6 @@ const Contact: React.FC = () => {
                 type="tel"
                 id="phone"
                 name="phone"
-                value={formData.phone}
-                onChange={handleChange}
                 className={styles.input}
                 placeholder="(555) 123-4567"
               />
@@ -193,8 +200,6 @@ const Contact: React.FC = () => {
               <textarea
                 id="message"
                 name="message"
-                value={formData.message}
-                onChange={handleChange}
                 rows={5}
                 className={styles.textarea}
                 placeholder="Share details about what you're looking for..."

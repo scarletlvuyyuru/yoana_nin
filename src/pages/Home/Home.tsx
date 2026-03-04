@@ -95,7 +95,7 @@ const Home: React.FC = () => {
               And if Raleigh, NC is calling? Let's build your next chapter there, too.
             </p>
             <div className={styles.heroCtas}>
-              <Link to="/contact" className={`btn btn-primary ${styles.primaryCta}`}>
+              <Link to="/coaching" className={`btn btn-primary ${styles.primaryCta}`}>
                 Transform Your ADHD Into Your Business Superpower
               </Link>
             </div>

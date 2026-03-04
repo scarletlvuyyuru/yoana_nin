@@ -180,12 +180,10 @@ const Navigation: React.FC = () => {
               Contact
             </Link>
             <a 
-              href="#community" 
+              href="https://link.fastpaydirect.com/payment-link/69a78cca84b2d7d9935cc76c"
               className={`${styles.bannerButton} ${styles.blue}`}
-              onClick={(e) => {
-                e.preventDefault();
-                // Add your community link logic here
-              }}
+              target="_blank"
+              rel="noopener noreferrer"
             >
               Join Community
             </a>
