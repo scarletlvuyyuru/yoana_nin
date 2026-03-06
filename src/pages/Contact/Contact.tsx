@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styles from './Contact.module.css';
+import SEO from '../../components/SEO/SEO';
 
 // Import all icons for proper Vite build handling
 import masterMindsetIcon from '../../assets/images/masterMindset.webp';
@@ -118,6 +119,11 @@ const Contact: React.FC = () => {
 
   return (
     <div className={styles.contactPage}>
+      <SEO 
+        title="Contact Yoana Nin | Start Your Transformation"
+        description="Ready to begin your journey? Get in touch for ADHD coaching, real estate services, or speaking engagements in the Raleigh Triangle area."
+        url="https://yoananincoaching.com/contact"
+      />
       <div className={styles.container}>
         {/* Main Title */}
         <div className={styles.mainTitle}>

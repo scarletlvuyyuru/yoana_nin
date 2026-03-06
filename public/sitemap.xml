@@ -7,7 +7,7 @@
   
   <!-- Homepage - High-value entry point -->
   <url>
-    <loc>https://yoananin.com/</loc>
+    <loc>https://yoananincoaching.com/</loc>
     <lastmod>2026-03-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
@@ -15,7 +15,7 @@
   
   <!-- Coaching - Primary service page with FAQ content -->
   <url>
-    <loc>https://yoananin.com/coaching</loc>
+    <loc>https://yoananincoaching.com/coaching</loc>
     <lastmod>2026-03-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.95</priority>
@@ -23,7 +23,7 @@
   
   <!-- Real Estate - Secondary service with location-based SEO -->
   <url>
-    <loc>https://yoananin.com/real-estate</loc>
+    <loc>https://yoananincoaching.com/real-estate</loc>
     <lastmod>2026-03-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.90</priority>
@@ -31,7 +31,7 @@
   
   <!-- About/Story - Trust-building content -->
   <url>
-    <loc>https://yoananin.com/my-story</loc>
+    <loc>https://yoananincoaching.com/my-story</loc>
     <lastmod>2026-03-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.80</priority>
@@ -39,15 +39,44 @@
   
   <!-- Blog - Fresh content for featured snippets -->
   <url>
-    <loc>https://yoananin.com/blog</loc>
-    <lastmod>2026-03-04</lastmod>
-    <changefreq>daily</changefreq>
+    <loc>https://yoananincoaching.com/blog</loc>
+    <lastmod>2026-03-06</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.85</priority>
+  </url>
+
+  <!-- Blog Posts - Individual SEO-targeted articles -->
+  <url>
+    <loc>https://yoananincoaching.com/blog/adhd-entrepreneur-life-coach-raleigh</loc>
+    <lastmod>2026-03-04</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.75</priority>
+  </url>
+
+  <url>
+    <loc>https://yoananincoaching.com/blog/expat-community-triangle-area</loc>
+    <lastmod>2026-03-04</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.75</priority>
+  </url>
+
+  <url>
+    <loc>https://yoananincoaching.com/blog/holistic-life-coaching-guide</loc>
+    <lastmod>2026-03-04</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.75</priority>
+  </url>
+
+  <url>
+    <loc>https://yoananincoaching.com/blog/real-estate-agent-relocating-families</loc>
+    <lastmod>2026-03-04</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.75</priority>
   </url>
   
   <!-- Contact - Conversion page -->
   <url>
-    <loc>https://yoananin.com/contact</loc>
+    <loc>https://yoananincoaching.com/contact</loc>
     <lastmod>2026-03-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
@@ -55,14 +84,14 @@
   
   <!-- Legal pages - Lower priority but necessary -->
   <url>
-    <loc>https://yoananin.com/terms</loc>
+    <loc>https://yoananincoaching.com/terms</loc>
     <lastmod>2026-03-04</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.20</priority>
   </url>
   
   <url>
-    <loc>https://yoananin.com/privacy</loc>
+    <loc>https://yoananincoaching.com/privacy</loc>
     <lastmod>2026-03-04</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.20</priority>

@@ -1,6 +1,7 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import styles from './BlogPost.module.css';
+import SEO from '../../components/SEO/SEO';
 
 // This will be dynamically populated with blog data
 interface BlogPostData {
@@ -183,6 +184,34 @@ const BlogPost: React.FC = () => {
   
   return (
     <article className={styles.blogPost} data-category={post.category}>
+      <SEO 
+        title={`${post.title} | Yoana Nin Coaching`}
+        description={post.excerpt}
+        url={`https://yoananincoaching.com/blog/${slug}`}
+        schema={JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "BlogPosting",
+          "headline": post.title,
+          "description": post.excerpt,
+          "author": {
+            "@type": "Person",
+            "name": post.author
+          },
+          "datePublished": post.date,
+          "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": `https://yoananincoaching.com/blog/${slug}`
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "Yoana Nin Coaching",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://yoananincoaching.com/metaOG.png"
+            }
+          }
+        })}
+      />
       <div className={styles.container}>
         <header className={styles.postHeader}>
           <div className={styles.postMeta}>

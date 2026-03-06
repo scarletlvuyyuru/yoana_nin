@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './Home.module.css';
+import SEO from '../../components/SEO/SEO';
 import heroImage from '../../assets/images/YoanaHero1.webp';
 import coachingImage from '../../assets/images/masterMindset.webp';
 import realEstateImage from '../../assets/images/Sanctuary.webp';
@@ -58,6 +59,56 @@ const Home: React.FC = () => {
   ];
   return (
     <>
+      <SEO 
+        title="Yoana Nin - ADHD Entrepreneur Coach & Real Estate Expert | Raleigh NC Area"
+        description="ADHD Entrepreneur Coach & Raleigh Real Estate Expert | Transform Your ADHD Into Your Business Superpower | Fix the System, Not You | Raleigh NC Area"
+        schema={[
+          JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            "name": "Yoana Nin Coaching",
+            "url": "https://yoananincoaching.com",
+            "logo": "https://yoananincoaching.com/metaOG.png",
+            "description": "ADHD Entrepreneur Coach serving women entrepreneurs and change-makers",
+            "founder": {
+              "@type": "Person",
+              "name": "Yoana Nin"
+            },
+            "areaServed": {
+              "@type": "Place", 
+              "name": "Raleigh Area North Carolina"
+            },
+            "knowsAbout": [
+              "ADHD Coaching",
+              "Business Coaching",
+              "Life Coaching",
+              "Mindset Coaching",
+              "Real Estate",
+              "Expat Coaching"
+            ],
+            "sameAs": [
+              "https://yoananincoaching.com",
+              "https://www.youtube.com/@ElevatewithYoanaNin",
+              "https://www.facebook.com/Nin.Yoana/",
+              "https://www.instagram.com/yoananincoaching/",
+              "https://www.linkedin.com/in/yoananin",
+              "https://www.tiktok.com/@yoananincoaching"
+            ]
+          }),
+          JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": faqData.map(faq => ({
+              "@type": "Question",
+              "name": faq.question,
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": faq.answer
+              }
+            }))
+          })
+        ]}
+      />
       {/* Hero Section */}
       <section className={styles.hero}>
         <div className={styles.heroContent}>

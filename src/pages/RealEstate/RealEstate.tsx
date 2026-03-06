@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styles from './RealEstate.module.css';
+import SEO from '../../components/SEO/SEO';
 import fourCInfographic from '../../assets/images/4cInfographic.webp';
 import bulletPoint from '../../assets/images/bulletPoint.webp';
 import yoanaPrideFlag from '../../assets/images/yoanaPrideFlag.webp';
@@ -14,6 +15,51 @@ import relocationImage from '../../assets/images/GlobalFamilies.webp'; // Reloca
 const RealEstate: React.FC = () => {
   return (
     <>
+      <SEO 
+        title="Prosperous Agency | Real Estate Expert in Raleigh, Cary, Apex NC"
+        description="Looking to buy, sell, or relocate in the Raleigh Triangle Area? Yoana Nin and The Prosperous Agency provide holistic real estate services."
+        url="https://yoananincoaching.com/real-estate"
+        schema={JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "RealEstateAgent",
+          "name": "Prosperous Agency Real Estate Services",
+          "description": "Real Estate Expert serving Raleigh NC Triangle Area - helping relocating families find their sanctuary",
+          "url": "https://yoananincoaching.com/real-estate",
+          "areaServed": [
+            { "@type": "City", "name": "Raleigh" },
+            { "@type": "City", "name": "Durham" },
+            { "@type": "City", "name": "Chapel Hill" },
+            { "@type": "City", "name": "Cary" },
+            { "@type": "City", "name": "Apex" }
+          ],
+          "priceRange": "$$",
+          "serviceType": [
+            "Real Estate Buyer Agent",
+            "Real Estate Seller Agent", 
+            "Relocation Services"
+          ],
+          "knowsAbout": [
+            "Triangle Area Real Estate Market",
+            "Raleigh Real Estate",
+            "Durham Real Estate", 
+            "Chapel Hill Real Estate",
+            "Cary Real Estate",
+            "Apex Real Estate",
+            "Relocation Services",
+            "International Relocation",
+            "Expat Relocation"
+          ],
+          "sameAs": [
+            "https://www.bbb.org/us/nc/cary/profile/real-estate-broker/yoana-nin-realty-aka-the-prosperous-agency-0593-90359119",
+            "https://www.realtor.com/realestateagents/5681075989a68901006b0471",
+            "https://www.zillow.com/profile/Yoana%20Nin",
+            "https://www.homes.com/real-estate-agents/cary-nc/macgregor-downs-neighborhood/",
+            "https://www.land.com/member/yoana-nin/1555580/listings/",
+            "https://www.fastexpert.com/real-estate-company/yoana-nin-realty-aka-the-prosperous-agency-cary-nc-54811/",
+            "https://www.yelp.com/biz/yoana-nin-realty-aka-the-prosperous-agency-cary-2"
+          ]
+        })}
+      />
       {/* Hero Section */}
       <section id="environment-effect" className={styles.hero} style={{backgroundImage: `url(${triangleHeroImage})`}}>
         <div className={styles.container}>

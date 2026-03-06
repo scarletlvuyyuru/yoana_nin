@@ -3,7 +3,7 @@ User-agent: *
 Allow: /
 
 # Host
-Host: https://yoananin.com
+Host: https://yoananincoaching.com
 
 # Sitemaps
-Sitemap: https://yoananin.com/sitemap.xml
+Sitemap: https://yoananincoaching.com/sitemap.xml

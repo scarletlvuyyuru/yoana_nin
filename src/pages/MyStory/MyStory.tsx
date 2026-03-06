@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styles from './MyStory.module.css';
+import SEO from '../../components/SEO/SEO';
 import bookImage from '../../assets/images/Journey_to_inner_joy_and_success_in_realestate.webp';
 import adhdBadge from '../../assets/images/Adhd_certification_badge.webp';
 import jayShettyCert from '../../assets/images/jay_Shetty_Certification.webp';
@@ -17,6 +18,39 @@ import yoanaBlueShirt from '../../assets/images/yoana-nin-blue-shirt-pose.webp';
 const MyStory: React.FC = () => {
   return (
     <>
+      <SEO 
+        title="My Story | Yoana Nin - From Romania to NC"
+        description="Learn how I rebuilt my life from the ground up, becoming a certified ADHD life coach, energetic healer, and real estate entrepreneur in Raleigh."
+        url="https://yoananincoaching.com/my-story"
+        schema={JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Person",
+          "name": "Yoana Nin",
+          "url": "https://yoananincoaching.com",
+          "image": "https://yoananincoaching.com/YoanaIseeYou.webp",
+          "jobTitle": "ADHD Entrepreneur Coach & Real Estate Expert",
+          "description": "Holistic life coach specializing in ADHD entrepreneurs and expat community support",
+          "worksFor": [
+            {
+              "@type": "Organization",
+              "name": "Yoana Nin Coaching",
+              "description": "ADHD Entrepreneur Coaching"
+            },
+            {
+              "@type": "Organization",
+              "name": "Prosperous Agency",
+              "description": "Boutique Real Estate Agency"
+            }
+          ],
+          "sameAs": [
+            "https://www.youtube.com/@ElevatewithYoanaNin",
+            "https://www.facebook.com/Nin.Yoana/",
+            "https://www.instagram.com/yoananincoaching/",
+            "https://www.linkedin.com/in/yoananin",
+            "https://www.tiktok.com/@yoananincoaching"
+          ]
+        })}
+      />
       {/* Hero Section */}
       <section className={styles.hero} style={{backgroundImage: `url(${heroBackground})`}}>
         <div className={styles.container}>

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styles from './Coaching.module.css';
+import SEO from '../../components/SEO/SEO';
 import buildYourCommunityImage from '../../assets/images/buildYourCommuntiy.webp';
 import brainIconforRewire from '../../assets/images/brainIconforRewire.webp';
 import compassIconforShift from '../../assets/images/compassIconforShift.webp';
@@ -10,6 +11,39 @@ import bulletPoint from '../../assets/images/bulletPoint.webp';
 const Coaching: React.FC = () => {
   return (
     <div className="main-content">
+      <SEO 
+        title="ADHD Coaching for Entrepreneurs & Expats | Yoana Nin"
+        description="Overcome ADHD overwhelm with actionable strategies. Elevate your life and business with the ABC Framework tailored for neurodivergent entrepreneurs."
+        url="https://yoananincoaching.com/coaching"
+        schema={JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "HowTo",
+          "name": "Transform ADHD Into Your Business Superpower",
+          "description": "6-Month Focused Founder Framework for ADHD Entrepreneurs", 
+          "totalTime": "P6M",
+          "supply": ["Coaching sessions", "Community support", "Structured framework"],
+          "step": [
+            {
+              "@type": "HowToStep",
+              "name": "Phase 1: Personal Development",
+              "text": "Stabilize identity, nervous system, and internal foundation before business growth. Transform shame into self-trust and build the confidence to lead authentically.",
+              "position": 1
+            },
+            {
+              "@type": "HowToStep", 
+              "name": "Phase 2: Planning",
+              "text": "Build systems that match ADHD energy, not fight it. Create sustainable habits, master scheduling, and design your ideal business infrastructure.",
+              "position": 2
+            },
+            {
+              "@type": "HowToStep",
+              "name": "Phase 3: Execution", 
+              "text": "Convert clarity into profit, momentum, and sustainable growth. Execute with confidence while building relationships that support your success.",
+              "position": 3
+            }
+          ]
+        })}
+      />
       {/* Hero Section */}
       <section id="top" className={styles.heroSection} style={{backgroundImage: `url(${buildYourCommunityImage})`}}>
         <div className={styles.container}>

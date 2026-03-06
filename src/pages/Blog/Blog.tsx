@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './Blog.module.css';
+import SEO from '../../components/SEO/SEO';
 import masterMindsetImage from '../../assets/images/masterMindset.webp';
 
 // Blog post data structure (will be replaced with CMS data)
@@ -61,6 +62,11 @@ const Blog: React.FC = () => {
   
   return (
     <div className={styles.blogPage}>
+      <SEO 
+        title="Journal & Insights | Yoana Nin Coaching"
+        description="Explore insights on ADHD entrepreneurship, holistic life coaching, and relocating to the Raleigh Triangle area."
+        url="https://yoananincoaching.com/blog"
+      />
       {/* Hero Section */}
       <section className={styles.hero} style={{backgroundImage: `url(${masterMindsetImage})`}}>
         <div className={styles.container}>
