@@ -1,11 +1,3 @@
-<form
-  name="contact"
-  method="POST"
-  data-netlify="true"
-  data-netlify-honeypot="bot-field"
-  data-netlify-recaptcha="true"
-  onSubmit={handleSubmit}
->
 [build]
   publish = "dist"
   command = "npm run build"
