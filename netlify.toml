@@ -1,3 +1,11 @@
+<form
+  name="contact"
+  method="POST"
+  data-netlify="true"
+  data-netlify-honeypot="bot-field"
+  data-netlify-recaptcha="true"
+  onSubmit={handleSubmit}
+>
 [build]
   publish = "dist"
   command = "npm run build"
@@ -6,10 +14,6 @@
   directory = "netlify/functions"
   node_bundler = "esbuild"
 
-# Form settings
-[forms]
-  settings = true
-  spam_filter = true
 
 # Redirect rules for SPA
 [[redirects]]
@@ -30,7 +34,6 @@
   for = "/*"
   [headers.values]
     X-Frame-Options = "DENY"
-    X-XSS-Protection = "1; mode=block"
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
     Permissions-Policy = "camera=(), microphone=(), geolocation=()"
