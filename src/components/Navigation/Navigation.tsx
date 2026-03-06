@@ -176,7 +176,11 @@ const Navigation: React.FC = () => {
 
           {/* Banner Buttons - Right Side */}
           <div className={styles.bannerButtons}>
-            <Link to="/contact" className={`${styles.bannerButton} ${styles.primary}`}>
+            <Link 
+              to="/contact" 
+              className={`${styles.bannerButton} ${styles.primary}`}
+              onClick={() => window.scrollTo(0, 0)}
+            >
               Contact
             </Link>
             <a 
@@ -262,6 +266,7 @@ const Navigation: React.FC = () => {
                   ) : (
                     <Link
                       to={item.path}
+                      onClick={() => window.scrollTo(0, 0)}
                       className={`${styles.navLink} ${location.pathname === item.path ? styles.active : ''}`}
                     >
                       {item.name}
@@ -357,6 +362,7 @@ const Navigation: React.FC = () => {
                   ) : (
                     <Link
                       to={item.path}
+                      onClick={() => window.scrollTo(0, 0)}
                       className={`${styles.navLink} ${location.pathname === item.path ? styles.active : ''}`}
                     >
                       {item.name}
@@ -392,7 +398,10 @@ const Navigation: React.FC = () => {
                 <li key={item.name} className={styles.mobileNavItem}>
                   <Link
                     to={item.path}
-                    onClick={() => setIsOpen(false)}
+                    onClick={() => {
+                      setIsOpen(false);
+                      window.scrollTo(0, 0);
+                    }}
                     className={styles.mobileNavLink}
                   >
                     {item.name}
@@ -402,7 +411,10 @@ const Navigation: React.FC = () => {
               <li>
                 <Link
                   to="/contact"
-                  onClick={() => setIsOpen(false)}
+                  onClick={() => {
+                    setIsOpen(false);
+                    window.scrollTo(0, 0);
+                  }}
                   className={styles.mobileContactButton}
                 >
                   Contact

@@ -37,7 +37,7 @@ const MyStory: React.FC = () => {
           <div className={styles.filmReel}>
             <div className={styles.filmStrip}>
               <img src={yoanaYoung} alt="Young Yoana" className={styles.filmFrame} />
-                <img src={yoanaRealEstate} alt="Yoana real estate" className={styles.filmFrame} />
+                <img src={yoanaRealEstate} alt="Yoana working with Prosperous Agency" className={styles.filmFrame} />
               <img src={yoanaHollywood} alt="Yoana in Hollywood" className={styles.filmFrame} />
               <img src={yoanaBlueShirt} alt="Yoana blue shirt pose" className={styles.filmFrame} />
               <img src={credentialsImage} alt="Yoana coaching" className={styles.filmFrame} />

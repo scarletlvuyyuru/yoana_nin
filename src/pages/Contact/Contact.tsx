@@ -210,6 +210,7 @@ const Contact: React.FC = () => {
                 data-netlify-honeypot="bot-field"
                 className={styles.contactForm}
                 onSubmit={handleSubmit}
+                autoComplete="on"
               >
                 <input type="hidden" name="form-name" value="contact" />
                 <input type="hidden" name="subject" value="New Contact Form Submission - Yoana Nin" />

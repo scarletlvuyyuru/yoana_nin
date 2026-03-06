@@ -563,10 +563,19 @@
     gap: 3rem;
   }
 
+  /* Uniform image positioning on mobile - all images on top */
+  .momsImageSection,
+  .tpaImageSection,
+  .relocationImageSection,
+  .inclusivityImageSection {
+    order: 1;
+  }
+
   .momsTextSection,
   .tpaTextSection,
   .relocationTextSection,
   .inclusivityText {
+    order: 2;
     padding: 1rem;
     text-align: left;
   }

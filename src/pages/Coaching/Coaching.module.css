@@ -378,8 +378,49 @@
   transform: translateY(-2px);
 }
 
-/* Responsive Design for Phase Overview */
+/* Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInFromLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Responsive Design */
 @media (max-width: 768px) {
+  /* Hero Section */
+  .heroSection {
+    padding: 4rem 0 3rem;
+    min-height: 80vh;
+  }
+  
+  .pricingBox {
+    padding: 2rem;
+    margin: 0 auto 2rem;
+  }
+  
+  .buttonSpacing {
+    margin: 1.5rem auto 1rem;
+    width: 100%;
+    text-align: center;
+  }
+
+  /* Phase Overview */
   .phaseStepArrow {
     margin: -0.5rem 0;
   }
@@ -400,6 +441,9 @@
   }
 
   .phaseStep {
+    flex-direction: row;
+    align-items: flex-start;
+    text-align: left;
     padding: 1.5rem;
     gap: 1rem;
   }
@@ -407,15 +451,115 @@
   .phaseStepIcon {
     width: 70px;
     height: 70px;
+    flex-shrink: 0;
     font-size: var(--font-size-5xl);
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  .phaseStepPersonal .phaseStepIcon,
+  .phaseStepPlanning .phaseStepIcon,
+  .phaseStepExecution .phaseStepIcon {
+    width: 70px;
+    height: 70px;
+    flex-shrink: 0;
   }
 
   .phaseStepTitle {
     font-size: var(--font-size-lg);
+    text-align: left;
+    margin: 0 0 0.75rem 0;
   }
 
   .phaseStepDescription {
     font-size: var(--font-size-sm);
+    text-align: left;
+    margin: 0 0 1rem 0;
+  }
+
+  .phaseStepContent {
+    text-align: left;
+    flex: 1;
+  }
+
+  /* Phase Headers */
+  .phaseHeader {
+    text-align: left;
+    margin-bottom: 3rem;
+  }
+  
+  .phaseHeaderIcon {
+    width: 40px;
+    height: 40px;
+    margin-right: 0.75rem;
+  }
+  
+  .phaseMainTitle1,
+  .phaseMainTitle2,
+  .phaseMainTitle3 {
+    margin-bottom: 1rem;
+    font-size: clamp(1.8rem, 6vw, 2.5rem);
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start !important;
+    gap: 0.75rem;
+    text-align: left !important;
+  }
+  
+  .phaseDescriptionLarge {
+    text-align: left;
+    margin: 0;
+    max-width: 100%;
+  }
+
+  /* Phase Cards */
+  .phaseCard1,
+  .phaseCard2,
+  .phaseCard3 {
+    padding: 2rem 1.5rem;
+  }
+
+  /* Month Cards */
+  .monthCardWhite,
+  .monthCardMagenta,
+  .monthCardBlue,
+  .monthCardWhiteBlue,
+  .monthCardWhiteSage,
+  .monthCardOrange {
+    padding: 2rem;
+  }
+  
+  .monthGrid {
+    gap: 2rem;
+  }
+
+  /* CTA Section */
+  .ctaButtonContainer {
+    flex-direction: column;
+    gap: 1rem;
+    max-width: 100%;
+  }
+  
+  .ctaButtonContainer .ctaBtnSecondary,
+  .ctaButtonContainer .ctaBtnPrimary {
+    flex: 1;
+    margin: 0 !important;
+    width: 100%;
+    max-width: 320px;
+    font-size: var(--font-size-xs) !important;
+    padding: 0.75rem 0.25rem !important;
+    min-height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1.2;
+    text-align: center;
+  }
+  
+  .ctaPricingContainer {
+    padding: 1.5rem;
+    margin-bottom: 2rem;
   }
 }
 
@@ -442,6 +586,17 @@
     height: 50px;
     flex-shrink: 0;
     font-size: var(--font-size-2xl);
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  .phaseStepPersonal .phaseStepIcon,
+  .phaseStepPlanning .phaseStepIcon,
+  .phaseStepExecution .phaseStepIcon {
+    width: 50px;
+    height: 50px;
+    flex-shrink: 0;
   }
   
   .phaseStepIconImage {
@@ -457,6 +612,18 @@
   .phaseStepContent {
     text-align: left;
     flex: 1;
+  }
+
+  .phaseStepTitle {
+    text-align: left;
+    font-size: var(--font-size-md);
+    margin: 0 0 0.5rem 0;
+  }
+
+  .phaseStepDescription {
+    text-align: left;
+    font-size: var(--font-size-xs);
+    margin: 0 0 0.75rem 0;
   }
 }
 
@@ -564,37 +731,7 @@
   justify-content: center;
 }
 
-/* Mobile responsive design */
-@media (max-width: 768px) {
-  .phaseHeader {
-    text-align: left;
-    margin-bottom: 3rem;
-  }
-  
-  .phaseHeaderIcon {
-    width: 40px;
-    height: 40px;
-    margin-right: 0.75rem;
-  }
-  
-  .phaseMainTitle1,
-  .phaseMainTitle2,
-  .phaseMainTitle3 {
-    margin-bottom: 1rem;
-    font-size: clamp(1.8rem, 6vw, 2.5rem);
-    flex-direction: row;
-    align-items: center;
-    justify-content: flex-start;
-    gap: 0.75rem;
-    text-align: left;
-  }
-  
-  .phaseDescriptionLarge {
-    text-align: left;
-    margin: 0;
-    max-width: 100%;
-  }
-}
+
 
 .phaseDescriptionLarge {
   font-size: var(--font-size-xl);
@@ -893,37 +1030,6 @@
   margin-top: 2rem;
 }
 
-/* Mobile: Stack buttons on smaller screens */
-@media (max-width: 768px) {
-  .ctaButtonContainer {
-    flex-direction: column; /* Stack them on mobile */
-    gap: 1rem;
-    max-width: 100%;
-  }
-  
-  .ctaButtonContainer .ctaBtnSecondary,
-  .ctaButtonContainer .ctaBtnPrimary {
-    flex: 1;
-    margin: 0;
-    width: 100%; /* Make buttons full width on mobile */
-    max-width: 320px; /* Optional: constrain max width on mobile */
-    font-size: var(--font-size-sm);
-    padding: 0.75rem 0.5rem;
-  }
-}
-
-/* Animations */
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
 /* Center-aligned tagline for Phase sections on coaching page */
 .taglineDarkLeft {
   font-size: var(--font-size-md);
@@ -936,48 +1042,7 @@
   text-align: center;
 }
 
-/* Mobile Responsive */
-@media (max-width: 768px) {
-  .heroSection {
-    padding: 4rem 0 3rem;
-    min-height: 80vh;
-  }
-  
-  .pricingBox {
-    padding: 2rem;
-    margin: 0 auto 2rem;
-  }
-  
-  .buttonSpacing {
-    margin: 1.5rem auto 1rem;
-    width: 100%;
-    text-align: center;
-  }
-  
-  .phaseCard1,
-  .phaseCard2,
-  .phaseCard3 {
-    padding: 2rem 1.5rem;
-  }
-  
-  .monthCardWhite,
-  .monthCardMagenta,
-  .monthCardBlue,
-  .monthCardWhiteBlue,
-  .monthCardWhiteSage,
-  .monthCardOrange {
-    padding: 2rem;
-  }
-  
-  .monthGrid {
-    gap: 2rem;
-  }
-  
-  .ctaPricingContainer {
-    padding: 1.5rem;
-    margin-bottom: 2rem;
-  }
-}
+
 
 /* Dark Mode Overrides */
 [data-theme="dark"] .heroSection {

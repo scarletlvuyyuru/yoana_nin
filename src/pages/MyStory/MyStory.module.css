@@ -699,6 +699,24 @@
   color: #E2E8F0;
 }
 
+/* Dark Mode Mobile/Medium Screen Overrides for Hero Text */
+@media (max-width: 768px) {
+  [data-theme="dark"] .hero .heroTitle {
+    background: linear-gradient(135deg, #ffffff 0%, #f0f0f0 50%, #ffffff 100%) !important;
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+  }
+  
+  [data-theme="dark"] .hero .heroSubtitle {
+    color: white !important;
+  }
+  
+  [data-theme="dark"] .hero .heroDescription {
+    color: white !important;
+  }
+}
+
 [data-theme="dark"] .bookSection {
   background: rgba(45, 55, 72, 0.05);
   border: 1px solid var(--border-color);

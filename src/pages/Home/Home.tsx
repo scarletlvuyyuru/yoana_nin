@@ -6,7 +6,7 @@ import coachingImage from '../../assets/images/masterMindset.webp';
 import realEstateImage from '../../assets/images/Sanctuary.webp';
 import blogImage from '../../assets/images/buildYourCommuntiy.webp';
 import bulletPoint from '../../assets/images/bulletPoint.webp';
-import lookingThroughFingersImage from '../../assets/images/YoanaIseeYou.webp';
+import lookingThroughFingersImage from '/YoanaIseeYou.webp';
 import microphoneIcon from '../../assets/images/microphoneIcon.webp';
 import youtubeLikesIcon from '../../assets/images/youtubeLikesIcon.webp';
 import CredibilityStrip from '../../components/CredibilityStrip/CredibilityStrip';
@@ -374,7 +374,12 @@ const Home: React.FC = () => {
                     Book Me to Speak
                   </h3>
                   <p className={styles.optionText}>Engaging presentations on entrepreneurship, wellness, expat experiences, and building resilience through life's transitions.</p>
-                  <Link to="/contact" className="btn btn-primary" style={{marginTop: '1rem', padding: '0.5rem 1rem', fontSize: 'var(--font-size-sm)', width: '200px', textAlign: 'center'}}>
+                  <Link 
+                    to="/contact" 
+                    className="btn btn-primary" 
+                    style={{marginTop: '1rem', padding: '0.5rem 1rem', fontSize: 'var(--font-size-sm)', width: '200px', textAlign: 'center'}}
+                    onClick={() => window.scrollTo(0, 0)}
+                  >
                     Explore Speaking Opportunities
                   </Link>
                 </div>
