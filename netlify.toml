@@ -46,3 +46,4 @@
 
 [context.branch-deploy]
   command = "npm run build"
+  ignore = "echo $HEAD | grep -q 'dependabot'"
