@@ -27,12 +27,12 @@ const Coaching: React.FC = () => {
               Start Your Transformation
             </p>
             <div className={styles.pricingAmount}>
-              $97/month for 6 months
+              $97/Month for 6 Months
             </div>
             <div className={styles.pricingDetails}>
               <div className={styles.pricingItem}>
                 <img src={bulletPoint} alt="" className={styles.bulletIcon} />
-                2-Hour Sessions Twice Per Month
+                2 One Hour Sessions Twice Per Month
               </div>
               <div className={styles.pricingItem}>
                 <img src={bulletPoint} alt="" className={styles.bulletIcon} />
@@ -409,7 +409,7 @@ const Coaching: React.FC = () => {
               $97/month × 6 months
             </div>
             <div className={styles.ctaPricingDetails}>
-              4 hours of live coaching + 1 hour community bonus each month
+              2 Hours of Live Coaching + 1 Hour Community Bonus Each Month
             </div>
           </div>
 
