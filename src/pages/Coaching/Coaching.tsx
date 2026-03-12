@@ -74,7 +74,7 @@ const Coaching: React.FC = () => {
               </div>
             </div>
             <a 
-              href="https://sendlink.co/documents/doc-form/69a9b3752de1a29428886da0?locale=en-US"
+              href="https://sendlink.co/documents/doc-form/69b2d898993c38a3c094ca2b?locale=en-US"
               className={`btn btn-secondary ${styles.buttonSpacing}`}
               target="_blank"
               rel="noopener noreferrer"
@@ -449,7 +449,7 @@ const Coaching: React.FC = () => {
 
           <div className={styles.ctaButtonContainer}>
             <a 
-              href="https://sendlink.co/documents/doc-form/69a9b3752de1a29428886da0?locale=en-US"
+              href="https://sendlink.co/documents/doc-form/69b2d898993c38a3c094ca2b?locale=en-US"
               className={`btn btn-secondary ${styles.ctaBtnSecondary}`}
               target="_blank"
               rel="noopener noreferrer"

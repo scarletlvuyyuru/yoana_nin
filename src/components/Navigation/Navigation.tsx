@@ -184,7 +184,7 @@ const Navigation: React.FC = () => {
               Contact
             </Link>
             <a 
-              href="https://sendlink.co/documents/doc-form/69a9b3752de1a29428886da0?locale=en-US"
+              href="https://sendlink.co/documents/doc-form/69b2d898993c38a3c094ca2b?locale=en-US"
               className={`${styles.bannerButton} ${styles.blue}`}
               target="_blank"
               rel="noopener noreferrer"
