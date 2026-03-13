@@ -10,7 +10,7 @@ collections:
     label: "Blog Posts" # Used in the UI
     folder: "src/content/blog" # The path to the folder where the documents are stored
     create: true # Allow users to create new documents in this collection
-    slug: "{{slug}}" # Filename template, e.g., YYYY-MM-DD-title.md
+    slug: "{{fields.slug}}" # Use explicit slug field so title edits don't rename files
     fields: # The fields for each document, usually in front matter
       - { label: "Title", name: "title", widget: "string" }
       - { label: "Slug", name: "slug", widget: "string", pattern: ['^[a-z0-9]+(?:-[a-z0-9]+)*$', 'A slug can have no spaces or special characters'] }
@@ -42,6 +42,7 @@ collections:
       - label: "Body"
         name: "body"
         widget: "markdown"
+        required: false
         modes: ["rich_text", "raw"]
-        default_mode: "raw"
-        hint: "Use Raw mode for most reliable saves; Rich Text is available when you want formatting buttons."
+        default_mode: "rich_text"
+        hint: "If save fails, switch to Markdown mode once and save again."
