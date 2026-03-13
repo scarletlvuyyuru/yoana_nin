@@ -39,4 +39,8 @@ collections:
       - { label: "Source Type", name: "source_type", widget: "select", required: false, options: ["instagram", "facebook", "tiktok", "youtube", "other"] }
       - { label: "Source URL", name: "source_url", widget: "string", required: false, hint: "Paste video URL when using video mode." }
       - { label: "Transcript (optional)", name: "transcript", widget: "text", required: false, hint: "Optional transcript backup for AI generation." }
-      - { label: "Body", name: "body", widget: "markdown" }
+      - label: "Body"
+        name: "body"
+        widget: "markdown"
+        modes: ["raw"]
+        hint: "Write directly in markdown for best reliability. Use headings (H2/H3), short paragraphs, and bullets."
