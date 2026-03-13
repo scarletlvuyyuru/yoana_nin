@@ -42,5 +42,6 @@ collections:
       - label: "Body"
         name: "body"
         widget: "markdown"
-        modes: ["raw"]
-        hint: "Write directly in markdown for best reliability. Use headings (H2/H3), short paragraphs, and bullets."
+        modes: ["rich_text", "raw"]
+        default_mode: "raw"
+        hint: "Use Raw mode for most reliable saves; Rich Text is available when you want formatting buttons."
