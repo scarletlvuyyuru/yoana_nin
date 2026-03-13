@@ -1,5 +1,5 @@
 ---
-title: Stop Being a TEST23
+title: Stop Being a TEST
 slug: stop-being-a-test
 date: 2026-03-13T14:15:00.000-05:00
 author: Yoana Nin
