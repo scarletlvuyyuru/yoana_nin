@@ -35,6 +35,16 @@ const Blog: React.FC = () => {
           <div className={styles.blogGrid}>
             {featuredPosts.map((post) => (
               <article key={post.id} className={styles.blogCard} data-category={post.category}>
+                {post.featured_image && (
+                  <a href={`/blog/${post.slug}`} className={styles.imageLink}>
+                    <img
+                      src={post.featured_image}
+                      alt={post.image_alt || post.title}
+                      className={styles.cardImage}
+                      loading="lazy"
+                    />
+                  </a>
+                )}
                 <div className={styles.cardContent}>
                   <div className={styles.cardMeta}>
                     <span className={styles.category}>{post.category}</span>

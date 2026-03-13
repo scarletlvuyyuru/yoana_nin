@@ -33,6 +33,9 @@ const BlogPost: React.FC = () => {
           '@type': 'BlogPosting',
           headline: post.title,
           description: seoDescription,
+          image: post.featured_image
+            ? `https://yoananincoaching.com${post.featured_image}`
+            : 'https://yoananincoaching.com/metaOG.png',
           author: {
             '@type': 'Person',
             name: post.author,
@@ -68,6 +71,17 @@ const BlogPost: React.FC = () => {
             </div>
           </div>
         </header>
+
+        {post.featured_image && (
+          <div className={styles.featuredImageWrap}>
+            <img
+              src={post.featured_image}
+              alt={post.image_alt || post.title}
+              className={styles.featuredImage}
+              loading="lazy"
+            />
+          </div>
+        )}
 
         <div className={styles.postContent}>
           {post.content?.trim() ? (
