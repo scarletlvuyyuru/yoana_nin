@@ -29,7 +29,7 @@
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
     Permissions-Policy = "camera=(), microphone=(), geolocation=()"
-    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://identity.netlify.com https://unpkg.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https://api.netlify.com https://identity.netlify.com https://app.netlify.com https://unpkg.com https://cdn.jsdelivr.net; frame-src 'self' https://identity.netlify.com https://app.netlify.com;"
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://identity.netlify.com https://unpkg.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https://api.netlify.com https://identity.netlify.com https://app.netlify.com https://git-gateway.netlify.com https://*.netlify.com https://unpkg.com https://cdn.jsdelivr.net; frame-src 'self' https://identity.netlify.com https://app.netlify.com;"
 
 [[headers]]
   for = "/admin/*"
@@ -37,7 +37,7 @@
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
     Permissions-Policy = "camera=(), microphone=(), geolocation=()"
-    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://identity.netlify.com https://unpkg.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https://api.netlify.com https://identity.netlify.com https://app.netlify.com https://unpkg.com https://cdn.jsdelivr.net; frame-src 'self' https://identity.netlify.com https://app.netlify.com;"
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://identity.netlify.com https://unpkg.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https://api.netlify.com https://identity.netlify.com https://app.netlify.com https://git-gateway.netlify.com https://*.netlify.com https://unpkg.com https://cdn.jsdelivr.net; frame-src 'self' https://identity.netlify.com https://app.netlify.com;"
 
 [[headers]]
   for = "/assets/*"
