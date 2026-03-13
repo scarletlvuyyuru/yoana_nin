@@ -3,7 +3,6 @@ import { load as parseYaml } from 'js-yaml';
 import type {
   BlogCategory,
   BlogCreationMode,
-  BlogDraftStatus,
   BlogFaqItem,
   BlogPostListItem,
   BlogSourceType,
@@ -17,7 +16,6 @@ const rawBlogFiles = import.meta.glob('./blog/*.md', {
 
 const allowedCategories: BlogCategory[] = ['Coaching', 'Community', 'Real Estate', 'Personal Growth'];
 const allowedCreationModes: BlogCreationMode[] = ['manual', 'video'];
-const allowedDraftStatuses: BlogDraftStatus[] = ['draft', 'ready', 'published'];
 const allowedSourceTypes: BlogSourceType[] = ['instagram', 'facebook', 'tiktok', 'youtube', 'other'];
 
 function stripFrontmatter(raw: string): { frontmatterText: string; markdownBody: string } {
@@ -109,13 +107,6 @@ function normalizeCreationMode(value: unknown): BlogCreationMode | undefined {
   return undefined;
 }
 
-function normalizeDraftStatus(value: unknown): BlogDraftStatus | undefined {
-  if (typeof value === 'string' && allowedDraftStatuses.includes(value as BlogDraftStatus)) {
-    return value as BlogDraftStatus;
-  }
-  return undefined;
-}
-
 function normalizeSourceType(value: unknown): BlogSourceType | undefined {
   if (typeof value === 'string' && allowedSourceTypes.includes(value as BlogSourceType)) {
     return value as BlogSourceType;
@@ -180,7 +171,6 @@ function parseBlogFile(path: string, rawContent: string): BlogPostListItem {
     geo_focus: typeof frontmatter.geo_focus === 'string' ? frontmatter.geo_focus : undefined,
     geo_schema: typeof frontmatter.geo_schema === 'boolean' ? frontmatter.geo_schema : undefined,
     creation_mode: normalizeCreationMode(frontmatter.creation_mode),
-    draft_status: normalizeDraftStatus(frontmatter.draft_status),
     source_type: normalizeSourceType(frontmatter.source_type),
     source_url: typeof frontmatter.source_url === 'string' ? frontmatter.source_url : undefined,
     transcript: typeof frontmatter.transcript === 'string' ? frontmatter.transcript : undefined,

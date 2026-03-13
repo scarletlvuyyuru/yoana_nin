@@ -2,8 +2,6 @@ export type BlogCategory = 'Coaching' | 'Community' | 'Real Estate' | 'Personal 
 
 export type BlogCreationMode = 'manual' | 'video';
 
-export type BlogDraftStatus = 'draft' | 'ready' | 'published';
-
 export type BlogSourceType = 'instagram' | 'facebook' | 'tiktok' | 'youtube' | 'other';
 
 export interface BlogFaqItem {
@@ -28,7 +26,6 @@ export interface BlogPostData {
   geo_focus?: string;
   geo_schema?: boolean;
   creation_mode?: BlogCreationMode;
-  draft_status?: BlogDraftStatus;
   source_type?: BlogSourceType;
   source_url?: string;
   transcript?: string;
