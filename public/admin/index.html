@@ -7,7 +7,45 @@
     <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
   </head>
   <body>
-    <!-- Include the script that builds the page and powers Decap CMS -->
-    <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+    <div id="cms-loading" style="font-family: Arial, sans-serif; padding: 2rem; color: #1f2937;">
+      Loading CMS…
+    </div>
+
+    <script>
+      (function loadDecapCMS() {
+        var loadingEl = document.getElementById('cms-loading');
+
+        function showError() {
+          if (loadingEl) {
+            loadingEl.innerHTML = 'CMS failed to load. Please refresh the page. If this continues, check Netlify CSP settings for /admin.';
+          }
+        }
+
+        function attachScript(src, onLoad, onError) {
+          var script = document.createElement('script');
+          script.src = src;
+          script.async = true;
+          script.onload = onLoad;
+          script.onerror = onError;
+          document.body.appendChild(script);
+        }
+
+        attachScript(
+          'https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js',
+          function () {
+            if (loadingEl) loadingEl.remove();
+          },
+          function () {
+            attachScript(
+              'https://cdn.jsdelivr.net/npm/decap-cms@^3.0.0/dist/decap-cms.js',
+              function () {
+                if (loadingEl) loadingEl.remove();
+              },
+              showError
+            );
+          }
+        );
+      })();
+    </script>
   </body>
 </html>
