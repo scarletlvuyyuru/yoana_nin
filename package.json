@@ -16,6 +16,9 @@
     "vite": "^7.2.4"
   },
   "dependencies": {
+    "@types/js-yaml": "^4.0.9",
+    "js-yaml": "^4.1.1",
+    "marked": "^17.0.4",
     "node-fetch": "^2.6.7",
     "react": "^19.2.3",
     "react-dom": "^19.2.3",

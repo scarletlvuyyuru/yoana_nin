@@ -16,25 +16,27 @@ collections:
       - { label: "Slug", name: "slug", widget: "string", pattern: ['^[a-z0-9]+(?:-[a-z0-9]+)*$', 'A slug can have no spaces or special characters'] }
       - { label: "Publish Date", name: "date", widget: "datetime" }
       - { label: "Author", name: "author", widget: "string", default: "Yoana Nin" }
-      - { label: "Category", name: "category", widget: "select", options: ["Coaching", "Community", "Wellness", "Real Estate", "Personal Growth"] }
+      - { label: "Category", name: "category", widget: "select", options: ["Coaching", "Community", "Real Estate", "Personal Growth"], default: "Coaching" }
+      - { label: "Creation Mode", name: "creation_mode", widget: "select", options: ["manual", "video"], default: "manual", hint: "Manual = write from scratch. Video = generated from transcript draft." }
+      - { label: "Draft Status", name: "draft_status", widget: "select", options: ["draft", "ready", "published"], default: "draft", hint: "Use draft until the post is fully reviewed." }
       - { label: "Tags", name: "tags", widget: "list", default: [""] }
       - { label: "Featured", name: "featured", widget: "boolean", default: true }
+      - { label: "Featured Image", name: "featured_image", widget: "image", required: false, hint: "Use one main image per post for consistent style." }
+      - { label: "Image Alt Text", name: "image_alt", widget: "string", required: false, hint: "Describe the featured image for accessibility and SEO." }
+      - { label: "Key Answer (AEO)", name: "key_answer", widget: "text", required: false, hint: "Direct answer snippet. Keep it short (about 1-3 sentences)." }
       - { label: "Excerpt", name: "excerpt", widget: "text" }
       - { label: "Meta Description", name: "meta_description", widget: "text", hint: "SEO description for search engines" }
+      - label: "FAQ (AEO)"
+        name: "faq"
+        widget: "list"
+        required: false
+        hint: "Optional. Add common questions and direct answers."
+        fields:
+          - { label: "Question", name: "question", widget: "string" }
+          - { label: "Answer", name: "answer", widget: "text" }
+      - { label: "Geo Focus", name: "geo_focus", widget: "string", required: false, default: "Holly Springs, NC", hint: "Primary local area for this article." }
+      - { label: "Add Local Schema", name: "geo_schema", widget: "boolean", default: true, required: false }
+      - { label: "Source Type", name: "source_type", widget: "select", required: false, options: ["instagram", "facebook", "tiktok", "youtube", "other"] }
+      - { label: "Source URL", name: "source_url", widget: "string", required: false, hint: "Paste video URL when using video mode." }
+      - { label: "Transcript (optional)", name: "transcript", widget: "text", required: false, hint: "Optional transcript backup for AI generation." }
       - { label: "Body", name: "body", widget: "markdown" }
-      
-  - name: "pages"
-    label: "Pages"
-    files:
-      - label: "About Page"
-        name: "about"
-        file: "src/content/pages/about.md"
-        fields:
-          - { label: "Title", name: "title", widget: "string" }
-          - { label: "Body", name: "body", widget: "markdown" }
-      - label: "Services"
-        name: "services"
-        file: "src/content/pages/services.md"
-        fields:
-          - { label: "Title", name: "title", widget: "string" }
-          - { label: "Body", name: "body", widget: "markdown" }

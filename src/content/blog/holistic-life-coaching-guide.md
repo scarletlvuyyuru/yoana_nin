@@ -3,7 +3,7 @@ title: "What to Expect from Holistic Life Coaching: Your Journey to Wholeness"
 slug: "holistic-life-coaching-guide"
 date: "2026-01-25"
 author: "Yoana Nin"
-category: "Wellness"
+category: "Coaching"
 tags: ["Holistic Coaching", "Personal Growth", "Wellness", "Transformation"]
 featured: true
 excerpt: "Curious about holistic life coaching? Let's explore what this transformative approach looks like and how it can support your entire being."
