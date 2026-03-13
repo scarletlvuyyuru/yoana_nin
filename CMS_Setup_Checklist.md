@@ -33,7 +33,7 @@ In Netlify dashboard for this site:
    - `meta_description`
    - `body`
    - `is_published` (keep OFF while drafting)
-5. Save as draft, then publish.
+5. Save/publish the entry from Decap.
 6. Confirm a markdown file appears in `src/content/blog/`.
 
 ## 4) Verify frontend population from CMS
@@ -47,11 +47,8 @@ In Netlify dashboard for this site:
 
 ## 4.1 Draft vs Live behavior
 
-- Use **Save draft** while writing or revising.
 - Keep `is_published: false` until final approval.
-- A post appears on the website only when:
-   - entry is published in Decap, and
-   - `is_published` is set to `true`.
+- A post appears on the website only when `is_published` is set to `true`.
 
 ## 5) Launch-safety checks
 

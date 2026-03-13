@@ -2,8 +2,6 @@ backend:
   name: git-gateway
   branch: cms-prep-decapsafe-2026-03-13 # Branch to update during CMS testing
 
-publish_mode: editorial_workflow
-
 media_folder: public/images/uploads # Media files will be stored in the repo under public/images/uploads
 public_folder: /images/uploads # The src attribute for uploaded media will begin with /images/uploads
 
@@ -20,7 +18,6 @@ collections:
       - { label: "Author", name: "author", widget: "string", default: "Yoana Nin" }
       - { label: "Category", name: "category", widget: "select", options: ["Coaching", "Community", "Real Estate", "Personal Growth"], default: "Coaching" }
       - { label: "Creation Mode", name: "creation_mode", widget: "select", options: ["manual", "video"], default: "manual", hint: "Manual = write from scratch. Video = generated from transcript draft." }
-      - { label: "Draft Status", name: "draft_status", widget: "select", options: ["draft", "ready", "published"], default: "draft", hint: "Use draft until the post is fully reviewed." }
       - { label: "Publish To Website", name: "is_published", widget: "boolean", default: false, hint: "Turn ON only when this post is final and ready to go live." }
       - { label: "Tags", name: "tags", widget: "list", default: [""] }
       - { label: "Featured", name: "featured", widget: "boolean", default: true }
