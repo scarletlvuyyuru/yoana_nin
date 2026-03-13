@@ -32,6 +32,7 @@ In Netlify dashboard for this site:
    - `excerpt`
    - `meta_description`
    - `body`
+   - `is_published` (keep OFF while drafting)
 5. Save as draft, then publish.
 6. Confirm a markdown file appears in `src/content/blog/`.
 
@@ -43,6 +44,14 @@ In Netlify dashboard for this site:
 4. Confirm SEO fields on post page:
    - `<title>` uses post title
    - description uses `meta_description` fallback logic
+
+## 4.1 Draft vs Live behavior
+
+- Use **Save draft** while writing or revising.
+- Keep `is_published: false` until final approval.
+- A post appears on the website only when:
+   - entry is published in Decap, and
+   - `is_published` is set to `true`.
 
 ## 5) Launch-safety checks
 

@@ -165,6 +165,7 @@ function parseBlogFile(path: string, rawContent: string): BlogPostListItem {
     category: normalizeCategory(frontmatter.category),
     tags: toStringList(frontmatter.tags),
     featured: typeof frontmatter.featured === 'boolean' ? frontmatter.featured : true,
+    is_published: typeof frontmatter.is_published === 'boolean' ? frontmatter.is_published : true,
     excerpt:
       typeof frontmatter.excerpt === 'string' && frontmatter.excerpt.trim()
         ? frontmatter.excerpt.trim()
@@ -190,14 +191,16 @@ const blogPostsCache = Object.entries(rawBlogFiles)
   .map(([path, rawContent]) => parseBlogFile(path, rawContent))
   .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
+const publishedBlogPostsCache = blogPostsCache.filter((post) => post.is_published === true);
+
 export function getAllBlogPosts(): BlogPostListItem[] {
-  return blogPostsCache;
+  return publishedBlogPostsCache;
 }
 
 export function getFeaturedBlogPosts(): BlogPostListItem[] {
-  return blogPostsCache.filter((post) => post.featured);
+  return publishedBlogPostsCache.filter((post) => post.featured);
 }
 
 export function getBlogPostBySlug(slug: string): BlogPostListItem | undefined {
-  return blogPostsCache.find((post) => post.slug === slug);
+  return publishedBlogPostsCache.find((post) => post.slug === slug);
 }

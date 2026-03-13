@@ -19,6 +19,7 @@ export interface BlogPostData {
   category: BlogCategory;
   tags: string[];
   excerpt: string;
+  is_published?: boolean;
   meta_description?: string;
   featured_image?: string;
   image_alt?: string;
