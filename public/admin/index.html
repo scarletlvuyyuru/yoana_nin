@@ -24,27 +24,50 @@
 
           var h = window.CMS.h;
 
-          var VideoToBlogControl = window.CMS.createClass({
-            getInitialState: function () {
-              return {
-                loading: false,
-                error: '',
-                success: '',
-                useMock: true,
-              };
-            },
+          function getValue(value, key, fallback) {
+            if (!value) return fallback;
+            if (typeof value.get === 'function') {
+              var fromMap = value.get(key);
+              return fromMap === undefined ? fallback : fromMap;
+            }
+            if (value[key] === undefined) return fallback;
+            return value[key];
+          }
 
-            handleGenerate: async function () {
-              var entry = this.props.entry;
+          function toPlainObject(value) {
+            if (!value) return {};
+            if (typeof value.toJS === 'function') return value.toJS();
+            return value;
+          }
+
+          var VideoToBlogControl = function (props) {
+            var value = props.value || {};
+            var loading = !!getValue(value, '_loading', false);
+            var error = getValue(value, '_error', '');
+            var success = getValue(value, '_success', '');
+            var useMock = getValue(value, 'use_mock', true) !== false;
+            var generatedTitle = getValue(value, 'title', '');
+
+            function pushPatch(patch) {
+              var current = toPlainObject(props.value);
+              props.onChange(Object.assign({}, current, patch));
+            }
+
+            function toggleMock(event) {
+              pushPatch({ use_mock: !!event.target.checked });
+            }
+
+            async function handleGenerate() {
+              var entry = props.entry;
               var sourceUrl = (entry && entry.getIn(['data', 'source_url'])) || '';
               var sourceType = (entry && entry.getIn(['data', 'source_type'])) || 'other';
 
               if (!sourceUrl) {
-                this.setState({ error: 'Please fill Source URL first.', success: '' });
+                pushPatch({ _error: 'Please fill Source URL first.', _success: '', _loading: false });
                 return;
               }
 
-              this.setState({ loading: true, error: '', success: '' });
+              pushPatch({ _loading: true, _error: '', _success: '' });
 
               try {
                 var response = await fetch('/.netlify/functions/video-to-blog', {
@@ -53,7 +76,7 @@
                   body: JSON.stringify({
                     sourceUrl: sourceUrl,
                     sourceType: sourceType,
-                    mock: this.state.useMock,
+                    mock: useMock,
                   }),
                 });
 
@@ -62,7 +85,7 @@
                   throw new Error(data.error || 'Generation failed.');
                 }
 
-                this.props.onChange({
+                pushPatch({
                   apply_on_save: true,
                   generated_at: new Date().toISOString(),
                   source_url: sourceUrl,
@@ -75,84 +98,78 @@
                     data.draft && data.draft.meta_description ? data.draft.meta_description : '',
                   key_answer: data.draft && data.draft.key_answer ? data.draft.key_answer : '',
                   body: data.draft && data.draft.body ? data.draft.body : '',
+                  _loading: false,
+                  _error: '',
+                  _success:
+                    'Draft generated. Click Save to apply title, excerpt, meta, transcript, and body.',
                 });
-
-                this.setState({
-                  loading: false,
-                  error: '',
-                  success: 'Draft generated. Click Save to apply title, excerpt, meta, transcript, and body.',
+              } catch (requestError) {
+                pushPatch({
+                  _loading: false,
+                  _error: requestError.message || 'Generation failed.',
+                  _success: '',
                 });
-              } catch (error) {
-                this.setState({ loading: false, error: error.message || 'Generation failed.', success: '' });
               }
-            },
+            }
 
-            toggleMock: function (event) {
-              this.setState({ useMock: !!event.target.checked });
-            },
-
-            render: function () {
-              var value = this.props.value || {};
-
-              return h(
-                'div',
+            return h(
+              'div',
+              {
+                style: {
+                  border: '1px solid #e5e7eb',
+                  borderRadius: '8px',
+                  padding: '12px',
+                  background: '#f9fafb',
+                },
+              },
+              h(
+                'p',
+                { style: { margin: '0 0 8px', fontSize: '13px', color: '#374151' } },
+                'Generate draft from source_url + transcript. Uses transcript messaging only.'
+              ),
+              h(
+                'label',
+                { style: { display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '10px' } },
+                h('input', {
+                  type: 'checkbox',
+                  checked: useMock,
+                  onChange: toggleMock,
+                }),
+                h('span', { style: { fontSize: '13px' } }, 'Use mock transcript mode (safe testing)')
+              ),
+              h(
+                'button',
                 {
+                  type: 'button',
+                  onClick: handleGenerate,
+                  disabled: loading,
                   style: {
-                    border: '1px solid #e5e7eb',
-                    borderRadius: '8px',
-                    padding: '12px',
-                    background: '#f9fafb',
+                    background: '#111827',
+                    color: '#ffffff',
+                    border: 'none',
+                    borderRadius: '6px',
+                    padding: '8px 12px',
+                    cursor: loading ? 'not-allowed' : 'pointer',
                   },
                 },
-                h(
-                  'p',
-                  { style: { margin: '0 0 8px', fontSize: '13px', color: '#374151' } },
-                  'Generate draft from source_url + transcript. Uses transcript messaging only.'
-                ),
-                h(
-                  'label',
-                  { style: { display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '10px' } },
-                  h('input', {
-                    type: 'checkbox',
-                    checked: this.state.useMock,
-                    onChange: this.toggleMock,
-                  }),
-                  h('span', { style: { fontSize: '13px' } }, 'Use mock transcript mode (safe testing)')
-                ),
-                h(
-                  'button',
-                  {
-                    type: 'button',
-                    onClick: this.handleGenerate,
-                    disabled: this.state.loading,
-                    style: {
-                      background: '#111827',
-                      color: '#ffffff',
-                      border: 'none',
-                      borderRadius: '6px',
-                      padding: '8px 12px',
-                      cursor: this.state.loading ? 'not-allowed' : 'pointer',
-                    },
-                  },
-                  this.state.loading ? 'Generating…' : 'Generate Blog Draft'
-                ),
-                this.state.error
-                  ? h('p', { style: { margin: '10px 0 0', color: '#b91c1c', fontSize: '13px' } }, this.state.error)
-                  : null,
-                this.state.success
-                  ? h('p', { style: { margin: '10px 0 0', color: '#065f46', fontSize: '13px' } }, this.state.success)
-                  : null,
-                value.title
-                  ? h(
-                      'p',
-                      { style: { margin: '10px 0 0', fontSize: '13px', color: '#111827' } },
-                      'Generated title: ',
-                      h('strong', null, value.title)
-                    )
-                  : null
-              );
-            },
-          });
+                loading ? 'Generating…' : 'Generate Blog Draft'
+              ),
+              error
+                ? h('p', { style: { margin: '10px 0 0', color: '#b91c1c', fontSize: '13px' } }, error)
+                : null,
+              success
+                ? h('p', { style: { margin: '10px 0 0', color: '#065f46', fontSize: '13px' } }, success)
+                : null,
+              generatedTitle
+                ? h(
+                    'p',
+                    { style: { margin: '10px 0 0', fontSize: '13px', color: '#111827' } },
+                    'Generated title: ',
+                    h('strong', null, generatedTitle)
+                  )
+                : null
+            );
+          };
 
           window.CMS.registerWidget('video_to_blog', VideoToBlogControl);
 
@@ -211,17 +228,27 @@
         attachScript(
           'https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js',
           function () {
-            registerVideoToBlogWidget();
-            window.CMS.init();
-            if (loadingEl) loadingEl.remove();
+            try {
+              registerVideoToBlogWidget();
+              window.CMS.init();
+              if (loadingEl) loadingEl.remove();
+            } catch (error) {
+              console.error(error);
+              showError();
+            }
           },
           function () {
             attachScript(
               'https://cdn.jsdelivr.net/npm/decap-cms@^3.0.0/dist/decap-cms.js',
               function () {
-                registerVideoToBlogWidget();
-                window.CMS.init();
-                if (loadingEl) loadingEl.remove();
+                try {
+                  registerVideoToBlogWidget();
+                  window.CMS.init();
+                  if (loadingEl) loadingEl.remove();
+                } catch (error) {
+                  console.error(error);
+                  showError();
+                }
               },
               showError
             );
