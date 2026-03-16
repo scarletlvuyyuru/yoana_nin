@@ -12,6 +12,89 @@
     </div>
 
     <script>
+      (function setupBlogPrefillBridge() {
+        var PREFILL_KEY = 'yoana_blog_prefill';
+        var PREFILL_PENDING_KEY = 'yoana_blog_prefill_pending';
+
+        function readPrefill() {
+          try {
+            var raw = localStorage.getItem(PREFILL_KEY);
+            if (!raw) return null;
+            return JSON.parse(raw);
+          } catch (error) {
+            return null;
+          }
+        }
+
+        function setControlValue(name, value) {
+          if (value == null) return false;
+          var selector = '[name="' + name + '"]';
+          var el = document.querySelector(selector);
+          if (!el) return false;
+
+          var normalized = typeof value === 'string' ? value : String(value);
+          if (el.value === normalized) return true;
+
+          el.focus();
+          el.value = normalized;
+          el.dispatchEvent(new Event('input', { bubbles: true }));
+          el.dispatchEvent(new Event('change', { bubbles: true }));
+          return true;
+        }
+
+        function applyPrefillOnce() {
+          if (!window.location.hash || window.location.hash.indexOf('/collections/blog/new') === -1) {
+            return;
+          }
+
+          if (localStorage.getItem(PREFILL_PENDING_KEY) !== '1') {
+            return;
+          }
+
+          var data = readPrefill();
+          if (!data) {
+            localStorage.removeItem(PREFILL_PENDING_KEY);
+            return;
+          }
+
+          var mapped = {
+            title: data.title || '',
+            slug: data.slug || '',
+            key_answer: data.key_answer || '',
+            excerpt: data.excerpt || '',
+            meta_description: data.meta_description || '',
+            body: data.body || '',
+            transcript: data.transcript || '',
+            source_type: data.source_type || 'instagram',
+            source_url: data.source_url || '',
+            creation_mode: 'video',
+            workflow_stage: 'draft_ready'
+          };
+
+          var appliedCount = 0;
+          Object.keys(mapped).forEach(function (key) {
+            if (setControlValue(key, mapped[key])) {
+              appliedCount += 1;
+            }
+          });
+
+          if (appliedCount >= 6) {
+            localStorage.removeItem(PREFILL_PENDING_KEY);
+          }
+        }
+
+        var attempts = 0;
+        setInterval(function () {
+          attempts += 1;
+          applyPrefillOnce();
+          if (attempts > 240) {
+            attempts = 0;
+          }
+        }, 500);
+
+        window.addEventListener('hashchange', applyPrefillOnce);
+      })();
+
       (function loadDecapCMS() {
         var loadingEl = document.getElementById('cms-loading');
 

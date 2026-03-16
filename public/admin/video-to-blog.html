@@ -132,6 +132,7 @@
       <div class="actions">
         <button id="generateBtn" class="primary">Generate Draft</button>
         <button id="copyBtn" class="secondary" type="button">Copy Results JSON</button>
+        <button id="sendToCmsBtn" class="secondary" type="button">Open Blog + with Draft</button>
         <a href="/admin/#/collections/blog/new" style="align-self:center;text-decoration:none;">Open Blog +</a>
       </div>
 
@@ -174,6 +175,7 @@
       var sourceTypeEl = document.getElementById('sourceType');
       var generateBtn = document.getElementById('generateBtn');
       var copyBtn = document.getElementById('copyBtn');
+      var sendToCmsBtn = document.getElementById('sendToCmsBtn');
       var statusEl = document.getElementById('status');
 
       var titleEl = document.getElementById('title');
@@ -203,6 +205,10 @@
           body: bodyEl.value,
           transcript: transcriptEl.value,
         };
+      }
+
+      function hasGeneratedDraft() {
+        return !!titleEl.value.trim() && !!slugEl.value.trim() && !!bodyEl.value.trim();
       }
 
       generateBtn.addEventListener('click', async function () {
@@ -254,6 +260,22 @@
           setStatus('Results JSON copied to clipboard.', 'success');
         } catch (error) {
           setStatus('Copy failed. You can still select text manually.', 'error');
+        }
+      });
+
+      sendToCmsBtn.addEventListener('click', function () {
+        if (!hasGeneratedDraft()) {
+          setStatus('Generate a draft first, then send it to Blog +.', 'error');
+          return;
+        }
+
+        try {
+          var payload = getResultObject();
+          localStorage.setItem('yoana_blog_prefill', JSON.stringify(payload));
+          localStorage.setItem('yoana_blog_prefill_pending', '1');
+          window.location.href = '/admin/#/collections/blog/new';
+        } catch (error) {
+          setStatus('Could not send draft to CMS. Use Copy Results JSON instead.', 'error');
         }
       });
     </script>
