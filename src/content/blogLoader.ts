@@ -6,6 +6,7 @@ import type {
   BlogFaqItem,
   BlogPostListItem,
   BlogSourceType,
+  BlogWorkflowStage,
 } from '../types/blog';
 
 const rawBlogFiles = import.meta.glob('./blog/*.md', {
@@ -16,6 +17,13 @@ const rawBlogFiles = import.meta.glob('./blog/*.md', {
 
 const allowedCategories: BlogCategory[] = ['Coaching', 'Community', 'Real Estate', 'Personal Growth'];
 const allowedCreationModes: BlogCreationMode[] = ['manual', 'video'];
+const allowedWorkflowStages: BlogWorkflowStage[] = [
+  'intake',
+  'transcript_ready',
+  'draft_ready',
+  'final_review',
+  'published',
+];
 const allowedSourceTypes: BlogSourceType[] = ['instagram', 'facebook', 'tiktok', 'youtube', 'other'];
 
 function stripFrontmatter(raw: string): { frontmatterText: string; markdownBody: string } {
@@ -114,6 +122,13 @@ function normalizeSourceType(value: unknown): BlogSourceType | undefined {
   return undefined;
 }
 
+function normalizeWorkflowStage(value: unknown): BlogWorkflowStage | undefined {
+  if (typeof value === 'string' && allowedWorkflowStages.includes(value as BlogWorkflowStage)) {
+    return value as BlogWorkflowStage;
+  }
+  return undefined;
+}
+
 function removeLeadingH1(markdownBody: string): string {
   return markdownBody.replace(/^#\s+.+\n+/, '').trim();
 }
@@ -171,6 +186,7 @@ function parseBlogFile(path: string, rawContent: string): BlogPostListItem {
     geo_focus: typeof frontmatter.geo_focus === 'string' ? frontmatter.geo_focus : undefined,
     geo_schema: typeof frontmatter.geo_schema === 'boolean' ? frontmatter.geo_schema : undefined,
     creation_mode: normalizeCreationMode(frontmatter.creation_mode),
+    workflow_stage: normalizeWorkflowStage(frontmatter.workflow_stage),
     source_type: normalizeSourceType(frontmatter.source_type),
     source_url: typeof frontmatter.source_url === 'string' ? frontmatter.source_url : undefined,
     transcript: typeof frontmatter.transcript === 'string' ? frontmatter.transcript : undefined,

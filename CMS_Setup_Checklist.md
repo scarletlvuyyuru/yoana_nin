@@ -55,3 +55,48 @@ In Netlify dashboard for this site:
 - Keep CMS work on branch: `cms-prep-decapsafe-2026-03-13`.
 - Merge only after preview QA passes.
 - Keep production deploy locked to `main` until sign-off.
+
+## 6) Transcript test endpoint (Step 1)
+
+Endpoint: `/.netlify/functions/transcript-test`
+
+Request method: `POST`
+
+Payload:
+
+```json
+{
+   "sourceType": "instagram",
+   "sourceUrl": "https://www.instagram.com/reel/ABC123/",
+   "mock": true
+}
+```
+
+Expected behavior:
+
+- With `mock: true` (or env `TRANSCRIPT_TEST_MODE=mock`), returns a placeholder transcript for end-to-end CMS testing.
+- Without mock mode, function calls your transcript provider URL and expects transcript text in `transcript`, `text`, `transcript[]`, or `segments[]`.
+
+Optional environment variables:
+
+- `TRANSCRIPT_TEST_MODE=mock`
+- `TRANSCRIPT_API_URL=https://your-provider-endpoint`
+- `TRANSCRIPT_API_KEY=your-secret-key`
+
+## 7) Video-to-blog workflow (Step 2)
+
+Use this flow whenever `creation_mode: video`:
+
+1. Set `creation_mode` to `video` and `workflow_stage` to `intake`.
+2. Paste the social video in `source_url` and choose `source_type`.
+3. Call `/.netlify/functions/transcript-test` with the same URL.
+4. Paste returned text into `transcript`, then set `workflow_stage` to `transcript_ready`.
+5. Write/edit the post body from the transcript, then set `workflow_stage` to `draft_ready`.
+6. Final polish for title/excerpt/meta/FAQ, then set `workflow_stage` to `final_review`.
+7. When approved, set `is_published: true` and `workflow_stage: published`.
+
+Guardrails:
+
+- Keep only one source URL per post.
+- Keep `is_published: false` until final review is complete.
+- If transcript fails, use mock mode for testing and continue drafting manually.

@@ -21,6 +21,9 @@
 [functions.instagram-webhook]
   timeout = 10
 
+[functions.transcript-test]
+  timeout = 15
+
 # Headers for better performance and security
 [[headers]]
   for = "/*"
