@@ -22,7 +22,14 @@
             return;
           }
 
-          var h = window.CMS.h;
+          var h =
+            (window.React && window.React.createElement) ||
+            (window.CMS && window.CMS.h) ||
+            null;
+
+          if (!h) {
+            throw new Error('Unable to initialize custom widget UI renderer.');
+          }
 
           function getValue(value, key, fallback) {
             if (!value) return fallback;
