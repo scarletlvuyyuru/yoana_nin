@@ -19,6 +19,7 @@ collections:
       - { label: "Category", name: "category", widget: "select", options: ["Coaching", "Community", "Real Estate", "Personal Growth"], default: "Coaching" }
       - { label: "Creation Mode", name: "creation_mode", widget: "select", options: ["manual", "video"], default: "manual", hint: "Manual = write from scratch. Video = generated from transcript draft." }
       - { label: "Workflow Stage", name: "workflow_stage", widget: "select", options: ["intake", "transcript_ready", "draft_ready", "final_review", "published"], default: "intake", hint: "Use this only for process tracking: URL captured -> transcript added -> draft written -> final review -> published." }
+      - { label: "Tab 2: Video to Blog", name: "ai_generation", widget: "video_to_blog", required: false, hint: "Video workflow area: generate transcript + draft before writing body." }
       - { label: "Publish To Website", name: "is_published", widget: "boolean", default: false, hint: "Turn ON only when this post is final and ready to go live." }
       - { label: "Tags", name: "tags", widget: "list", default: [""] }
       - { label: "Featured", name: "featured", widget: "boolean", default: true }
@@ -40,7 +41,6 @@ collections:
       - { label: "Source Type", name: "source_type", widget: "select", required: false, options: ["instagram", "facebook", "tiktok", "youtube", "other"] }
       - { label: "Source URL", name: "source_url", widget: "string", required: false, hint: "For video mode, paste one reel/video URL here first." }
       - { label: "Transcript (optional)", name: "transcript", widget: "text", required: false, hint: "Paste transcript output here after calling /.netlify/functions/transcript-test." }
-      - { label: "Tab 2: Video to Blog", name: "ai_generation", widget: "video_to_blog", required: false, hint: "Uses source URL to transcribe and generate draft using transcript-only messaging." }
       - label: "Body"
         name: "body"
         widget: "markdown"

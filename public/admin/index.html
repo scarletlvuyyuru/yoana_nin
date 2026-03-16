@@ -12,15 +12,17 @@
     </div>
 
     <script>
+      window.CMS_MANUAL_INIT = true;
+
       (function loadDecapCMS() {
         var loadingEl = document.getElementById('cms-loading');
 
         function registerVideoToBlogWidget() {
-          if (!window.CMS || !window.React) {
+          if (!window.CMS) {
             return;
           }
 
-          var h = window.React.createElement;
+          var h = window.CMS.h;
 
           var VideoToBlogControl = window.CMS.createClass({
             getInitialState: function () {
@@ -152,9 +154,7 @@
             },
           });
 
-          window.CMS.registerWidget('video_to_blog', VideoToBlogControl, function () {
-            return null;
-          });
+          window.CMS.registerWidget('video_to_blog', VideoToBlogControl);
 
           window.CMS.registerEventListener({
             name: 'preSave',
@@ -212,6 +212,7 @@
           'https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js',
           function () {
             registerVideoToBlogWidget();
+            window.CMS.init();
             if (loadingEl) loadingEl.remove();
           },
           function () {
@@ -219,6 +220,7 @@
               'https://cdn.jsdelivr.net/npm/decap-cms@^3.0.0/dist/decap-cms.js',
               function () {
                 registerVideoToBlogWidget();
+                window.CMS.init();
                 if (loadingEl) loadingEl.remove();
               },
               showError
