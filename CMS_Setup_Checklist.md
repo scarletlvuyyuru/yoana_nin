@@ -121,20 +121,21 @@ Expected result:
 - Use H3 only for subsections under an H2.
 - Avoid skipping levels (H2 to H4).
 
-## 10) Tab 2 AI workflow (URL -> transcript -> blog)
+## 10) AI workflow (URL -> transcript -> blog)
 
-In a blog entry, use **Tab 2: Video to Blog**:
+Use the stable generator page at `/admin/video-to-blog.html`:
 
-1. Set `source_url` and `source_type`.
-2. In Tab 2, click **Generate Blog Draft**.
-3. Save entry once to auto-apply generated fields.
-4. Review/edit body in rich text or markdown mode.
-5. Publish only after final review.
+1. Paste `source_url` and choose `source_type`.
+2. Click **Generate Draft**.
+3. Copy generated fields into the blog entry in `/admin` (`Blog Posts` collection).
+4. Set `creation_mode: video` and `workflow_stage: draft_ready`.
+5. Review/edit body in rich text or markdown mode.
+6. Publish only after final review.
 
-What auto-fills on save:
+Fields to copy:
 
 - `title`, `slug`, `excerpt`, `meta_description`, `key_answer`
-- `transcript`, `body`, `creation_mode`, `workflow_stage`
+- `transcript`, `body`
 
 Environment variables for real AI mode:
 
@@ -147,3 +148,4 @@ Notes:
 
 - If no OpenAI key is set, the function uses a safe fallback draft from transcript text.
 - Prompt is constrained to transcript-only messaging (no external facts).
+- This path avoids custom Decap widgets for better runtime stability.

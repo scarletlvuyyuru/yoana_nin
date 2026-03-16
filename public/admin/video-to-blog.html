@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Video to Blog Generator</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 24px;
+        background: #f9fafb;
+        color: #111827;
+      }
+      .card {
+        max-width: 920px;
+        margin: 0 auto;
+        background: #ffffff;
+        border: 1px solid #e5e7eb;
+        border-radius: 10px;
+        padding: 20px;
+      }
+      h1 {
+        margin-top: 0;
+        font-size: 24px;
+      }
+      .hint {
+        color: #4b5563;
+        margin-bottom: 16px;
+      }
+      label {
+        display: block;
+        margin-top: 14px;
+        margin-bottom: 6px;
+        font-weight: 600;
+      }
+      input,
+      select,
+      textarea {
+        width: 100%;
+        box-sizing: border-box;
+        border: 1px solid #d1d5db;
+        border-radius: 8px;
+        padding: 10px;
+        font-size: 14px;
+      }
+      textarea {
+        min-height: 140px;
+        resize: vertical;
+      }
+      .row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+      }
+      .actions {
+        margin-top: 16px;
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+      button {
+        border: 0;
+        border-radius: 8px;
+        padding: 10px 14px;
+        font-weight: 600;
+        cursor: pointer;
+      }
+      .primary {
+        background: #111827;
+        color: #ffffff;
+      }
+      .secondary {
+        background: #e5e7eb;
+        color: #111827;
+      }
+      .status {
+        margin-top: 12px;
+        font-size: 14px;
+      }
+      .error {
+        color: #b91c1c;
+      }
+      .success {
+        color: #065f46;
+      }
+      .section {
+        margin-top: 18px;
+        border-top: 1px solid #e5e7eb;
+        padding-top: 16px;
+      }
+      .small {
+        font-size: 12px;
+        color: #6b7280;
+      }
+      @media (max-width: 700px) {
+        .row {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="card">
+      <h1>Video URL to Blog Draft</h1>
+      <p class="hint">Use this generator first, then paste results into the Blog entry in /admin.</p>
+
+      <div class="row">
+        <div>
+          <label for="sourceUrl">Source URL</label>
+          <input id="sourceUrl" placeholder="https://www.instagram.com/reel/..." />
+        </div>
+        <div>
+          <label for="sourceType">Source Type</label>
+          <select id="sourceType">
+            <option value="instagram">instagram</option>
+            <option value="facebook">facebook</option>
+            <option value="tiktok">tiktok</option>
+            <option value="youtube">youtube</option>
+            <option value="other">other</option>
+          </select>
+        </div>
+      </div>
+
+      <label style="display:flex;align-items:center;gap:8px;margin-top:12px;font-weight:400;">
+        <input id="useMock" type="checkbox" checked style="width:auto;" />
+        Use mock transcript mode (safe testing)
+      </label>
+
+      <div class="actions">
+        <button id="generateBtn" class="primary">Generate Draft</button>
+        <button id="copyBtn" class="secondary" type="button">Copy Results JSON</button>
+        <a href="/admin/#/collections/blog/new" style="align-self:center;text-decoration:none;">Open Blog +</a>
+      </div>
+
+      <div id="status" class="status"></div>
+
+      <div class="section">
+        <label for="title">Title</label>
+        <input id="title" />
+
+        <div class="row">
+          <div>
+            <label for="slug">Slug</label>
+            <input id="slug" />
+          </div>
+          <div>
+            <label for="keyAnswer">Key Answer</label>
+            <input id="keyAnswer" />
+          </div>
+        </div>
+
+        <label for="excerpt">Excerpt</label>
+        <textarea id="excerpt"></textarea>
+
+        <label for="metaDescription">Meta Description</label>
+        <textarea id="metaDescription"></textarea>
+
+        <label for="body">Body (Markdown)</label>
+        <textarea id="body" style="min-height:220px;"></textarea>
+
+        <label for="transcript">Transcript</label>
+        <textarea id="transcript" style="min-height:220px;"></textarea>
+
+        <p class="small">Paste these values into your blog entry fields in Decap CMS.</p>
+      </div>
+    </div>
+
+    <script>
+      var sourceUrlEl = document.getElementById('sourceUrl');
+      var sourceTypeEl = document.getElementById('sourceType');
+      var useMockEl = document.getElementById('useMock');
+      var generateBtn = document.getElementById('generateBtn');
+      var copyBtn = document.getElementById('copyBtn');
+      var statusEl = document.getElementById('status');
+
+      var titleEl = document.getElementById('title');
+      var slugEl = document.getElementById('slug');
+      var keyAnswerEl = document.getElementById('keyAnswer');
+      var excerptEl = document.getElementById('excerpt');
+      var metaDescriptionEl = document.getElementById('metaDescription');
+      var bodyEl = document.getElementById('body');
+      var transcriptEl = document.getElementById('transcript');
+
+      function setStatus(message, type) {
+        statusEl.className = 'status ' + (type || '');
+        statusEl.textContent = message || '';
+      }
+
+      function getResultObject() {
+        return {
+          source_url: sourceUrlEl.value.trim(),
+          source_type: sourceTypeEl.value,
+          creation_mode: 'video',
+          workflow_stage: 'draft_ready',
+          title: titleEl.value,
+          slug: slugEl.value,
+          key_answer: keyAnswerEl.value,
+          excerpt: excerptEl.value,
+          meta_description: metaDescriptionEl.value,
+          body: bodyEl.value,
+          transcript: transcriptEl.value,
+        };
+      }
+
+      generateBtn.addEventListener('click', async function () {
+        var sourceUrl = sourceUrlEl.value.trim();
+        if (!sourceUrl) {
+          setStatus('Please add a source URL first.', 'error');
+          return;
+        }
+
+        setStatus('Generating draft...', '');
+        generateBtn.disabled = true;
+
+        try {
+          var response = await fetch('/.netlify/functions/video-to-blog', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              sourceUrl: sourceUrl,
+              sourceType: sourceTypeEl.value,
+              mock: !!useMockEl.checked,
+            }),
+          });
+
+          var data = await response.json();
+          if (!response.ok || !data.ok) {
+            throw new Error(data.error || 'Draft generation failed.');
+          }
+
+          titleEl.value = (data.draft && data.draft.title) || '';
+          slugEl.value = (data.draft && data.draft.slug) || '';
+          keyAnswerEl.value = (data.draft && data.draft.key_answer) || '';
+          excerptEl.value = (data.draft && data.draft.excerpt) || '';
+          metaDescriptionEl.value = (data.draft && data.draft.meta_description) || '';
+          bodyEl.value = (data.draft && data.draft.body) || '';
+          transcriptEl.value = data.transcript || '';
+
+          setStatus('Draft generated. Copy/paste fields into your Blog entry.', 'success');
+        } catch (error) {
+          setStatus(error.message || 'Draft generation failed.', 'error');
+        } finally {
+          generateBtn.disabled = false;
+        }
+      });
+
+      copyBtn.addEventListener('click', async function () {
+        var text = JSON.stringify(getResultObject(), null, 2);
+        try {
+          await navigator.clipboard.writeText(text);
+          setStatus('Results JSON copied to clipboard.', 'success');
+        } catch (error) {
+          setStatus('Copy failed. You can still select text manually.', 'error');
+        }
+      });
+    </script>
+  </body>
+</html>
