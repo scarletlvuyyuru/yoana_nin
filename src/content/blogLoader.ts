@@ -130,7 +130,12 @@ function normalizeWorkflowStage(value: unknown): BlogWorkflowStage | undefined {
 }
 
 function removeLeadingH1(markdownBody: string): string {
-  return markdownBody.replace(/^#\s+.+\n+/, '').trim();
+  let normalizedBody = markdownBody.trimStart();
+
+  normalizedBody = normalizedBody.replace(/^#\s+.+(?:\r?\n)+/, '').trimStart();
+  normalizedBody = normalizedBody.replace(/^<h1\b[^>]*>[\s\S]*?<\/h1>\s*/i, '').trimStart();
+
+  return normalizedBody.trim();
 }
 
 function markdownToHtml(markdownBody: string): string {

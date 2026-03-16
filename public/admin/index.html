@@ -15,6 +15,184 @@
       (function loadDecapCMS() {
         var loadingEl = document.getElementById('cms-loading');
 
+        function registerVideoToBlogWidget() {
+          if (!window.CMS || !window.React) {
+            return;
+          }
+
+          var h = window.React.createElement;
+
+          var VideoToBlogControl = window.CMS.createClass({
+            getInitialState: function () {
+              return {
+                loading: false,
+                error: '',
+                success: '',
+                useMock: true,
+              };
+            },
+
+            handleGenerate: async function () {
+              var entry = this.props.entry;
+              var sourceUrl = (entry && entry.getIn(['data', 'source_url'])) || '';
+              var sourceType = (entry && entry.getIn(['data', 'source_type'])) || 'other';
+
+              if (!sourceUrl) {
+                this.setState({ error: 'Please fill Source URL first.', success: '' });
+                return;
+              }
+
+              this.setState({ loading: true, error: '', success: '' });
+
+              try {
+                var response = await fetch('/.netlify/functions/video-to-blog', {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify({
+                    sourceUrl: sourceUrl,
+                    sourceType: sourceType,
+                    mock: this.state.useMock,
+                  }),
+                });
+
+                var data = await response.json();
+                if (!response.ok || !data.ok) {
+                  throw new Error(data.error || 'Generation failed.');
+                }
+
+                this.props.onChange({
+                  apply_on_save: true,
+                  generated_at: new Date().toISOString(),
+                  source_url: sourceUrl,
+                  source_type: sourceType,
+                  transcript: data.transcript || '',
+                  title: data.draft && data.draft.title ? data.draft.title : '',
+                  slug: data.draft && data.draft.slug ? data.draft.slug : '',
+                  excerpt: data.draft && data.draft.excerpt ? data.draft.excerpt : '',
+                  meta_description:
+                    data.draft && data.draft.meta_description ? data.draft.meta_description : '',
+                  key_answer: data.draft && data.draft.key_answer ? data.draft.key_answer : '',
+                  body: data.draft && data.draft.body ? data.draft.body : '',
+                });
+
+                this.setState({
+                  loading: false,
+                  error: '',
+                  success: 'Draft generated. Click Save to apply title, excerpt, meta, transcript, and body.',
+                });
+              } catch (error) {
+                this.setState({ loading: false, error: error.message || 'Generation failed.', success: '' });
+              }
+            },
+
+            toggleMock: function (event) {
+              this.setState({ useMock: !!event.target.checked });
+            },
+
+            render: function () {
+              var value = this.props.value || {};
+
+              return h(
+                'div',
+                {
+                  style: {
+                    border: '1px solid #e5e7eb',
+                    borderRadius: '8px',
+                    padding: '12px',
+                    background: '#f9fafb',
+                  },
+                },
+                h(
+                  'p',
+                  { style: { margin: '0 0 8px', fontSize: '13px', color: '#374151' } },
+                  'Generate draft from source_url + transcript. Uses transcript messaging only.'
+                ),
+                h(
+                  'label',
+                  { style: { display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '10px' } },
+                  h('input', {
+                    type: 'checkbox',
+                    checked: this.state.useMock,
+                    onChange: this.toggleMock,
+                  }),
+                  h('span', { style: { fontSize: '13px' } }, 'Use mock transcript mode (safe testing)')
+                ),
+                h(
+                  'button',
+                  {
+                    type: 'button',
+                    onClick: this.handleGenerate,
+                    disabled: this.state.loading,
+                    style: {
+                      background: '#111827',
+                      color: '#ffffff',
+                      border: 'none',
+                      borderRadius: '6px',
+                      padding: '8px 12px',
+                      cursor: this.state.loading ? 'not-allowed' : 'pointer',
+                    },
+                  },
+                  this.state.loading ? 'Generating…' : 'Generate Blog Draft'
+                ),
+                this.state.error
+                  ? h('p', { style: { margin: '10px 0 0', color: '#b91c1c', fontSize: '13px' } }, this.state.error)
+                  : null,
+                this.state.success
+                  ? h('p', { style: { margin: '10px 0 0', color: '#065f46', fontSize: '13px' } }, this.state.success)
+                  : null,
+                value.title
+                  ? h(
+                      'p',
+                      { style: { margin: '10px 0 0', fontSize: '13px', color: '#111827' } },
+                      'Generated title: ',
+                      h('strong', null, value.title)
+                    )
+                  : null
+              );
+            },
+          });
+
+          window.CMS.registerWidget('video_to_blog', VideoToBlogControl, function () {
+            return null;
+          });
+
+          window.CMS.registerEventListener({
+            name: 'preSave',
+            handler: function (_ref) {
+              var entry = _ref.entry;
+              var data = entry.get('data');
+              if (!data) return entry;
+
+              var aiGeneration = data.get('ai_generation');
+              if (!aiGeneration) return entry;
+
+              var applyOnSave = aiGeneration.get('apply_on_save') === true;
+              if (!applyOnSave) {
+                return entry.set('data', data.delete('ai_generation'));
+              }
+
+              var nextData = data
+                .set('title', aiGeneration.get('title') || data.get('title'))
+                .set('slug', aiGeneration.get('slug') || data.get('slug'))
+                .set('excerpt', aiGeneration.get('excerpt') || data.get('excerpt'))
+                .set(
+                  'meta_description',
+                  aiGeneration.get('meta_description') || data.get('meta_description')
+                )
+                .set('key_answer', aiGeneration.get('key_answer') || data.get('key_answer'))
+                .set('body', aiGeneration.get('body') || data.get('body'))
+                .set('transcript', aiGeneration.get('transcript') || data.get('transcript'))
+                .set('source_url', aiGeneration.get('source_url') || data.get('source_url'))
+                .set('source_type', aiGeneration.get('source_type') || data.get('source_type'))
+                .set('creation_mode', 'video')
+                .set('workflow_stage', 'draft_ready')
+                .delete('ai_generation');
+
+              return entry.set('data', nextData);
+            },
+          });
+        }
+
         function showError() {
           if (loadingEl) {
             loadingEl.innerHTML = 'CMS failed to load. Please refresh the page. If this continues, check Netlify CSP settings for /admin.';
@@ -33,12 +211,14 @@
         attachScript(
           'https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js',
           function () {
+            registerVideoToBlogWidget();
             if (loadingEl) loadingEl.remove();
           },
           function () {
             attachScript(
               'https://cdn.jsdelivr.net/npm/decap-cms@^3.0.0/dist/decap-cms.js',
               function () {
+                registerVideoToBlogWidget();
                 if (loadingEl) loadingEl.remove();
               },
               showError

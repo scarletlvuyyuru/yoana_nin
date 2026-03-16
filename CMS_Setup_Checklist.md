@@ -100,3 +100,50 @@ Guardrails:
 - Keep only one source URL per post.
 - Keep `is_published: false` until final review is complete.
 - If transcript fails, use mock mode for testing and continue drafting manually.
+
+## 8) Rich text mode verification (Step 3)
+
+1. In `/admin`, create or edit a post with `Body` in rich text mode.
+2. Add one heading, one bullet list, one link, and one image.
+3. Save and confirm no "failed to persist" errors.
+4. Open `/blog/<slug>` and verify formatting renders correctly.
+5. Confirm only one page-level H1 is visible (post title in page header).
+
+Expected result:
+
+- Rich text and markdown body formats both render on the site.
+- Any leading body H1 is ignored to prevent duplicate H1 on the post page.
+
+## 9) Heading authoring rules (Step 4)
+
+- The post title field is the only page H1.
+- In the body, start sections at H2.
+- Use H3 only for subsections under an H2.
+- Avoid skipping levels (H2 to H4).
+
+## 10) Tab 2 AI workflow (URL -> transcript -> blog)
+
+In a blog entry, use **Tab 2: Video to Blog**:
+
+1. Set `source_url` and `source_type`.
+2. In Tab 2, click **Generate Blog Draft**.
+3. Save entry once to auto-apply generated fields.
+4. Review/edit body in rich text or markdown mode.
+5. Publish only after final review.
+
+What auto-fills on save:
+
+- `title`, `slug`, `excerpt`, `meta_description`, `key_answer`
+- `transcript`, `body`, `creation_mode`, `workflow_stage`
+
+Environment variables for real AI mode:
+
+- `OPENAI_API_KEY`
+- `OPENAI_MODEL` (optional, default: `gpt-4.1-mini`)
+- `OPENAI_MAX_RETRIES` (optional, default: `2`)
+- `TRANSCRIPT_MAX_CHARS` (optional, default: `12000`)
+
+Notes:
+
+- If no OpenAI key is set, the function uses a safe fallback draft from transcript text.
+- Prompt is constrained to transcript-only messaging (no external facts).

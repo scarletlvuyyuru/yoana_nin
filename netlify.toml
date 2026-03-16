@@ -24,6 +24,9 @@
 [functions.transcript-test]
   timeout = 15
 
+[functions.video-to-blog]
+  timeout = 25
+
 # Headers for better performance and security
 [[headers]]
   for = "/*"

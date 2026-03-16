@@ -131,6 +131,45 @@ async function fetchProviderTranscript(sourceType, sourceUrl) {
   };
 }
 
+async function resolveTranscript(sourceType, sourceUrl, useMock) {
+  if (useMock) {
+    return {
+      ok: true,
+      statusCode: 200,
+      mode: 'mock',
+      sourceType,
+      sourceUrl,
+      transcript: buildMockTranscript(sourceType, sourceUrl),
+    };
+  }
+
+  const result = await fetchProviderTranscript(sourceType, sourceUrl);
+  if (!result.ok) {
+    return {
+      ok: false,
+      statusCode: result.statusCode,
+      mode: 'provider',
+      sourceType,
+      sourceUrl,
+      error: result.error,
+      providerResponse: result.providerResponse,
+    };
+  }
+
+  return {
+    ok: true,
+    statusCode: 200,
+    mode: 'provider',
+    sourceType,
+    sourceUrl,
+    transcript: result.transcript,
+  };
+}
+
+exports.resolveTranscript = resolveTranscript;
+exports.normalizeSourceType = normalizeSourceType;
+exports.validateSourceUrl = validateSourceUrl;
+
 exports.handler = async (event) => {
   const headers = buildHeaders();
 
@@ -152,21 +191,7 @@ exports.handler = async (event) => {
     const sourceUrl = validateSourceUrl(body.sourceUrl);
     const useMock = body.mock === true || process.env.TRANSCRIPT_TEST_MODE === 'mock';
 
-    if (useMock) {
-      return {
-        statusCode: 200,
-        headers,
-        body: JSON.stringify({
-          ok: true,
-          mode: 'mock',
-          sourceType,
-          sourceUrl,
-          transcript: buildMockTranscript(sourceType, sourceUrl),
-        }),
-      };
-    }
-
-    const result = await fetchProviderTranscript(sourceType, sourceUrl);
+    const result = await resolveTranscript(sourceType, sourceUrl, useMock);
 
     if (!result.ok) {
       return {
@@ -174,7 +199,7 @@ exports.handler = async (event) => {
         headers,
         body: JSON.stringify({
           ok: false,
-          mode: 'provider',
+          mode: result.mode,
           sourceType,
           sourceUrl,
           error: result.error,
@@ -188,7 +213,7 @@ exports.handler = async (event) => {
       headers,
       body: JSON.stringify({
         ok: true,
-        mode: 'provider',
+          mode: result.mode,
         sourceType,
         sourceUrl,
         transcript: result.transcript,
