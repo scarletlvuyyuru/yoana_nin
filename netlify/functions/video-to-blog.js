@@ -379,23 +379,36 @@ exports.handler = async (event) => {
   try {
     const body = parseBody(event.body);
     const sourceType = normalizeSourceType(body.sourceType);
-    const sourceUrl = validateSourceUrl(body.sourceUrl);
-    const useMockTranscript = body.mock === true || process.env.TRANSCRIPT_TEST_MODE === 'mock';
 
-    const transcriptResult = await resolveTranscript(sourceType, sourceUrl, useMockTranscript);
-    if (!transcriptResult.ok || !transcriptResult.transcript) {
-      return {
-        statusCode: transcriptResult.statusCode || 502,
-        headers,
-        body: JSON.stringify({
-          ok: false,
-          stage: 'transcript',
-          error: transcriptResult.error || 'Failed to resolve transcript.',
-        }),
-      };
+    // If transcript text is pasted directly, skip URL fetching entirely.
+    let transcript;
+    let sourceUrl = '';
+    let transcriptMode;
+
+    if (body.transcript && typeof body.transcript === 'string' && body.transcript.trim().length > 0) {
+      transcript = body.transcript.trim();
+      transcriptMode = 'pasted';
+      sourceUrl = (body.sourceUrl && typeof body.sourceUrl === 'string') ? body.sourceUrl.trim() : '';
+    } else {
+      // Legacy URL-based path (mock or provider).
+      sourceUrl = validateSourceUrl(body.sourceUrl);
+      const useMockTranscript = body.mock === true || process.env.TRANSCRIPT_TEST_MODE === 'mock';
+      const transcriptResult = await resolveTranscript(sourceType, sourceUrl, useMockTranscript);
+      if (!transcriptResult.ok || !transcriptResult.transcript) {
+        return {
+          statusCode: transcriptResult.statusCode || 502,
+          headers,
+          body: JSON.stringify({
+            ok: false,
+            stage: 'transcript',
+            error: transcriptResult.error || 'Failed to resolve transcript.',
+          }),
+        };
+      }
+      transcript = transcriptResult.transcript;
+      transcriptMode = transcriptResult.mode;
     }
 
-    const transcript = transcriptResult.transcript;
     const clampedTranscript = clampTranscript(transcript);
     const aiDraft = await generateDraftWithOpenAI(clampedTranscript.transcript, sourceType, sourceUrl);
 
@@ -406,6 +419,7 @@ exports.handler = async (event) => {
         ok: true,
         stage: 'completed',
         mode: process.env.OPENAI_API_KEY ? 'openai' : 'fallback',
+        transcriptMode,
         sourceType,
         sourceUrl,
         transcript,

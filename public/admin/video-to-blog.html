@@ -102,12 +102,19 @@
   </head>
   <body>
     <div class="card">
-      <h1>Video URL to Blog Draft</h1>
-      <p class="hint">Use this generator first, then paste results into the Blog entry in /admin.</p>
+      <h1>Video to Blog Generator</h1>
+      <p class="hint">Turn your Instagram content into a blog draft in two steps:</p>
+      <ol class="hint" style="margin-top:4px;padding-left:20px;">
+        <li>Go to <strong><a href="https://www.getthescript.app" target="_blank" rel="noopener">getthescript.app</a></strong>, paste your Instagram URL, and copy the transcript text.</li>
+        <li>Paste the transcript below and click <strong>Generate Draft</strong>.</li>
+      </ol>
 
-      <div class="row">
+      <label for="pastedTranscript">Transcript (paste from getthescript.app)</label>
+      <textarea id="pastedTranscript" style="min-height:180px;" placeholder="Paste the full transcript text here..."></textarea>
+
+      <div class="row" style="margin-top:14px;">
         <div>
-          <label for="sourceUrl">Source URL</label>
+          <label for="sourceUrl">Source URL <span style="font-weight:400;color:#6b7280;">(optional, for your records)</span></label>
           <input id="sourceUrl" placeholder="https://www.instagram.com/reel/..." />
         </div>
         <div>
@@ -121,11 +128,6 @@
           </select>
         </div>
       </div>
-
-      <label style="display:flex;align-items:center;gap:8px;margin-top:12px;font-weight:400;">
-        <input id="useMock" type="checkbox" checked style="width:auto;" />
-        Use mock transcript mode (safe testing)
-      </label>
 
       <div class="actions">
         <button id="generateBtn" class="primary">Generate Draft</button>
@@ -167,9 +169,9 @@
     </div>
 
     <script>
+      var pastedTranscriptEl = document.getElementById('pastedTranscript');
       var sourceUrlEl = document.getElementById('sourceUrl');
       var sourceTypeEl = document.getElementById('sourceType');
-      var useMockEl = document.getElementById('useMock');
       var generateBtn = document.getElementById('generateBtn');
       var copyBtn = document.getElementById('copyBtn');
       var statusEl = document.getElementById('status');
@@ -204,9 +206,9 @@
       }
 
       generateBtn.addEventListener('click', async function () {
-        var sourceUrl = sourceUrlEl.value.trim();
-        if (!sourceUrl) {
-          setStatus('Please add a source URL first.', 'error');
+        var transcript = pastedTranscriptEl.value.trim();
+        if (!transcript) {
+          setStatus('Please paste a transcript first.', 'error');
           return;
         }
 
@@ -218,9 +220,9 @@
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-              sourceUrl: sourceUrl,
+              transcript: transcript,
+              sourceUrl: sourceUrlEl.value.trim() || null,
               sourceType: sourceTypeEl.value,
-              mock: !!useMockEl.checked,
             }),
           });
 
