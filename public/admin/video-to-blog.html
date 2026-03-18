@@ -229,6 +229,7 @@
               transcript: transcript,
               sourceUrl: sourceUrlEl.value.trim() || null,
               sourceType: sourceTypeEl.value,
+              allowFallback: false,
             }),
           });
 
@@ -245,7 +246,8 @@
           bodyEl.value = (data.draft && data.draft.body) || '';
           transcriptEl.value = data.transcript || '';
 
-          setStatus('Draft generated. Copy/paste fields into your Blog entry.', 'success');
+          var modeText = data.mode ? (' (mode: ' + data.mode + ')') : '';
+          setStatus('Draft generated' + modeText + '. Send to Blog + or review fields below.', 'success');
         } catch (error) {
           setStatus(error.message || 'Draft generation failed.', 'error');
         } finally {

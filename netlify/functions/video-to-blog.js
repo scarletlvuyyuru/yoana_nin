@@ -379,6 +379,8 @@ exports.handler = async (event) => {
   try {
     const body = parseBody(event.body);
     const sourceType = normalizeSourceType(body.sourceType);
+    const hasOpenAIKey = !!process.env.OPENAI_API_KEY;
+    const allowFallback = body.allowFallback === true;
 
     // If transcript text is pasted directly, skip URL fetching entirely.
     let transcript;
@@ -410,6 +412,20 @@ exports.handler = async (event) => {
     }
 
     const clampedTranscript = clampTranscript(transcript);
+
+    if (!hasOpenAIKey && !allowFallback) {
+      return {
+        statusCode: 503,
+        headers,
+        body: JSON.stringify({
+          ok: false,
+          stage: 'generation',
+          error:
+            'OPENAI_API_KEY is not available in this deploy context. Add it to Netlify Environment Variables for Functions + Branch deploys, then redeploy.',
+        }),
+      };
+    }
+
     const aiDraft = await generateDraftWithOpenAI(clampedTranscript.transcript, sourceType, sourceUrl);
 
     return {
@@ -418,7 +434,7 @@ exports.handler = async (event) => {
       body: JSON.stringify({
         ok: true,
         stage: 'completed',
-        mode: process.env.OPENAI_API_KEY ? 'openai' : 'fallback',
+        mode: hasOpenAIKey ? 'openai' : 'fallback',
         transcriptMode,
         sourceType,
         sourceUrl,
