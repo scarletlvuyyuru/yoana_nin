@@ -2,13 +2,6 @@
 title: Stop Being “Just 10 Minutes Late” When You Have ADHD
 slug: stop-being-just-10-minutes-late-when-you-have-adhd
 date: 2026-03-13T13:26:00.000-05:00
-author: Yoana Nin
-category: Coaching
-creation_mode: manual
-is_published: true
-tags:
-  - "#adhdlate"
-featured: true
 excerpt: Recently, one of my clients called me because she’s flying to Arizona
   tomorrow. She said, “Yoana, I just need to talk to you real quick.” So I
   shared a few simple strategies with her—and I realized they might help you
@@ -17,6 +10,14 @@ meta_description: Recently, one of my clients called me because she’s flying t
   Arizona tomorrow. She said, “Yoana, I just need to talk to you real quick.” So
   I shared a few simple strategies with her—and I realized they might help you
   too.
+creation_mode: manual
+author: Yoana Nin
+category: Coaching
+is_published: true
+tags:
+  - "#adhdlate"
+featured: true
+featured_image: /images/uploads/10mins-late.jpg
 geo_focus: Holly Springs, NC
 geo_schema: true
 ---
