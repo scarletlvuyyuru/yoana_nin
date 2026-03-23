@@ -1,9 +1,16 @@
 import React from 'react';
+import { Helmet } from 'react-helmet-async';
 import styles from './Terms.module.css';
 
 const Terms: React.FC = () => {
   return (
     <div className={styles.termsPage}>
+      <Helmet>
+        <title>Terms & Conditions | Yoana Nin Coaching</title>
+        <meta name="description" content="Terms and Conditions for Yoana Nin Coaching — our service agreement, disclaimers, and legal information." />
+        <meta name="robots" content="noindex, follow" />
+        <link rel="canonical" href="https://yoananincoaching.com/terms" />
+      </Helmet>
       <div className={styles.container}>
         <header className={styles.header}>
           <h1 className={styles.title}>Terms & Conditions</h1>

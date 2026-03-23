@@ -119,10 +119,23 @@ const Contact: React.FC = () => {
 
   return (
     <div className={styles.contactPage}>
-      <SEO 
+      <SEO
         title="Contact Yoana Nin | Start Your Transformation"
         description="Ready to begin your journey? Get in touch for ADHD coaching, real estate services, or speaking engagements in the Raleigh Triangle area."
         url="https://yoananincoaching.com/contact"
+        schema={JSON.stringify({
+          '@context': 'https://schema.org',
+          '@type': 'ContactPage',
+          '@id': 'https://yoananincoaching.com/contact',
+          'name': 'Contact Yoana Nin',
+          'description': 'Get in touch for ADHD coaching, real estate services, or speaking engagements in the Raleigh Triangle area.',
+          'url': 'https://yoananincoaching.com/contact',
+          'mainEntity': {
+            '@type': 'Person',
+            '@id': 'https://yoananincoaching.com/#person',
+            'name': 'Yoana Nin',
+          },
+        })}
       />
       <div className={styles.container}>
         {/* Main Title */}

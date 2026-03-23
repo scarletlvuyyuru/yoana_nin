@@ -1,9 +1,16 @@
 import React from 'react';
+import { Helmet } from 'react-helmet-async';
 import styles from './Privacy.module.css';
 
 const Privacy: React.FC = () => {
   return (
     <div className={styles.privacyPage}>
+      <Helmet>
+        <title>Privacy Policy | Yoana Nin Coaching</title>
+        <meta name="description" content="Privacy Policy for Yoana Nin Coaching — how we collect, use, and protect your personal information." />
+        <meta name="robots" content="noindex, follow" />
+        <link rel="canonical" href="https://yoananincoaching.com/privacy" />
+      </Helmet>
       <div className={styles.container}>
         <header className={styles.header}>
           <h1 className={styles.title}>Privacy Policy</h1>

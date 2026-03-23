@@ -280,6 +280,31 @@
             removePanel();
           }
         });
+
+        // After save/publish: redirect to collection list
+        (function setupPostSaveRedirect() {
+          var wasOnNew = false;
+
+          function checkRoute() {
+            var hash = window.location.hash || '';
+            var onNew = hash.indexOf('/collections/blog/new') !== -1;
+            var onEntry = hash.indexOf('/collections/blog/entries/') !== -1;
+
+            if (onNew) {
+              wasOnNew = true;
+            } else if (wasOnNew && onEntry) {
+              wasOnNew = false;
+              setTimeout(function () {
+                window.location.hash = '/collections/blog';
+              }, 1200);
+            } else if (!onNew && !onEntry) {
+              wasOnNew = false;
+            }
+          }
+
+          window.addEventListener('hashchange', checkRoute);
+          checkRoute();
+        })();
       })();
 
       (function loadDecapCMS() {

@@ -24,7 +24,7 @@ const SEO: React.FC<SEOProps> = ({
     <Helmet>
       <title>{title}</title>
       <meta name="description" content={description} />
-      {canonical && <link rel="canonical" href={canonical} />}
+      <link rel="canonical" href={canonical || url} />
 
       {/* Open Graph */}
       <meta property="og:title" content={title} />

@@ -66,18 +66,35 @@ const Home: React.FC = () => {
           JSON.stringify({
             "@context": "https://schema.org",
             "@type": "Organization",
+            "@id": "https://yoananincoaching.com/#organization",
             "name": "Yoana Nin Coaching",
             "url": "https://yoananincoaching.com",
-            "logo": "https://yoananincoaching.com/metaOG.png",
-            "description": "ADHD Entrepreneur Coach serving women entrepreneurs and change-makers",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://yoananincoaching.com/metaOG.png",
+              "width": 1200,
+              "height": 630
+            },
+            "description": "ADHD Entrepreneur Coach & Real Estate Expert serving women entrepreneurs and change-makers in the Raleigh NC area",
             "founder": {
               "@type": "Person",
+              "@id": "https://yoananincoaching.com/#person",
               "name": "Yoana Nin"
             },
-            "areaServed": {
-              "@type": "Place", 
-              "name": "Raleigh Area North Carolina"
+            "address": {
+              "@type": "PostalAddress",
+              "addressLocality": "Cary",
+              "addressRegion": "NC",
+              "addressCountry": "US"
             },
+            "areaServed": [
+              { "@type": "City", "name": "Raleigh" },
+              { "@type": "City", "name": "Cary" },
+              { "@type": "City", "name": "Apex" },
+              { "@type": "City", "name": "Holly Springs" },
+              { "@type": "City", "name": "Durham" },
+              { "@type": "City", "name": "Chapel Hill" }
+            ],
             "knowsAbout": [
               "ADHD Coaching",
               "Business Coaching",
@@ -88,6 +105,37 @@ const Home: React.FC = () => {
             ],
             "sameAs": [
               "https://yoananincoaching.com",
+              "https://www.youtube.com/@ElevatewithYoanaNin",
+              "https://www.facebook.com/Nin.Yoana/",
+              "https://www.instagram.com/yoananincoaching/",
+              "https://www.linkedin.com/in/yoananin",
+              "https://www.tiktok.com/@yoananincoaching"
+            ]
+          }),
+          JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": ["LocalBusiness", "ProfessionalService"],
+            "@id": "https://yoananincoaching.com/#localbusiness",
+            "name": "Yoana Nin Coaching",
+            "url": "https://yoananincoaching.com",
+            "image": "https://yoananincoaching.com/metaOG.png",
+            "description": "ADHD Entrepreneur Coach & Real Estate Expert serving the Raleigh NC Triangle area",
+            "address": {
+              "@type": "PostalAddress",
+              "addressLocality": "Cary",
+              "addressRegion": "NC",
+              "addressCountry": "US"
+            },
+            "areaServed": [
+              { "@type": "City", "name": "Raleigh" },
+              { "@type": "City", "name": "Cary" },
+              { "@type": "City", "name": "Apex" },
+              { "@type": "City", "name": "Holly Springs" },
+              { "@type": "City", "name": "Durham" },
+              { "@type": "City", "name": "Chapel Hill" }
+            ],
+            "priceRange": "$$",
+            "sameAs": [
               "https://www.youtube.com/@ElevatewithYoanaNin",
               "https://www.facebook.com/Nin.Yoana/",
               "https://www.instagram.com/yoananincoaching/",

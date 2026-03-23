@@ -49,8 +49,9 @@ const navigationItems: NavigationItem[] = [
     name: 'Inspiration and Resources',
     path: '/blog',
     sections: [
-      { name: 'Quick Insights', id: 'inspiration' },
-      { name: 'Featured Stories', id: 'featured-stories' }
+      { name: 'Featured Stories', id: 'featured-stories' },
+      { name: 'Social Highlights', id: 'social-highlights' },
+      { name: 'All Articles', id: 'all-articles' }
     ]
   }
 ];

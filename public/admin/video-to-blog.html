@@ -132,9 +132,7 @@
 
       <div class="actions">
         <button id="generateBtn" class="primary">Generate AI Draft</button>
-        <button id="copyBtn" class="secondary" type="button">Copy Results JSON</button>
         <button id="sendToCmsBtn" class="secondary" type="button">Send Draft to Blog +</button>
-        <a href="/admin/#/collections/blog/new" style="align-self:center;text-decoration:none;">Open Blog +</a>
       </div>
 
       <div id="status" class="status"></div>
@@ -175,7 +173,6 @@
       var sourceUrlEl = document.getElementById('sourceUrl');
       var sourceTypeEl = document.getElementById('sourceType');
       var generateBtn = document.getElementById('generateBtn');
-      var copyBtn = document.getElementById('copyBtn');
       var sendToCmsBtn = document.getElementById('sendToCmsBtn');
       var statusEl = document.getElementById('status');
 
@@ -250,16 +247,6 @@
           setStatus(error.message || 'Draft generation failed.', 'error');
         } finally {
           generateBtn.disabled = false;
-        }
-      });
-
-      copyBtn.addEventListener('click', async function () {
-        var text = JSON.stringify(getResultObject(), null, 2);
-        try {
-          await navigator.clipboard.writeText(text);
-          setStatus('Results JSON copied to clipboard.', 'success');
-        } catch (error) {
-          setStatus('Copy failed. You can still select text manually.', 'error');
         }
       });
 

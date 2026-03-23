@@ -25,16 +25,47 @@ const MyStory: React.FC = () => {
         schema={JSON.stringify({
           "@context": "https://schema.org",
           "@type": "Person",
+          "@id": "https://yoananincoaching.com/#person",
           "name": "Yoana Nin",
           "url": "https://yoananincoaching.com",
           "image": "https://yoananincoaching.com/YoanaIseeYou.webp",
           "jobTitle": "ADHD Entrepreneur Coach & Real Estate Expert",
-          "description": "Holistic life coach specializing in ADHD entrepreneurs and expat community support",
+          "description": "Holistic life coach specializing in ADHD entrepreneurs and expat community support, certified through Jay Shetty Certified School of Life Coaching",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Cary",
+            "addressRegion": "NC",
+            "addressCountry": "US"
+          },
+          "alumniOf": [
+            { "@type": "Organization", "name": "Jay Shetty Certified School of Life Coaching" }
+          ],
+          "hasCredential": [
+            {
+              "@type": "EducationalOccupationalCredential",
+              "name": "Certified Life Coach",
+              "credentialCategory": "certification",
+              "recognizedBy": {
+                "@type": "Organization",
+                "name": "Jay Shetty Certified School of Life Coaching"
+              }
+            }
+          ],
+          "knowsAbout": [
+            "ADHD Coaching",
+            "Life Coaching",
+            "Business Coaching",
+            "Mindset Coaching",
+            "Real Estate",
+            "Expat Coaching",
+            "Energetic Healing",
+            "Neurodivergent Entrepreneurship"
+          ],
           "worksFor": [
             {
               "@type": "Organization",
-              "name": "Yoana Nin Coaching",
-              "description": "ADHD Entrepreneur Coaching"
+              "@id": "https://yoananincoaching.com/#organization",
+              "name": "Yoana Nin Coaching"
             },
             {
               "@type": "Organization",

@@ -22,41 +22,116 @@ const RealEstate: React.FC = () => {
         schema={JSON.stringify({
           "@context": "https://schema.org",
           "@type": "RealEstateAgent",
-          "name": "Prosperous Agency Real Estate Services",
+          "@id": "https://yoananincoaching.com/real-estate#agent",
+          "name": "Yoana Nin \u2014 The Prosperous Agency",
           "description": "Real Estate Expert serving Raleigh NC Triangle Area - helping relocating families find their sanctuary",
           "url": "https://yoananincoaching.com/real-estate",
+          "image": "https://yoananincoaching.com/metaOG.png",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Cary",
+            "addressRegion": "NC",
+            "addressCountry": "US"
+          },
+          "employee": {
+            "@type": "Person",
+            "@id": "https://yoananincoaching.com/#person",
+            "name": "Yoana Nin",
+            "jobTitle": "Real Estate Agent & ADHD Life Coach"
+          },
           "areaServed": [
             { "@type": "City", "name": "Raleigh" },
             { "@type": "City", "name": "Durham" },
             { "@type": "City", "name": "Chapel Hill" },
             { "@type": "City", "name": "Cary" },
-            { "@type": "City", "name": "Apex" }
+            { "@type": "City", "name": "Apex" },
+            { "@type": "City", "name": "Holly Springs" },
+            { "@type": "City", "name": "Morrisville" },
+            { "@type": "City", "name": "Wake Forest" },
+            { "@type": "City", "name": "Fuquay-Varina" },
+            { "@type": "City", "name": "Garner" },
+            { "@type": "City", "name": "Clayton" },
+            { "@type": "City", "name": "Rolesville" }
           ],
           "priceRange": "$$",
           "serviceType": [
             "Real Estate Buyer Agent",
-            "Real Estate Seller Agent", 
-            "Relocation Services"
+            "Real Estate Seller Agent",
+            "Relocation Services",
+            "New Construction Home Buying"
           ],
+          "hasOfferCatalog": {
+            "@type": "OfferCatalog",
+            "name": "Real Estate Services",
+            "itemListElement": [
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Relocation Services"
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "New Construction Home Buying"
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Buyer Representation"
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Seller Representation"
+                }
+              }
+            ]
+          },
           "knowsAbout": [
             "Triangle Area Real Estate Market",
             "Raleigh Real Estate",
-            "Durham Real Estate", 
+            "Durham Real Estate",
             "Chapel Hill Real Estate",
             "Cary Real Estate",
             "Apex Real Estate",
+            "Holly Springs Real Estate",
+            "Morrisville Real Estate",
+            "Wake Forest Real Estate",
+            "Fuquay-Varina Real Estate",
+            "Garner Real Estate",
+            "Clayton Real Estate",
+            "Rolesville Real Estate",
             "Relocation Services",
+            "New Construction Homes",
+            "Builder Contracts",
             "International Relocation",
             "Expat Relocation"
           ],
           "sameAs": [
+            "https://www.facebook.com/share/1DTKdgCCyL/",
+            "https://www.linkedin.com/in/yoananin",
+            "https://www.instagram.com/yoananin/",
+            "https://www.threads.net/@yoananin",
+            "https://www.youtube.com/@yoananinrealty",
+            "https://www.tiktok.com/@yoananin",
+            "https://x.com/NinYoana",
+            "https://license.ncrec.gov/ncrec/oecgi3.exe/O4W_WRAPPER?ID=O4W_BROKERS_BY_FIRM_DETAIL_NEW&FIRM_ID=C26570*0*0",
             "https://www.bbb.org/us/nc/cary/profile/real-estate-broker/yoana-nin-realty-aka-the-prosperous-agency-0593-90359119",
             "https://www.realtor.com/realestateagents/5681075989a68901006b0471",
             "https://www.zillow.com/profile/Yoana%20Nin",
             "https://www.homes.com/real-estate-agents/cary-nc/macgregor-downs-neighborhood/",
-            "https://www.land.com/member/yoana-nin/1555580/listings/",
-            "https://www.fastexpert.com/real-estate-company/yoana-nin-realty-aka-the-prosperous-agency-cary-nc-54811/",
-            "https://www.yelp.com/biz/yoana-nin-realty-aka-the-prosperous-agency-cary-2"
+            "https://web.carychamber.com/Real-Estate/The-Prosperous-Agency-16421",
+            "https://nextdoor.com/pages/the-prosperous-agency-cary-nc/",
+            "https://www.yelp.com/biz/the-prosperous-agency-cary-2",
+            "https://www.amazon.in/Journey-Inner-Success-Real-Estate/dp/191294832X",
+            "https://www.b2bmit.com/showroom-11068975.htm"
           ]
         })}
       />

@@ -1,73 +1,170 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './Blog.module.css';
 import SEO from '../../components/SEO/SEO';
+import SocialReels from '../../components/SocialReels/SocialReels';
 import masterMindsetImage from '../../assets/images/masterMindset.webp';
-import { getFeaturedBlogPosts } from '../../content/blogLoader';
+import { getAllBlogPosts, getFeaturedBlogPosts } from '../../content/blogLoader';
+
+const CATEGORY_FILTERS = ['All', 'Coaching', 'Community', 'Real Estate'];
 
 const Blog: React.FC = () => {
-  const featuredPosts = getFeaturedBlogPosts();
-  
+  const [activeFilter, setActiveFilter] = useState('All');
+  const featuredPosts = getFeaturedBlogPosts().slice(0, 7);
+  const allPosts = getAllBlogPosts();
+
+  const filteredPosts =
+    activeFilter === 'All'
+      ? allPosts
+      : allPosts.filter((p) => p.category === activeFilter);
+
   return (
     <div className={styles.blogPage}>
-      <SEO 
+      <SEO
         title="Journal & Insights | Yoana Nin Coaching"
         description="Explore insights on ADHD entrepreneurship, holistic life coaching, and relocating to the Raleigh Triangle area."
         url="https://yoananincoaching.com/blog"
+        schema={JSON.stringify({
+          '@context': 'https://schema.org',
+          '@type': 'Blog',
+          '@id': 'https://yoananincoaching.com/blog',
+          'name': 'Journal & Insights | Yoana Nin Coaching',
+          'description': 'Explore insights on ADHD entrepreneurship, holistic life coaching, and relocating to the Raleigh Triangle area.',
+          'url': 'https://yoananincoaching.com/blog',
+          'author': {
+            '@type': 'Person',
+            '@id': 'https://yoananincoaching.com/#person',
+            'name': 'Yoana Nin',
+          },
+          'publisher': {
+            '@type': 'Organization',
+            '@id': 'https://yoananincoaching.com/#organization',
+            'name': 'Yoana Nin Coaching',
+          },
+          'inLanguage': 'en-US',
+        })}
       />
+
       {/* Hero Section */}
-      <section className={styles.hero} style={{backgroundImage: `url(${masterMindsetImage})`}}>
+      <section className={styles.hero} style={{ backgroundImage: `url(${masterMindsetImage})` }}>
         <div className={styles.container}>
           <div className={styles.heroContent}>
             <h1 className={styles.heroTitle}>Inspiration and Resources</h1>
             <h2 className={styles.heroSubtitle}>
               Inspiration and Insights for ADHD Entrepreneurs
             </h2>
-         
           </div>
         </div>
       </section>
 
-      {/* Featured Blog Posts */}
-      <section className={styles.blogSection}>
-        <div className={styles.container}>
-          <div id="featured-stories" style={{ position: 'relative', top: '-100px' }}></div>
-          <h2 className={styles.sectionTitle}>Featured Stories</h2>
-          <div className={styles.blogGrid}>
-            {featuredPosts.map((post) => (
-              <article key={post.id} className={styles.blogCard} data-category={post.category}>
-                {post.featured_image && (
-                  <a href={`/blog/${post.slug}`} className={styles.imageLink}>
-                    <img
-                      src={post.featured_image}
-                      alt={post.image_alt || post.title}
-                      className={styles.cardImage}
-                      loading="lazy"
-                    />
-                  </a>
-                )}
-                <div className={styles.cardContent}>
-                  <div className={styles.cardMeta}>
-                    <span className={styles.category}>{post.category}</span>
-                    <span className={styles.date}>{new Date(post.date).toLocaleDateString()}</span>
-                  </div>
-                  <h3 className={styles.cardTitle}>
-                    <a href={`/blog/${post.slug}`} className={styles.titleLink}>
-                      {post.title}
+      {/* Featured Stories */}
+      {featuredPosts.length > 0 && (
+        <section className={styles.blogSection}>
+          <div className={styles.container}>
+            <div id="featured-stories" style={{ position: 'relative', top: '-100px' }}></div>
+            <h2 className={styles.sectionTitle}>Featured Stories</h2>
+            <div className={styles.blogGrid}>
+              {featuredPosts.map((post) => (
+                <article key={post.id} className={`${styles.blogCard} ${styles.featuredCard}`} data-category={post.category}>
+                  {post.featured_image && (
+                    <a href={`/blog/${post.slug}`} className={styles.imageLink}>
+                      <img
+                        src={post.featured_image}
+                        alt={post.image_alt || post.title}
+                        className={styles.cardImage}
+                        loading="lazy"
+                      />
                     </a>
-                  </h3>
-                  <p className={styles.cardExcerpt}>{post.excerpt}</p>
-                  <div className={styles.cardTags}>
-                    {post.tags.map((tag, index) => (
-                      <span key={index} className={styles.tag}>{tag}</span>
-                    ))}
+                  )}
+                  <div className={styles.cardContent}>
+                    <div className={styles.cardMeta}>
+                      <span className={styles.category}>{post.category}</span>
+                      <span className={styles.date}>{new Date(post.date).toLocaleDateString()}</span>
+                    </div>
+                    <h3 className={styles.cardTitle}>
+                      <a href={`/blog/${post.slug}`} className={styles.titleLink}>
+                        {post.title}
+                      </a>
+                    </h3>
+                    <p className={styles.cardExcerpt}>{post.excerpt}</p>
+                    <div className={styles.cardTags}>
+                      {post.tags.map((tag, index) => (
+                        <span key={index} className={styles.tag}>{tag}</span>
+                      ))}
+                    </div>
+                    <a href={`/blog/${post.slug}`} className={styles.readMore}>
+                      Read More →
+                    </a>
                   </div>
-                  <a href={`/blog/${post.slug}`} className={styles.readMore}>
-                    Read More →
-                  </a>
-                </div>
-              </article>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Social Reel Cards — between featured and all articles */}
+      <div id="social-highlights" style={{ position: 'relative', top: '-100px' }}></div>
+      <SocialReels />
+
+      {/* All Articles with Category Filter */}
+      <section className={styles.allPostsSection}>
+        <div className={styles.container}>
+          <div id="all-articles" style={{ position: 'relative', top: '-100px' }}></div>
+          <h2 className={styles.sectionTitle}>All Articles</h2>
+
+          <div className={styles.filterBar} role="group" aria-label="Filter articles by category">
+            {CATEGORY_FILTERS.map((cat) => (
+              <button
+                key={cat}
+                className={`${styles.filterBtn} ${activeFilter === cat ? styles.filterBtnActive : ''}`}
+                onClick={() => setActiveFilter(cat)}
+                aria-pressed={activeFilter === cat}
+              >
+                {cat}
+              </button>
             ))}
           </div>
+
+          {filteredPosts.length > 0 ? (
+            <div className={styles.blogGrid}>
+              {filteredPosts.map((post) => (
+                <article key={post.id} className={styles.blogCard} data-category={post.category}>
+                  {post.featured_image && (
+                    <a href={`/blog/${post.slug}`} className={styles.imageLink}>
+                      <img
+                        src={post.featured_image}
+                        alt={post.image_alt || post.title}
+                        className={styles.cardImage}
+                        loading="lazy"
+                      />
+                    </a>
+                  )}
+                  <div className={styles.cardContent}>
+                    <div className={styles.cardMeta}>
+                      <span className={styles.category}>{post.category}</span>
+                      <span className={styles.date}>{new Date(post.date).toLocaleDateString()}</span>
+                    </div>
+                    <h3 className={styles.cardTitle}>
+                      <a href={`/blog/${post.slug}`} className={styles.titleLink}>
+                        {post.title}
+                      </a>
+                    </h3>
+                    <p className={styles.cardExcerpt}>{post.excerpt}</p>
+                    <div className={styles.cardTags}>
+                      {post.tags.map((tag, index) => (
+                        <span key={index} className={styles.tag}>{tag}</span>
+                      ))}
+                    </div>
+                    <a href={`/blog/${post.slug}`} className={styles.readMore}>
+                      Read More →
+                    </a>
+                  </div>
+                </article>
+              ))}
+            </div>
+          ) : (
+            <p className={styles.noResults}>No articles in this category yet. Check back soon!</p>
+          )}
         </div>
       </section>
     </div>
