@@ -7,15 +7,20 @@ import { getAllBlogPosts, getFeaturedBlogPosts } from '../../content/blogLoader'
 
 const CATEGORY_FILTERS = ['All', 'Coaching', 'Community', 'Real Estate'];
 
+const POSTS_PER_PAGE = 9;
+
 const Blog: React.FC = () => {
   const [activeFilter, setActiveFilter] = useState('All');
-  const featuredPosts = getFeaturedBlogPosts().slice(0, 7);
+  const [visibleCount, setVisibleCount] = useState(POSTS_PER_PAGE);
+  const featuredPosts = getFeaturedBlogPosts().slice(0, 3);
   const allPosts = getAllBlogPosts();
 
   const filteredPosts =
     activeFilter === 'All'
       ? allPosts
       : allPosts.filter((p) => p.category === activeFilter);
+
+  const visiblePosts = filteredPosts.slice(0, visibleCount);
 
   return (
     <div className={styles.blogPage}>
@@ -117,7 +122,7 @@ const Blog: React.FC = () => {
               <button
                 key={cat}
                 className={`${styles.filterBtn} ${activeFilter === cat ? styles.filterBtnActive : ''}`}
-                onClick={() => setActiveFilter(cat)}
+                onClick={() => { setActiveFilter(cat); setVisibleCount(POSTS_PER_PAGE); }}
                 aria-pressed={activeFilter === cat}
               >
                 {cat}
@@ -127,7 +132,7 @@ const Blog: React.FC = () => {
 
           {filteredPosts.length > 0 ? (
             <div className={styles.blogGrid}>
-              {filteredPosts.map((post) => (
+              {visiblePosts.map((post) => (
                 <article key={post.id} className={styles.blogCard} data-category={post.category}>
                   {post.featured_image && (
                     <a href={`/blog/${post.slug}`} className={styles.imageLink}>
@@ -164,6 +169,20 @@ const Blog: React.FC = () => {
             </div>
           ) : (
             <p className={styles.noResults}>No articles in this category yet. Check back soon!</p>
+          )}
+
+          {visibleCount < filteredPosts.length && (
+            <div className={styles.loadMoreWrapper}>
+              <button
+                className={styles.loadMoreBtn}
+                onClick={() => setVisibleCount((prev) => prev + POSTS_PER_PAGE)}
+              >
+                Load More Articles
+              </button>
+              <p className={styles.loadMoreCount}>
+                Showing {visibleCount} of {filteredPosts.length} articles
+              </p>
+            </div>
           )}
         </div>
       </section>
