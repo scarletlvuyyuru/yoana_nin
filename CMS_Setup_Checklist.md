@@ -85,15 +85,13 @@ Optional environment variables:
 
 ## 7) Video-to-blog workflow (Step 2)
 
-Use this flow whenever `creation_mode: video`:
+Use this flow for transcript-based blog drafting:
 
-1. Set `creation_mode` to `video` and `workflow_stage` to `intake`.
-2. Paste the social video in `source_url` and choose `source_type`.
-3. Call `/.netlify/functions/transcript-test` with the same URL.
-4. Paste returned text into `transcript`, then set `workflow_stage` to `transcript_ready`.
-5. Write/edit the post body from the transcript, then set `workflow_stage` to `draft_ready`.
-6. Final polish for title/excerpt/meta/FAQ, then set `workflow_stage` to `final_review`.
-7. When approved, set `is_published: true` and `workflow_stage: published`.
+1. Start at `/admin/workflow.html`.
+2. Use **AI Blog from Transcript** to create the draft.
+3. Send the draft into Blog +.
+4. Review title, excerpt, meta description, body, tags, and category.
+5. Turn `is_published` on only when approved and ready to go live.
 
 Guardrails:
 

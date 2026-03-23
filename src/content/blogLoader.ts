@@ -52,6 +52,33 @@ function toDateString(value: unknown): string {
   return new Date().toISOString().slice(0, 10);
 }
 
+function toPublishTimestamp(value: string): number {
+  const trimmed = value.trim();
+  if (!trimmed) {
+    return Number.NEGATIVE_INFINITY;
+  }
+
+  const explicitTimestamp = Date.parse(trimmed);
+  if (Number.isFinite(explicitTimestamp)) {
+    return explicitTimestamp;
+  }
+
+  const dateOnlyTimestamp = Date.parse(`${trimmed}T00:00:00`);
+  if (Number.isFinite(dateOnlyTimestamp)) {
+    return dateOnlyTimestamp;
+  }
+
+  return Number.NEGATIVE_INFINITY;
+}
+
+function isLivePost(post: BlogPostListItem): boolean {
+  if (post.is_published !== true) {
+    return false;
+  }
+
+  return toPublishTimestamp(post.date) <= Date.now();
+}
+
 function toStringList(value: unknown): string[] {
   if (Array.isArray(value)) {
     return value
@@ -202,7 +229,7 @@ const blogPostsCache = Object.entries(rawBlogFiles)
   .map(([path, rawContent]) => parseBlogFile(path, rawContent))
   .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
-const publishedBlogPostsCache = blogPostsCache.filter((post) => post.is_published === true);
+const publishedBlogPostsCache = blogPostsCache.filter((post) => isLivePost(post));
 
 export function getAllBlogPosts(): BlogPostListItem[] {
   return publishedBlogPostsCache;
