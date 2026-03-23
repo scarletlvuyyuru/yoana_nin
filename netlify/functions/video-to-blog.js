@@ -203,11 +203,24 @@ function fallbackDraftFromTranscript(transcript, sourceType, sourceUrl) {
       '',
       transcript,
       '',
+      '### What this might feel like in daily life',
+      '',
+      firstSentence(transcript) || 'Feeling overwhelmed can be a signal that your brain needs fewer inputs and one small next step.',
+      '',
       '## Practical Takeaway',
       '',
       `This post is based only on the ${sourceType} transcript from: ${sourceUrl}`,
     ].join('\n'),
   };
+}
+
+function normalizeBodyHeadings(body) {
+  if (!body || typeof body !== 'string') return '';
+
+  return body
+    .replace(/^#\s+/gm, '## ')
+    .replace(/\n{3,}/g, '\n\n')
+    .trim();
 }
 
 function sanitizeAiDraft(raw) {
@@ -228,13 +241,15 @@ function sanitizeAiDraft(raw) {
 
   const cleanTitle = title.replace(/^#+\s*/, '').trim();
 
+  const normalizedBody = normalizeBodyHeadings(body);
+
   return {
     title: cleanTitle,
     slug: createSlug(raw.slug || cleanTitle || 'video-insight'),
-    excerpt: excerpt || firstSentence(body),
-    meta_description: metaDescription || firstSentence(body),
-    key_answer: keyAnswer || firstSentence(body),
-    body: body.replace(/^#\s+.+(?:\r?\n)+/, '').trim(),
+    excerpt: excerpt || firstSentence(normalizedBody),
+    meta_description: metaDescription || firstSentence(normalizedBody),
+    key_answer: keyAnswer || firstSentence(normalizedBody),
+    body: normalizedBody,
   };
 }
 
@@ -315,8 +330,12 @@ async function generateDraftWithOpenAI(transcript, sourceType, sourceUrl) {
     'Keep tone warm, conversational, and coach-like.',
     'Output strictly valid JSON with keys: title, slug, excerpt, meta_description, key_answer, body.',
     'Rules:',
+    '- title is the post H1',
     '- body must be Markdown',
     '- Do NOT include an H1 in body; use H2/H3 only',
+    '- body must include 3-6 H2 sections',
+    '- body must include at least 2 H3 subheadings',
+    '- do not use H4+ headings',
     '- keep the messaging faithful to transcript wording and intent',
     '',
     `Source type: ${sourceType}`,

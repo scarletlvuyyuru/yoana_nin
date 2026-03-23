@@ -15,6 +15,7 @@
       (function setupBlogPrefillBridge() {
         var PREFILL_KEY = 'yoana_blog_prefill';
         var PREFILL_PENDING_KEY = 'yoana_blog_prefill_pending';
+        var PANEL_ID = 'yoana-prefill-panel';
 
         function readPrefill() {
           try {
@@ -26,35 +27,194 @@
           }
         }
 
+        function isBlogNewRoute() {
+          return !!window.location.hash && window.location.hash.indexOf('/collections/blog/new') !== -1;
+        }
+
         function setControlValue(name, value) {
           if (value == null) return false;
-          var selector = '[name="' + name + '"]';
-          var el = document.querySelector(selector);
+          var labelMap = {
+            title: 'Title',
+            slug: 'Slug',
+            key_answer: 'Key Answer',
+            excerpt: 'Excerpt',
+            meta_description: 'Meta Description',
+            body: 'Body',
+            transcript: 'Transcript',
+            source_type: 'Source Type',
+            source_url: 'Source URL',
+            creation_mode: 'Creation Mode',
+            workflow_stage: 'Workflow Stage'
+          };
+
+          function findByLabelText(labelText) {
+            if (!labelText) return null;
+            var labels = Array.prototype.slice.call(document.querySelectorAll('label'));
+            var target = labels.find(function (label) {
+              var text = (label.textContent || '').toLowerCase().replace(/\s+/g, ' ').trim();
+              return text.indexOf(labelText.toLowerCase()) !== -1;
+            });
+            if (!target) return null;
+
+            if (target.htmlFor) {
+              var byFor = document.getElementById(target.htmlFor);
+              if (byFor) return byFor;
+            }
+
+            var parent = target.parentElement || target.closest('div');
+            if (!parent) return null;
+            return parent.querySelector('input, textarea, select, [contenteditable="true"], [role="textbox"]');
+          }
+
+          function findFieldElement() {
+            var selectors = [
+              '[name="' + name + '"]',
+              '#'+ name,
+              '[data-name="' + name + '"] input',
+              '[data-name="' + name + '"] textarea',
+              '[data-name="' + name + '"] select',
+              '[id*="' + name + '"]',
+              '[class*="' + name + '"] input',
+              '[class*="' + name + '"] textarea'
+            ];
+
+            for (var i = 0; i < selectors.length; i += 1) {
+              var found = document.querySelector(selectors[i]);
+              if (found) return found;
+            }
+
+            if (name === 'body') {
+              var bodyLabelMatch = findByLabelText('Body');
+              if (bodyLabelMatch) return bodyLabelMatch;
+              var richTextBox = document.querySelector('[role="textbox"]');
+              if (richTextBox) return richTextBox;
+            }
+
+            var byLabel = findByLabelText(labelMap[name]);
+            if (byLabel) return byLabel;
+
+            return null;
+          }
+
+          function setInputValue(el, normalized) {
+            var tagName = (el.tagName || '').toLowerCase();
+
+            if (tagName === 'select') {
+              el.value = normalized;
+              el.dispatchEvent(new Event('change', { bubbles: true }));
+              return true;
+            }
+
+            if (tagName === 'input' || tagName === 'textarea') {
+              var prototype = tagName === 'textarea' ? window.HTMLTextAreaElement.prototype : window.HTMLInputElement.prototype;
+              var valueSetter = Object.getOwnPropertyDescriptor(prototype, 'value');
+              if (valueSetter && typeof valueSetter.set === 'function') {
+                valueSetter.set.call(el, normalized);
+              } else {
+                el.value = normalized;
+              }
+              el.dispatchEvent(new Event('input', { bubbles: true }));
+              el.dispatchEvent(new Event('change', { bubbles: true }));
+              return true;
+            }
+
+            if (el.isContentEditable) {
+              el.textContent = normalized;
+              el.dispatchEvent(new Event('input', { bubbles: true }));
+              return true;
+            }
+
+            return false;
+          }
+
+          var el = findFieldElement();
           if (!el) return false;
 
           var normalized = typeof value === 'string' ? value : String(value);
-          if (el.value === normalized) return true;
+          var existing = el.value || el.textContent || '';
+          if (normalized.trim() && (existing || '').trim() === normalized.trim()) return true;
 
           el.focus();
-          el.value = normalized;
-          el.dispatchEvent(new Event('input', { bubbles: true }));
-          el.dispatchEvent(new Event('change', { bubbles: true }));
-          return true;
+          return setInputValue(el, normalized);
         }
 
-        function applyPrefillOnce() {
-          if (!window.location.hash || window.location.hash.indexOf('/collections/blog/new') === -1) {
-            return;
+        function createOrUpdatePanel(message, isError) {
+          if (!isBlogNewRoute()) return;
+
+          var panel = document.getElementById(PANEL_ID);
+          if (!panel) {
+            panel = document.createElement('div');
+            panel.id = PANEL_ID;
+            panel.style.cssText = [
+              'position:fixed',
+              'top:12px',
+              'right:12px',
+              'z-index:9999',
+              'background:#ffffff',
+              'border:1px solid #d1d5db',
+              'border-radius:8px',
+              'padding:10px',
+              'box-shadow:0 8px 18px rgba(0,0,0,0.12)',
+              'font-family:Arial,sans-serif',
+              'min-width:240px'
+            ].join(';');
+            document.body.appendChild(panel);
+          }
+
+          panel.innerHTML = '';
+
+          var title = document.createElement('div');
+          title.textContent = 'AI Draft Helper';
+          title.style.cssText = 'font-weight:700;margin-bottom:6px;color:#111827;';
+          panel.appendChild(title);
+
+          var bodyText = document.createElement('div');
+          bodyText.textContent = message || 'AI draft is ready to apply.';
+          bodyText.style.cssText = 'font-size:12px;margin-bottom:8px;color:' + (isError ? '#b91c1c' : '#374151') + ';';
+          panel.appendChild(bodyText);
+
+          var applyBtn = document.createElement('button');
+          applyBtn.textContent = 'Apply AI Draft';
+          applyBtn.style.cssText = 'border:0;background:#111827;color:#fff;border-radius:6px;padding:7px 10px;font-size:12px;cursor:pointer;margin-right:6px;';
+          applyBtn.onclick = function () {
+            var result = applyPrefillOnce(true);
+            createOrUpdatePanel(
+              result.appliedCount > 0
+                ? 'Applied ' + result.appliedCount + ' fields. Review, then save.'
+                : 'No fields matched yet. Wait for form load, then click again.',
+              result.appliedCount === 0
+            );
+          };
+          panel.appendChild(applyBtn);
+
+          var clearBtn = document.createElement('button');
+          clearBtn.textContent = 'Clear Pending';
+          clearBtn.style.cssText = 'border:1px solid #d1d5db;background:#fff;color:#111827;border-radius:6px;padding:6px 8px;font-size:12px;cursor:pointer;';
+          clearBtn.onclick = function () {
+            localStorage.removeItem(PREFILL_PENDING_KEY);
+            createOrUpdatePanel('Pending AI draft cleared.', false);
+          };
+          panel.appendChild(clearBtn);
+        }
+
+        function removePanel() {
+          var panel = document.getElementById(PANEL_ID);
+          if (panel) panel.remove();
+        }
+
+        function applyPrefillOnce(allowPartial) {
+          if (!isBlogNewRoute()) {
+            return { appliedCount: 0, titleApplied: false, bodyApplied: false };
           }
 
           if (localStorage.getItem(PREFILL_PENDING_KEY) !== '1') {
-            return;
+            return { appliedCount: 0, titleApplied: false, bodyApplied: false };
           }
 
           var data = readPrefill();
           if (!data) {
             localStorage.removeItem(PREFILL_PENDING_KEY);
-            return;
+            return { appliedCount: 0, titleApplied: false, bodyApplied: false };
           }
 
           var mapped = {
@@ -72,27 +232,60 @@
           };
 
           var appliedCount = 0;
+          var titleApplied = false;
+          var bodyApplied = false;
           Object.keys(mapped).forEach(function (key) {
-            if (setControlValue(key, mapped[key])) {
+            var wasApplied = setControlValue(key, mapped[key]);
+            if (wasApplied) {
               appliedCount += 1;
+              if (key === 'title' && mapped[key]) titleApplied = true;
+              if (key === 'body' && mapped[key]) bodyApplied = true;
             }
           });
 
-          if (appliedCount >= 6) {
+          var success = titleApplied && bodyApplied && appliedCount >= 4;
+          if (success || (allowPartial && appliedCount >= 2)) {
             localStorage.removeItem(PREFILL_PENDING_KEY);
           }
+
+          return {
+            appliedCount: appliedCount,
+            titleApplied: titleApplied,
+            bodyApplied: bodyApplied,
+          };
         }
 
         var attempts = 0;
         setInterval(function () {
           attempts += 1;
-          applyPrefillOnce();
+          if (isBlogNewRoute()) {
+            if (localStorage.getItem(PREFILL_PENDING_KEY) === '1') {
+              var result = applyPrefillOnce(false);
+              if (result.appliedCount > 0) {
+                createOrUpdatePanel('AI draft applied. Review, then save/publish.', false);
+              } else {
+                createOrUpdatePanel('AI draft detected. Click Apply AI Draft if fields are still empty.', false);
+              }
+            } else {
+              removePanel();
+            }
+          } else {
+            removePanel();
+          }
+
           if (attempts > 240) {
             attempts = 0;
           }
-        }, 500);
+        }, 600);
 
-        window.addEventListener('hashchange', applyPrefillOnce);
+        window.addEventListener('hashchange', function () {
+          if (isBlogNewRoute() && localStorage.getItem(PREFILL_PENDING_KEY) === '1') {
+            createOrUpdatePanel('AI draft detected. Applying now...', false);
+            applyPrefillOnce(false);
+          } else {
+            removePanel();
+          }
+        });
       })();
 
       (function loadDecapCMS() {
