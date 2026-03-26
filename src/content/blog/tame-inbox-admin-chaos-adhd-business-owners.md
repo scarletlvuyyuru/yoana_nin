@@ -8,7 +8,7 @@ is_published: true
 tags:
   - adhdEntrepreneursinbox
 featured: true
-featured_image: /images/uploads/inbox.jpg
+featured_image: ""
 image_alt: "Woman with Email in a tangle with new strategies. "
 key_answer: Create a daily admin power hour during a low energy time, use a
   three-step checklist to triage, decide, and schedule tasks, then batch
