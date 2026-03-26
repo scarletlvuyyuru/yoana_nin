@@ -171,7 +171,7 @@ const Home: React.FC = () => {
           </div>
           <div className={styles.heroTextSection}>
             <div className={styles.serviceBadge}>
-              ADHD Powerhouse Coaching + Raleigh Real Estate
+              ADHD Powerhouse Coaching
             </div>
             <h1 className={styles.heroTitle}>
               Brilliant mind. Overloaded life.
@@ -190,9 +190,7 @@ const Home: React.FC = () => {
                 <span className={styles.valueHighlight}>Make your ADHD your unfair advantage.</span>
               </div>
             </div>
-            <p className={styles.raleighText}>
-              And if Raleigh, NC is calling? Let's build your next chapter there, too.
-            </p>
+           
             <div className={styles.heroCtas}>
               <Link 
                 to="/coaching" 
