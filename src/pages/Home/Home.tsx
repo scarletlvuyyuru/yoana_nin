@@ -232,6 +232,9 @@ const Home: React.FC = () => {
                   src={coachingImage} 
                   alt="Coaching - Master Your Mindset" 
                   className={styles.cardHeaderImage}
+                  loading="lazy"
+                  decoding="async"
+                  fetchPriority="low"
                 />
                 <div className={styles.cardHeaderOverlay}>
                   <h4 className={`${styles.cardTitle} ${styles.coaching}`}>
@@ -274,6 +277,9 @@ const Home: React.FC = () => {
                   src={realEstateImage} 
                   alt="Real Estate - Find Your Sanctuary" 
                   className={styles.cardHeaderImage}
+                  loading="lazy"
+                  decoding="async"
+                  fetchPriority="low"
                 />
                 <div className={styles.cardHeaderOverlay} style={{background: 'linear-gradient(135deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.1) 50%, rgba(0,0,0,0.2) 100%)'}}>
                   <h4 className={`${styles.cardTitle} ${styles.realEstate}`}>
@@ -316,6 +322,9 @@ const Home: React.FC = () => {
                   src={blogImage} 
                   alt="Community - Build Your Village" 
                   className={styles.cardHeaderImage}
+                  loading="lazy"
+                  decoding="async"
+                  fetchPriority="low"
                 />
                 <div className={styles.cardHeaderOverlay}>
                   <h4 className={`${styles.cardTitle} ${styles.blog}`}>
@@ -379,6 +388,9 @@ const Home: React.FC = () => {
                 src={lookingThroughFingersImage} 
                 alt="Yoana looking through her fingers in a playful manner" 
                 className={styles.iSeeYouImage}
+                loading="lazy"
+                decoding="async"
+                fetchPriority="low"
               />
             </div>
             <div className={styles.iSeeYouTextSection}>
@@ -474,6 +486,8 @@ const Home: React.FC = () => {
                     <img 
                       src={microphoneIcon} 
                       alt="Microphone" 
+                      loading="lazy"
+                      decoding="async"
                       style={{width: '32px', height: '32px', marginRight: '0.75rem', verticalAlign: 'middle'}} 
                     /> 
                     Book Me to Speak
@@ -493,6 +507,8 @@ const Home: React.FC = () => {
                     <img 
                       src={youtubeLikesIcon} 
                       alt="YouTube" 
+                      loading="lazy"
+                      decoding="async"
                       style={{width: '32px', height: '32px', marginRight: '0.75rem', verticalAlign: 'middle'}} 
                     /> 
                     Join My YouTube Channel
