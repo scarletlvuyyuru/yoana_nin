@@ -192,6 +192,13 @@ const Navigation: React.FC = () => {
             >
               Join Community
             </a>
+            <Link
+              to="/assessment"
+              className={`${styles.bannerButton} ${styles.quiz}`}
+              onClick={() => window.scrollTo(0, 0)}
+            >
+              ADHD Quiz
+            </Link>
           </div>
         </div>
       </div>
@@ -292,6 +299,14 @@ const Navigation: React.FC = () => {
               width="32"
               height="32"
             />
+          </Link>
+
+          <Link
+            to="/assessment"
+            className={styles.mobileQuizButton}
+            onClick={() => window.scrollTo(0, 0)}
+          >
+            ADHD Quiz
           </Link>
 
           {/* Right Navigation */}

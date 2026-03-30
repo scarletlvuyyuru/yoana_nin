@@ -27,6 +27,9 @@
 [functions.video-to-blog]
   timeout = 25
 
+[functions.assessment-results]
+  timeout = 15
+
 # Headers for better performance and security
 [[headers]]
   for = "/*"

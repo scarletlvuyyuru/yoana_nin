@@ -72,6 +72,11 @@
   transform: translateY(-1px);
 }
 
+.bannerButton:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: 2px;
+}
+
 .bannerButton.primary {
   background: linear-gradient(135deg, var(--color-orange-coral, #ff6b6b), var(--color-orange-warm, #ffa500));
   border-color: transparent;
@@ -81,6 +86,19 @@
   background: var(--color-blue);
   border-color: transparent;
   color: white;
+}
+
+.bannerButton.quiz {
+  background: var(--color-accessible-magenta, #b300b3);
+  border-color: transparent;
+  color: white;
+}
+
+.bannerButton.quiz:hover {
+  background: var(--color-magenta, #8f0d52);
+  border-color: transparent;
+  color: white;
+  transform: translateY(-1px);
 }
 
 .bannerButton.primary:hover {
@@ -211,7 +229,7 @@
 }
 
 .dropdownButton {
-  color: var(--color-magenta-accesible);
+  color: var(--color-accessible-magenta);
   border: none;
   background: none;
   cursor: pointer;
@@ -346,6 +364,21 @@
   padding: 0.5rem;
 }
 
+.mobileQuizButton {
+  display: none;
+}
+
+@keyframes mobileQuizPulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(179, 0, 179, 0.45);
+  }
+  50% {
+    transform: scale(1.03);
+    box-shadow: 0 0 0 8px rgba(179, 0, 179, 0);
+  }
+}
+
 .hamburger {
   display: flex;
   flex-direction: column;
@@ -435,12 +468,17 @@
   .bannerButtons {
     justify-content: flex-end;
     gap: 0.5rem;
+    flex-wrap: wrap;
   }
   
   .bannerButton {
     font-size: var(--font-size-xs);
     padding: 0.25rem 0.5rem;
     min-width: auto;
+  }
+
+  .bannerButton.quiz {
+    display: none;
   }
   
   .container {
@@ -470,6 +508,42 @@
     z-index: 102;
     align-items: center;
     gap: 1rem;
+  }
+
+  .mobileQuizButton {
+    display: inline-flex;
+    position: absolute;
+    top: 1rem;
+    margin-top: 0.25rem;
+    left: 1rem;
+    z-index: 102;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+    background: var(--color-accessible-magenta, #b300b3);
+    color: #ffffff;
+    border: 1px solid transparent;
+    border-radius: 999px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.7rem;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+    padding: 0.35rem 0.6rem;
+    line-height: 1;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+    animation: mobileQuizPulse 2.2s ease-in-out infinite;
+  }
+
+  .mobileQuizButton:hover {
+    background: var(--color-magenta, #8f0d52);
+    color: #ffffff;
+    transform: translateY(-1px);
+  }
+
+  .mobileQuizButton:focus-visible {
+    outline: 2px solid #ffffff;
+    outline-offset: 2px;
   }
   
   /* Mobile logo overrides */
@@ -518,6 +592,12 @@
   .socialIconImage {
     width: 16px;
     height: 16px;
+  }
+
+  .mobileQuizButton {
+    font-size: 0.64rem;
+    padding: 0.3rem 0.5rem;
+    left: 0.6rem;
   }
 }
 

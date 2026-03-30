@@ -94,6 +94,26 @@
       <input type="tel" name="phone" />
       <textarea name="message"></textarea>
     </form>
+
+    <form
+      name="assessment-results"
+      method="POST"
+      data-netlify="true"
+      data-netlify-honeypot="bot-field"
+      style="display: none;"
+    >
+      <input type="hidden" name="form-name" value="assessment-results" />
+      <input type="hidden" name="subject" value="New ADHD Assessment Result - Yoana Nin" />
+      <input type="text" name="bot-field" />
+      <input type="email" name="email" />
+      <input type="text" name="totalScore" />
+      <input type="text" name="scoreRange" />
+      <input type="text" name="scoreSuggestion" />
+      <input type="text" name="nextStep" />
+      <textarea name="answersSummary"></textarea>
+      <input type="text" name="marketingConsent" />
+      <input type="text" name="resultsConsent" />
+    </form>
     
     <script type="module" src="/src/main.tsx"></script>
     
