@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import styles from './Home.module.css';
 import SEO from '../../components/SEO/SEO';
 import heroImage from '../../assets/images/YoanaExpo.webp';
+import heroImageMobile from '../../assets/images/YoanaHero1.webp';
 import coachingImage from '../../assets/images/masterMindset.webp';
 import realEstateImage from '../../assets/images/Sanctuary.webp';
 import blogImage from '../../assets/images/buildYourCommuntiy.webp';
@@ -157,16 +159,27 @@ const Home: React.FC = () => {
           })
         ]}
       />
+      <Helmet>
+        <link rel="preload" as="image" href={heroImageMobile} media="(max-width: 968px)" />
+        <link rel="preload" as="image" href={heroImage} media="(min-width: 969px)" />
+      </Helmet>
       {/* Hero Section */}
       <section className={styles.hero}>
         <div className={styles.heroContent}>
           <div className={styles.heroImageSection}>
-            <img 
-              src={heroImage}
-              alt="Yoana Nin - ADHD Powerhouse Coach and Raleigh Real Estate Expert"
-              className={styles.heroImage}
-              loading="eager"
-            />
+            <picture>
+              <source media="(max-width: 968px)" srcSet={heroImageMobile} />
+              <img 
+                src={heroImage}
+                alt="Yoana Nin - ADHD Powerhouse Coach and Raleigh Real Estate Expert"
+                className={styles.heroImage}
+                loading="eager"
+                fetchPriority="high"
+                decoding="async"
+                width={1200}
+                height={1200}
+              />
+            </picture>
             <div className={styles.heroImageOverlay}></div>
           </div>
           <div className={styles.heroTextSection}>
