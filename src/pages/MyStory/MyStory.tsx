@@ -7,7 +7,7 @@ import adhdBadge from '../../assets/images/Adhd_certification_badge.webp';
 import jayShettyCert from '../../assets/images/jay_Shetty_Certification.webp';
 import energeticHealerBadge from '../../assets/images/energeticHealer.webp';
 import tpaLogo from '../../assets/images/TPA_logo.webp';
-import credentialsImage from '../../assets/images/yoana_nin_green_sweater.webp';
+import credentialsImage from '../../assets/images/YoanaHero1.webp';
 import heroBackground from '../../assets/images/MyStoryHeroBackground.webp';
 
 import yoanaYoung from '../../assets/images/yoana-nin-young.webp';
