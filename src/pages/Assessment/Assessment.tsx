@@ -120,9 +120,24 @@ const Assessment: React.FC = () => {
   );
 
   const handleAnswerSelect = (value: number) => {
+    const questionIndex = currentQuestion;
     const nextAnswers = [...answers];
-    nextAnswers[currentQuestion] = value;
+    nextAnswers[questionIndex] = value;
     setAnswers(nextAnswers);
+
+    // Auto-advance after selection while keeping manual Next/Previous controls available.
+    setTimeout(() => {
+      if (questionIndex < QUESTIONS.length - 1) {
+        setCurrentQuestion((prev) =>
+          prev === questionIndex ? Math.min(prev + 1, QUESTIONS.length - 1) : prev
+        );
+        return;
+      }
+
+      if (nextAnswers.every((answer) => answer > 0)) {
+        setShowResults(true);
+      }
+    }, 120);
   };
 
   const handleNext = () => {
@@ -239,14 +254,21 @@ const Assessment: React.FC = () => {
       });
 
       if (!emailResponse.ok) {
-        let functionError = 'Results email failed';
+        let functionError = `Results email failed (HTTP ${emailResponse.status})`;
         try {
           const errorPayload = await emailResponse.json();
           if (errorPayload?.error) {
             functionError = errorPayload.error;
           }
         } catch {
-          // Keep generic fallback if response body is not JSON.
+          try {
+            const rawError = await emailResponse.text();
+            if (rawError?.trim()) {
+              functionError = `${functionError}: ${rawError.trim()}`;
+            }
+          } catch {
+            // Keep fallback if response body cannot be read.
+          }
         }
         throw new Error(functionError);
       }
