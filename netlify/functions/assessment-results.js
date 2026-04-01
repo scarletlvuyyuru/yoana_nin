@@ -38,16 +38,6 @@ Answers: ${answers}
 
 Ready to turn your ADHD into your business superpower? Reply to this email or book your free discovery call with Yoana.`;
 
-const buildAdminEmailText = ({ email, totalScore, scoreRange, scoreSuggestion, nextStep, answers, marketingConsent }) => `New ADHD Assessment submission
-
-Email: ${email}
-Total score: ${totalScore} / 50
-Score range: ${scoreRange}
-Impact: ${scoreSuggestion}
-Recommended next step: ${nextStep}
-Answers: ${answers}
-Marketing consent: ${marketingConsent ? 'Yes' : 'No'}`;
-
 const sendEmail = async ({ apiKey, from, to, subject, html, text, replyTo }) => {
   const response = await fetch(RESEND_API_URL, {
     method: 'POST',
@@ -93,7 +83,6 @@ exports.handler = async (event) => {
   try {
     const apiKey = process.env.RESEND_API_KEY;
     const from = process.env.ASSESSMENT_RESULTS_FROM;
-    const notificationEmail = process.env.ASSESSMENT_NOTIFICATION_EMAIL;
     const replyTo = process.env.ASSESSMENT_REPLY_TO || 'yoana@yoananin.com';
 
     if (!apiKey || !from) {
@@ -144,18 +133,6 @@ exports.handler = async (event) => {
       text: buildUserEmailText({ totalScore, scoreRange, scoreSuggestion, nextStep, answers }),
       replyTo,
     });
-
-    if (notificationEmail) {
-      await sendEmail({
-        apiKey,
-        from,
-        to: notificationEmail,
-        subject: `New ADHD Assessment Result: ${email}`,
-        html: `<pre style="font-family: Arial, sans-serif; white-space: pre-wrap;">${buildAdminEmailText({ email, totalScore, scoreRange, scoreSuggestion, nextStep, answers, marketingConsent })}</pre>`,
-        text: buildAdminEmailText({ email, totalScore, scoreRange, scoreSuggestion, nextStep, answers, marketingConsent }),
-        replyTo: email,
-      });
-    }
 
     return {
       statusCode: 200,
