@@ -239,12 +239,23 @@ const Assessment: React.FC = () => {
       });
 
       if (!emailResponse.ok) {
-        throw new Error('Results email failed');
+        let functionError = 'Results email failed';
+        try {
+          const errorPayload = await emailResponse.json();
+          if (errorPayload?.error) {
+            functionError = errorPayload.error;
+          }
+        } catch {
+          // Keep generic fallback if response body is not JSON.
+        }
+        throw new Error(functionError);
       }
 
       setEmailSubmitted(true);
-    } catch (error) {
-      setSubmitError('There was a problem sending your results. Please try again in a moment.');
+    } catch (error: unknown) {
+      const defaultError = 'There was a problem sending your results. Please try again in a moment.';
+      const message = error instanceof Error ? error.message : defaultError;
+      setSubmitError(message || defaultError);
     } finally {
       setIsSubmitting(false);
     }
