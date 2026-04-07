@@ -206,7 +206,7 @@ const Footer: React.FC = () => {
           fontSize: 'var(--font-size-sm)'
         }}>
           <p style={{ margin: '0' }}>
-            © {new Date().getFullYear()} Yoana. All rights reserved. 
+            © {new Date().getFullYear()} Yoana Nin Coaching. All Rights Reserved. 
           </p>
           <p style={{ margin: '0' }}>
             <a 
