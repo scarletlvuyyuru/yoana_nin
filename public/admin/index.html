@@ -68,34 +68,54 @@
         }
 
         function parseSummaryDate(summaryText) {
-          var match = summaryText.match(/\|\s*(\d{1,2}\/\d{1,2}\/\d{4}\s+\d{1,2}:\d{2}\s+[AP]M)\s*\|/i);
+          var match = summaryText.match(/\|\s*(\d{1,2}\/\d{1,2}\/\d{4}\s+\d{1,2}:\d{2}\s+[AP]M)\b/i);
           if (!match) return NaN;
 
           var parsed = Date.parse(match[1]);
           return Number.isFinite(parsed) ? parsed : NaN;
         }
 
+        function parsePrimarySummary(rawText) {
+          var compact = (rawText || '').replace(/\s+/g, ' ').trim();
+          var summaryMatch = compact.match(/^(.*?)\s*\|\s*(\d{1,2}\/\d{1,2}\/\d{4}\s+\d{1,2}:\d{2}\s+[AP]M)\b/i);
+          if (!summaryMatch) return null;
+
+          var title = (summaryMatch[1] || '').trim();
+          var dateText = (summaryMatch[2] || '').trim();
+          if (!title || !dateText) return null;
+
+          return {
+            title: title,
+            dateText: dateText,
+            compact: compact,
+          };
+        }
+
         function rewriteBlogEntryStatuses() {
           var entryLinks = document.querySelectorAll('a[href*="/collections/blog/entries/"]');
           Array.prototype.forEach.call(entryLinks, function (link) {
-            var raw = (link.textContent || '').replace(/\s+/g, ' ').trim();
-            var liveMatch = raw.match(/\|\s*live:\s*(true|false)\s*$/i);
-            if (!liveMatch) return;
+            var parsed = parsePrimarySummary(link.textContent || '');
+            if (!parsed) return;
 
-            var isLiveEnabled = liveMatch[1].toLowerCase() === 'true';
+            var raw = parsed.compact;
+            var existingStatus = raw.match(/status:\s*(posted|scheduled|draft)/i);
+            var status = existingStatus
+              ? existingStatus[1].charAt(0).toUpperCase() + existingStatus[1].slice(1).toLowerCase()
+              : 'Draft';
+
+            var boolMatch = raw.match(/(?:live:\s*)?(true|false)\b/i);
+            var isLiveEnabled = boolMatch ? boolMatch[1].toLowerCase() === 'true' : false;
             var publishTimestamp = parseSummaryDate(raw);
-            var status = 'Draft';
-
-            if (isLiveEnabled) {
+            if (boolMatch && isLiveEnabled) {
               status = Number.isFinite(publishTimestamp) && publishTimestamp > Date.now() ? 'Scheduled' : 'Posted';
+            } else if (boolMatch && !isLiveEnabled) {
+              status = 'Draft';
             }
 
-            var formatted = raw.replace(/\|\s*live:\s*(true|false)\s*$/i, '| Status: ' + status);
-            if (formatted === raw) return;
+            var formatted = parsed.title + ' | ' + parsed.dateText + ' | Status: ' + status;
+            if ((link.textContent || '').replace(/\s+/g, ' ').trim() === formatted) return;
 
-            var preferredNodes = link.querySelectorAll('strong, span, div');
-            var targetNode = preferredNodes.length ? preferredNodes[preferredNodes.length - 1] : link;
-            targetNode.textContent = formatted;
+            link.textContent = formatted;
             link.setAttribute('aria-label', formatted);
           });
         }
@@ -115,6 +135,8 @@
           }
 
           if (newPostBtn && newPostBtn.parentElement) {
+            btn.removeAttribute('style');
+            btn.className = '';
             if (newPostBtn.className) {
               btn.className = newPostBtn.className;
             } else {
@@ -135,6 +157,13 @@
 
             btn.style.marginLeft = '10px';
             btn.style.verticalAlign = 'middle';
+            btn.style.position = 'static';
+            btn.style.top = '';
+            btn.style.right = '';
+            btn.style.bottom = '';
+            btn.style.left = '';
+            btn.style.zIndex = '';
+            btn.style.textDecoration = 'none';
             if (newPostBtn.nextSibling) {
               newPostBtn.parentElement.insertBefore(btn, newPostBtn.nextSibling);
             } else {
