@@ -39,15 +39,63 @@
             && hash.indexOf('/collections/blog/entries/') === -1;
         }
 
+        function findNewBlogPostButton() {
+          var controls = Array.prototype.slice.call(document.querySelectorAll('a, button'));
+          return controls.find(function (el) {
+            var text = (el.textContent || '').toLowerCase().replace(/\s+/g, ' ').trim();
+            var href = (el.getAttribute && el.getAttribute('href')) || '';
+            return text.indexOf('new blog post') !== -1 || href.indexOf('/collections/blog/new') !== -1;
+          }) || null;
+        }
+
+        function widenBlogEntryRows() {
+          var entryLinks = document.querySelectorAll('a[href*="/collections/blog/entries/"]');
+          Array.prototype.forEach.call(entryLinks, function (link) {
+            link.style.maxWidth = 'none';
+            link.style.width = '100%';
+          });
+        }
+
         function createOrUpdateQuickAction() {
           if (!isBlogCollectionRoute()) return;
 
           var btn = document.getElementById(QUICK_ACTION_ID);
+          var newPostBtn = findNewBlogPostButton();
           if (!btn) {
-            btn = document.createElement('button');
+            btn = document.createElement('a');
             btn.id = QUICK_ACTION_ID;
-            btn.type = 'button';
-            btn.textContent = 'AI Blog from Transcript';
+            btn.href = '/admin/video-to-blog.html';
+            btn.textContent = 'Transcript to Blog';
+            btn.style.textDecoration = 'none';
+            btn.setAttribute('aria-label', 'Create AI blog from transcript');
+          }
+
+          if (newPostBtn && newPostBtn.parentElement) {
+            if (newPostBtn.className) {
+              btn.className = newPostBtn.className;
+            } else {
+              btn.style.cssText = [
+                'border:0',
+                'background:#111827',
+                'color:#fff',
+                'border-radius:8px',
+                'padding:10px 14px',
+                'font-size:13px',
+                'font-weight:700',
+                'font-family:Arial,sans-serif',
+                'cursor:pointer',
+                'display:inline-flex',
+                'align-items:center'
+              ].join(';');
+            }
+
+            btn.style.marginLeft = '10px';
+            if (newPostBtn.nextSibling) {
+              newPostBtn.parentElement.insertBefore(btn, newPostBtn.nextSibling);
+            } else {
+              newPostBtn.parentElement.appendChild(btn);
+            }
+          } else if (!btn.parentElement) {
             btn.style.cssText = [
               'position:fixed',
               'bottom:18px',
@@ -62,13 +110,13 @@
               'font-weight:700',
               'font-family:Arial,sans-serif',
               'cursor:pointer',
-              'box-shadow:0 8px 18px rgba(0,0,0,0.16)'
+              'display:inline-flex',
+              'align-items:center'
             ].join(';');
-            btn.onclick = function () {
-              window.location.href = '/admin/video-to-blog.html';
-            };
             document.body.appendChild(btn);
           }
+
+          widenBlogEntryRows();
         }
 
         function removeQuickAction() {
