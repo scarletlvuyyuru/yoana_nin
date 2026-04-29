@@ -17,6 +17,7 @@
         var PREFILL_PENDING_KEY = 'yoana_blog_prefill_pending';
         var PANEL_ID = 'yoana-prefill-panel';
         var QUICK_ACTION_ID = 'yoana-ai-blog-quick-action';
+        var COLLECTION_STYLE_ID = 'yoana-blog-collection-style';
 
         function readPrefill() {
           try {
@@ -40,19 +41,62 @@
         }
 
         function findNewBlogPostButton() {
-          var controls = Array.prototype.slice.call(document.querySelectorAll('a, button'));
+          var controls = Array.prototype.slice.call(document.querySelectorAll('a, button, [role="button"]'));
           return controls.find(function (el) {
             var text = (el.textContent || '').toLowerCase().replace(/\s+/g, ' ').trim();
             var href = (el.getAttribute && el.getAttribute('href')) || '';
-            return text.indexOf('new blog post') !== -1 || href.indexOf('/collections/blog/new') !== -1;
+            return text.indexOf('new blog post') !== -1
+              || text.indexOf('new blog posts') !== -1
+              || href.indexOf('/collections/blog/new') !== -1;
           }) || null;
         }
 
-        function widenBlogEntryRows() {
+        function ensureBlogCollectionStyles() {
+          var existing = document.getElementById(COLLECTION_STYLE_ID);
+          if (existing) return;
+
+          var style = document.createElement('style');
+          style.id = COLLECTION_STYLE_ID;
+          style.textContent = [
+            'a[href*="/collections/blog/entries/"] { width: 100% !important; max-width: none !important; }',
+            'a[href*="/collections/blog/entries/"] > div { width: 100% !important; max-width: none !important; }',
+            'a[href*="/collections/blog/entries/"] strong,',
+            'a[href*="/collections/blog/entries/"] span,',
+            'a[href*="/collections/blog/entries/"] div { white-space: normal !important; overflow: visible !important; text-overflow: unset !important; }'
+          ].join('\n');
+          document.head.appendChild(style);
+        }
+
+        function parseSummaryDate(summaryText) {
+          var match = summaryText.match(/\|\s*(\d{1,2}\/\d{1,2}\/\d{4}\s+\d{1,2}:\d{2}\s+[AP]M)\s*\|/i);
+          if (!match) return NaN;
+
+          var parsed = Date.parse(match[1]);
+          return Number.isFinite(parsed) ? parsed : NaN;
+        }
+
+        function rewriteBlogEntryStatuses() {
           var entryLinks = document.querySelectorAll('a[href*="/collections/blog/entries/"]');
           Array.prototype.forEach.call(entryLinks, function (link) {
-            link.style.maxWidth = 'none';
-            link.style.width = '100%';
+            var raw = (link.textContent || '').replace(/\s+/g, ' ').trim();
+            var liveMatch = raw.match(/\|\s*live:\s*(true|false)\s*$/i);
+            if (!liveMatch) return;
+
+            var isLiveEnabled = liveMatch[1].toLowerCase() === 'true';
+            var publishTimestamp = parseSummaryDate(raw);
+            var status = 'Draft';
+
+            if (isLiveEnabled) {
+              status = Number.isFinite(publishTimestamp) && publishTimestamp > Date.now() ? 'Scheduled' : 'Posted';
+            }
+
+            var formatted = raw.replace(/\|\s*live:\s*(true|false)\s*$/i, '| Status: ' + status);
+            if (formatted === raw) return;
+
+            var preferredNodes = link.querySelectorAll('strong, span, div');
+            var targetNode = preferredNodes.length ? preferredNodes[preferredNodes.length - 1] : link;
+            targetNode.textContent = formatted;
+            link.setAttribute('aria-label', formatted);
           });
         }
 
@@ -90,6 +134,7 @@
             }
 
             btn.style.marginLeft = '10px';
+            btn.style.verticalAlign = 'middle';
             if (newPostBtn.nextSibling) {
               newPostBtn.parentElement.insertBefore(btn, newPostBtn.nextSibling);
             } else {
@@ -98,8 +143,8 @@
           } else if (!btn.parentElement) {
             btn.style.cssText = [
               'position:fixed',
-              'bottom:18px',
-              'right:18px',
+              'top:22px',
+              'right:22px',
               'z-index:9998',
               'border:0',
               'background:#111827',
@@ -116,12 +161,16 @@
             document.body.appendChild(btn);
           }
 
-          widenBlogEntryRows();
+          ensureBlogCollectionStyles();
+          rewriteBlogEntryStatuses();
         }
 
         function removeQuickAction() {
           var btn = document.getElementById(QUICK_ACTION_ID);
           if (btn) btn.remove();
+
+          var style = document.getElementById(COLLECTION_STYLE_ID);
+          if (style) style.remove();
         }
 
         function setControlValue(name, value) {
