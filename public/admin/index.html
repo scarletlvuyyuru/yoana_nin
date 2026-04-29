@@ -98,7 +98,7 @@
             if (!parsed) return;
 
             var raw = parsed.compact;
-            var existingStatus = raw.match(/status:\s*(posted|scheduled|draft)/i);
+            var existingStatus = raw.match(/status:\s*(posted|scheduled|published)/i);
             var status = existingStatus
               ? existingStatus[1].charAt(0).toUpperCase() + existingStatus[1].slice(1).toLowerCase()
               : 'Draft';
@@ -109,7 +109,7 @@
             if (boolMatch && isLiveEnabled) {
               status = Number.isFinite(publishTimestamp) && publishTimestamp > Date.now() ? 'Scheduled' : 'Posted';
             } else if (boolMatch && !isLiveEnabled) {
-              status = 'Draft';
+              status = 'Published';
             }
 
             var formatted = parsed.title + ' | ' + parsed.dateText + ' | Status: ' + status;

@@ -34,7 +34,7 @@ collections:
         fields:
           - { label: "Question", name: "question", widget: "string" }
           - { label: "Answer", name: "answer", widget: "text" }
-      - { label: "Geo Focus", name: "geo_focus", widget: "string", required: false, default: "Holly Springs, NC", hint: "Primary local area for this article." }
+      - { label: "Geo Focus", name: "geo_focus", widget: "string", required: false, default: "Raleigh, NC", hint: "Primary local area for this article." }
       - { label: "Add Local Schema", name: "geo_schema", widget: "boolean", default: true, required: false }
       - { label: "Source URL", name: "source_url", widget: "string", required: false, hint: "Optional. Paste the original Instagram/video link here for your records." }
       - label: "Body"
