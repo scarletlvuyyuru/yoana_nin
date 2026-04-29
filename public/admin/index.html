@@ -16,6 +16,7 @@
         var PREFILL_KEY = 'yoana_blog_prefill';
         var PREFILL_PENDING_KEY = 'yoana_blog_prefill_pending';
         var PANEL_ID = 'yoana-prefill-panel';
+        var QUICK_ACTION_ID = 'yoana-ai-blog-quick-action';
 
         function readPrefill() {
           try {
@@ -29,6 +30,50 @@
 
         function isBlogNewRoute() {
           return !!window.location.hash && window.location.hash.indexOf('/collections/blog/new') !== -1;
+        }
+
+        function isBlogCollectionRoute() {
+          var hash = window.location.hash || '';
+          return hash.indexOf('/collections/blog') !== -1
+            && hash.indexOf('/collections/blog/new') === -1
+            && hash.indexOf('/collections/blog/entries/') === -1;
+        }
+
+        function createOrUpdateQuickAction() {
+          if (!isBlogCollectionRoute()) return;
+
+          var btn = document.getElementById(QUICK_ACTION_ID);
+          if (!btn) {
+            btn = document.createElement('button');
+            btn.id = QUICK_ACTION_ID;
+            btn.type = 'button';
+            btn.textContent = 'AI Blog from Transcript';
+            btn.style.cssText = [
+              'position:fixed',
+              'bottom:18px',
+              'right:18px',
+              'z-index:9998',
+              'border:0',
+              'background:#111827',
+              'color:#fff',
+              'border-radius:8px',
+              'padding:10px 14px',
+              'font-size:13px',
+              'font-weight:700',
+              'font-family:Arial,sans-serif',
+              'cursor:pointer',
+              'box-shadow:0 8px 18px rgba(0,0,0,0.16)'
+            ].join(';');
+            btn.onclick = function () {
+              window.location.href = '/admin/video-to-blog.html';
+            };
+            document.body.appendChild(btn);
+          }
+        }
+
+        function removeQuickAction() {
+          var btn = document.getElementById(QUICK_ACTION_ID);
+          if (btn) btn.remove();
         }
 
         function setControlValue(name, value) {
@@ -252,6 +297,13 @@
         var attempts = 0;
         setInterval(function () {
           attempts += 1;
+
+          if (isBlogCollectionRoute()) {
+            createOrUpdateQuickAction();
+          } else {
+            removeQuickAction();
+          }
+
           if (isBlogNewRoute()) {
             if (localStorage.getItem(PREFILL_PENDING_KEY) === '1') {
               var result = applyPrefillOnce(false);
@@ -276,8 +328,13 @@
           if (isBlogNewRoute() && localStorage.getItem(PREFILL_PENDING_KEY) === '1') {
             createOrUpdatePanel('AI draft detected. Applying now...', false);
             applyPrefillOnce(false);
+            removeQuickAction();
+          } else if (isBlogCollectionRoute()) {
+            createOrUpdateQuickAction();
+            removePanel();
           } else {
             removePanel();
+            removeQuickAction();
           }
         });
 
