@@ -8,7 +8,7 @@ is_published: true
 tags:
   - ADHDSupport
 featured: true
-featured_image: /images/uploads/supporting-adhd-family_friends.jpg
+featured_image: /images/uploads/supporting-adhd-family_friends.webp
 key_answer: Long corporate meetings can be exhausting for those with ADHD, so
   it’s important to give grace, simplify daily tasks with easy lists, and find
   ways to calm the nervous system to manage energy and stress effectively.
