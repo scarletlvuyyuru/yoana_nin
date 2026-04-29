@@ -23,7 +23,7 @@ excerpt: Discover the unique strengths that make people with ADHD powerful
 meta_description: Explore the top 10 strengths of entrepreneurs with ADHD and
   how these qualities can be harnessed for business success. Coaching insights
   to help you or your loved ones thrive.
-geo_focus: Holly Springs, NC
+geo_focus: Raleigh, NC
 geo_schema: true
 source_url: https://www.tiktok.com/@yoananincoaching/video/7602668026441321758?is_from_webapp=1&sender_device=pc
 ---
