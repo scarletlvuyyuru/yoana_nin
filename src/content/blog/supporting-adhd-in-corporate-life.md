@@ -8,7 +8,7 @@ is_published: true
 tags:
   - ADHDSupport
 featured: true
-featured_image: /images/uploads/supporting-adhd-family_friends.jpg
+featured_image: /images/uploads/supporting-adhd-family_friends.webp
 key_answer: Long corporate meetings can be exhausting for those with ADHD, so
   it’s important to give grace, simplify daily tasks with easy lists, and find
   ways to calm the nervous system to manage energy and stress effectively.
@@ -19,7 +19,7 @@ meta_description: Discover practical ways to support yourself or a loved one
   with ADHD in a corporate environment. Learn about the challenges of long
   meetings, the importance of grace, and simple strategies to calm the nervous
   system and prioritize daily tasks.
-geo_focus: Holly Springs, NC
+geo_focus: Raleigh, NC
 geo_schema: true
 source_url: https://www.tiktok.com/@yoananincoaching/video/7605294215999868173?is_from_webapp=1&sender_device=pc
 ---
