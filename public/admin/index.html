@@ -306,6 +306,22 @@
           return setInputValue(el, normalized);
         }
 
+        function hasBodyContent() {
+          var bodyCandidates = Array.prototype.slice.call(
+            document.querySelectorAll('[name="body"], [data-name="body"] textarea, [role="textbox"]')
+          );
+
+          for (var i = 0; i < bodyCandidates.length; i += 1) {
+            var el = bodyCandidates[i];
+            var raw = (el.value || el.textContent || '').replace(/[\u200B-\u200D\uFEFF]/g, '');
+            if (raw.replace(/\s+/g, '').length > 0) {
+              return true;
+            }
+          }
+
+          return false;
+        }
+
         function createOrUpdatePanel(message, isError) {
           if (!isBlogNewRoute()) return;
 
@@ -346,11 +362,14 @@
           applyBtn.style.cssText = 'border:0;background:#111827;color:#fff;border-radius:6px;padding:7px 10px;font-size:12px;cursor:pointer;margin-right:6px;';
           applyBtn.onclick = function () {
             var result = applyPrefillOnce(true);
+            var bodyReady = hasBodyContent();
             createOrUpdatePanel(
               result.appliedCount > 0
-                ? 'Applied ' + result.appliedCount + ' fields. Review, then save.'
+                ? (bodyReady
+                    ? 'Applied ' + result.appliedCount + ' fields. Body detected. Review, then save.'
+                    : 'Applied some fields, but Body is still empty. Wait for load and click Apply again before saving.')
                 : 'No fields matched yet. Wait for form load, then click again.',
-              result.appliedCount === 0
+              result.appliedCount === 0 || !bodyReady
             );
           };
           panel.appendChild(applyBtn);
@@ -409,7 +428,7 @@
           });
 
           var success = titleApplied && bodyApplied && appliedCount >= 4;
-          if (success || (allowPartial && appliedCount >= 2)) {
+          if (success) {
             localStorage.removeItem(PREFILL_PENDING_KEY);
           }
 
@@ -434,7 +453,11 @@
             if (localStorage.getItem(PREFILL_PENDING_KEY) === '1') {
               var result = applyPrefillOnce(false);
               if (result.appliedCount > 0) {
-                createOrUpdatePanel('AI draft applied. Review, then save/publish.', false);
+                if (hasBodyContent()) {
+                  createOrUpdatePanel('AI draft applied. Body detected. Review, then save/publish.', false);
+                } else {
+                  createOrUpdatePanel('AI draft detected, but Body is still empty. Do not save yet. Click Apply AI Draft again after form fully loads.', true);
+                }
               } else {
                 createOrUpdatePanel('AI draft detected. Click Apply AI Draft if fields are still empty.', false);
               }

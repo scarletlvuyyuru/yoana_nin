@@ -93,20 +93,6 @@
         font-size: 12px;
         color: #6b7280;
       }
-      .image-preview-wrap {
-        margin-top: 14px;
-        display: none;
-      }
-      .image-preview-wrap img {
-        width: 100%;
-        border-radius: 8px;
-        border: 1px solid #e5e7eb;
-        display: block;
-      }
-      .image-status {
-        margin-top: 8px;
-        font-size: 13px;
-      }
       @media (max-width: 700px) {
         .row {
           grid-template-columns: 1fr;
@@ -150,19 +136,6 @@
       </div>
 
       <div id="status" class="status"></div>
-
-      <div class="section" id="imageSection" style="display:none;">
-        <label style="margin-top:0;">Featured Image</label>
-        <p class="small" style="margin:0 0 10px;">Generated from your post title and excerpt. No text or words will appear on the image.</p>
-        <div class="actions">
-          <button id="generateImageBtn" class="secondary" type="button">Generate Image</button>
-          <a id="downloadImageBtn" style="display:none;border:0;background:#111827;color:#fff;border-radius:8px;padding:10px 14px;font-weight:600;font-size:14px;cursor:pointer;text-decoration:none;" download="featured-image.webp">Download WebP</a>
-        </div>
-        <div id="imageStatus" class="image-status"></div>
-        <div class="image-preview-wrap" id="imagePreviewWrap">
-          <img id="imagePreview" src="" alt="Generated featured image" />
-        </div>
-      </div>
 
       <div class="section">
         <label for="title">Title</label>
@@ -210,69 +183,6 @@
       var metaDescriptionEl = document.getElementById('metaDescription');
       var bodyEl = document.getElementById('body');
       var transcriptEl = document.getElementById('transcript');
-
-      var imageSectionEl = document.getElementById('imageSection');
-      var generateImageBtn = document.getElementById('generateImageBtn');
-      var downloadImageBtn = document.getElementById('downloadImageBtn');
-      var imageStatusEl = document.getElementById('imageStatus');
-      var imagePreviewWrap = document.getElementById('imagePreviewWrap');
-      var imagePreviewEl = document.getElementById('imagePreview');
-
-      function setImageStatus(msg, type) {
-        imageStatusEl.className = 'image-status ' + (type || '');
-        imageStatusEl.textContent = msg || '';
-      }
-
-      function base64PngToWebpDataUrl(b64, callback) {
-        var img = new Image();
-        img.onload = function () {
-          var canvas = document.createElement('canvas');
-          canvas.width = img.naturalWidth;
-          canvas.height = img.naturalHeight;
-          canvas.getContext('2d').drawImage(img, 0, 0);
-          var webpUrl = canvas.toDataURL('image/webp', 0.92);
-          callback(null, webpUrl);
-        };
-        img.onerror = function () { callback(new Error('Failed to load image for conversion.')); };
-        img.src = 'data:image/png;base64,' + b64;
-      }
-
-      generateImageBtn.addEventListener('click', async function () {
-        if (!hasGeneratedDraft()) {
-          setImageStatus('Generate a blog draft first, then create an image.', 'error');
-          return;
-        }
-        setImageStatus('Generating image — this takes about 15 seconds…', '');
-        generateImageBtn.disabled = true;
-        downloadImageBtn.style.display = 'none';
-        imagePreviewWrap.style.display = 'none';
-
-        try {
-          var res = await fetch('/.netlify/functions/generate-blog-image', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              title: titleEl.value.trim(),
-              excerpt: excerptEl.value.trim(),
-            }),
-          });
-          var data = await res.json();
-          if (!res.ok || !data.ok) throw new Error(data.error || 'Image generation failed.');
-
-          base64PngToWebpDataUrl(data.b64, function (err, webpUrl) {
-            if (err) { setImageStatus(err.message, 'error'); return; }
-            imagePreviewEl.src = webpUrl;
-            imagePreviewWrap.style.display = 'block';
-            downloadImageBtn.href = webpUrl;
-            downloadImageBtn.style.display = 'inline-flex';
-            setImageStatus('Image ready. Download and upload it as the Featured Image in Decap.', 'success');
-          });
-        } catch (e) {
-          setImageStatus(e.message || 'Image generation failed.', 'error');
-        } finally {
-          generateImageBtn.disabled = false;
-        }
-      });
 
       function setStatus(message, type) {
         statusEl.className = 'status ' + (type || '');
@@ -330,10 +240,9 @@
           metaDescriptionEl.value = (data.draft && data.draft.meta_description) || '';
           bodyEl.value = (data.draft && data.draft.body) || '';
           transcriptEl.value = data.transcript || '';
-          imageSectionEl.style.display = 'block';
 
           var modeText = data.mode ? (' (mode: ' + data.mode + ')') : '';
-          setStatus('Draft generated' + modeText + '. Generate an image or send to Blog +.', 'success');
+          setStatus('Draft generated' + modeText + '. Send to Blog + or review fields below.', 'success');
         } catch (error) {
           setStatus(error.message || 'Draft generation failed.', 'error');
         } finally {
