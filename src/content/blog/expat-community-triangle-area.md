@@ -1,13 +1,30 @@
 ---
-title: "Building Your Village: A Guide to Finding Community as an Expat in the Triangle"
-slug: "expat-community-triangle-area"
-date: "2026-01-26"
-author: "Yoana Nin"
-category: "Community"
-tags: ["Expat Life", "Triangle Area", "Community", "Connection"]
+title: "Building Your Village: A Guide to Finding Community as an Expat in the
+  Triangle"
+slug: expat-community-triangle-area
+date: 2026-04-29T14:16:00.000-04:00
+author: Yoana Nin
+category: Community
+is_published: true
+tags:
+  - Expat Life
+  - Triangle Area
+  - Community
+  - Connection
 featured: true
-excerpt: "Moving to a new place as an expat can feel isolating. Here's your gentle guide to creating meaningful connections in North Carolina's Triangle area."
-meta_description: "Discover how to build authentic community as an expat in Raleigh, Durham, and Chapel Hill. Practical tips for creating your village in the Triangle area."
+featured_image: /images/uploads/finding-support-in-your-move.png
+image_alt: "Women of all walks of life joining together for dinner. "
+key_answer: Discover how to build authentic community as an expat in Raleigh,
+  Durham, and Chapel Hill. Practical tips for creating your village in the
+  Triangle area.
+excerpt: Moving to a new place as an expat can feel isolating. Here's your
+  gentle guide to creating meaningful connections in North Carolina's Triangle
+  area.
+meta_description: Discover how to build authentic community as an expat in
+  Raleigh, Durham, and Chapel Hill. Practical tips for creating your village in
+  the Triangle area.
+geo_focus: Raleigh, NC
+geo_schema: true
 ---
 
 # Building Your Village: A Guide to Finding Community as an Expat in the Triangle
