@@ -40,7 +40,7 @@ collections:
       - label: "Body"
         name: "body"
         widget: "markdown"
-        required: false
+        required: true
         modes: ["rich_text", "raw"]
-        default_mode: "rich_text"
-        hint: "Use H2/H3 inside body (no H1). The page title is already H1. If save fails, switch to Markdown mode once and save again."
+        default_mode: "raw"
+        hint: "Required. Use H2/H3 inside body (no H1). Prefer Markdown mode for reliable saves."

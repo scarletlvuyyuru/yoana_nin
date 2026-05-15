@@ -189,12 +189,21 @@ function parseBlogFile(path: string, rawContent: string): BlogPostListItem {
       : slug;
 
   const bodyWithoutTitle = removeLeadingH1(markdownBody);
+  const excerptFallback =
+    typeof frontmatter.excerpt === 'string' && frontmatter.excerpt.trim()
+      ? frontmatter.excerpt.trim()
+      : '';
+  const keyAnswerFallback =
+    typeof frontmatter.key_answer === 'string' && frontmatter.key_answer.trim()
+      ? frontmatter.key_answer.trim()
+      : '';
+  const effectiveBody = bodyWithoutTitle || excerptFallback || keyAnswerFallback;
 
   return {
     id: slug,
     slug,
     title,
-    content: markdownToHtml(bodyWithoutTitle),
+    content: markdownToHtml(effectiveBody),
     date: toDateString(frontmatter.date),
     author:
       typeof frontmatter.author === 'string' && frontmatter.author.trim()

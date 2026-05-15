@@ -40,6 +40,12 @@
             && hash.indexOf('/collections/blog/entries/') === -1;
         }
 
+        function isBlogEditorRoute() {
+          var hash = window.location.hash || '';
+          return hash.indexOf('/collections/blog/new') !== -1
+            || hash.indexOf('/collections/blog/entries/') !== -1;
+        }
+
         function findNewBlogPostButton() {
           var controls = Array.prototype.slice.call(document.querySelectorAll('a, button, [role="button"]'));
           return controls.find(function (el) {
@@ -98,18 +104,21 @@
             if (!parsed) return;
 
             var raw = parsed.compact;
-            var existingStatus = raw.match(/status:\s*(posted|scheduled|published)/i);
-            var status = existingStatus
-              ? existingStatus[1].charAt(0).toUpperCase() + existingStatus[1].slice(1).toLowerCase()
-              : 'Draft';
-
             var boolMatch = raw.match(/(?:live:\s*)?(true|false)\b/i);
             var isLiveEnabled = boolMatch ? boolMatch[1].toLowerCase() === 'true' : false;
             var publishTimestamp = parseSummaryDate(raw);
+
+            var status = 'Draft';
             if (boolMatch && isLiveEnabled) {
-              status = Number.isFinite(publishTimestamp) && publishTimestamp > Date.now() ? 'Scheduled' : 'Posted';
+              status = Number.isFinite(publishTimestamp) && publishTimestamp > Date.now() ? 'Scheduled' : 'Published';
             } else if (boolMatch && !isLiveEnabled) {
-              status = 'Published';
+              status = 'Draft';
+            } else {
+              var existingStatus = raw.match(/status:\s*(posted|scheduled|published|draft)/i);
+              if (existingStatus) {
+                var normalizedStatus = existingStatus[1].toLowerCase();
+                status = normalizedStatus === 'posted' ? 'Published' : normalizedStatus.charAt(0).toUpperCase() + normalizedStatus.slice(1);
+              }
             }
 
             var formatted = parsed.title + ' | ' + parsed.dateText + ' | Status: ' + status;
@@ -215,6 +224,13 @@
             source_url: 'Source URL'
           };
 
+          function normalizeText(value) {
+            return String(value || '')
+              .replace(/[\u200B-\u200D\uFEFF]/g, '')
+              .replace(/\s+/g, ' ')
+              .trim();
+          }
+
           function findByLabelText(labelText) {
             if (!labelText) return null;
             var labels = Array.prototype.slice.call(document.querySelectorAll('label'));
@@ -234,7 +250,30 @@
             return parent.querySelector('input, textarea, select, [contenteditable="true"], [role="textbox"]');
           }
 
+          function findBodyFieldElement() {
+            var strictSelectors = [
+              '[name="body"]',
+              'textarea[name="body"]',
+              '[data-name="body"] textarea',
+              '[data-name="body"] [contenteditable="true"]',
+              '[data-name="body"] [role="textbox"]',
+              '#body',
+              'textarea[id*="body" i]'
+            ];
+
+            for (var i = 0; i < strictSelectors.length; i += 1) {
+              var found = document.querySelector(strictSelectors[i]);
+              if (found) return found;
+            }
+
+            return findByLabelText('Body');
+          }
+
           function findFieldElement() {
+            if (name === 'body') {
+              return findBodyFieldElement();
+            }
+
             var selectors = [
               '[name="' + name + '"]',
               '#'+ name,
@@ -249,13 +288,6 @@
             for (var i = 0; i < selectors.length; i += 1) {
               var found = document.querySelector(selectors[i]);
               if (found) return found;
-            }
-
-            if (name === 'body') {
-              var bodyLabelMatch = findByLabelText('Body');
-              if (bodyLabelMatch) return bodyLabelMatch;
-              var richTextBox = document.querySelector('[role="textbox"]');
-              if (richTextBox) return richTextBox;
             }
 
             var byLabel = findByLabelText(labelMap[name]);
@@ -300,16 +332,32 @@
 
           var normalized = typeof value === 'string' ? value : String(value);
           var existing = el.value || el.textContent || '';
-          if (normalized.trim() && (existing || '').trim() === normalized.trim()) return true;
+          if (normalized.trim() && normalizeText(existing) === normalizeText(normalized)) return true;
 
           el.focus();
           return setInputValue(el, normalized);
         }
 
         function hasBodyContent() {
-          var bodyCandidates = Array.prototype.slice.call(
-            document.querySelectorAll('[name="body"], [data-name="body"] textarea, [role="textbox"]')
-          );
+          var bodyCandidates = Array.prototype.slice.call(document.querySelectorAll(
+            '[name="body"], textarea[name="body"], [data-name="body"] textarea, [data-name="body"] [contenteditable="true"], [data-name="body"] [role="textbox"], #body, textarea[id*="body" i]'
+          ));
+
+          var labelMatches = Array.prototype.slice.call(document.querySelectorAll('label')).map(function (label) {
+            var text = (label.textContent || '').toLowerCase().replace(/\s+/g, ' ').trim();
+            if (text.indexOf('body') === -1) return null;
+            if (label.htmlFor) {
+              return document.getElementById(label.htmlFor);
+            }
+            var parent = label.parentElement || label.closest('div');
+            return parent ? parent.querySelector('textarea, [contenteditable="true"], [role="textbox"]') : null;
+          }).filter(Boolean);
+
+          labelMatches.forEach(function (el) {
+            if (bodyCandidates.indexOf(el) === -1) {
+              bodyCandidates.push(el);
+            }
+          });
 
           for (var i = 0; i < bodyCandidates.length; i += 1) {
             var el = bodyCandidates[i];
@@ -321,6 +369,45 @@
 
           return false;
         }
+
+        (function setupBodySaveGuard() {
+          var lastWarnAt = 0;
+
+          function isSaveActionTarget(target) {
+            if (!target || !(target instanceof Element)) return false;
+            var actionEl = target.closest('button, [role="button"], a');
+            if (!actionEl) return false;
+
+            var label = [
+              actionEl.textContent || '',
+              actionEl.getAttribute('aria-label') || '',
+              actionEl.getAttribute('title') || ''
+            ].join(' ').toLowerCase();
+
+            return label.indexOf('save') !== -1
+              || label.indexOf('publish') !== -1
+              || label.indexOf('update') !== -1;
+          }
+
+          document.addEventListener('click', function (event) {
+            if (!isBlogEditorRoute()) return;
+            if (!isSaveActionTarget(event.target)) return;
+            if (hasBodyContent()) return;
+
+            event.preventDefault();
+            event.stopPropagation();
+            if (typeof event.stopImmediatePropagation === 'function') {
+              event.stopImmediatePropagation();
+            }
+
+            var now = Date.now();
+            if (now - lastWarnAt > 1200) {
+              lastWarnAt = now;
+              createOrUpdatePanel('Cannot save yet: Body is empty. Paste/apply blog content first, then save.', true);
+              window.alert('Body is empty. Please add blog content before saving or publishing.');
+            }
+          }, true);
+        })();
 
         function createOrUpdatePanel(message, isError) {
           if (!isBlogNewRoute()) return;
@@ -427,7 +514,7 @@
             }
           });
 
-          var success = titleApplied && bodyApplied && appliedCount >= 4;
+          var success = titleApplied && bodyApplied && appliedCount >= 4 && hasBodyContent();
           if (success) {
             localStorage.removeItem(PREFILL_PENDING_KEY);
           }
