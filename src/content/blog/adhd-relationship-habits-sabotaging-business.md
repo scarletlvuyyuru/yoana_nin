@@ -24,7 +24,7 @@ geo_focus: Raleigh, NC
 geo_schema: true
 source_url: https://www.tiktok.com/@yoananincoaching/video/7606489409122258189?is_from_webapp=1&sender_device=pc
 ---
-
+## How ADHD Relationship Habits Are Secretly Sabotaging Your Business
 
 Let’s talk about something that doesn’t get highlighted enough: the direct link between your home life and your revenue. Specifically, how ADHD relationship habits might actually be sabotaging your business.
 
