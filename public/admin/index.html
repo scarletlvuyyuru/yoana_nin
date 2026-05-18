@@ -339,9 +339,31 @@
         }
 
         function hasBodyContent() {
-          var bodyCandidates = Array.prototype.slice.call(document.querySelectorAll(
-            '[name="body"], textarea[name="body"], [data-name="body"] textarea, [data-name="body"] [contenteditable="true"], [data-name="body"] [role="textbox"], #body, textarea[id*="body" i]'
-          ));
+          var bodySelectors = [
+            '[name="body"]',
+            'textarea[name="body"]',
+            '[data-name="body"] textarea',
+            '[data-name="body"] [contenteditable="true"]',
+            '[data-name="body"] [role="textbox"]',
+            '#body',
+            'textarea[id*="body" i]',
+            '[aria-label*="body" i]',
+            '[aria-labelledby*="body" i]',
+            '.cm-editor .cm-content',
+            '.cm-content',
+            '.ProseMirror',
+            '[data-slate-editor="true"]',
+            '[role="textbox"]'
+          ];
+          var bodyCandidates = [];
+
+          bodySelectors.forEach(function (selector) {
+            Array.prototype.forEach.call(document.querySelectorAll(selector), function (el) {
+              if (bodyCandidates.indexOf(el) === -1) {
+                bodyCandidates.push(el);
+              }
+            });
+          });
 
           var labelMatches = Array.prototype.slice.call(document.querySelectorAll('label')).map(function (label) {
             var text = (label.textContent || '').toLowerCase().replace(/\s+/g, ' ').trim();
@@ -361,7 +383,7 @@
 
           for (var i = 0; i < bodyCandidates.length; i += 1) {
             var el = bodyCandidates[i];
-            var raw = (el.value || el.textContent || '').replace(/[\u200B-\u200D\uFEFF]/g, '');
+            var raw = (el.value || el.textContent || el.innerText || '').replace(/[\u200B-\u200D\uFEFF]/g, '');
             if (raw.replace(/\s+/g, '').length > 0) {
               return true;
             }
