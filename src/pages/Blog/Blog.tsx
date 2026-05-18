@@ -70,10 +70,10 @@ const Blog: React.FC = () => {
             <div className={styles.blogGrid}>
               {featuredPosts.map((post) => (
                 <article key={post.id} className={`${styles.blogCard} ${styles.featuredCard}`} data-category={post.category}>
-                  {post.featured_image && (
+                  {post.thumbnail_image && (
                     <a href={`/blog/${post.slug}`} className={styles.imageLink}>
                       <img
-                        src={post.featured_image}
+                        src={post.thumbnail_image}
                         alt={post.image_alt || post.title}
                         className={styles.cardImage}
                         loading="lazy"
@@ -134,10 +134,10 @@ const Blog: React.FC = () => {
             <div className={styles.blogGrid}>
               {visiblePosts.map((post) => (
                 <article key={post.id} className={styles.blogCard} data-category={post.category}>
-                  {post.featured_image && (
+                  {post.thumbnail_image && (
                     <a href={`/blog/${post.slug}`} className={styles.imageLink}>
                       <img
-                        src={post.featured_image}
+                        src={post.thumbnail_image}
                         alt={post.image_alt || post.title}
                         className={styles.cardImage}
                         loading="lazy"

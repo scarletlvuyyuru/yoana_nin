@@ -169,6 +169,46 @@ function markdownToHtml(markdownBody: string): string {
   return marked.parse(markdownBody) as string;
 }
 
+function extractFirstImageSrc(html: string): string | undefined {
+  if (typeof html !== 'string' || !html.trim()) {
+    return undefined;
+  }
+
+  const match = html.match(/<img[^>]+src=["']([^"']+)["']/i);
+  return match && match[1] ? match[1] : undefined;
+}
+
+function normalizeImagePath(value: unknown): string | undefined {
+  if (typeof value !== 'string') {
+    return undefined;
+  }
+
+  const trimmed = value.trim();
+  return trimmed ? trimmed : undefined;
+}
+
+function resolveFeaturedImage(frontmatter: Record<string, unknown>): string | undefined {
+  const candidates = [
+    frontmatter.featured_image,
+    frontmatter.featuredImage,
+    frontmatter.thumbnail_image,
+    frontmatter.thumbnailImage,
+    frontmatter.thumbnail,
+    frontmatter.hero_image,
+    frontmatter.heroImage,
+    frontmatter.image,
+  ];
+
+  for (const candidate of candidates) {
+    const normalized = normalizeImagePath(candidate);
+    if (normalized) {
+      return normalized;
+    }
+  }
+
+  return undefined;
+}
+
 function extractSlug(path: string, frontmatterSlug: unknown): string {
   if (typeof frontmatterSlug === 'string' && frontmatterSlug.trim()) {
     return frontmatterSlug.trim();
@@ -198,12 +238,15 @@ function parseBlogFile(path: string, rawContent: string): BlogPostListItem {
       ? frontmatter.key_answer.trim()
       : '';
   const effectiveBody = bodyWithoutTitle || excerptFallback || keyAnswerFallback;
+  const effectiveContent = markdownToHtml(effectiveBody);
+  const contentThumbnail = extractFirstImageSrc(effectiveContent);
+  const resolvedFeaturedImage = resolveFeaturedImage(frontmatter);
 
   return {
     id: slug,
     slug,
     title,
-    content: markdownToHtml(effectiveBody),
+    content: effectiveContent,
     date: toDateString(frontmatter.date),
     author:
       typeof frontmatter.author === 'string' && frontmatter.author.trim()
@@ -219,8 +262,7 @@ function parseBlogFile(path: string, rawContent: string): BlogPostListItem {
         : '',
     meta_description:
       typeof frontmatter.meta_description === 'string' ? frontmatter.meta_description : undefined,
-    featured_image:
-      typeof frontmatter.featured_image === 'string' ? frontmatter.featured_image : undefined,
+    featured_image: resolvedFeaturedImage,
     image_alt: typeof frontmatter.image_alt === 'string' ? frontmatter.image_alt : undefined,
     key_answer: typeof frontmatter.key_answer === 'string' ? frontmatter.key_answer : undefined,
     faq: toFaqList(frontmatter.faq),
@@ -231,6 +273,7 @@ function parseBlogFile(path: string, rawContent: string): BlogPostListItem {
     source_type: normalizeSourceType(frontmatter.source_type),
     source_url: typeof frontmatter.source_url === 'string' ? frontmatter.source_url : undefined,
     transcript: typeof frontmatter.transcript === 'string' ? frontmatter.transcript : undefined,
+    thumbnail_image: resolvedFeaturedImage || contentThumbnail,
   };
 }
 

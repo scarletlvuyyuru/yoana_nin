@@ -37,6 +37,7 @@ export interface BlogPostData {
   source_type?: BlogSourceType;
   source_url?: string;
   transcript?: string;
+  thumbnail_image?: string;
 }
 
 export interface BlogPostListItem extends BlogPostData {
