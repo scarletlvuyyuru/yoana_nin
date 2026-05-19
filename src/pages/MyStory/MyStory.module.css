@@ -28,37 +28,70 @@
   z-index: 2;
 }
 
+.heroEyebrow {
+  font-family: var(--font-heading);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--color-magenta);
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
 .heroTitle {
   font-family: var(--font-heading);
-  font-size: var(--font-size-5xl);
+  font-size: clamp(2.2rem, 4.7vw, 4.25rem);
   font-weight: 600;
   background: linear-gradient(135deg, var(--color-navy) 0%, var(--color-magenta) 50%, var(--color-navy) 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
   margin-bottom: 1.5rem;
+  max-width: 780px;
+  margin-left: auto;
+  margin-right: auto;
   line-height: 1.5;
   letter-spacing: -0.02em;
 }
 
 .heroSubtitle {
   font-family: var(--font-heading);
-  font-size: var(--font-size-2xl);
+  font-size: var(--font-size-xl);
   color: var(--text-secondary);
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
   font-weight: 400;
+  max-width: 680px;
+  margin-left: auto;
+  margin-right: auto;
   line-height: 1.5;
   letter-spacing: -0.01em;
+}
+
+.heroSignals {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.heroSignal {
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(26, 42, 66, 0.12);
+  border-radius: 999px;
+  padding: 0.5rem 1rem;
+  color: var(--text-primary);
+  font-size: var(--font-size-sm);
+  font-weight: 600;
 }
 
 .heroDescription {
   font-family: var(--font-body);
   font-size: var(--font-size-lg);
-  color: var(--text-secondary);
-  max-width: 600px;
+  color: var(--text-primary);
+  max-width: 640px;
   margin: 0 auto;
   line-height: 1.5;
-  font-style: italic;
+  font-style: normal;
 }
 
 /* Film Reel - Hidden on desktop */
@@ -95,7 +128,7 @@
   }
 }
 
-/* Acts Section - Combined with Subtle Overlay */
+/* Story Path Section */
 .actsSection {
   background: var(--color-cream);
   background-image: url('../../assets/images/sunsetBackground.webp');
@@ -116,6 +149,91 @@
   background: rgba(250, 249, 246, 0.85); /* Cream overlay at 85% opacity */
   pointer-events: none;
   z-index: 1;
+}
+
+.storyIntro {
+  max-width: 900px;
+  margin: 0 auto 2rem auto;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+
+.storyTitle {
+  font-family: var(--font-heading);
+  font-size: clamp(1.9rem, 3.3vw, 3rem);
+  color: var(--text-primary);
+  margin-bottom: 0.8rem;
+  letter-spacing: -0.01em;
+}
+
+.storyLead {
+  font-family: var(--font-body);
+  font-size: var(--font-size-lg);
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.storyGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.5rem;
+  max-width: 1080px;
+  margin: 0 auto 2rem auto;
+  position: relative;
+  z-index: 2;
+}
+
+.storyCard {
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(26, 42, 66, 0.12);
+  border-radius: 16px;
+  padding: 1.4rem 1.25rem;
+  box-shadow: 0 8px 24px rgba(26, 42, 66, 0.08);
+}
+
+.storyTag {
+  margin: 0 0 0.65rem 0;
+  font-size: var(--font-size-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-magenta);
+  font-weight: 700;
+}
+
+.storyBody {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: var(--font-size-md);
+  line-height: 1.5;
+  color: var(--text-primary);
+}
+
+.storyBridge {
+  max-width: 900px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+
+.storyBridgeText {
+  margin: 0 0 1rem 0;
+  font-family: var(--font-body);
+  font-size: var(--font-size-lg);
+  line-height: 1.5;
+  color: var(--text-primary);
+}
+
+.storyQuote {
+  margin: 2rem 0 0 0;
+  padding: 1.25rem 1.5rem;
+  border-left: 4px solid var(--color-magenta);
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 0 12px 12px 0;
+  font-family: var(--font-heading);
+  font-size: var(--font-size-lg);
+  color: var(--text-primary);
+  line-height: 1.5;
 }
 
 .actContent {
@@ -368,6 +486,17 @@
   color: var(--color-navy) !important;
 }
 
+[data-theme="dark"] .heroSignal {
+  background: rgba(26, 42, 66, 0.88);
+  border-color: rgba(255, 255, 255, 0.16);
+  color: #ffffff;
+}
+
+[data-theme="dark"] .storyCard,
+[data-theme="dark"] .storyQuote {
+  background: rgba(255, 255, 255, 0.92);
+}
+
 .credentialsLayout {
   display: grid;
   grid-template-columns: 400px 1fr;
@@ -525,15 +654,38 @@
   .heroTitle {
     font-size: var(--font-size-4xl);
     text-align: left;
+    max-width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .heroSignals {
+    justify-content: flex-start;
   }
   
   .heroSubtitle {
     font-size: var(--font-size-2xl);
     text-align: left;
+    max-width: 100%;
+    margin-left: 0;
+    margin-right: 0;
   }
   
   .heroDescription {
     font-size: var(--font-size-lg);
+    text-align: left;
+  }
+
+  .storyIntro {
+    text-align: left;
+  }
+
+  .storyGrid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .storyBridge {
     text-align: left;
   }
   

@@ -85,17 +85,20 @@ const MyStory: React.FC = () => {
       {/* Hero Section */}
       <section className={styles.hero} style={{backgroundImage: `url(${heroBackground})`}}>
         <div className={styles.container}>
+          <p className={styles.heroEyebrow}>My Story</p>
           <h1 className={styles.heroTitle}>
-            MY STORY: <br />FROM ROMANIA TO RALEIGH
+            I came to America with a suitcase, $10,000, an accent, and a dream.
           </h1>
           <h2 className={styles.heroSubtitle}>
-            How I Found Joy and Success by Rebuilding From the Ground Up
+            From starting over to building with intention.
           </h2>
+          <div className={styles.heroSignals}>
+            <span className={styles.heroSignal}>No connections.</span>
+            <span className={styles.heroSignal}>No roadmap.</span>
+            <span className={styles.heroSignal}>No guarantee it would work.</span>
+          </div>
           <p className={styles.heroDescription}>
-            Some journeys start with certainty. Mine started with a suitcase, $10,000, an accent, and a dream that felt bigger than my reality.
-          </p>
-          <p className={styles.heroDescription} style={{paddingTop: '1.5rem'}}>
-            Life had a bigger plan — one that would break me open, strip me down, rebuild me completely, and eventually reveal the woman I was meant to become.
+            I won the Green Card Lottery and landed in Los Angeles - wide-eyed, determined, and completely starting over.
           </p>
           
           {/* Film Reel - Mobile/Tablet Only */}
@@ -111,46 +114,73 @@ const MyStory: React.FC = () => {
         </div>
       </section>
 
-      {/* Acts Section - Combined */}
+      {/* Story Path Section */}
       <section className={styles.actsSection}>
         <div className={styles.container}>
-          {/* Act I */}
-          <div className={styles.actContent} id="my-journey">
-            <div className={styles.actNumber}>I</div>
-            <div className={styles.actText}>
-              <h2 className={styles.actTitle}>The American Dream & The Hollywood Hustle</h2>
-              <h3 className={styles.actDescription}>
-                I arrived in Los Angeles after winning the Green Card Lottery, wide-eyed and determined. I worked jobs that built grit, but I learned quickly that in America, dreams don't chase you— you chase them. Yet, something was missing: joy, alignment, and purpose. The success I wanted wasn't loud or glamorous; it was peaceful.
-              </h3>
-            </div>
+          <div className={styles.storyIntro} id="my-journey">
+            <h2 className={styles.storyTitle}>What Starting Over Really Felt Like</h2>
+            <p className={styles.storyLead}>
+              But starting over is never just logistical. It's mental.
+            </p>
           </div>
 
-          {/* Act Divider */}
-          <div className={styles.actDivider}></div>
+          <div className={styles.storyGrid}>
+            <article className={styles.storyCard}>
+              <p className={styles.storyTag}>Mental Load</p>
+              <p className={styles.storyBody}>
+                It's waking up every day not knowing which step to take first. It's the overwhelm of too many decisions and not enough clarity. It's the paralysis of wanting to move forward - and not knowing how.
+              </p>
+            </article>
 
-          {/* Act II */}
-          <div className={styles.actContent}>
-            <div className={styles.actNumber}>II</div>
-            <div className={styles.actText}>
-              <h2 className={styles.actTitle}>The Struggle and The Shift</h2>
-              <h3 className={styles.actDescription}>
-                Life tested me in ways I never expected. Infertility. Two heartbreaking miscarriages. Financial collapse. In my darkest moments, I realized that hard work alone doesn't save you—joy does. To heal, I had to stop merely surviving and start listening to my soul. I learned that making peace with the past is essential because you no longer reside in that space, and change cannot occur there. I had to engage in a step-by-step process of forgiveness to release the emotional burdens acting as barriers to my goals.
-              </h3>
-            </div>
+            <article className={styles.storyCard}>
+              <p className={styles.storyTag}>The Truth</p>
+              <p className={styles.storyBody}>
+                I know what it feels like to be stuck inside your own potential.
+              </p>
+            </article>
+
+            <article className={styles.storyCard}>
+              <p className={styles.storyTag}>The Questions</p>
+              <p className={styles.storyBody}>
+                Finding my purpose didn't happen overnight. It took sitting in the confusion long enough to finally ask the right questions - What do I actually want? What am I building? Where do I even begin?
+              </p>
+            </article>
+
+            <article className={styles.storyCard}>
+              <p className={styles.storyTag}>The Shift</p>
+              <p className={styles.storyBody}>
+                When I stopped trying to do everything and started building with intention, everything shifted.
+              </p>
+            </article>
+
+            <article className={styles.storyCard}>
+              <p className={styles.storyTag}>The System</p>
+              <p className={styles.storyBody}>
+                We moved to Raleigh, NC. We built The Prosperous Agency from the ground up - with focus, discipline, and a clear system that turned overwhelm into momentum.
+              </p>
+            </article>
+
+            <article className={styles.storyCard}>
+              <p className={styles.storyTag}>Now</p>
+              <p className={styles.storyBody}>
+                And now? I help women do the same. I have sat across from brilliant women entrepreneurs - women with ADHD, big ideas, and even bigger hearts - who were exhausted, scattered, and stuck. Not because they lacked talent. Because they lacked a system built for their brain.
+              </p>
+            </article>
           </div>
 
-          {/* Act Divider */}
-          <div className={styles.actDivider}></div>
-
-          {/* Act III */}
-          <div className={styles.actContent}>
-            <div className={styles.actNumber}>III</div>
-            <div className={styles.actText}>
-              <h2 className={styles.actTitle}>The Phoenix Rising</h2>
-              <h3 className={styles.actDescription}>
-                We moved to Raleigh, NC—a place that welcomed us with open arms. We rebuilt from zero and created The Prosperous Agency. Naming my son Phoenix was a testament to rising from the ashes to find stability and purpose. Today, I choose to give that joy back to every person I work with.
-              </h3>
-            </div>
+          <div className={styles.storyBridge}>
+            <p className={styles.storyBridgeText}>
+              I know what it means to face a blank page and not know where to start. I know the weight of confusion when your vision is clear but your path isn't. I know what it takes to push through - and come out the other side with purpose.
+            </p>
+            <p className={styles.storyBridgeText}>
+              That lived experience is what I bring into every coaching session.
+            </p>
+            <p className={styles.storyBridgeText}>
+              If I could build a thriving business starting from scratch, in a new country, in a new language, imagine what you can build when someone finally gives you the right system.
+            </p>
+            <blockquote className={styles.storyQuote}>
+              "You don't need to be fixed. You need a strategy that works for the way you're wired." - Yoana Nin
+            </blockquote>
           </div>
         </div>
       </section>
@@ -276,10 +306,10 @@ const MyStory: React.FC = () => {
         <div className={styles.container}>
           <div className={styles.ctaContent}>
             <p className={styles.ctaTagline}>
-              Fix My System
+              You do not need to be fixed.
             </p>
             <p className={styles.ctaText}>
-              <span className={styles.ctaGradientText}>Stop the overwhelm. Start the strategy.</span>
+              <span className={styles.ctaGradientText}>You need a strategy that works for the way you are wired.</span>
             </p>
             <Link to="/contact" className="btn btn-primary" style={{fontSize: 'var(--font-size-lg)', padding: '1rem 2.5rem'}}>
               Connect with Yoana
