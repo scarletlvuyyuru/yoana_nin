@@ -98,7 +98,7 @@ const Testimonials: React.FC = () => {
     <section className={styles.testimonialsSection}>
       <div className={styles.container}>
         <div className={styles.header}>
-          <p className={styles.tagline}>Our Students Get Results</p>
+          <p className={styles.tagline}>Real Women. Real Results.</p>
           <h2 className={styles.title}>What will your success story be?</h2>
         </div>
 

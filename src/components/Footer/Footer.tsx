@@ -5,6 +5,7 @@ import facebookIcon from '../../assets/images/icon_fb_wht.webp';
 import instagramIcon from '../../assets/images/icon_instagram.webp';
 import linkedinIcon from '../../assets/images/icon_linkedin.webp';
 import tiktokIcon from '../../assets/images/icon_tiktok_wht.webp';
+import youtubeIcon from '../../assets/images/youtubeLikesIcon.webp';
 
 const Footer: React.FC = () => {
   const footerStyle = {
@@ -33,6 +34,26 @@ const Footer: React.FC = () => {
     marginBottom: '0.5rem',
     display: 'block',
     transition: 'color 0.2s ease'
+  };
+
+  const sloganWrapStyle = {
+    display: 'inline-block',
+    marginBottom: '1rem',
+    padding: '0.45rem 0.75rem',
+    borderRadius: '999px',
+    background: 'linear-gradient(135deg, rgba(255, 107, 107, 0.16), rgba(0, 123, 255, 0.16))',
+    border: '1px solid rgba(13, 37, 71, 0.12)'
+  };
+
+  const sloganTextStyle = {
+    margin: 0,
+    fontSize: 'var(--font-size-base)',
+    fontWeight: 700,
+    letterSpacing: '0.01em',
+    background: 'linear-gradient(120deg, var(--color-navy), var(--color-accessible-magenta))',
+    WebkitBackgroundClip: 'text',
+    backgroundClip: 'text',
+    color: 'transparent'
   };
 
   const socialStyle = {
@@ -85,53 +106,8 @@ const Footer: React.FC = () => {
                 Yoana Nin Coaching
               </h3>
             </div>
-            <p style={{ color: 'var(--footer-text-secondary)', marginBottom: '1rem' }}>
-           Accredited Life Coach For Women Entrepreneurs (ADHD Focus)
-            </p>
-            {/* Social Media Links */}
-            <div style={socialStyle}>
-              <a 
-                href="https://www.facebook.com/Nin.Yoana/" 
-                style={socialLinkStyle} 
-                aria-label="Facebook"
-                onMouseOver={(e) => e.currentTarget.style.backgroundColor = 'rgba(13, 37, 71, 0.8)'}
-                onMouseOut={(e) => e.currentTarget.style.backgroundColor = 'var(--color-navy)'}
-              >
-                <img src={facebookIcon} alt="Facebook" style={{width: '20px', height: '20px'}} />
-              </a>
-              <a 
-                href="https://www.instagram.com/yoananincoaching/" 
-                style={socialLinkStyle} 
-                aria-label="Instagram"
-                target="_blank"
-                rel="noopener noreferrer"
-                onMouseOver={(e) => e.currentTarget.style.backgroundColor = 'rgba(13, 37, 71, 0.8)'}
-                onMouseOut={(e) => e.currentTarget.style.backgroundColor = 'var(--color-navy)'}
-              >
-                <img src={instagramIcon} alt="Instagram" style={{width: '20px', height: '20px'}} />
-              </a>
-              <a 
-                href="https://www.linkedin.com/in/yoananin" 
-                style={socialLinkStyle} 
-                aria-label="LinkedIn"
-                target="_blank"
-                rel="noopener noreferrer"
-                onMouseOver={(e) => e.currentTarget.style.backgroundColor = 'rgba(13, 37, 71, 0.8)'}
-                onMouseOut={(e) => e.currentTarget.style.backgroundColor = 'var(--color-navy)'}
-              >
-                <img src={linkedinIcon} alt="LinkedIn" style={{width: '20px', height: '20px'}} />
-              </a>
-              <a 
-                href="https://www.tiktok.com/@yoananincoaching" 
-                style={socialLinkStyle} 
-                aria-label="TikTok"
-                target="_blank"
-                rel="noopener noreferrer"
-                onMouseOver={(e) => e.currentTarget.style.backgroundColor = 'rgba(13, 37, 71, 0.8)'}
-                onMouseOut={(e) => e.currentTarget.style.backgroundColor = 'var(--color-navy)'}
-              >
-                <img src={tiktokIcon} alt="TikTok" style={{width: '20px', height: '20px'}} />
-              </a>
+            <div style={sloganWrapStyle}>
+              <p style={sloganTextStyle}>Fix the System. Not You.</p>
             </div>
           </div>
           
@@ -140,15 +116,17 @@ const Footer: React.FC = () => {
             <h4 style={{ 
               color: 'var(--footer-text-primary)', 
               marginBottom: '1rem',
-              fontSize: 'var(--font-size-lg)'
+              fontSize: 'var(--font-size-lg)',
+              fontWeight: 700,
+              textDecoration: 'underline',
+              textUnderlineOffset: '4px'
             }}>
               Services
             </h4>
             <Link to="/coaching" style={linkStyle} onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>Life Coaching</Link>
             <Link to="/coaching" style={linkStyle} onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>ADHD Coaching</Link>
             <Link to="/coaching" style={linkStyle} onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>Entrepreneur Guidance</Link>
-            <Link to="/real-estate" style={linkStyle} onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>Real Estate</Link>
-            <Link to="/real-estate" style={linkStyle} onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>Relocation Services</Link>
+          
           </div>
           
           {/* Quick Links Section */}
@@ -156,41 +134,109 @@ const Footer: React.FC = () => {
             <h4 style={{ 
               color: 'var(--footer-text-primary)', 
               marginBottom: '1rem',
-              fontSize: 'var(--font-size-lg)'
+              fontSize: 'var(--font-size-lg)',
+              fontWeight: 700,
+              textDecoration: 'underline',
+              textUnderlineOffset: '4px'
             }}>
               Quick Links
             </h4>
-            <Link to="/my-story" style={linkStyle} onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>My Story</Link>
-            <Link to="/blog" style={linkStyle} onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>Insights & Inspiration</Link>
+            <Link to="/my-story" style={linkStyle} onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>About Yoana</Link>
+            <Link to="/coaching" style={linkStyle} onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>Work With Me</Link>
+            <Link to="/assessment" style={linkStyle} onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>Free Quiz</Link>
+            <Link to="/contact#top" style={linkStyle} onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>Book a Call</Link>
             <Link to="/contact" style={linkStyle} onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>Contact</Link>
-            <Link to="/privacy" style={linkStyle} onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>Privacy Policy</Link>
-            <Link to="/terms" style={linkStyle} onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>Terms & Conditions</Link>
           </div>
-          
+
           {/* Contact Section */}
           <div>
-            <h4 style={{ 
-              color: 'var(--footer-text-primary)', 
-              marginBottom: '1rem',
-              fontSize: 'var(--font-size-lg)'
+            <h4 style={{
+              color: 'var(--footer-text-primary)',
+              marginBottom: '0.6rem',
+              fontSize: 'var(--font-size-lg)',
+              fontWeight: 700,
+              textDecoration: 'underline',
+              textUnderlineOffset: '4px'
             }}>
               Get In Touch
             </h4>
-            <p style={{ color: 'var(--footer-text-secondary)', marginBottom: '0.5rem' }}>
-              Serving Raleigh, Cary, Apex & relocators worldwide
-            </p>
-            <a 
-              href="mailto:yoana@yoananin.com" 
+            <a
+              href="mailto:yoana@yoananin.com"
               style={linkStyle}
               onMouseOver={(e) => e.currentTarget.style.color = 'var(--color-magenta)'}
               onMouseOut={(e) => e.currentTarget.style.color = 'var(--footer-text-secondary)'}
             >
               yoana@yoananin.com
             </a>
-            <p style={{ color: 'var(--footer-text-secondary)', fontSize: 'var(--font-size-sm)', marginTop: '0.5rem' }}>
-              Licensed in North Carolina
+            {/* Social Media Links */}
+            <div style={socialStyle}>
+              <a
+                href="https://www.facebook.com/Nin.Yoana/"
+                style={socialLinkStyle}
+                aria-label="Facebook"
+                onMouseOver={(e) => e.currentTarget.style.backgroundColor = 'rgba(13, 37, 71, 0.8)'}
+                onMouseOut={(e) => e.currentTarget.style.backgroundColor = 'var(--color-navy)'}
+              >
+                <img src={facebookIcon} alt="Facebook" style={{width: '20px', height: '20px'}} />
+              </a>
+              <a
+                href="https://www.instagram.com/yoananincoaching/"
+                style={socialLinkStyle}
+                aria-label="Instagram"
+                target="_blank"
+                rel="noopener noreferrer"
+                onMouseOver={(e) => e.currentTarget.style.backgroundColor = 'rgba(13, 37, 71, 0.8)'}
+                onMouseOut={(e) => e.currentTarget.style.backgroundColor = 'var(--color-navy)'}
+              >
+                <img src={instagramIcon} alt="Instagram" style={{width: '20px', height: '20px'}} />
+              </a>
+              <a
+                href="https://www.linkedin.com/in/yoananin"
+                style={socialLinkStyle}
+                aria-label="LinkedIn"
+                target="_blank"
+                rel="noopener noreferrer"
+                onMouseOver={(e) => e.currentTarget.style.backgroundColor = 'rgba(13, 37, 71, 0.8)'}
+                onMouseOut={(e) => e.currentTarget.style.backgroundColor = 'var(--color-navy)'}
+              >
+                <img src={linkedinIcon} alt="LinkedIn" style={{width: '20px', height: '20px'}} />
+              </a>
+              <a
+                href="https://www.tiktok.com/@yoananincoaching"
+                style={socialLinkStyle}
+                aria-label="TikTok"
+                target="_blank"
+                rel="noopener noreferrer"
+                onMouseOver={(e) => e.currentTarget.style.backgroundColor = 'rgba(13, 37, 71, 0.8)'}
+                onMouseOut={(e) => e.currentTarget.style.backgroundColor = 'var(--color-navy)'}
+              >
+                <img src={tiktokIcon} alt="TikTok" style={{width: '20px', height: '20px'}} />
+              </a>
+              <a
+                href="https://www.youtube.com/@ElevatewithYoanaNin"
+                style={socialLinkStyle}
+                aria-label="YouTube"
+                target="_blank"
+                rel="noopener noreferrer"
+                onMouseOver={(e) => e.currentTarget.style.backgroundColor = 'rgba(13, 37, 71, 0.8)'}
+                onMouseOut={(e) => e.currentTarget.style.backgroundColor = 'var(--color-navy)'}
+              >
+                <img src={youtubeIcon} alt="YouTube" style={{width: '20px', height: '20px'}} />
+              </a>
+            </div>
+            <p style={{ color: 'var(--footer-text-secondary)', fontSize: 'var(--font-size-sm)', marginTop: '0.75rem', lineHeight: 1.45 }}>
+              Yoana is also a licensed Real Estate Professional serving the Raleigh, NC area.{' '}
+              <a
+                href="https://www.theprosperousagency.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ color: 'var(--footer-text-secondary)', textDecoration: 'underline' }}
+              >
+                Learn more -&gt;
+              </a>
             </p>
           </div>
+          
         </div>
         
         {/* Bottom Section */}

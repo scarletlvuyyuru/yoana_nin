@@ -4,13 +4,7 @@ import { Helmet } from 'react-helmet-async';
 import styles from './Home.module.css';
 import SEO from '../../components/SEO/SEO';
 import heroImage from '../../assets/images/YoanaExpo.webp';
-import coachingImage from '../../assets/images/masterMindset.webp';
-import realEstateImage from '../../assets/images/Sanctuary.webp';
-import blogImage from '../../assets/images/buildYourCommuntiy.webp';
-import bulletPoint from '../../assets/images/bulletPoint.webp';
 import lookingThroughFingersImage from '/YoanaIseeYou.webp';
-import microphoneIcon from '../../assets/images/microphoneIcon.webp';
-import youtubeLikesIcon from '../../assets/images/youtubeLikesIcon.webp';
 import CredibilityStrip from '../../components/CredibilityStrip/CredibilityStrip';
 import Testimonials from '../../components/Testimonials/Testimonials';
 
@@ -182,31 +176,124 @@ const Home: React.FC = () => {
               ADHD Powerhouse Coaching
             </div>
             <h1 className={styles.heroTitle}>
-              Brilliant mind. Overloaded life.
+              Your Brain Isn't Broken. Your System Is.
             </h1>
             <p className={styles.heroSubtitle}>
-              Let's fix the system — not you.
+              ADHD Coaching for Women Entrepreneurs Who Are Done Playing Small.
             </p>
             <div className={styles.heroValueProps}>
               <div className={styles.valueItem}>
-                <span className={styles.valueHighlight}>Build the business.</span>
+                <span className={styles.valueHighlight}>You have the ideas. The drive. The vision.</span>
               </div>
               <div className={styles.valueItem}>
-                <span className={styles.valueHighlight}>Calm the chaos.</span>
+                <span className={styles.valueHighlight}>What you need is a system that works with your brain — not against it.</span>
               </div>
               <div className={styles.valueItem}>
-                <span className={styles.valueHighlight}>Make your ADHD your unfair advantage.</span>
+                <span className={styles.valueHighlight}>That's exactly what we build together.</span>
               </div>
             </div>
            
             <div className={styles.heroCtas}>
-              <Link 
-                to="/coaching" 
+              <a
+                href=""
                 className={`btn btn-primary ${styles.primaryCta}`}
-                onClick={() => window.scrollTo(0, 0)}
+                onClick={(event) => event.preventDefault()}
               >
-                Transform Your ADHD Into Your Business Superpower
-              </Link>
+                YES, I'M READY — BOOK MY FREE CALL
+              </a>
+              <a
+                href=""
+                className={`btn btn-secondary ${styles.secondaryCta}`}
+                onClick={(event) => event.preventDefault()}
+              >
+                TAKE THE FREE ADHD QUIZ FIRST
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Problem Section */}
+      <section className={styles.problemSection}>
+        <div className={styles.container}>
+          <div className={styles.problemContent}>
+            <h2 className={styles.problemTitle}>Does This Sound Like You?</h2>
+            <ul className={styles.problemList}>
+              <li>You start strong... then lose momentum halfway through</li>
+              <li>Your to-do list is a mile long but nothing gets done</li>
+              <li>You feel like you're always "almost there" but never quite arriving</li>
+              <li>You've been told to "just focus" — as if it were that simple</li>
+              <li>You're brilliant in your head but scattered in execution</li>
+              <li>You wonder if everyone else has a secret you don't</li>
+            </ul>
+            <p className={styles.problemClose}>
+              You're not lazy. You're not broken. You're wired differently — and that's your edge.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Solution Section */}
+      <section className={styles.solutionSection}>
+        <div className={styles.container}>
+          <div className={styles.solutionContent}>
+            <h2 className={styles.solutionTitle}>Here's What Changes When You Work With Me</h2>
+            <div className={styles.solutionGrid}>
+              <article className={styles.solutionCard}>
+                <h3 className={styles.solutionCardTitle}>CLARITY</h3>
+                <p className={styles.solutionCardText}>
+                  We cut through the noise and identify exactly what's holding you back — and what to do first.
+                </p>
+              </article>
+              <article className={styles.solutionCard}>
+                <h3 className={styles.solutionCardTitle}>SYSTEMS</h3>
+                <p className={styles.solutionCardText}>
+                  We build simple, repeatable systems designed for your ADHD brain — not a neurotypical template.
+                </p>
+              </article>
+              <article className={styles.solutionCard}>
+                <h3 className={styles.solutionCardTitle}>MOMENTUM</h3>
+                <p className={styles.solutionCardText}>
+                  You stop spinning and start moving. Consistently. Confidently. On your terms.
+                </p>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Section 3: Proof */}
+      <section id="section-3-proof" className={styles.proofSection}>
+        <div className={styles.container}>
+          <div className={styles.proofContent}>
+            <h2 className={styles.proofTitle}>I Know This Works — Because My Clients Prove It Every Day</h2>
+            <p className={styles.proofText}>
+              <strong>I'm not a coach who learned ADHD from a textbook.</strong>
+            </p>
+            <p className={styles.proofText}>
+              I've sat across from brilliant women entrepreneurs who felt exhausted from fighting their own brains.
+            </p>
+            <ul className={styles.proofList}>
+              <li><strong>Every tool, still stuck:</strong> They had planners, strategies, and advice, but no real momentum.</li>
+              <li><strong>The real gap:</strong> It was not motivation. It was a system built for how their brain actually works.</li>
+              <li><strong>What I specialize in:</strong> Turning chaos into clarity, structure, and consistent execution.</li>
+              <li><strong>Real-world proof:</strong> I built a thriving real estate business in Raleigh using the same systems I teach.</li>
+            </ul>
+
+            <p className={styles.proofTextStrong}>And the results speak for themselves.</p>
+
+            <blockquote className={styles.proofQuote}>
+              "I don't just teach strategies. I build the exact system your brain needs — and my clients' results are the proof." — Yoana Nin
+            </blockquote>
+
+            <div className={styles.proofCtaWrap}>
+              <a
+                href=""
+                className={`btn btn-primary ${styles.proofCta}`}
+                onClick={(event) => event.preventDefault()}
+              >
+                YES, I'M READY — BOOK MY FREE CALL
+              </a>
             </div>
           </div>
         </div>
@@ -215,154 +302,131 @@ const Home: React.FC = () => {
       {/* Credibility Strip */}
       <CredibilityStrip />
 
-      {/* Three Paths Section */}
-      <section id="three-paths" className={styles.section}>
+      {/* Fit Section */}
+      <section className={styles.fitSection}>
         <div className={styles.container}>
-          <p className="taglineDark">Let me help guide the way</p>
-          <h2 className={styles.sectionTitle}>
-           How We Can Begin Your Journey Together
-          </h2>
-          <h3 className={styles.sectionSubtitle}>
-            Three ways to stop surviving and start thriving, whether you're rebuilding confidence, finding home, or getting inspired.
-          </h3>
-          <div className={styles.pathsGrid}>
-            <div className={`${styles.pathCard} ${styles.coaching}`}>
-              <div className={styles.cardHeader}>
-                <img 
-                  src={coachingImage} 
-                  alt="Coaching - Master Your Mindset" 
-                  className={styles.cardHeaderImage}
-                  loading="lazy"
-                  decoding="async"
-                  fetchPriority="low"
-                />
-                <div className={styles.cardHeaderOverlay}>
-                  <h4 className={`${styles.cardTitle} ${styles.coaching}`}>
-                    Master Your ADHD Power<br/>(Coaching)
-                  </h4>
-                </div>
-              </div>
-              <div className={styles.cardContent}>
-                <p className={styles.cardDescription}>
-                  Build the business. Calm the chaos.
-                </p>
-                <div className={styles.cardText}>
-                  <div className={styles.bulletItem}>
-                    <img src={bulletPoint} alt="pink bullet point star" className={styles.bulletIcon} />
-                    <span>Community-Driven Transformation</span>
-                  </div>
-                  <div className={styles.bulletItem}>
-                    <img src={bulletPoint} alt="pink bullet point star" className={styles.bulletIcon} />
-                    <span>6-Month Focused Founder Framework</span>
-                  </div>
-                  <div className={styles.bulletItem}>
-                    <img src={bulletPoint} alt="pink bullet point star" className={styles.bulletIcon} />
-                    <span>Create Structure that Works for Your Brain</span>
-                  </div>
-                     <div className={styles.bulletItem}>
-                    <img src={bulletPoint} alt="pink bullet point star" className={styles.bulletIcon} />
-                    <span>Emotional Regulation for Consistency</span>
-                  </div>
-                  
-                </div>
-                <Link to="/coaching" className={`${styles.cardLink} ${styles.coaching}`}>
-                  → Explore Coaching
-                </Link>
-              </div>
+          <div className={styles.fitContent}>
+            <h2 className={styles.fitTitle}>This Is For You If...</h2>
+
+            <div className={styles.fitHeaderRow}>
+              <p className={styles.fitHeaderCell}>YOU ARE</p>
+              <p className={styles.fitHeaderCell}>YOU'RE STRUGGLING WITH</p>
             </div>
 
-            <div className={`${styles.pathCard} ${styles.realEstate}`}>
-              <div className={styles.cardHeader}>
-                <img 
-                  src={realEstateImage} 
-                  alt="Real Estate - Find Your Sanctuary" 
-                  className={styles.cardHeaderImage}
-                  loading="lazy"
-                  decoding="async"
-                  fetchPriority="low"
-                />
-                <div className={styles.cardHeaderOverlay} style={{background: 'linear-gradient(135deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.1) 50%, rgba(0,0,0,0.2) 100%)'}}>
-                  <h4 className={`${styles.cardTitle} ${styles.realEstate}`}>
-                    Find Your Sanctuary<br/>(Real Estate)
-                  </h4>
-                </div>
-              </div>
-              <div className={styles.cardContent}>
-                <p className={styles.cardDescription}>
-                  Spaces that fuel focus—not drain it.
-                </p>
-                <div className={styles.cardText}>
-                  <div className={styles.bulletItem}>
-                    <img src={bulletPoint} alt="pink bullet point star" className={styles.bulletIcon} />
-                    <span>Serving NC Triangle Area since 2013</span>
-                  </div>
-                  <div className={styles.bulletItem}>
-                    <img src={bulletPoint} alt="pink bullet point star" className={styles.bulletIcon} />
-                    <span>Relocation Specialist</span>
-                  </div>
-                  <div className={styles.bulletItem}>
-                    <img src={bulletPoint} alt="pink bullet point star" className={styles.bulletIcon} />
-                    <span>Precision Scouting for layouts designed for focus
-                    </span>
-                  </div>
-                  <div className={styles.bulletItem}>
-                    <img src={bulletPoint} alt="pink bullet point star" className={styles.bulletIcon} />
-                    <span>Find a Home That Matches Your Energy</span>
-                  </div>
-                </div>
-                <Link to="/real-estate" className={`${styles.cardLink} ${styles.realEstate}`}>
-                  → Explore Real Estate
-                </Link>
-              </div>
+            <div className={styles.fitGrid}>
+              <article className={styles.fitRow}>
+                <p className={styles.fitWho}><strong>A woman entrepreneur with ADHD</strong></p>
+                <p className={styles.fitPain}><strong>Staying consistent</strong> and finishing what you start</p>
+              </article>
+
+              <article className={styles.fitRow}>
+                <p className={styles.fitWho}><strong>A business owner who suspects ADHD</strong></p>
+                <p className={styles.fitPain}><strong>Overwhelm, procrastination, and decision fatigue</strong></p>
+              </article>
+
+              <article className={styles.fitRow}>
+                <p className={styles.fitWho}><strong>Someone newly diagnosed</strong></p>
+                <p className={styles.fitPain}><strong>Understanding how to use your diagnosis as a tool</strong></p>
+              </article>
+
+              <article className={styles.fitRow}>
+                <p className={styles.fitWho}><strong>A high achiever who feels stuck</strong></p>
+                <p className={styles.fitPain}><strong>Turning big ideas into real, measurable results</strong></p>
+              </article>
             </div>
 
-            <div className={`${styles.pathCard} ${styles.blog}`}>
-              <div className={styles.cardHeader}>
-                <img 
-                  src={blogImage} 
-                  alt="Community - Build Your Village" 
-                  className={styles.cardHeaderImage}
-                  loading="lazy"
-                  decoding="async"
-                  fetchPriority="low"
-                />
-                <div className={styles.cardHeaderOverlay}>
-                  <h4 className={`${styles.cardTitle} ${styles.blog}`}>
-                    Inspiration & Resources<br/>(Blog)
-                  </h4>
+            <p className={styles.fitClose}>
+              If you are ready to <strong>stop surviving and start thriving</strong> — you are in the right place.
+            </p>
+
+          
+          </div>
+        </div>
+      </section>
+
+      {/* Section Divider */}
+      <div className={styles.sectionDivider}></div>
+
+      {/* Getting Started Section */}
+      <section className={styles.gettingStartedSection}>
+        <div className={styles.container}>
+          <div className={styles.gettingStartedContent}>
+            <p className={styles.gettingStartedEyebrow}>How It Works</p>
+            <h2 className={styles.gettingStartedTitle}>Getting Started Is Simple</h2>
+
+            <div className={styles.gettingStartedSteps}>
+              <article className={styles.gettingStartedStep}>
+                <div className={styles.stepHeader}>
+                  <span className={styles.stepNumber}>Step 1</span>
+                  <h3 className={styles.stepTitle}>■■ Book Your Free Discovery Call</h3>
                 </div>
-              </div>
-              <div className={styles.cardContent}>
-                <p className={styles.cardDescription}>
-                  Inspiring stories fueling action. 
+                <p className={styles.stepText}>
+                  No pressure. No pitch. Just a real conversation about where you are and where you want to go.
                 </p>
-                <div className={styles.cardText}>
-                  <div className={styles.bulletItem}>
-                    <img src={bulletPoint} alt="" className={styles.bulletIcon} />
-                    <span>Weekly ADHD Business Tips</span>
-                  </div>
-                  <div className={styles.bulletItem}>
-                    <img src={bulletPoint} alt="" className={styles.bulletIcon} />
-                    <span>Entrepreneurial Success Stories</span>
-                  </div>
-                  <div className={styles.bulletItem}>
-                    <img src={bulletPoint} alt="" className={styles.bulletIcon} />
-                    <span>Free Resources & Guides</span>
-                  </div>
-                  <div className={styles.bulletItem}>
-                    <img src={bulletPoint} alt="" className={styles.bulletIcon} />
-                    <span>Practical Strategies That Work</span>
-                  </div>
+              </article>
+
+              <article className={styles.gettingStartedStep}>
+                <div className={styles.stepHeader}>
+                  <span className={styles.stepNumber}>Step 2</span>
+                  <h3 className={styles.stepTitle}>■■ Get Your Custom Roadmap</h3>
                 </div>
-                <Link 
-                  to="/blog" 
-                  className={`${styles.cardLink} ${styles.blog}`}
-                  onClick={() => window.scrollTo(0, 0)}
-                >
-                  → Get Weekly Inspiration
-                </Link>
-              </div>
+                <p className={styles.stepText}>
+                  We build a coaching plan designed specifically for your brain, your business, and your goals.
+                </p>
+              </article>
+
+              <article className={styles.gettingStartedStep}>
+                <div className={styles.stepHeader}>
+                  <span className={styles.stepNumber}>Step 3</span>
+                  <h3 className={styles.stepTitle}>■ Start Moving Forward</h3>
+                </div>
+                <p className={styles.stepText}>
+                  Weekly sessions. Real accountability. Measurable results. No more spinning your wheels.
+                </p>
+              </article>
             </div>
+
+            <div className={styles.gettingStartedCtaWrap}>
+              <a
+                href=""
+                className={`btn btn-primary ${styles.gettingStartedCta}`}
+                onClick={(event) => event.preventDefault()}
+              >
+                → BOOK YOUR FREE CALL NOW
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials Section */}
+      <section className={styles.testimonialsSection}>
+        <div className={styles.container}>
+         
+          <Testimonials />
+        </div>
+      </section>
+
+      {/* Final CTA Section */}
+      <section className={styles.finalCta}>
+        <div className={styles.container}>
+          <div className={styles.ctaContent}>
+            <h2 className="tagline">
+              Not Sure Where to Start?
+            </h2>
+            <p className={styles.ctaText}>
+              <span className={styles.ctaGradientText}>Take the free 2-minute ADHD Entrepreneur Quiz.</span>
+            </p>
+            <p className={styles.ctaText}>
+              Find out exactly how ADHD is showing up in your business - and what to do about it.
+            </p>
+            <Link 
+              to="/assessment" 
+              className="btn btn-primary" 
+              style={{fontSize: 'var(--font-size-lg)', padding: '1rem 2.5rem'}}
+            >
+              ■ TAKE THE FREE QUIZ - IT TAKES 2 MINUTES
+            </Link>
           </div>
         </div>
       </section>
@@ -416,9 +480,6 @@ const Home: React.FC = () => {
       {/* Section Divider */}
       <div className={styles.sectionDivider}></div>
 
-      {/* Testimonials Section */}
-      <Testimonials />
-
       {/* FAQ Section */}
       <section className={styles.faqSection}>
         <div className={styles.container}>
@@ -467,88 +528,6 @@ const Home: React.FC = () => {
         </div>
       </section>
 
-      {/* Section Divider */}
-      <div className={styles.sectionDivider}></div>
-
-     {/* Speaking Arrangements Section */}
-      <section className={styles.speakingSection}>
-        <div className={styles.container}>
-          <p className="taglineDark">Share Your Story, Amplify Your Voice</p>
-          <div className={styles.speakingContent}>
-            <div className={styles.speakingText}>
-              <h2 className={styles.speakingSubtitle}>Speaking Opportunities & Media Collaborations</h2>
-              <p className={styles.speakingDescription}>
-                Ready to share your story or book an inspiring speaker? Let's create conversations that matter and amplify voices that inspire change.
-              </p>
-              <div className={styles.speakingOptions}>
-                <div className={styles.speakingOption}>
-                  <h3 className={styles.optionTitle}>
-                    <img 
-                      src={microphoneIcon} 
-                      alt="Microphone" 
-                      loading="lazy"
-                      decoding="async"
-                      style={{width: '32px', height: '32px', marginRight: '0.75rem', verticalAlign: 'middle'}} 
-                    /> 
-                    Book Me to Speak
-                  </h3>
-                  <p className={styles.optionText}>Engaging presentations on entrepreneurship, wellness, expat experiences, and building resilience through life's transitions.</p>
-                  <Link 
-                    to="/contact" 
-                    className="btn btn-primary" 
-                    style={{marginTop: '1rem', padding: '0.5rem 1rem', fontSize: 'var(--font-size-sm)', width: '200px', textAlign: 'center'}}
-                    onClick={() => window.scrollTo(0, 0)}
-                  >
-                    Explore Speaking Opportunities
-                  </Link>
-                </div>
-                <div className={styles.speakingOption}>
-                  <h3 className={styles.optionTitle}>
-                    <img 
-                      src={youtubeLikesIcon} 
-                      alt="YouTube" 
-                      loading="lazy"
-                      decoding="async"
-                      style={{width: '32px', height: '32px', marginRight: '0.75rem', verticalAlign: 'middle'}} 
-                    /> 
-                    Join My YouTube Channel
-                  </h3>
-                  <p className={styles.optionText}>Share your inspiring journey and connect with our community of women breaking barriers and building businesses.</p>
-                  <a 
-                    href="https://www.youtube.com/@ElevatewithYoanaNin" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="btn btn-primary" 
-                    style={{marginTop: '1rem', padding: '0.5rem 1rem', fontSize: 'var(--font-size-sm)', width: '200px', textAlign: 'center'}}
-                  >
-                    Visit My YouTube Channel
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-      {/* Final CTA Section */}
-      <section className={styles.finalCta}>
-        <div className={styles.container}>
-          <div className={styles.ctaContent}>
-            <h2 className="tagline">
-              Claim My Unfair Advantage
-            </h2>
-            <p className={styles.ctaText}>
-             <span className={styles.ctaGradientText}>Turn ADHD into your business superpower.</span>
-            </p>
-            <Link 
-              to="/contact#top" 
-              className="btn btn-primary" 
-              style={{fontSize: 'var(--font-size-lg)', padding: '1rem 2.5rem'}}
-            >
-              Let's Connect
-            </Link>
-          </div>
-        </div>
-      </section>
     </>
   );
 };

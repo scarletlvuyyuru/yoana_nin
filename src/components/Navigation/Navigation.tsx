@@ -6,6 +6,7 @@ import facebookIcon from '../../assets/images/icon_fb_wht.webp';
 import instagramIcon from '../../assets/images/icon_instagram.webp';
 import linkedinIcon from '../../assets/images/icon_linkedin.webp';
 import tiktokIcon from '../../assets/images/icon_tiktok_wht.webp';
+import youtubeIcon from '../../assets/images/youtubeLikesIcon.webp';
 
 interface NavigationItem {
   name: string;
@@ -14,15 +15,6 @@ interface NavigationItem {
 }
 
 const navigationItems: NavigationItem[] = [
-  {
-    name: 'My Story',
-    path: '/my-story',
-    sections: [
-      { name: 'My Journey', id: 'my-journey' },
-      { name: 'Authorship', id: 'authorship' },
-      { name: 'My Approach', id: 'my-approach' }
-    ]
-  },
   {
     name: 'Coaching',
     path: '/coaching',
@@ -35,18 +27,16 @@ const navigationItems: NavigationItem[] = [
     ]
   },
   {
-    name: 'Real Estate',
-    path: '/real-estate',
+    name: 'My Story',
+    path: '/my-story',
     sections: [
-      { name: 'The Environment Effect', id: 'environment-effect' },
-      { name: 'Triangle Living', id: 'triangle-living' },
-      { name: 'The Prosperous Difference', id: 'prosperous-difference' },
-      { name: 'The Foundation of Trust', id: 'foundation-trust' },
-      { name: 'Global Integration', id: 'global-integration' }
+      { name: 'My Journey', id: 'my-journey' },
+      { name: 'Authorship', id: 'authorship' },
+      { name: 'My Approach', id: 'my-approach' }
     ]
   },
   {
-    name: 'Inspiration and Resources',
+    name: 'Blog',
     path: '/blog',
     sections: [
       { name: 'Featured Stories', id: 'featured-stories' },
@@ -172,6 +162,15 @@ const Navigation: React.FC = () => {
               rel="noopener noreferrer"
             >
               <img src={tiktokIcon} alt="TikTok" className={styles.socialIconImage} />
+            </a>
+            <a
+              href="https://www.youtube.com/@ElevatewithYoanaNin"
+              className={styles.socialIcon}
+              aria-label="Subscribe on YouTube"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img src={youtubeIcon} alt="YouTube" className={styles.socialIconImage} />
             </a>
           </div>
 

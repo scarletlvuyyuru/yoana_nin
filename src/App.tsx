@@ -10,7 +10,6 @@ import LoadingSpinner from './components/UI/LoadingSpinner';
 const Home = React.lazy(() => import('./pages/Home/Home'));
 const MyStory = React.lazy(() => import('./pages/MyStory/MyStory'));
 const Coaching = React.lazy(() => import('./pages/Coaching/Coaching'));
-const RealEstate = React.lazy(() => import('./pages/RealEstate/RealEstate'));
 const Blog = React.lazy(() => import('./pages/Blog/Blog'));
 const BlogPost = React.lazy(() => import('./pages/BlogPost/BlogPost'));
 const Contact = React.lazy(() => import('./pages/Contact/Contact'));
@@ -36,7 +35,6 @@ function App() {
                 <Route path="/" element={<Home />} />
                 <Route path="/my-story" element={<MyStory />} />
                 <Route path="/coaching" element={<Coaching />} />
-                <Route path="/real-estate" element={<RealEstate />} />
                 <Route path="/blog" element={<Blog />} />
                 <Route path="/blog/:slug" element={<BlogPost />} />
                 <Route path="/contact" element={<Contact />} />

@@ -24,7 +24,6 @@ const NotFound: React.FC = () => {
             <h3>You might be looking for:</h3>
             <ul>
               <li><Link to="/coaching">ADHD Coaching</Link></li>
-              <li><Link to="/real-estate">Real Estate Services</Link></li>
               <li><Link to="/my-story">My Story</Link></li>
               <li><Link to="/blog">Blog</Link></li>
             </ul>

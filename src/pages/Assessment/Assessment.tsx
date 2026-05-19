@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './Assessment.module.css';
 import SEO from '../../components/SEO/SEO';
@@ -104,6 +104,10 @@ const Assessment: React.FC = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState('');
   const [formLoadTime] = useState(Date.now());
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'auto' });
+  }, []);
 
   const totalScore = useMemo(() => answers.reduce((sum, value) => sum + value, 0), [answers]);
   const answeredCount = useMemo(() => answers.filter((value) => value > 0).length, [answers]);
