@@ -137,7 +137,7 @@ const Resources: React.FC = () => {
             <h2 className={styles.formTitle}>Schedule your Free 30 Minute Consultation Now</h2>
 
             <form
-              name="resources-consultation"
+              name="book-now-contact"
               method="POST"
               data-netlify="true"
               data-netlify-honeypot="bot-field"
@@ -145,7 +145,7 @@ const Resources: React.FC = () => {
               onSubmit={handleSubmit}
               autoComplete="on"
             >
-              <input type="hidden" name="form-name" value="resources-consultation" />
+              <input type="hidden" name="form-name" value="book-now-contact" />
               <input type="hidden" name="subject" value="New Resources Consultation Request" />
               <input type="hidden" name="form-timestamp" value={formLoadTime.toString()} />
 
