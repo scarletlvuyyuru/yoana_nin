@@ -1,26 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
 import SEO from '../../components/SEO/SEO';
 import styles from './Resources.module.css';
 
 const Resources: React.FC = () => {
-  const navigate = useNavigate();
   const [showSuccess, setShowSuccess] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formLoadTime] = useState(Date.now());
-
-  useEffect(() => {
-    if (!showSuccess) {
-      return;
-    }
-
-    const redirectTimer = window.setTimeout(() => {
-      navigate('/');
-      window.scrollTo({ top: 0, behavior: 'auto' });
-    }, 3000);
-
-    return () => window.clearTimeout(redirectTimer);
-  }, [showSuccess, navigate]);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -106,6 +91,9 @@ const Resources: React.FC = () => {
       }
 
       setShowSuccess(true);
+      window.setTimeout(() => {
+        window.location.assign('/');
+      }, 3000);
       form.reset();
     } catch (error) {
       alert('There was an issue submitting the form. Please try again.');

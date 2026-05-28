@@ -100,16 +100,6 @@
   }
 }
 
-.successMessage {
-  margin: 0 0 1rem;
-  color: #0f5f2c;
-  background: #ebf8ef;
-  border: 1px solid #bde7cb;
-  border-radius: 10px;
-  padding: 0.75rem 0.9rem;
-  font-weight: 600;
-}
-
 .form {
   display: grid;
   gap: 0.9rem;

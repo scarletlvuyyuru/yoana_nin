@@ -287,13 +287,13 @@ const Home: React.FC = () => {
             </blockquote>
 
             <div className={styles.proofCtaWrap}>
-              <a
-                href=""
+              <Link
+                to="/resources/"
                 className={`btn btn-primary ${styles.proofCta}`}
-                onClick={(event) => event.preventDefault()}
+                onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
               >
                 YES, I'M READY — BOOK MY FREE CALL
-              </a>
+              </Link>
             </div>
           </div>
         </div>
