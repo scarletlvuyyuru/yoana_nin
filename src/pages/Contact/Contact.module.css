@@ -51,8 +51,9 @@
 /* Split Layout */
 .splitLayout {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 4rem;
+  grid-template-columns: 1fr;
+  justify-items: center;
+  gap: 2rem;
   align-items: start;
   margin-bottom: 4rem;
 }
@@ -198,7 +199,9 @@
 
 /* Right Content */
 .rightContent {
-  padding-left: 2rem;
+  padding-left: 0;
+  width: 90vw;
+  max-width: 1100px;
 }
 
 @media (max-width: 1024px) {
@@ -215,8 +218,7 @@
   box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
   backdrop-filter: blur(15px);
   border: 1px solid rgba(255, 255, 255, 0.2);
-  position: sticky;
-  top: 2rem;
+  position: static;
   width: 100%;
   max-width: 100%;
   box-sizing: border-box;
@@ -269,6 +271,13 @@
   gap: 2rem;
   width: 100%;
   max-width: 100%;
+}
+
+.formRow {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  width: 100%;
 }
 
 /* Form Groups */
@@ -549,11 +558,12 @@
 @media (max-width: 1024px) {
   .splitLayout {
     grid-template-columns: 1fr;
-    gap: 3rem;
+    gap: 2rem;
   }
 
-  .leftContent,
   .rightContent {
+    width: 100%;
+    max-width: 100%;
     padding: 0;
   }
 
@@ -585,15 +595,9 @@
     gap: 2rem;
   }
 
-  .leftContent {
-    padding: 0;
-    margin-bottom: 0;
-    order: 2; /* Show second on mobile */
-  }
-
   .rightContent {
     padding: 0;
-    order: 1; /* Show first on mobile - contact form priority */
+    order: 1;
     width: 100%;
     max-width: 100%;
   }
@@ -611,6 +615,11 @@
   .contactForm {
     width: 100%;
     max-width: 100%;
+  }
+
+  .formRow {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
   }
 
   .whySection {
@@ -670,6 +679,10 @@
   .contactForm {
     gap: 1.25rem;
     width: 100%;
+  }
+
+  .formRow {
+    gap: 0.6rem;
   }
 
   .input,
@@ -787,11 +800,6 @@
     display: block;
     gap: 0;
     margin-bottom: 2rem;
-  }
-
-  .leftContent {
-    padding: 0;
-    margin-bottom: 1.5rem;
   }
 
   .rightContent {

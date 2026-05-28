@@ -113,6 +113,24 @@
       <input type="text" name="marketingConsent" />
       <input type="text" name="resultsConsent" />
     </form>
+
+    <form
+      name="resources-consultation"
+      method="POST"
+      data-netlify="true"
+      data-netlify-recaptcha="true"
+      data-netlify-honeypot="bot-field"
+      style="display: none;"
+    >
+      <input type="hidden" name="form-name" value="resources-consultation" />
+      <input type="hidden" name="subject" value="New Resources Consultation Request" />
+      <input type="text" name="bot-field" />
+      <input type="text" name="name" />
+      <input type="email" name="email" />
+      <input type="tel" name="phone" />
+      <input type="text" name="form-timestamp" />
+      <div data-netlify-recaptcha="true"></div>
+    </form>
     
     <script type="module" src="/src/main.tsx"></script>
     

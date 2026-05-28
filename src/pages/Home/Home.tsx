@@ -194,20 +194,20 @@ const Home: React.FC = () => {
             </div>
            
             <div className={styles.heroCtas}>
-              <a
-                href=""
+              <Link
+                to="/resources/"
                 className={`btn btn-primary ${styles.primaryCta}`}
-                onClick={(event) => event.preventDefault()}
+                onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
               >
                 YES, I'M READY — BOOK MY FREE CALL
-              </a>
-              <a
-                href=""
+              </Link>
+              <Link
+                to="/assessment"
                 className={`btn btn-secondary ${styles.secondaryCta}`}
-                onClick={(event) => event.preventDefault()}
+                onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
               >
                 TAKE THE FREE ADHD QUIZ FIRST
-              </a>
+              </Link>
             </div>
           </div>
         </div>
@@ -358,7 +358,7 @@ const Home: React.FC = () => {
               <article className={styles.gettingStartedStep}>
                 <div className={styles.stepHeader}>
                   <span className={styles.stepNumber}>Step 1</span>
-                  <h3 className={styles.stepTitle}>■■ Book Your Free Discovery Call</h3>
+                  <h3 className={styles.stepTitle}>■ Book Your Free Discovery Call</h3>
                 </div>
                 <p className={styles.stepText}>
                   No pressure. No pitch. Just a real conversation about where you are and where you want to go.
@@ -378,7 +378,7 @@ const Home: React.FC = () => {
               <article className={styles.gettingStartedStep}>
                 <div className={styles.stepHeader}>
                   <span className={styles.stepNumber}>Step 3</span>
-                  <h3 className={styles.stepTitle}>■ Start Moving Forward</h3>
+                  <h3 className={styles.stepTitle}>■■■ Start Moving Forward</h3>
                 </div>
                 <p className={styles.stepText}>
                   Weekly sessions. Real accountability. Measurable results. No more spinning your wheels.
@@ -392,54 +392,10 @@ const Home: React.FC = () => {
                 className={`btn btn-primary ${styles.gettingStartedCta}`}
                 onClick={(event) => event.preventDefault()}
               >
-                → BOOK YOUR FREE CALL NOW
+                 BOOK YOUR FREE CALL NOW ✨
               </a>
             </div>
           </div>
-        </div>
-      </section>
-
-      {/* Testimonials Section */}
-      <section className={styles.testimonialsSection}>
-        <div className={styles.container}>
-         
-          <Testimonials />
-        </div>
-      </section>
-
-      {/* Final CTA Section */}
-      <section className={styles.finalCta}>
-        <div className={styles.container}>
-          <div className={styles.ctaContent}>
-            <h2 className="tagline">
-              Not Sure Where to Start?
-            </h2>
-            <p className={styles.ctaText}>
-              <span className={styles.ctaGradientText}>Take the free 2-minute ADHD Entrepreneur Quiz.</span>
-            </p>
-            <p className={styles.ctaText}>
-              Find out exactly how ADHD is showing up in your business - and what to do about it.
-            </p>
-            <Link 
-              to="/assessment" 
-              className="btn btn-primary" 
-              style={{fontSize: 'var(--font-size-lg)', padding: '1rem 2.5rem'}}
-            >
-              ■ TAKE THE FREE QUIZ - IT TAKES 2 MINUTES
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* Inspirational Quote Section */}
-      <section className={styles.quoteSection}>
-        <div className={styles.container}>
-          <blockquote className={styles.quote}>
-            <p className={styles.quoteText}>
-              "And the day came when the risk to remain tight in a bud was more painful than the risk it took to blossom"
-            </p>
-            <cite className={styles.quoteAuthor}>— Anaïs Nin</cite>
-          </blockquote>
         </div>
       </section>
 
@@ -476,6 +432,38 @@ const Home: React.FC = () => {
           </div>
         </div>
       </section>
+
+      {/* Testimonials Section */}
+      <section className={styles.testimonialsSection}>
+        <div className={styles.container}>
+         
+          <Testimonials />
+        </div>
+      </section>
+
+        {/* Final CTA Section */}
+        <section className={styles.finalCta}>
+          <div className={styles.container}>
+            <div className={styles.ctaContent}>
+              <h2 className="tagline">
+                Not Sure Where to Start?
+              </h2>
+              <p className={styles.ctaText}>
+                <span className={styles.ctaGradientText}>Take the free 2-minute ADHD Entrepreneur Quiz.</span>
+              </p>
+              <p className={styles.ctaText}>
+                Find out exactly how ADHD is showing up in your business - and what to do about it.
+              </p>
+              <Link 
+                to="/assessment" 
+                className="btn btn-primary" 
+                style={{fontSize: 'var(--font-size-lg)', padding: '1rem 2.5rem'}}
+              >
+                ■ TAKE THE FREE QUIZ - IT TAKES 2 MINUTES
+              </Link>
+            </div>
+          </div>
+        </section>
 
       {/* Section Divider */}
       <div className={styles.sectionDivider}></div>

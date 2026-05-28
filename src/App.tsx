@@ -11,6 +11,8 @@ const Home = React.lazy(() => import('./pages/Home/Home'));
 const MyStory = React.lazy(() => import('./pages/MyStory/MyStory'));
 const Coaching = React.lazy(() => import('./pages/Coaching/Coaching'));
 const Blog = React.lazy(() => import('./pages/Blog/Blog'));
+const Events = React.lazy(() => import('./pages/Events/Events'));
+const Resources = React.lazy(() => import('./pages/Resources/Resources'));
 const BlogPost = React.lazy(() => import('./pages/BlogPost/BlogPost'));
 const Contact = React.lazy(() => import('./pages/Contact/Contact'));
 const Assessment = React.lazy(() => import('./pages/Assessment/Assessment'));
@@ -36,6 +38,8 @@ function App() {
                 <Route path="/my-story" element={<MyStory />} />
                 <Route path="/coaching" element={<Coaching />} />
                 <Route path="/blog" element={<Blog />} />
+                <Route path="/events" element={<Events />} />
+                <Route path="/resources" element={<Resources />} />
                 <Route path="/blog/:slug" element={<BlogPost />} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/assessment" element={<Assessment />} />

@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styles from './MyStory.module.css';
 import SEO from '../../components/SEO/SEO';
-import bookImage from '../../assets/images/Journey_to_inner_joy_and_success_in_realestate.webp';
 import adhdBadge from '../../assets/images/Adhd_certification_badge.webp';
 import jayShettyCert from '../../assets/images/jay_Shetty_Certification.webp';
 import energeticHealerBadge from '../../assets/images/energeticHealer.webp';
@@ -185,35 +184,15 @@ const MyStory: React.FC = () => {
         </div>
       </section>
 
-      {/* Book Section */}
-      <section className={styles.bookSection}>
+      {/* Inspirational Quote Section */}
+      <section id="authorship" className={styles.quoteSection}>
         <div className={styles.container}>
-          <div className={styles.bookContent}>
-            <div className={styles.bookImageSection}>
-              <img 
-                src={bookImage} 
-                alt="Journey to Inner Joy & Success in Real Estate book cover" 
-                className={styles.bookImage}
-              />
-            </div>
-            <div className={styles.bookTextSection}>
-              <h2 className={styles.bookTitle}>
-                Why I Wrote "Journey to Inner Joy & Success in Real Estate"
-              </h2>
-              <p className={styles.bookDescription}>
-                Real estate gave me a way to help people feel safe again. My book teaches you how to follow joy, stay aligned, and build success without sacrificing your soul, your values, or your peace.
-              </p>
-              <h3 className={styles.bookSubtitle}>Learn to Walk Joyfully Toward Success</h3>
-              <a 
-                href="https://www.amazon.com/Journey-Inner-Success-Real-Estate/dp/191294832X" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className={styles.bookButton}
-              >
-                → Buy on Amazon
-              </a>
-            </div>
-          </div>
+          <blockquote className={styles.quote}>
+            <p className={styles.quoteText}>
+              "And the day came when the risk to remain tight in a bud was more painful than the risk it took to blossom"
+            </p>
+            <cite className={styles.quoteAuthor}>— Anaïs Nin</cite>
+          </blockquote>
         </div>
       </section>
 
@@ -311,7 +290,12 @@ const MyStory: React.FC = () => {
             <p className={styles.ctaText}>
               <span className={styles.ctaGradientText}>You need a strategy that works for the way you are wired.</span>
             </p>
-            <Link to="/contact" className="btn btn-primary" style={{fontSize: 'var(--font-size-lg)', padding: '1rem 2.5rem'}}>
+            <Link
+              to="/contact"
+              className="btn btn-primary"
+              style={{fontSize: 'var(--font-size-lg)', padding: '1rem 2.5rem'}}
+              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            >
               Connect with Yoana
             </Link>
           </div>

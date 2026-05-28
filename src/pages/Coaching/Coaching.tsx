@@ -37,7 +37,7 @@ const Coaching: React.FC = () => {
             "@type": "Offer",
             "price": "97.00",
             "priceCurrency": "USD",
-            "description": "$97/month for 6 months — 2 one-hour sessions twice per month"
+            "description": "$97/month for 6 months — 2 one-hour sessions per month"
           },
           "hasOfferCatalog": {
             "@type": "OfferCatalog",
@@ -72,7 +72,7 @@ const Coaching: React.FC = () => {
             <div className={styles.pricingDetails}>
               <div className={styles.pricingItem}>
                 <img src={bulletPoint} alt="" className={styles.bulletIcon} />
-                2 One Hour Sessions Twice Per Month
+                2 One Hour Sessions Per Month
               </div>
               <div className={styles.pricingItem}>
                 <img src={bulletPoint} alt="" className={styles.bulletIcon} />
