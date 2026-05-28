@@ -1,11 +1,26 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import SEO from '../../components/SEO/SEO';
 import styles from './Resources.module.css';
 
 const Resources: React.FC = () => {
+  const navigate = useNavigate();
   const [showSuccess, setShowSuccess] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formLoadTime] = useState(Date.now());
+
+  useEffect(() => {
+    if (!showSuccess) {
+      return;
+    }
+
+    const redirectTimer = window.setTimeout(() => {
+      navigate('/');
+      window.scrollTo({ top: 0, behavior: 'auto' });
+    }, 3000);
+
+    return () => window.clearTimeout(redirectTimer);
+  }, [showSuccess, navigate]);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -108,6 +123,15 @@ const Resources: React.FC = () => {
       />
 
       <section className={styles.hero}>
+        {showSuccess && (
+          <div className={styles.successOverlay} role="status" aria-live="polite">
+            <div className={styles.successOverlayCard}>
+              <h2 className={styles.successOverlayTitle}>Thank you, we will talk soon!</h2>
+              <p className={styles.successOverlayText}>Redirecting you to the home page...</p>
+            </div>
+          </div>
+        )}
+
         <div className={styles.container}>
           <p className={styles.eyebrow}>Get In Touch</p>
           <h1 className={styles.title}>Start Your Journey</h1>
@@ -117,10 +141,6 @@ const Resources: React.FC = () => {
 
           <div className={styles.formShell}>
             <h2 className={styles.formTitle}>Schedule your Free 30 Minute Consultation Now</h2>
-
-            {showSuccess && (
-              <p className={styles.successMessage}>~ Thank you we will talk soon!</p>
-            )}
 
             <form
               name="resources-consultation"
