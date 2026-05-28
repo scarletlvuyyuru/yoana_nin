@@ -96,7 +96,13 @@ const Resources: React.FC = () => {
       }, 3000);
       form.reset();
     } catch (error) {
-      alert('There was an issue submitting the form. Please try again.');
+      const isLocalhost =
+        window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+      alert(
+        isLocalhost
+          ? 'This form posts to Netlify Forms and will not submit from localhost. Please test on your Netlify deploy (or run with netlify dev).'
+          : 'There was an issue submitting the form. Please try again.'
+      );
     } finally {
       setIsSubmitting(false);
     }
@@ -134,7 +140,6 @@ const Resources: React.FC = () => {
               name="resources-consultation"
               method="POST"
               data-netlify="true"
-              data-netlify-recaptcha="true"
               data-netlify-honeypot="bot-field"
               className={styles.form}
               onSubmit={handleSubmit}
@@ -173,8 +178,6 @@ const Resources: React.FC = () => {
                 <label htmlFor="email" className={styles.label}>Email</label>
                 <input id="email" name="email" type="email" required className={styles.input} autoComplete="email" />
               </div>
-
-              <div data-netlify-recaptcha="true"></div>
 
               <button type="submit" className={styles.submitButton} disabled={isSubmitting}>
                 {isSubmitting ? 'Submitting...' : 'Schedule Consultation'}
