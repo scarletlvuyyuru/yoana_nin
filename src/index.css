@@ -42,6 +42,8 @@
   /* Footer-specific colors for WCAG AAA compliance */
   --footer-text-primary: var(--color-navy);
   --footer-text-secondary: var(--color-navy);
+  --footer-slogan-bg: linear-gradient(135deg, rgba(255, 107, 107, 0.16), rgba(0, 123, 255, 0.16));
+  --footer-slogan-border: rgba(13, 37, 71, 0.12);
 }
 
 /* Dark Theme */
@@ -59,6 +61,8 @@
   /* Footer-specific colors for WCAG AAA compliance */
   --footer-text-primary: var(--color-cream);
   --footer-text-secondary: var(--color-cream);
+  --footer-slogan-bg: linear-gradient(135deg, rgba(255, 184, 184, 0.32), rgba(130, 193, 255, 0.34));
+  --footer-slogan-border: rgba(226, 232, 240, 0.45);
 }
 
 /* Typography - Optimized System Fonts Only */

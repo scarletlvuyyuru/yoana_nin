@@ -520,6 +520,35 @@
   border: 0;
 }
 
+[data-theme="dark"] .title,
+[data-theme="dark"] .subtitle,
+[data-theme="dark"] .sectionTitle,
+[data-theme="dark"] .sectionText,
+[data-theme="dark"] .featureQuote,
+[data-theme="dark"] .featureLink,
+[data-theme="dark"] .secondaryButton,
+[data-theme="dark"] .heroListenCta,
+[data-theme="dark"] .eventTitle,
+[data-theme="dark"] .eventLocation,
+[data-theme="dark"] .eventSummary,
+[data-theme="dark"] .eventAccent,
+[data-theme="dark"] .photoPlaceholderText,
+[data-theme="dark"] .photoPlaceholderPath,
+[data-theme="dark"] .photoPlaceholderNote,
+[data-theme="dark"] .photoChecklist,
+[data-theme="dark"] .field,
+[data-theme="dark"] .checkboxRow {
+  color: var(--color-navy);
+}
+
+[data-theme="dark"] .field input {
+  color: var(--color-navy);
+}
+
+[data-theme="dark"] .field input::placeholder {
+  color: #4b5563;
+}
+
 @media (max-width: 900px) {
   .heroGrid,
   .featureCard,
@@ -594,6 +623,7 @@
   .newsletterCard,
   .magazineFeature {
     padding: 1.25rem;
+  }
 
   .eventCollageRow {
     gap: 0.45rem;
@@ -603,6 +633,5 @@
 
   .eventCollageItem {
     min-width: 120px;
-  }
   }
 }

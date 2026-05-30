@@ -112,6 +112,21 @@
   align-items: center;
 }
 
+  [data-theme="dark"] .quizCard .questionPrompt,
+  [data-theme="dark"] .quizCard .questionExample,
+  [data-theme="dark"] .quizCard .answerText,
+  [data-theme="dark"] .quizCard .questionCount,
+  [data-theme="dark"] .quizCard .answeredCount,
+  [data-theme="dark"] .quizCard .secondaryButton,
+  [data-theme="dark"] .quizCard .secondaryButton:hover,
+  [data-theme="dark"] .quizCard .secondaryButton:focus {
+    color: var(--color-navy);
+  }
+
+  [data-theme="dark"] .quizCard .answerValue {
+    color: var(--color-navy);
+  }
+
 .questionCount,
 .answeredCount {
   margin: 0;

@@ -1207,6 +1207,10 @@
   color: #FFFFFF;
 }
 
+[data-theme="dark"] .phase1Section .phaseDescriptionLarge {
+  color: var(--color-navy);
+}
+
 [data-theme="dark"] .detailsLink {
   color: #E2E8F0;
 }

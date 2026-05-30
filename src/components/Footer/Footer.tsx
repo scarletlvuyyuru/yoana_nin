@@ -41,8 +41,8 @@ const Footer: React.FC = () => {
     marginBottom: '1rem',
     padding: '0.45rem 0.75rem',
     borderRadius: '999px',
-    background: 'linear-gradient(135deg, rgba(255, 107, 107, 0.16), rgba(0, 123, 255, 0.16))',
-    border: '1px solid rgba(13, 37, 71, 0.12)'
+    background: 'var(--footer-slogan-bg)',
+    border: '1px solid var(--footer-slogan-border)'
   };
 
   const sloganTextStyle = {

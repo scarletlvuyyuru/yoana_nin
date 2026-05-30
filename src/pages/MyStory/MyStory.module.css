@@ -442,6 +442,14 @@
   background: rgba(255, 255, 255, 0.92);
 }
 
+[data-theme="dark"] .actsSection .storyTitle,
+[data-theme="dark"] .actsSection .storyLead,
+[data-theme="dark"] .actsSection .storyBody,
+[data-theme="dark"] .actsSection .storyBridgeText,
+[data-theme="dark"] .actsSection .storyQuote {
+  color: var(--color-navy);
+}
+
 .credentialsLayout {
   display: grid;
   grid-template-columns: 400px 1fr;

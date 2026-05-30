@@ -1548,3 +1548,21 @@
 [data-theme="dark"] .methodCard:hover {
   background: rgba(45, 55, 72, 0.9);
 }
+
+[data-theme="dark"] .problemTitle,
+[data-theme="dark"] .problemList li,
+[data-theme="dark"] .proofTitle,
+[data-theme="dark"] .proofText,
+[data-theme="dark"] .proofList li,
+[data-theme="dark"] .proofTextStrong,
+[data-theme="dark"] .proofQuote,
+[data-theme="dark"] .solutionTitle,
+[data-theme="dark"] .solutionCardText,
+[data-theme="dark"] .fitTitle,
+[data-theme="dark"] .fitWho,
+[data-theme="dark"] .fitPain,
+[data-theme="dark"] .fitClose,
+[data-theme="dark"] .gettingStartedTitle,
+[data-theme="dark"] .stepText {
+  color: var(--color-navy);
+}
