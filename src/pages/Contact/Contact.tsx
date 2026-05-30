@@ -141,8 +141,8 @@ const Contact: React.FC = () => {
           <div id="contact-success" className={styles.successMessage}>
             <div className={styles.successIcon}>✓</div>
             <h2>Thank You!</h2>
-            <p>Your message has been successfully sent. I'll get back to you within 24-48 hours.</p>
-            <p>Looking forward to connecting with you!</p>
+            <p>Your message has been successfully sent. I will get back to you within 24-48 hours.</p>
+            <p>Looking forward to connecting with you.</p>
             <button
               onClick={() => setShowSuccess(false)}
               className={styles.dismissButton}
