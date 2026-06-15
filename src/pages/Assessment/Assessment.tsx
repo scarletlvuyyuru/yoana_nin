@@ -291,6 +291,30 @@ const Assessment: React.FC = () => {
         title="ADHD Self-Assessment for Women Entrepreneurs | Yoana Nin Coaching"
         description="Take Yoana Nin's ADHD self-assessment to understand how ADHD patterns may be affecting your business growth and discover your next best step."
         url="https://yoananincoaching.com/assessment"
+        schema={JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "WebPage",
+          "@id": "https://yoananincoaching.com/assessment",
+          "url": "https://yoananincoaching.com/assessment",
+          "name": "ADHD Self-Assessment for Women Entrepreneurs",
+          "description": "A free ADHD self-assessment tool designed for women entrepreneurs to identify ADHD patterns affecting their business and discover personalized next steps.",
+          "inLanguage": "en-US",
+          "isPartOf": { "@id": "https://yoananincoaching.com/#website" },
+          "about": {
+            "@type": "MedicalCondition",
+            "name": "ADHD",
+            "alternateName": "Attention Deficit Hyperactivity Disorder"
+          },
+          "author": {
+            "@type": "Person",
+            "name": "Yoana Nin",
+            "@id": "https://yoananincoaching.com/#person"
+          },
+          "audience": {
+            "@type": "Audience",
+            "audienceType": "Women Entrepreneurs with ADHD"
+          }
+        })}
       />
 
       <div className={styles.container}>

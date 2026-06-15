@@ -798,16 +798,18 @@
 [data-theme="dark"] .actsSection .storyTitle,
 [data-theme="dark"] .actsSection .storyLead,
 [data-theme="dark"] .actsSection .storyBody,
-[data-theme="dark"] .actsSection .storyBridgeText,
-[data-theme="dark"] .actsSection .storyQuote {
+[data-theme="dark"] .actsSection .storyBridgeText {
   color: var(--color-navy);
 }
 
-[data-theme="dark"] .itsCard,
-[data-theme="dark"] .knowItem,
-[data-theme="dark"] .milestonesRow,
+[data-theme="dark"] .itsCard {
+  background: rgba(26, 42, 66, 0.88);
+  color: var(--color-cream);
+}
+
 [data-theme="dark"] .storyQuote {
-  background: rgba(255, 255, 255, 0.94);
+  background: rgba(26, 42, 66, 0.88);
+  color: var(--color-cream);
 }
 
 [data-theme="dark"] .storyCallout {

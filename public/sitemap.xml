@@ -1,92 +1,121 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
         xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
         http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
-  
-  <!-- Homepage - High-value entry point -->
+
+  <!-- Homepage -->
   <url>
     <loc>https://yoananincoaching.com/</loc>
-    <lastmod>2026-03-04</lastmod>
+    <lastmod>2026-06-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
-  
-  <!-- Coaching - Primary service page with FAQ content -->
+
+  <!-- Primary service page -->
   <url>
     <loc>https://yoananincoaching.com/coaching</loc>
-    <lastmod>2026-03-04</lastmod>
-    <changefreq>weekly</changefreq>
+    <lastmod>2026-06-15</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.95</priority>
   </url>
-  
-  <!-- Real Estate - Secondary service with location-based SEO -->
+
+  <!-- ADHD Self-Assessment — high conversion page -->
   <url>
-    <loc>https://yoananincoaching.com/real-estate</loc>
-    <lastmod>2026-03-04</lastmod>
-    <changefreq>weekly</changefreq>
+    <loc>https://yoananincoaching.com/assessment</loc>
+    <lastmod>2026-06-15</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.90</priority>
   </url>
-  
-  <!-- About/Story - Trust-building content -->
+
+  <!-- About / Trust-building -->
   <url>
     <loc>https://yoananincoaching.com/my-story</loc>
-    <lastmod>2026-03-04</lastmod>
+    <lastmod>2026-06-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.80</priority>
   </url>
-  
-  <!-- Blog - Fresh content for featured snippets -->
+
+  <!-- Blog index -->
   <url>
     <loc>https://yoananincoaching.com/blog</loc>
-    <lastmod>2026-03-23</lastmod>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-06-15</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
 
-  <!-- Blog Posts - Individual SEO-targeted articles -->
+  <!-- Events / Speaking -->
   <url>
-    <loc>https://yoananincoaching.com/blog/adhd-entrepreneur-life-coach-raleigh</loc>
-    <lastmod>2026-03-04</lastmod>
-    <changefreq>yearly</changefreq>
+    <loc>https://yoananincoaching.com/events</loc>
+    <lastmod>2026-06-15</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.75</priority>
   </url>
 
+  <!-- Resources / Book Now -->
   <url>
-    <loc>https://yoananincoaching.com/blog/expat-community-triangle-area</loc>
-    <lastmod>2026-03-04</lastmod>
-    <changefreq>yearly</changefreq>
+    <loc>https://yoananincoaching.com/resources</loc>
+    <lastmod>2026-06-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.70</priority>
+  </url>
+
+  <!-- Contact — conversion page -->
+  <url>
+    <loc>https://yoananincoaching.com/contact</loc>
+    <lastmod>2026-06-15</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.75</priority>
   </url>
 
-  <url>
-    <loc>https://yoananincoaching.com/blog/holistic-life-coaching-guide</loc>
-    <lastmod>2026-03-04</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.75</priority>
-  </url>
-
-  <url>
-    <loc>https://yoananincoaching.com/blog/real-estate-agent-relocating-families</loc>
-    <lastmod>2026-03-04</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.75</priority>
-  </url>
-
+  <!-- Blog Posts -->
   <url>
     <loc>https://yoananincoaching.com/blog/stop-being-just-10-minutes-late-when-you-have-adhd</loc>
     <lastmod>2026-03-13</lastmod>
     <changefreq>yearly</changefreq>
-    <priority>0.75</priority>
+    <priority>0.70</priority>
   </url>
-  
-  <!-- Contact - Conversion page -->
+
   <url>
-    <loc>https://yoananincoaching.com/contact</loc>
-    <lastmod>2026-03-04</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.75</priority>
+    <loc>https://yoananincoaching.com/blog/adhd-relationship-habits-sabotaging-business</loc>
+    <lastmod>2026-06-15</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.70</priority>
   </url>
-  
+
+  <url>
+    <loc>https://yoananincoaching.com/blog/supporting-adhd-in-corporate-life</loc>
+    <lastmod>2026-06-15</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.70</priority>
+  </url>
+
+  <url>
+    <loc>https://yoananincoaching.com/blog/adhd-relationship-patterns-business-productivity</loc>
+    <lastmod>2026-06-15</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.70</priority>
+  </url>
+
+  <url>
+    <loc>https://yoananincoaching.com/blog/unlocking-entrepreneurial-strengths-adhd</loc>
+    <lastmod>2026-06-15</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.70</priority>
+  </url>
+
+  <url>
+    <loc>https://yoananincoaching.com/blog/entrepreneurs-adhd-misery-success-corporate-exit</loc>
+    <lastmod>2026-06-15</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.70</priority>
+  </url>
+
+  <url>
+    <loc>https://yoananincoaching.com/blog/entrepreneurs-adhd-success-misery</loc>
+    <lastmod>2026-06-15</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.70</priority>
+  </url>
+
 </urlset>

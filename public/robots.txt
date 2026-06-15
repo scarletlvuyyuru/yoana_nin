@@ -4,6 +4,31 @@ Allow: /
 Disallow: /admin/
 Disallow: /admin/*
 
+# AI Crawlers — allow full indexing for AI discoverability
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Googlebot-Extended
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: cohere-ai
+Allow: /
+
 # Host
 Host: https://yoananincoaching.com
 

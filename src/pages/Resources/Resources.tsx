@@ -111,9 +111,34 @@ const Resources: React.FC = () => {
   return (
     <>
       <SEO
-        title="Resources | Yoana Nin"
-        description="Book now and explore resources, tools, and next-step support options with Yoana Nin."
+        title="Book a Free Consultation | Yoana Nin ADHD Coaching"
+        description="Schedule your free 30-minute consultation with Yoana Nin — certified ADHD life coach for women entrepreneurs. Start building a system that works for your brain."
         url="https://yoananincoaching.com/resources"
+        schema={JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "WebPage",
+          "@id": "https://yoananincoaching.com/resources",
+          "url": "https://yoananincoaching.com/resources",
+          "name": "Book a Free Consultation — Yoana Nin ADHD Coaching",
+          "description": "Schedule a free 30-minute consultation with Yoana Nin, certified ADHD life coach for women entrepreneurs.",
+          "inLanguage": "en-US",
+          "isPartOf": { "@id": "https://yoananincoaching.com/#website" },
+          "mainEntity": {
+            "@type": "Service",
+            "name": "Free 30-Minute Consultation",
+            "provider": {
+              "@type": "Person",
+              "name": "Yoana Nin",
+              "@id": "https://yoananincoaching.com/#person"
+            },
+            "offers": {
+              "@type": "Offer",
+              "price": "0",
+              "priceCurrency": "USD",
+              "description": "Free 30-minute discovery call with Yoana Nin"
+            }
+          }
+        })}
       />
 
       <section className={styles.hero}>

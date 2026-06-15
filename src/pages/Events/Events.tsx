@@ -84,9 +84,25 @@ const Events: React.FC = () => {
   return (
     <>
       <SEO
-        title="Events | Yoana Nin"
-        description="Explore Yoana Nin's media features, speaking moments, community impact, and upcoming event opportunities."
+        title="Events & Speaking | Yoana Nin — ADHD Coach & Keynote Speaker"
+        description="Explore Yoana Nin's speaking engagements, media features, podcast appearances, and community impact events. Available for keynotes and ADHD entrepreneurship talks."
         url="https://yoananincoaching.com/events"
+        schema={JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "CollectionPage",
+          "@id": "https://yoananincoaching.com/events",
+          "url": "https://yoananincoaching.com/events",
+          "name": "Events & Speaking — Yoana Nin",
+          "description": "Speaking engagements, podcast appearances, media features, and community events featuring Yoana Nin — certified ADHD life coach and women's entrepreneur advocate.",
+          "inLanguage": "en-US",
+          "isPartOf": { "@id": "https://yoananincoaching.com/#website" },
+          "about": {
+            "@type": "Person",
+            "name": "Yoana Nin",
+            "@id": "https://yoananincoaching.com/#person",
+            "jobTitle": "ADHD Life Coach & Keynote Speaker"
+          }
+        })}
       />
 
       <section className={styles.hero}>
