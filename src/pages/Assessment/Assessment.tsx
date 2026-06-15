@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './Assessment.module.css';
 import SEO from '../../components/SEO/SEO';
@@ -96,7 +96,6 @@ const Assessment: React.FC = () => {
   const [answers, setAnswers] = useState<number[]>(Array(QUESTIONS.length).fill(0));
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [showResults, setShowResults] = useState(false);
-  const [showEmailForm, setShowEmailForm] = useState(false);
   const [email, setEmail] = useState('');
   const [resultsConsent, setResultsConsent] = useState(false);
   const [marketingConsent, setMarketingConsent] = useState(false);
@@ -104,6 +103,10 @@ const Assessment: React.FC = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState('');
   const [formLoadTime] = useState(Date.now());
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'auto' });
+  }, []);
 
   const totalScore = useMemo(() => answers.reduce((sum, value) => sum + value, 0), [answers]);
   const answeredCount = useMemo(() => answers.filter((value) => value > 0).length, [answers]);
@@ -159,7 +162,6 @@ const Assessment: React.FC = () => {
     setAnswers(Array(QUESTIONS.length).fill(0));
     setCurrentQuestion(0);
     setShowResults(false);
-    setShowEmailForm(false);
     setEmail('');
     setResultsConsent(false);
     setMarketingConsent(false);
@@ -213,7 +215,7 @@ const Assessment: React.FC = () => {
     const timestampValue = sanitizedFormData.get('form-timestamp');
     const timestamp = timestampValue ? parseInt(timestampValue.toString(), 10) : 0;
     if (!timestamp || submitTime - timestamp < 5000) {
-      setSubmitError('Please take a moment to review your results before submitting.');
+      setSubmitError('Please take a moment to finish before submitting.');
       return;
     }
 
@@ -368,160 +370,143 @@ const Assessment: React.FC = () => {
                 onClick={handleNext}
                 disabled={answers[currentQuestion] === 0}
               >
-                {currentQuestion === QUESTIONS.length - 1 ? 'See My Results' : 'Next'}
+                {currentQuestion === QUESTIONS.length - 1 ? 'Continue' : 'Next'}
               </button>
             </div>
           </section>
         ) : (
           <section className={styles.resultsCard}>
-            <h2 className={styles.resultsTitle}>Your Score: {totalScore} / 50</h2>
-            <p className={styles.resultsSubtitle}>Here is what your score range suggests right now.</p>
-
-            <div className={styles.rangeList}>
-              {SCORE_RANGES.map((range) => {
-                const isActive = totalScore >= range.min && totalScore <= range.max;
-
-                return (
-                  <article
-                    key={`${range.min}-${range.max}`}
-                    className={`${styles.rangeCard} ${isActive ? styles.activeRangeCard : ''}`}
-                  >
-                    <p className={styles.rangeScore}>
-                      {range.min} - {range.max}
-                    </p>
-                    <p className={styles.rangeSuggestion}>{range.suggestion}</p>
-                    <p className={styles.rangeNextStep}>{range.nextStep}</p>
-                  </article>
-                );
-              })}
-            </div>
-
-            {activeRange && (
-              <div className={styles.recommendationBox}>
-                <p className={styles.recommendationLabel}>Recommended Next Step</p>
-                <p className={styles.recommendationText}>{activeRange.nextStep}</p>
-              </div>
-            )}
-
-            <div className={styles.emailResultsSection}>
-              <button
-                type="button"
-                className={styles.emailResultsToggle}
-                onClick={() => setShowEmailForm((prev) => !prev)}
-                aria-expanded={showEmailForm}
-                aria-controls="assessment-email-form"
-              >
-                <span>Email My Results</span>
-                <span
-                  className={`${styles.emailResultsArrow} ${showEmailForm ? styles.emailResultsArrowOpen : ''}`}
-                  aria-hidden="true"
-                >
-                  ›
-                </span>
-              </button>
-
-              {showEmailForm && (
-                <div id="assessment-email-form" className={styles.emailResultsPanel}>
-                  {!emailSubmitted ? (
-                    <form
-                      name="assessment-results"
-                      method="POST"
-                      data-netlify="true"
-                      data-netlify-honeypot="bot-field"
-                      className={styles.emailForm}
-                      onSubmit={handleEmailSubmit}
-                    >
-                      <input type="hidden" name="form-name" value="assessment-results" />
-                      <input type="hidden" name="subject" value="New ADHD Assessment Result - Yoana Nin" />
-                      <input type="hidden" name="form-timestamp" value={formLoadTime.toString()} />
-                      <input type="hidden" name="totalScore" value={totalScore.toString()} />
-                      <input type="hidden" name="scoreRange" value={activeRange ? `${activeRange.min}-${activeRange.max}` : 'Not scored'} />
-                      <input type="hidden" name="scoreSuggestion" value={activeRange?.suggestion || ''} />
-                      <input type="hidden" name="nextStep" value={activeRange?.nextStep || ''} />
-                      <input type="hidden" name="answersSummary" value={answersSummary} />
-                      <input type="hidden" name="marketingConsent" value={marketingConsent ? 'yes' : 'no'} />
-                      <input type="hidden" name="resultsConsent" value={resultsConsent ? 'yes' : 'no'} />
-
-                      <div className={styles.honeypotField}>
-                        <label htmlFor="assessment-bot-field">Do not fill this out if you're human</label>
-                        <input id="assessment-bot-field" type="text" name="bot-field" tabIndex={-1} autoComplete="off" />
-                      </div>
-
-                      <div className={styles.formIntro}>
-                        <h3 className={styles.formTitle}>Send my results to my inbox</h3>
-                        <p className={styles.formCopy}>
-                          Get your score and next step by email, plus one follow-up email from Yoana related to your results.
-                        </p>
-                      </div>
-
-                      <label className={styles.fieldLabel} htmlFor="assessment-email">
-                        Email address
-                      </label>
-                      <input
-                        id="assessment-email"
-                        name="email"
-                        type="email"
-                        value={email}
-                        onChange={(event) => setEmail(event.target.value)}
-                        className={styles.emailInput}
-                        placeholder="you@example.com"
-                        required
-                      />
-
-                      <label className={styles.checkboxRow}>
-                        <input
-                          type="checkbox"
-                          checked={resultsConsent}
-                          onChange={(event) => setResultsConsent(event.target.checked)}
-                          required
-                        />
-                        <span>
-                          I agree to receive my results email and one follow-up email related to my results.
-                        </span>
-                      </label>
-
-                      <label className={styles.checkboxRow}>
-                        <input
-                          type="checkbox"
-                          checked={marketingConsent}
-                          onChange={(event) => setMarketingConsent(event.target.checked)}
-                        />
-                        <span>
-                          I’d also like ongoing tips, updates, and offers from Yoana.
-                        </span>
-                      </label>
-
-                      <p className={styles.formLegal}>
-                        Unsubscribe anytime. See <Link to="/privacy">Privacy Policy</Link>.
-                      </p>
-
-                      {submitError && <p className={styles.formError}>{submitError}</p>}
-
-                      <button
-                        type="submit"
-                        className={`${styles.navButton} ${styles.primaryButton} ${styles.submitButton}`}
-                        disabled={!email.trim() || !resultsConsent || isSubmitting}
-                      >
-                        {isSubmitting ? 'Sending...' : 'Send My Results'}
-                      </button>
-                    </form>
-                  ) : (
-                    <div className={styles.emailSuccess}>
-                      <h3 className={styles.formTitle}>You’re on the list for your results.</h3>
-                      <p className={styles.formCopy}>
-                        {marketingConsent
-                          ? 'Your assessment results are on the way, and you opted in for future updates and offers.'
-                          : 'Your assessment results are on the way, along with one follow-up email related to your results.'}
-                      </p>
-                    </div>
-                  )}
+            {!emailSubmitted ? (
+              <div id="assessment-email-form" className={styles.emailResultsPanel}>
+                <div className={styles.formIntro}>
+                  <h2 className={styles.resultsTitle}>Unlock Your Results</h2>
+                  <p className={styles.resultsSubtitle}>
+                    Enter your email to receive your score and personalized next step. Your results will appear immediately after submission.
+                  </p>
                 </div>
-              )}
-            </div>
+
+                <form
+                  name="assessment-results"
+                  method="POST"
+                  data-netlify="true"
+                  data-netlify-honeypot="bot-field"
+                  className={styles.emailForm}
+                  onSubmit={handleEmailSubmit}
+                >
+                  <input type="hidden" name="form-name" value="assessment-results" />
+                  <input type="hidden" name="subject" value="New ADHD Assessment Result - Yoana Nin" />
+                  <input type="hidden" name="form-timestamp" value={formLoadTime.toString()} />
+                  <input type="hidden" name="totalScore" value={totalScore.toString()} />
+                  <input type="hidden" name="scoreRange" value={activeRange ? `${activeRange.min}-${activeRange.max}` : 'Not scored'} />
+                  <input type="hidden" name="scoreSuggestion" value={activeRange?.suggestion || ''} />
+                  <input type="hidden" name="nextStep" value={activeRange?.nextStep || ''} />
+                  <input type="hidden" name="answersSummary" value={answersSummary} />
+                  <input type="hidden" name="marketingConsent" value={marketingConsent ? 'yes' : 'no'} />
+                  <input type="hidden" name="resultsConsent" value={resultsConsent ? 'yes' : 'no'} />
+
+                  <div className={styles.honeypotField}>
+                    <label htmlFor="assessment-bot-field">Do not fill this out if you're human</label>
+                    <input id="assessment-bot-field" type="text" name="bot-field" tabIndex={-1} autoComplete="off" />
+                  </div>
+
+                  <label className={styles.fieldLabel} htmlFor="assessment-email">
+                    Email address
+                  </label>
+                  <input
+                    id="assessment-email"
+                    name="email"
+                    type="email"
+                    value={email}
+                    onChange={(event) => setEmail(event.target.value)}
+                    className={styles.emailInput}
+                    placeholder="you@example.com"
+                    autoComplete="email"
+                    required
+                  />
+
+                  <label className={styles.checkboxRow}>
+                    <input
+                      type="checkbox"
+                      checked={resultsConsent}
+                      onChange={(event) => setResultsConsent(event.target.checked)}
+                      required
+                    />
+                    <span>
+                      I agree to receive my results email and one follow-up email related to my results.
+                    </span>
+                  </label>
+
+                  <label className={styles.checkboxRow}>
+                    <input
+                      type="checkbox"
+                      checked={marketingConsent}
+                      onChange={(event) => setMarketingConsent(event.target.checked)}
+                    />
+                    <span>
+                      I’d also like ongoing tips, updates, and offers from Yoana Nin Coaching.
+                    </span>
+                  </label>
+
+                  <p className={styles.formLegal}>
+                    Unsubscribe anytime. See <Link to="/privacy">Privacy Policy</Link>.
+                  </p>
+
+                  {submitError && <p className={styles.formError}>{submitError}</p>}
+
+                  <button
+                    type="submit"
+                    className={`${styles.navButton} ${styles.primaryButton} ${styles.submitButton}`}
+                    disabled={!email.trim() || !resultsConsent || isSubmitting}
+                  >
+                    {isSubmitting ? 'Unlocking...' : 'Unlock My Results'}
+                  </button>
+                </form>
+              </div>
+            ) : (
+              <>
+                <h2 className={styles.resultsTitle}>Your Score: {totalScore} / 50</h2>
+                <p className={styles.resultsSubtitle}>Here is what your score range suggests right now.</p>
+
+                <div className={styles.rangeList}>
+                  {SCORE_RANGES.map((range) => {
+                    const isActive = totalScore >= range.min && totalScore <= range.max;
+
+                    return (
+                      <article
+                        key={`${range.min}-${range.max}`}
+                        className={`${styles.rangeCard} ${isActive ? styles.activeRangeCard : ''}`}
+                      >
+                        <p className={styles.rangeScore}>
+                          {range.min} - {range.max}
+                        </p>
+                        <p className={styles.rangeSuggestion}>{range.suggestion}</p>
+                        <p className={styles.rangeNextStep}>{range.nextStep}</p>
+                      </article>
+                    );
+                  })}
+                </div>
+
+                {activeRange && (
+                  <div className={styles.recommendationBox}>
+                    <p className={styles.recommendationLabel}>Recommended Next Step</p>
+                    <p className={styles.recommendationText}>{activeRange.nextStep}</p>
+                  </div>
+                )}
+
+                <div className={styles.emailSuccess}>
+                  <h3 className={styles.formTitle}>Results sent to your inbox.</h3>
+                  <p className={styles.formCopy}>
+                    {marketingConsent
+                      ? 'A copy is on the way, and you opted in for future updates and offers.'
+                      : 'A copy is on the way, along with one follow-up email related to your results.'}
+                  </p>
+                </div>
+              </>
+            )}
 
             <div className={styles.ctaRow}>
               <Link
-                to="/contact"
+                to="/resources"
                 className={`btn btn-primary ${styles.ctaButton}`}
                 onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
               >

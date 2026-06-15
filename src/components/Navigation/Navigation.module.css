@@ -49,6 +49,14 @@
   gap: 1rem;
 }
 
+.topBannerActions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: 200px;
+  margin-top: 0.35rem;
+}
+
 .bannerButton {
   background: transparent;
   color: white;
@@ -101,6 +109,80 @@
   transform: translateY(-1px);
 }
 
+.bookNowButton {
+  background: linear-gradient(135deg, var(--color-orange-coral, #ff6b6b), var(--color-orange-warm, #ffa500));
+  border: 1px solid rgba(255, 255, 255, 0.26);
+  color: #ffffff;
+  font-weight: 800;
+  letter-spacing: 0.7px;
+  width: 100%;
+  justify-content: center;
+  box-shadow: 0 0 0 0 rgba(255, 149, 0, 0.45), 0 8px 20px rgba(255, 149, 0, 0.3);
+  animation: bookNowPulse 2.2s ease-in-out infinite;
+}
+
+.bookNowButton:hover {
+  background: linear-gradient(135deg, var(--color-orange-bright, #ff5252), var(--color-orange-amber, #ff9500));
+  border-color: rgba(255, 255, 255, 0.35);
+  color: #ffffff;
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 0 0 0 rgba(255, 149, 0, 0.5), 0 12px 26px rgba(255, 149, 0, 0.35);
+}
+
+@keyframes bookNowPulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(255, 149, 0, 0.45), 0 8px 20px rgba(255, 149, 0, 0.3);
+  }
+  70% {
+    box-shadow: 0 0 0 12px rgba(255, 149, 0, 0), 0 10px 24px rgba(255, 149, 0, 0.34);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 149, 0, 0), 0 8px 20px rgba(255, 149, 0, 0.3);
+  }
+}
+
+.neutralContactButton {
+  background: transparent;
+  color: var(--color-accessible-magenta, #b300b3);
+  border: 1.5px solid var(--color-accessible-magenta, #b300b3);
+  font-weight: 700;
+}
+
+.neutralContactButton:hover {
+  background: rgba(179, 0, 179, 0.08);
+  border-color: var(--color-accessible-magenta, #b300b3);
+  color: var(--color-accessible-magenta, #b300b3);
+}
+
+.joinCommunityLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  color: var(--color-blue);
+  text-decoration: none;
+  font-weight: 700;
+  font-size: var(--font-size-sm);
+  letter-spacing: 0.2px;
+  white-space: nowrap;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.joinCommunityLink:hover {
+  color: var(--color-accessible-magenta, #b300b3);
+  transform: translateY(-1px);
+}
+
+.joinCommunityLink:focus-visible {
+  outline: 2px solid var(--color-accessible-magenta, #b300b3);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+.textLinkIcon {
+  font-size: 0.95em;
+  line-height: 1;
+}
+
 .bannerButton.primary:hover {
   background: linear-gradient(135deg, var(--color-orange-bright, #ff5252), var(--color-orange-amber, #ff9500));
   color: white;
@@ -120,9 +202,9 @@
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 1rem;
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
   align-items: center;
-  justify-content: space-between;
   min-height: 70px;
   padding-top: 1rem;
   padding-bottom: 1rem;
@@ -215,6 +297,54 @@
   gap: 2rem;
 }
 
+.navLeft {
+  justify-self: start;
+}
+
+.navRight {
+  justify-self: end;
+}
+
+.logo {
+  justify-self: center;
+}
+
+.navBannerButtons .bannerButton,
+.navBannerButtons .joinCommunityLink {
+  font-family: inherit;
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+  text-transform: none;
+  letter-spacing: 0;
+  color: var(--color-accessible-magenta, #b300b3);
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  padding: 0;
+}
+
+.navBannerButtons {
+  gap: 2rem;
+}
+
+.navBannerButtons .bannerButton:hover,
+.navBannerButtons .joinCommunityLink:hover {
+  color: var(--color-accessible-magenta, #b300b3);
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  transform: none;
+  text-decoration: none;
+}
+
+.navBannerButtons .bannerButton:focus-visible,
+.navBannerButtons .joinCommunityLink:focus-visible {
+  outline: 2px solid var(--color-accessible-magenta, #b300b3);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
 .navList {
   display: flex;
   list-style: none;
@@ -222,6 +352,11 @@
   margin: 0;
   padding: 0;
   align-items: center;
+
+  .navBannerButtons .bannerButton,
+  .navBannerButtons .joinCommunityLink {
+    font-size: var(--font-size-3xl);
+  }
 }
 
 .navItem {
@@ -470,6 +605,16 @@
     gap: 0.5rem;
     flex-wrap: wrap;
   }
+
+  .topBannerActions {
+    justify-content: flex-end;
+    width: auto;
+  }
+
+  .bookNowButton {
+    animation-duration: 2.8s;
+    width: auto;
+  }
   
   .bannerButton {
     font-size: var(--font-size-xs);
@@ -608,6 +753,12 @@
   
   .navMobile {
     display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bookNowButton {
+    animation: none;
   }
 }
 

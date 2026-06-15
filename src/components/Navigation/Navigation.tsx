@@ -6,6 +6,7 @@ import facebookIcon from '../../assets/images/icon_fb_wht.webp';
 import instagramIcon from '../../assets/images/icon_instagram.webp';
 import linkedinIcon from '../../assets/images/icon_linkedin.webp';
 import tiktokIcon from '../../assets/images/icon_tiktok_wht.webp';
+import youtubeIcon from '../../assets/images/youtubeLikesIcon.webp';
 
 interface NavigationItem {
   name: string;
@@ -14,15 +15,6 @@ interface NavigationItem {
 }
 
 const navigationItems: NavigationItem[] = [
-  {
-    name: 'My Story',
-    path: '/my-story',
-    sections: [
-      { name: 'My Journey', id: 'my-journey' },
-      { name: 'Authorship', id: 'authorship' },
-      { name: 'My Approach', id: 'my-approach' }
-    ]
-  },
   {
     name: 'Coaching',
     path: '/coaching',
@@ -35,23 +27,21 @@ const navigationItems: NavigationItem[] = [
     ]
   },
   {
-    name: 'Real Estate',
-    path: '/real-estate',
-    sections: [
-      { name: 'The Environment Effect', id: 'environment-effect' },
-      { name: 'Triangle Living', id: 'triangle-living' },
-      { name: 'The Prosperous Difference', id: 'prosperous-difference' },
-      { name: 'The Foundation of Trust', id: 'foundation-trust' },
-      { name: 'Global Integration', id: 'global-integration' }
-    ]
-  },
-  {
-    name: 'Inspiration and Resources',
+    name: 'Blog',
     path: '/blog',
     sections: [
       { name: 'Featured Stories', id: 'featured-stories' },
       { name: 'Social Highlights', id: 'social-highlights' },
       { name: 'All Articles', id: 'all-articles' }
+    ]
+  },
+  {
+    name: 'Events',
+    path: '/events',
+    sections: [
+      { name: 'Media Features', id: 'media-features' },
+      { name: 'Community Highlights', id: 'community-highlights' },
+      { name: 'Upcoming Events', id: 'upcoming-events' }
     ]
   }
 ];
@@ -173,33 +163,27 @@ const Navigation: React.FC = () => {
             >
               <img src={tiktokIcon} alt="TikTok" className={styles.socialIconImage} />
             </a>
-          </div>
-
-          {/* Banner Buttons - Right Side */}
-          <div className={styles.bannerButtons}>
-            <Link 
-              to="/contact" 
-              className={`${styles.bannerButton} ${styles.primary}`}
-              onClick={() => window.scrollTo(0, 0)}
-            >
-              Contact
-            </Link>
-            <a 
-              href="https://sendlink.co/documents/doc-form/69b2d898993c38a3c094ca2b?locale=en-US"
-              className={`${styles.bannerButton} ${styles.blue}`}
+            <a
+              href="https://www.youtube.com/@ElevatewithYoanaNin"
+              className={styles.socialIcon}
+              aria-label="Subscribe on YouTube"
               target="_blank"
               rel="noopener noreferrer"
             >
-              Join Community
+              <img src={youtubeIcon} alt="YouTube" className={styles.socialIconImage} />
             </a>
+          </div>
+
+          <div className={styles.topBannerActions}>
             <Link
-              to="/assessment"
-              className={`${styles.bannerButton} ${styles.quiz}`}
-              onClick={() => window.scrollTo(0, 0)}
+              to="/resources/"
+              className={`${styles.bannerButton} ${styles.bookNowButton}`}
+              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
             >
-              ADHD Quiz
+              Book Now
             </Link>
           </div>
+
         </div>
       </div>
 
@@ -208,7 +192,7 @@ const Navigation: React.FC = () => {
           {/* Left Navigation */}
           <div className={styles.navLeft}>
             <ul className={styles.navList}>
-              {navigationItems.slice(0, 2).map((item) => (
+              {navigationItems.slice(0, 3).map((item) => (
                 <li key={item.name} className={styles.navItem}>
                   {item.sections ? (
                     <div>
@@ -311,82 +295,31 @@ const Navigation: React.FC = () => {
 
           {/* Right Navigation */}
           <div className={styles.navRight}>
-            <ul className={styles.navList}>
-              {navigationItems.slice(2).map((item) => (
-                <li key={item.name} className={styles.navItem}>
-                  {item.sections ? (
-                    <div>
-                      <button
-                        onClick={() => setActiveDropdown(activeDropdown === item.name ? null : item.name)}
-                        className={styles.dropdownButton}
-                        aria-expanded={activeDropdown === item.name}
-                        aria-haspopup="true"
-                      >
-                        {item.name}
-                        <svg
-                          width="12"
-                          height="12"
-                          viewBox="0 0 12 12"
-                          fill="none"
-                          className={`${styles.dropdownIcon} ${activeDropdown === item.name ? styles.open : ''}`}
-                          aria-hidden="true"
-                        >
-                          <path
-                            d="M2.5 4.5L6 8L9.5 4.5"
-                            stroke="currentColor"
-                            strokeWidth="2.5"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          />
-                        </svg>
-                      </button>
-                      {activeDropdown === item.name && (
-                        <ul className={styles.dropdown} role="menu">
-                          {/* Main page link */}
-                          <li role="none">
-                            <Link
-                              to={item.path}
-                              onClick={() => {
-                                window.scrollTo({ top: 0, behavior: 'smooth' });
-                                setActiveDropdown(null);
-                              }}
-                              className={`${styles.dropdownItem} ${styles.mainPageLink}`}
-                              role="menuitem"
-                            >
-                              {item.name}
-                            </Link>
-                          </li>
-                          {/* Sub-sections */}
-                          {item.sections.map((section) => (
-                            <li key={section.id} role="none">
-                              <Link
-                                to={item.path}
-                                onClick={() => {
-                                  setTimeout(() => scrollToSection(section.id, item.path), 100);
-                                  setActiveDropdown(null);
-                                }}
-                                className={`${styles.dropdownItem} ${styles.subSection}`}
-                                role="menuitem"
-                              >
-                                {section.name}
-                              </Link>
-                            </li>
-                          ))}
-                        </ul>
-                      )}
-                    </div>
-                  ) : (
-                    <Link
-                      to={item.path}
-                      onClick={() => window.scrollTo(0, 0)}
-                      className={`${styles.navLink} ${location.pathname === item.path ? styles.active : ''}`}
-                    >
-                      {item.name}
-                    </Link>
-                  )}
-                </li>
-              ))}
-            </ul>
+            <div className={`${styles.bannerButtons} ${styles.navBannerButtons}`}>
+              <Link
+                to="/contact"
+                className={`${styles.bannerButton} ${styles.neutralContactButton}`}
+                onClick={() => window.scrollTo(0, 0)}
+              >
+                Contact
+              </Link>
+              <Link
+                to="/assessment"
+                className={`${styles.bannerButton} ${styles.quiz}`}
+                onClick={() => window.scrollTo(0, 0)}
+              >
+                ADHD Quiz
+              </Link>
+              <a
+                href="https://sendlink.co/documents/doc-form/69b2d898993c38a3c094ca2b?locale=en-US"
+                className={styles.joinCommunityLink}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Join Community
+                <span className={styles.textLinkIcon} aria-hidden="true">↗</span>
+              </a>
+            </div>
           </div>
 
           {/* Mobile Menu Button */}

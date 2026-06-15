@@ -2,18 +2,12 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styles from './MyStory.module.css';
 import SEO from '../../components/SEO/SEO';
-import bookImage from '../../assets/images/Journey_to_inner_joy_and_success_in_realestate.webp';
 import adhdBadge from '../../assets/images/Adhd_certification_badge.webp';
 import jayShettyCert from '../../assets/images/jay_Shetty_Certification.webp';
 import energeticHealerBadge from '../../assets/images/energeticHealer.webp';
 import tpaLogo from '../../assets/images/TPA_logo.webp';
 import credentialsImage from '../../assets/images/YoanaHero1.webp';
-import heroBackground from '../../assets/images/MyStoryHeroBackground.webp';
-
-import yoanaYoung from '../../assets/images/yoana-nin-young.webp';
-import yoanaRealEstate from '../../assets/images/yoana-nin-realestateshot.webp';
-import yoanaHollywood from '../../assets/images/yoana-nin-hollywood.webp';
-import yoanaBlueShirt from '../../assets/images/yoana-nin-blue-shirt-pose.webp';
+import heroPortrait from '../../assets/images/YoanaIseeYou.webp';
 
 const MyStory: React.FC = () => {
   return (
@@ -83,107 +77,117 @@ const MyStory: React.FC = () => {
         })}
       />
       {/* Hero Section */}
-      <section className={styles.hero} style={{backgroundImage: `url(${heroBackground})`}}>
+      <section className={styles.hero}>
         <div className={styles.container}>
-          <h1 className={styles.heroTitle}>
-            MY STORY: <br />FROM ROMANIA TO RALEIGH
-          </h1>
-          <h2 className={styles.heroSubtitle}>
-            How I Found Joy and Success by Rebuilding From the Ground Up
-          </h2>
-          <p className={styles.heroDescription}>
-            Some journeys start with certainty. Mine started with a suitcase, $10,000, an accent, and a dream that felt bigger than my reality.
-          </p>
-          <p className={styles.heroDescription} style={{paddingTop: '1.5rem'}}>
-            Life had a bigger plan — one that would break me open, strip me down, rebuild me completely, and eventually reveal the woman I was meant to become.
-          </p>
-          
-          {/* Film Reel - Mobile/Tablet Only */}
-          <div className={styles.filmReel}>
-            <div className={styles.filmStrip}>
-              <img src={yoanaYoung} alt="Young Yoana" className={styles.filmFrame} />
-                <img src={yoanaRealEstate} alt="Yoana working with Prosperous Agency" className={styles.filmFrame} />
-              <img src={yoanaHollywood} alt="Yoana in Hollywood" className={styles.filmFrame} />
-              <img src={yoanaBlueShirt} alt="Yoana blue shirt pose" className={styles.filmFrame} />
-              <img src={credentialsImage} alt="Yoana coaching" className={styles.filmFrame} />
+          <div className={styles.heroLayout}>
+            <div className={styles.heroText}>
+              <p className={styles.heroEyebrow}>My Story</p>
+              <h1 className={styles.heroTitle}>From Romania<br />to Raleigh.</h1>
+              <div className={styles.heroSignals}>
+                <span className={styles.heroSignal}>No connections.</span>
+                <span className={styles.heroSignal}>No roadmap.</span>
+                <span className={styles.heroSignal}>No guarantee it would work.</span>
+              </div>
+            </div>
+            <div className={styles.heroImageContainer}>
+              <div className={styles.heroImageFrame}>
+                <img
+                  src={heroPortrait}
+                  alt="Yoana Nin — ADHD Life Coach and Entrepreneur"
+                  className={styles.heroImage}
+                />
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Acts Section - Combined */}
-      <section className={styles.actsSection}>
+      {/* My Story Section */}
+      <section className={styles.actsSection} id="my-journey">
         <div className={styles.container}>
-          {/* Act I */}
-          <div className={styles.actContent} id="my-journey">
-            <div className={styles.actNumber}>I</div>
-            <div className={styles.actText}>
-              <h2 className={styles.actTitle}>The American Dream & The Hollywood Hustle</h2>
-              <h3 className={styles.actDescription}>
-                I arrived in Los Angeles after winning the Green Card Lottery, wide-eyed and determined. I worked jobs that built grit, but I learned quickly that in America, dreams don't chase you— you chase them. Yet, something was missing: joy, alignment, and purpose. The success I wanted wasn't loud or glamorous; it was peaceful.
-              </h3>
+
+          {/* Section header */}
+          <div className={styles.storySectionHeader}>
+            <p className={styles.storyEyebrow}>My Story</p>
+            <h2 className={styles.storySectionTitle}>From Romania to Raleigh</h2>
+            <p className={styles.storySectionLead}>
+              I came to America with a suitcase, $10,000, an accent, and a dream.
+            </p>
+            <p className={styles.storySectionBody}>
+              I won the Green Card Lottery and landed in Los Angeles — wide-eyed, determined, and completely starting over.
+            </p>
+          </div>
+
+          {/* Mental truth opener */}
+          <div className={styles.storyOpener}>
+            <p className={styles.storyOpenerMain}>But starting over is never just logistical.</p>
+            <p className={styles.storyOpenerAccent}>It's mental.</p>
+          </div>
+
+          {/* "It's..." ADHD-friendly card cluster */}
+          <div className={styles.itsGrid}>
+            <div className={styles.itsCard}>
+              <p>It's waking up every day not knowing which step to take first.</p>
+            </div>
+            <div className={styles.itsCard}>
+              <p>It's the overwhelm of too many decisions and not enough clarity.</p>
+            </div>
+            <div className={styles.itsCard}>
+              <p>It's the paralysis of wanting to move forward — and not knowing how.</p>
             </div>
           </div>
 
-          {/* Act Divider */}
-          <div className={styles.actDivider}></div>
+          {/* Prose continuation */}
+          <div className={styles.storyBridge}>
+            <p className={styles.storyBridgeText}>
+              I know what it feels like to be <strong>stuck inside your own potential.</strong>
+            </p>
+            <p className={styles.storyBridgeText}>
+              Finding my purpose didn't happen overnight. It took sitting in the confusion long enough to finally ask the right questions — <strong>What do I actually want? What am I building? Where do I even begin?</strong>
+            </p>
+            <p className={styles.storyBridgeText}>
+              When I stopped trying to do everything and started building <strong>with intention</strong>, everything shifted.
+            </p>
+            <p className={styles.storyBridgeText}>
+              We moved to <strong>Raleigh, NC.</strong> We built <strong>The Prosperous Agency</strong> from the ground up — with focus, discipline, and a clear system that turned <strong>overwhelm into momentum.</strong>
+            </p>
+            <p className={styles.storyBridgeText}>
+              And now? <strong>I help women do the same.</strong>
+            </p>
+            <p className={styles.storyBridgeText}>
+              I have sat across from brilliant women entrepreneurs — <strong>women with ADHD, big ideas, and even bigger hearts</strong> — who were exhausted, scattered, and stuck.
+            </p>
+            <p className={styles.storyBridgeText}>
+              Not because they lacked talent. <strong>Because they lacked a system built for their brain.</strong>
+            </p>
+            <p className={styles.storyBridgeText}>
+              <strong>I know</strong> what it means to face a blank page and not know where to start. <strong>I know</strong> the weight of confusion when your vision is clear but your path isn't. <strong>I know</strong> what it takes to push through — and come out the other side with <strong>purpose.</strong>
+            </p>
 
-          {/* Act II */}
-          <div className={styles.actContent}>
-            <div className={styles.actNumber}>II</div>
-            <div className={styles.actText}>
-              <h2 className={styles.actTitle}>The Struggle and The Shift</h2>
-              <h3 className={styles.actDescription}>
-                Life tested me in ways I never expected. Infertility. Two heartbreaking miscarriages. Financial collapse. In my darkest moments, I realized that hard work alone doesn't save you—joy does. To heal, I had to stop merely surviving and start listening to my soul. I learned that making peace with the past is essential because you no longer reside in that space, and change cannot occur there. I had to engage in a step-by-step process of forgiveness to release the emotional burdens acting as barriers to my goals.
-              </h3>
-            </div>
+          {/* Bridge + Promise + Quote */}
+            <p className={styles.storyBridgeText}>
+              That lived experience is what I bring into every coaching session.
+            </p>
+            <p className={styles.storyBridgeText}>
+              If I could build a thriving business starting from scratch, in a new country, in a new language — imagine what you can build when someone finally gives you the right system.
+            </p>
+            <blockquote className={styles.storyQuote}>
+              "You don't need to be fixed. You need a strategy that works for the way you're wired." — Yoana Nin
+            </blockquote>
           </div>
 
-          {/* Act Divider */}
-          <div className={styles.actDivider}></div>
-
-          {/* Act III */}
-          <div className={styles.actContent}>
-            <div className={styles.actNumber}>III</div>
-            <div className={styles.actText}>
-              <h2 className={styles.actTitle}>The Phoenix Rising</h2>
-              <h3 className={styles.actDescription}>
-                We moved to Raleigh, NC—a place that welcomed us with open arms. We rebuilt from zero and created The Prosperous Agency. Naming my son Phoenix was a testament to rising from the ashes to find stability and purpose. Today, I choose to give that joy back to every person I work with.
-              </h3>
-            </div>
-          </div>
         </div>
       </section>
 
-      {/* Book Section */}
-      <section className={styles.bookSection}>
+      {/* Inspirational Quote Section */}
+      <section id="authorship" className={styles.quoteSection}>
         <div className={styles.container}>
-          <div className={styles.bookContent}>
-            <div className={styles.bookImageSection}>
-              <img 
-                src={bookImage} 
-                alt="Journey to Inner Joy & Success in Real Estate book cover" 
-                className={styles.bookImage}
-              />
-            </div>
-            <div className={styles.bookTextSection}>
-              <h2 className={styles.bookTitle}>
-                Why I Wrote "Journey to Inner Joy & Success in Real Estate"
-              </h2>
-              <p className={styles.bookDescription}>
-                Real estate gave me a way to help people feel safe again. My book teaches you how to follow joy, stay aligned, and build success without sacrificing your soul, your values, or your peace.
-              </p>
-              <h3 className={styles.bookSubtitle}>Learn to Walk Joyfully Toward Success</h3>
-              <a 
-                href="https://www.amazon.com/Journey-Inner-Success-Real-Estate/dp/191294832X" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className={styles.bookButton}
-              >
-                → Buy on Amazon
-              </a>
-            </div>
-          </div>
+          <blockquote className={styles.quote}>
+            <p className={styles.quoteText}>
+              "And the day came when the risk to remain tight in a bud was more painful than the risk it took to blossom"
+            </p>
+            <cite className={styles.quoteAuthor}>— Anaïs Nin</cite>
+          </blockquote>
         </div>
       </section>
 
@@ -276,12 +280,17 @@ const MyStory: React.FC = () => {
         <div className={styles.container}>
           <div className={styles.ctaContent}>
             <p className={styles.ctaTagline}>
-              Fix My System
+              You do not need to be fixed.
             </p>
             <p className={styles.ctaText}>
-              <span className={styles.ctaGradientText}>Stop the overwhelm. Start the strategy.</span>
+              <span className={styles.ctaGradientText}>You need a strategy that works for the way you are wired.</span>
             </p>
-            <Link to="/contact" className="btn btn-primary" style={{fontSize: 'var(--font-size-lg)', padding: '1rem 2.5rem'}}>
+            <Link
+              to="/contact"
+              className="btn btn-primary"
+              style={{fontSize: 'var(--font-size-lg)', padding: '1rem 2.5rem'}}
+              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            >
               Connect with Yoana
             </Link>
           </div>

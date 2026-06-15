@@ -5,7 +5,7 @@ import SocialReels from '../../components/SocialReels/SocialReels';
 import masterMindsetImage from '../../assets/images/masterMindset.webp';
 import { getAllBlogPosts, getFeaturedBlogPosts } from '../../content/blogLoader';
 
-const CATEGORY_FILTERS = ['All', 'Coaching', 'Community', 'Real Estate'];
+const CATEGORY_FILTERS = ['All', 'Coaching', 'Community'];
 
 const POSTS_PER_PAGE = 9;
 
