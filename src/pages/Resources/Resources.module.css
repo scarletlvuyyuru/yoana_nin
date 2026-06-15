@@ -170,3 +170,38 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* Dark Mode */
+[data-theme="dark"] .hero {
+  background: linear-gradient(135deg, var(--color-navy) 0%, #1e2d45 100%);
+}
+
+[data-theme="dark"] .formShell {
+  background: rgba(45, 55, 72, 0.95);
+  border-color: var(--border-color);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="dark"] .input {
+  background: rgba(45, 55, 72, 0.9);
+  color: var(--text-primary);
+  border-color: var(--border-color);
+}
+
+[data-theme="dark"] .input::placeholder {
+  color: var(--text-secondary);
+  opacity: 0.7;
+}
+
+[data-theme="dark"] .input:focus-visible {
+  outline-color: var(--color-blue-light);
+}
+
+[data-theme="dark"] .successOverlayCard {
+  background: linear-gradient(145deg, #1e2d45 0%, #2d3748 100%);
+  border-color: var(--border-color);
+}
+
+[data-theme="dark"] .successOverlayTitle {
+  color: var(--text-primary);
+}

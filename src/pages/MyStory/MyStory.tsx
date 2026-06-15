@@ -7,12 +7,7 @@ import jayShettyCert from '../../assets/images/jay_Shetty_Certification.webp';
 import energeticHealerBadge from '../../assets/images/energeticHealer.webp';
 import tpaLogo from '../../assets/images/TPA_logo.webp';
 import credentialsImage from '../../assets/images/YoanaHero1.webp';
-import heroBackground from '../../assets/images/MyStoryHeroBackground.webp';
-
-import yoanaYoung from '../../assets/images/yoana-nin-young.webp';
-import yoanaRealEstate from '../../assets/images/yoana-nin-realestateshot.webp';
-import yoanaHollywood from '../../assets/images/yoana-nin-hollywood.webp';
-import yoanaBlueShirt from '../../assets/images/yoana-nin-blue-shirt-pose.webp';
+import heroPortrait from '../../assets/images/YoanaIseeYou.webp';
 
 const MyStory: React.FC = () => {
   return (
@@ -82,105 +77,105 @@ const MyStory: React.FC = () => {
         })}
       />
       {/* Hero Section */}
-      <section className={styles.hero} style={{backgroundImage: `url(${heroBackground})`}}>
+      <section className={styles.hero}>
         <div className={styles.container}>
-          <p className={styles.heroEyebrow}>My Story</p>
-          <h1 className={styles.heroTitle}>
-            I came to America with a suitcase, $10,000, an accent, and a dream.
-          </h1>
-          <h2 className={styles.heroSubtitle}>
-            From starting over to building with intention.
-          </h2>
-          <div className={styles.heroSignals}>
-            <span className={styles.heroSignal}>No connections.</span>
-            <span className={styles.heroSignal}>No roadmap.</span>
-            <span className={styles.heroSignal}>No guarantee it would work.</span>
-          </div>
-          <p className={styles.heroDescription}>
-            I won the Green Card Lottery and landed in Los Angeles - wide-eyed, determined, and completely starting over.
-          </p>
-          
-          {/* Film Reel - Mobile/Tablet Only */}
-          <div className={styles.filmReel}>
-            <div className={styles.filmStrip}>
-              <img src={yoanaYoung} alt="Young Yoana" className={styles.filmFrame} />
-                <img src={yoanaRealEstate} alt="Yoana working with Prosperous Agency" className={styles.filmFrame} />
-              <img src={yoanaHollywood} alt="Yoana in Hollywood" className={styles.filmFrame} />
-              <img src={yoanaBlueShirt} alt="Yoana blue shirt pose" className={styles.filmFrame} />
-              <img src={credentialsImage} alt="Yoana coaching" className={styles.filmFrame} />
+          <div className={styles.heroLayout}>
+            <div className={styles.heroText}>
+              <p className={styles.heroEyebrow}>My Story</p>
+              <h1 className={styles.heroTitle}>From Romania<br />to Raleigh.</h1>
+              <div className={styles.heroSignals}>
+                <span className={styles.heroSignal}>No connections.</span>
+                <span className={styles.heroSignal}>No roadmap.</span>
+                <span className={styles.heroSignal}>No guarantee it would work.</span>
+              </div>
+            </div>
+            <div className={styles.heroImageContainer}>
+              <div className={styles.heroImageFrame}>
+                <img
+                  src={heroPortrait}
+                  alt="Yoana Nin — ADHD Life Coach and Entrepreneur"
+                  className={styles.heroImage}
+                />
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Story Path Section */}
-      <section className={styles.actsSection}>
+      {/* My Story Section */}
+      <section className={styles.actsSection} id="my-journey">
         <div className={styles.container}>
-          <div className={styles.storyIntro} id="my-journey">
-            <h2 className={styles.storyTitle}>What Starting Over Really Felt Like</h2>
-            <p className={styles.storyLead}>
-              But starting over is never just logistical. It's mental.
+
+          {/* Section header */}
+          <div className={styles.storySectionHeader}>
+            <p className={styles.storyEyebrow}>My Story</p>
+            <h2 className={styles.storySectionTitle}>From Romania to Raleigh</h2>
+            <p className={styles.storySectionLead}>
+              I came to America with a suitcase, $10,000, an accent, and a dream.
+            </p>
+            <p className={styles.storySectionBody}>
+              I won the Green Card Lottery and landed in Los Angeles — wide-eyed, determined, and completely starting over.
             </p>
           </div>
 
-          <div className={styles.storyGrid}>
-            <article className={styles.storyCard}>
-              <p className={styles.storyTag}>Mental Load</p>
-              <p className={styles.storyBody}>
-                It's waking up every day not knowing which step to take first. It's the overwhelm of too many decisions and not enough clarity. It's the paralysis of wanting to move forward - and not knowing how.
-              </p>
-            </article>
-
-            <article className={styles.storyCard}>
-              <p className={styles.storyTag}>The Truth</p>
-              <p className={styles.storyBody}>
-                I know what it feels like to be stuck inside your own potential.
-              </p>
-            </article>
-
-            <article className={styles.storyCard}>
-              <p className={styles.storyTag}>The Questions</p>
-              <p className={styles.storyBody}>
-                Finding my purpose didn't happen overnight. It took sitting in the confusion long enough to finally ask the right questions - What do I actually want? What am I building? Where do I even begin?
-              </p>
-            </article>
-
-            <article className={styles.storyCard}>
-              <p className={styles.storyTag}>The Shift</p>
-              <p className={styles.storyBody}>
-                When I stopped trying to do everything and started building with intention, everything shifted.
-              </p>
-            </article>
-
-            <article className={styles.storyCard}>
-              <p className={styles.storyTag}>The System</p>
-              <p className={styles.storyBody}>
-                We moved to Raleigh, NC. We built The Prosperous Agency from the ground up - with focus, discipline, and a clear system that turned overwhelm into momentum.
-              </p>
-            </article>
-
-            <article className={styles.storyCard}>
-              <p className={styles.storyTag}>Now</p>
-              <p className={styles.storyBody}>
-                And now? I help women do the same. I have sat across from brilliant women entrepreneurs - women with ADHD, big ideas, and even bigger hearts - who were exhausted, scattered, and stuck. Not because they lacked talent. Because they lacked a system built for their brain.
-              </p>
-            </article>
+          {/* Mental truth opener */}
+          <div className={styles.storyOpener}>
+            <p className={styles.storyOpenerMain}>But starting over is never just logistical.</p>
+            <p className={styles.storyOpenerAccent}>It's mental.</p>
           </div>
 
+          {/* "It's..." ADHD-friendly card cluster */}
+          <div className={styles.itsGrid}>
+            <div className={styles.itsCard}>
+              <p>It's waking up every day not knowing which step to take first.</p>
+            </div>
+            <div className={styles.itsCard}>
+              <p>It's the overwhelm of too many decisions and not enough clarity.</p>
+            </div>
+            <div className={styles.itsCard}>
+              <p>It's the paralysis of wanting to move forward — and not knowing how.</p>
+            </div>
+          </div>
+
+          {/* Prose continuation */}
           <div className={styles.storyBridge}>
             <p className={styles.storyBridgeText}>
-              I know what it means to face a blank page and not know where to start. I know the weight of confusion when your vision is clear but your path isn't. I know what it takes to push through - and come out the other side with purpose.
+              I know what it feels like to be <strong>stuck inside your own potential.</strong>
             </p>
+            <p className={styles.storyBridgeText}>
+              Finding my purpose didn't happen overnight. It took sitting in the confusion long enough to finally ask the right questions — <strong>What do I actually want? What am I building? Where do I even begin?</strong>
+            </p>
+            <p className={styles.storyBridgeText}>
+              When I stopped trying to do everything and started building <strong>with intention</strong>, everything shifted.
+            </p>
+            <p className={styles.storyBridgeText}>
+              We moved to <strong>Raleigh, NC.</strong> We built <strong>The Prosperous Agency</strong> from the ground up — with focus, discipline, and a clear system that turned <strong>overwhelm into momentum.</strong>
+            </p>
+            <p className={styles.storyBridgeText}>
+              And now? <strong>I help women do the same.</strong>
+            </p>
+            <p className={styles.storyBridgeText}>
+              I have sat across from brilliant women entrepreneurs — <strong>women with ADHD, big ideas, and even bigger hearts</strong> — who were exhausted, scattered, and stuck.
+            </p>
+            <p className={styles.storyBridgeText}>
+              Not because they lacked talent. <strong>Because they lacked a system built for their brain.</strong>
+            </p>
+            <p className={styles.storyBridgeText}>
+              <strong>I know</strong> what it means to face a blank page and not know where to start. <strong>I know</strong> the weight of confusion when your vision is clear but your path isn't. <strong>I know</strong> what it takes to push through — and come out the other side with <strong>purpose.</strong>
+            </p>
+
+          {/* Bridge + Promise + Quote */}
             <p className={styles.storyBridgeText}>
               That lived experience is what I bring into every coaching session.
             </p>
             <p className={styles.storyBridgeText}>
-              If I could build a thriving business starting from scratch, in a new country, in a new language, imagine what you can build when someone finally gives you the right system.
+              If I could build a thriving business starting from scratch, in a new country, in a new language — imagine what you can build when someone finally gives you the right system.
             </p>
             <blockquote className={styles.storyQuote}>
-              "You don't need to be fixed. You need a strategy that works for the way you're wired." - Yoana Nin
+              "You don't need to be fixed. You need a strategy that works for the way you're wired." — Yoana Nin
             </blockquote>
           </div>
+
         </div>
       </section>
 

@@ -322,6 +322,11 @@
   background: var(--bg-primary);
 }
 
+[data-theme="dark"] .sectionTitle {
+  color: var(--text-primary);
+  text-shadow: none;
+}
+
 [data-theme="dark"] .hero {
   background: linear-gradient(135deg, #2D3748 0%, var(--color-navy) 100%);
   background-size: cover;

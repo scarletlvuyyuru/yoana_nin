@@ -517,6 +517,86 @@
   color: var(--text-tertiary);
 }
 
+/* Dark Mode */
+[data-theme="dark"] .resultsCard {
+  background: rgba(30, 42, 60, 0.96);
+  border-color: var(--border-color);
+}
+
+[data-theme="dark"] .resultsTitle {
+  color: var(--text-primary);
+}
+
+[data-theme="dark"] .resultsSubtitle {
+  color: var(--text-secondary);
+}
+
+[data-theme="dark"] .rangeCard {
+  background: rgba(45, 55, 72, 0.85);
+  border-color: var(--border-color);
+  color: var(--text-primary);
+}
+
+[data-theme="dark"] .rangeScore,
+[data-theme="dark"] .rangeSuggestion {
+  color: var(--text-primary);
+}
+
+[data-theme="dark"] .rangeNextStep {
+  color: var(--text-secondary);
+}
+
+[data-theme="dark"] .recommendationBox {
+  background: rgba(0, 74, 173, 0.15);
+  border-color: rgba(119, 195, 234, 0.25);
+}
+
+[data-theme="dark"] .recommendationText {
+  color: var(--text-primary);
+}
+
+[data-theme="dark"] .emailResultsToggle {
+  background: linear-gradient(135deg, rgba(45, 55, 72, 0.95) 0%, rgba(30, 42, 60, 0.98) 100%);
+  color: var(--text-primary);
+  border-color: rgba(179, 0, 179, 0.35);
+}
+
+[data-theme="dark"] .emailResultsPanel {
+  background: linear-gradient(180deg, rgba(30, 42, 60, 0.95), rgba(45, 55, 72, 0.98));
+  border-color: var(--border-color);
+}
+
+[data-theme="dark"] .formTitle {
+  color: var(--text-primary);
+}
+
+[data-theme="dark"] .formCopy {
+  color: var(--text-secondary);
+}
+
+[data-theme="dark"] .fieldLabel {
+  color: var(--text-primary);
+}
+
+[data-theme="dark"] .emailInput {
+  background: rgba(45, 55, 72, 0.9);
+  color: var(--text-primary);
+  border-color: var(--border-color);
+}
+
+[data-theme="dark"] .emailInput::placeholder {
+  color: var(--text-secondary);
+  opacity: 0.7;
+}
+
+[data-theme="dark"] .formLegal {
+  color: var(--text-secondary);
+}
+
+[data-theme="dark"] .disclaimer {
+  color: var(--text-secondary);
+}
+
 @media (max-width: 768px) {
   .page {
     padding: 3.5rem 1rem;
