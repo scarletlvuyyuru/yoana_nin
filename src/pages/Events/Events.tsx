@@ -19,6 +19,20 @@ const relayForLifeCollageImages = [
     alt: 'Candid moment from Relay for Life event',
   },
 ];
+const sheSafeHomeCollageImages = [
+  {
+    src: '/images/events/she-safe-home/SHE1YoanaPosing.webp',
+    alt: 'Yoana Nin posing at the S.H.E. Safe Home Network event',
+  },
+  {
+    src: '/images/events/she-safe-home/SHEYoanaExcited.webp',
+    alt: 'Yoana Nin presenting ADHD strategies at S.H.E. Safe Home Network',
+  },
+  {
+    src: '/images/events/she-safe-home/SHEYoanaInteracting.webp',
+    alt: 'Yoana Nin interacting with attendees at S.H.E. Safe Home Network',
+  },
+];
 const womensDayCollageImages = [
   {
     src: '/images/events/womens-day-expo/Yoana_Giving_Speech_KeynoteSpeaker.webp',
@@ -73,7 +87,9 @@ const eventSections = [
     summary:
       'At a recent gathering for the S.H.E. Safe Home Network, Yoana Nin presented actionable ADHD management strategies tailored for women in home services and trades. Drawing from her frameworks at Yoana Nin Coaching, she shared practical tactics for conquering task initiation and executive dysfunction to help these professionals streamline their businesses and daily lives.',
     assetFolder: '/images/events/she-safe-home/',
-    image: null as string | null,
+    image: sheSafeHomeCollageImages[0].src,
+    imageAlt: sheSafeHomeCollageImages[0].alt,
+    collageImages: sheSafeHomeCollageImages,
     accent: 'Practical tools for busy professionals and business owners.',
   },
 ];

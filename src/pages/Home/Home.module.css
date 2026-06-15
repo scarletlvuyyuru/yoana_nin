@@ -1556,7 +1556,6 @@
 [data-theme="dark"] .proofList li,
 [data-theme="dark"] .proofTextStrong,
 [data-theme="dark"] .proofQuote,
-[data-theme="dark"] .solutionTitle,
 [data-theme="dark"] .solutionCardText,
 [data-theme="dark"] .fitTitle,
 [data-theme="dark"] .fitWho,
@@ -1565,4 +1564,8 @@
 [data-theme="dark"] .gettingStartedTitle,
 [data-theme="dark"] .stepText {
   color: var(--color-navy);
+}
+
+[data-theme="dark"] .solutionTitle {
+  color: var(--text-primary) !important;
 }
