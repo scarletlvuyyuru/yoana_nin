@@ -24,7 +24,7 @@ const Home: React.FC = () => {
   const faqData: FaqItem[] = [
     {
       question: "What makes your coaching approach different?",
-      answer: "My approach combines hollistic purpose-driven business strategies, practical mindset tools, and lived experience as an expat and entrepreneur. I specialize in working with ADHD entrepreneurs and expats, understanding the unique challenges of building meaningful businesses while navigating new cultures and neurodivergent traits."
+      answer: "My approach combines holistic, purpose-driven business strategies, practical mindset tools, and lived experience as an entrepreneur. I specialize in supporting women entrepreneurs with ADHD, helping them build meaningful businesses with systems that match how their brains work."
     },
     {
       question: "Do you work with clients virtually or in-person?",
@@ -62,9 +62,9 @@ const Home: React.FC = () => {
             "url": "https://yoananincoaching.com",
             "logo": {
               "@type": "ImageObject",
-              "url": "https://yoananincoaching.com/metaOG.png",
-              "width": 1200,
-              "height": 630
+              "url": "https://yoananincoaching.com/web-app-manifest-512x512.png",
+              "width": 512,
+              "height": 512
             },
             "description": "ADHD entrepreneur coaching for women business owners with virtual sessions across the United States and local support in the Raleigh NC Triangle area.",
             "founder": {
@@ -115,7 +115,7 @@ const Home: React.FC = () => {
             "@id": "https://yoananincoaching.com/#localbusiness",
             "name": "Yoana Nin Coaching",
             "url": "https://yoananincoaching.com",
-            "image": "https://yoananincoaching.com/metaOG.png",
+            "image": "https://yoananincoaching.com/YoanaIseeYou.webp",
             "description": "ADHD entrepreneur coaching delivered virtually across the U.S., with local in-person support available in the Raleigh NC Triangle area.",
             "address": {
               "@type": "PostalAddress",

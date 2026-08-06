@@ -54,7 +54,7 @@ const BlogPost: React.FC = () => {
         '@type': 'Organization',
         '@id': 'https://yoananincoaching.com/#organization',
         name: 'Yoana Nin Coaching',
-        logo: { '@type': 'ImageObject', url: 'https://yoananincoaching.com/metaOG.png', width: 1200, height: 630 },
+        logo: { '@type': 'ImageObject', url: 'https://yoananincoaching.com/web-app-manifest-512x512.png', width: 512, height: 512 },
       },
     }),
     JSON.stringify({

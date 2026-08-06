@@ -82,9 +82,9 @@ const coachingSchemas = [
     url: 'https://yoananincoaching.com/',
     logo: {
       '@type': 'ImageObject',
-      url: 'https://yoananincoaching.com/metaOG.png',
-      width: 1200,
-      height: 630,
+      url: 'https://yoananincoaching.com/web-app-manifest-512x512.png',
+      width: 512,
+      height: 512,
     },
     founder: { '@id': 'https://yoananincoaching.com/#person' },
     areaServed: [
