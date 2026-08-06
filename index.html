@@ -46,6 +46,7 @@
     <meta name="keywords" content="ADHD coach, ADHD life coach, ADHD entrepreneur coach, women entrepreneurs ADHD, ADHD business strategy, neurodivergent coaching, Jay Shetty coach, ADHD overwhelm, Raleigh NC life coach, virtual ADHD coaching, Cary NC coach, Apex NC coach, energetic healer" />
     <meta name="author" content="Yoana Nin" />
     <title>Yoana Nin - ADHD Life Coach for Women Entrepreneurs | Raleigh NC</title>
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
     
     <!-- Structured Data for Featured Snippets/AEO -->
     <script type="application/ld+json">
@@ -145,6 +146,35 @@
       </form>
     
     <script type="module" src="/src/main.tsx"></script>
+    <script>
+      (function setupNetlifyIdentityBridge() {
+        function hasIdentityTokenInHash() {
+          return /(^|[&#])(confirmation|recovery|invite|email_change)_token=/i.test(window.location.hash || '');
+        }
+
+        function routeTokenLinksToAdmin() {
+          if (!hasIdentityTokenInHash()) return;
+          if (window.location.pathname.indexOf('/admin/') === 0) return;
+          window.location.replace('/admin/' + window.location.hash);
+        }
+
+        routeTokenLinksToAdmin();
+
+        if (window.netlifyIdentity) {
+          window.netlifyIdentity.on('init', function (user) {
+            if (!user && window.location.pathname.indexOf('/admin/') === 0) {
+              window.netlifyIdentity.open('login');
+            }
+          });
+
+          window.netlifyIdentity.on('login', function () {
+            if (window.location.pathname.indexOf('/admin/') !== 0) {
+              document.location.href = '/admin/';
+            }
+          });
+        }
+      })();
+    </script>
     
   </body>
 </html>
