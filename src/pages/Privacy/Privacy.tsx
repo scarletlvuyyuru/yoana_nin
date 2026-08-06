@@ -2,6 +2,29 @@ import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import styles from './Privacy.module.css';
 
+const privacySchemas = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    '@id': 'https://yoananincoaching.com/privacy#webpage',
+    url: 'https://yoananincoaching.com/privacy',
+    name: 'Privacy Policy | Yoana Nin Coaching',
+    description: 'Privacy Policy for Yoana Nin Coaching — how personal information is collected, used, and protected.',
+    isPartOf: { '@id': 'https://yoananincoaching.com/#website' },
+    about: { '@id': 'https://yoananincoaching.com/#organization' },
+    inLanguage: 'en-US',
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'PrivacyPolicy',
+    '@id': 'https://yoananincoaching.com/privacy#policy',
+    name: 'Yoana Nin Coaching Privacy Policy',
+    url: 'https://yoananincoaching.com/privacy',
+    publisher: { '@id': 'https://yoananincoaching.com/#organization' },
+    inLanguage: 'en-US',
+  },
+];
+
 const Privacy: React.FC = () => {
   return (
     <div className={styles.privacyPage}>
@@ -10,6 +33,11 @@ const Privacy: React.FC = () => {
         <meta name="description" content="Privacy Policy for Yoana Nin Coaching — how we collect, use, and protect your personal information." />
         <meta name="robots" content="noindex, follow" />
         <link rel="canonical" href="https://yoananincoaching.com/privacy" />
+        {privacySchemas.map((schema, index) => (
+          <script key={index} type="application/ld+json">
+            {JSON.stringify(schema)}
+          </script>
+        ))}
       </Helmet>
       <div className={styles.container}>
         <header className={styles.header}>

@@ -508,6 +508,18 @@
   margin-top: 0.25rem;
 }
 
+.captchaNote {
+  margin: -0.15rem 0 0;
+  font-size: var(--font-size-sm);
+  line-height: 1.45;
+  color: var(--text-secondary);
+}
+
+.captchaNote a {
+  color: var(--text-accent);
+  text-decoration: underline;
+}
+
 .srOnly {
   position: absolute;
   width: 1px;
@@ -547,6 +559,14 @@
 
 [data-theme="dark"] .field input::placeholder {
   color: #4b5563;
+}
+
+[data-theme="dark"] .captchaNote {
+  color: var(--color-navy);
+}
+
+[data-theme="dark"] .captchaNote a {
+  color: var(--color-accessible-magenta);
 }
 
 @media (max-width: 900px) {

@@ -2,6 +2,29 @@ import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import styles from './Terms.module.css';
 
+const termsSchemas = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    '@id': 'https://yoananincoaching.com/terms#webpage',
+    url: 'https://yoananincoaching.com/terms',
+    name: 'Terms & Conditions | Yoana Nin Coaching',
+    description: 'Terms and Conditions for Yoana Nin Coaching covering service agreement, disclaimers, and legal information.',
+    isPartOf: { '@id': 'https://yoananincoaching.com/#website' },
+    about: { '@id': 'https://yoananincoaching.com/#organization' },
+    inLanguage: 'en-US',
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    '@id': 'https://yoananincoaching.com/terms#agreement',
+    name: 'Yoana Nin Coaching Terms and Conditions',
+    url: 'https://yoananincoaching.com/terms',
+    publisher: { '@id': 'https://yoananincoaching.com/#organization' },
+    inLanguage: 'en-US',
+  },
+];
+
 const Terms: React.FC = () => {
   return (
     <div className={styles.termsPage}>
@@ -10,6 +33,11 @@ const Terms: React.FC = () => {
         <meta name="description" content="Terms and Conditions for Yoana Nin Coaching — our service agreement, disclaimers, and legal information." />
         <meta name="robots" content="noindex, follow" />
         <link rel="canonical" href="https://yoananincoaching.com/terms" />
+        {termsSchemas.map((schema, index) => (
+          <script key={index} type="application/ld+json">
+            {JSON.stringify(schema)}
+          </script>
+        ))}
       </Helmet>
       <div className={styles.container}>
         <header className={styles.header}>

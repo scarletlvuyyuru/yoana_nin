@@ -96,6 +96,7 @@ const Assessment: React.FC = () => {
   const [answers, setAnswers] = useState<number[]>(Array(QUESTIONS.length).fill(0));
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [showResults, setShowResults] = useState(false);
+  const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
   const [resultsConsent, setResultsConsent] = useState(false);
   const [marketingConsent, setMarketingConsent] = useState(false);
@@ -162,6 +163,7 @@ const Assessment: React.FC = () => {
     setAnswers(Array(QUESTIONS.length).fill(0));
     setCurrentQuestion(0);
     setShowResults(false);
+    setFullName('');
     setEmail('');
     setResultsConsent(false);
     setMarketingConsent(false);
@@ -186,16 +188,23 @@ const Assessment: React.FC = () => {
         .replace(/on\w+\s*=/gi, '')
         .substring(0, 2000);
 
+    const submittedName = formData.get('fullName')?.toString().trim() || '';
     const submittedEmail = formData.get('email')?.toString().trim() || '';
+    const recaptchaToken = formData.get('g-recaptcha-response')?.toString().trim() || '';
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-    if (!resultsConsent || !submittedEmail) {
-      setSubmitError('Please enter your email and agree to receive your results.');
+    if (!resultsConsent || !submittedName || !submittedEmail) {
+      setSubmitError('Please enter your name, email, and agree to receive your results.');
       return;
     }
 
     if (!emailRegex.test(submittedEmail)) {
       setSubmitError('Please enter a valid email address.');
+      return;
+    }
+
+    if (!recaptchaToken) {
+      setSubmitError('Please complete the reCAPTCHA check before submitting.');
       return;
     }
 
@@ -244,6 +253,7 @@ const Assessment: React.FC = () => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
+          name: submittedName,
           email: submittedEmail,
           totalScore,
           scoreRange: activeRange ? `${activeRange.min}-${activeRange.max}` : 'Not scored',
@@ -413,6 +423,7 @@ const Assessment: React.FC = () => {
                   name="assessment-results"
                   method="POST"
                   data-netlify="true"
+                  data-netlify-recaptcha="true"
                   data-netlify-honeypot="bot-field"
                   className={styles.emailForm}
                   onSubmit={handleEmailSubmit}
@@ -432,6 +443,21 @@ const Assessment: React.FC = () => {
                     <label htmlFor="assessment-bot-field">Do not fill this out if you're human</label>
                     <input id="assessment-bot-field" type="text" name="bot-field" tabIndex={-1} autoComplete="off" />
                   </div>
+
+                  <label className={styles.fieldLabel} htmlFor="assessment-full-name">
+                    Name
+                  </label>
+                  <input
+                    id="assessment-full-name"
+                    name="fullName"
+                    type="text"
+                    value={fullName}
+                    onChange={(event) => setFullName(event.target.value)}
+                    className={styles.emailInput}
+                    placeholder="Your name"
+                    autoComplete="name"
+                    required
+                  />
 
                   <label className={styles.fieldLabel} htmlFor="assessment-email">
                     Email address
@@ -475,12 +501,18 @@ const Assessment: React.FC = () => {
                     Unsubscribe anytime. See <Link to="/privacy">Privacy Policy</Link>.
                   </p>
 
+                  <p className={styles.formLegal}>
+                    This site is protected by reCAPTCHA and the Google <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Privacy Policy</a> and <a href="https://policies.google.com/terms" target="_blank" rel="noopener noreferrer">Terms of Service</a> apply.
+                  </p>
+
+                  <div data-netlify-recaptcha="true"></div>
+
                   {submitError && <p className={styles.formError}>{submitError}</p>}
 
                   <button
                     type="submit"
                     className={`${styles.navButton} ${styles.primaryButton} ${styles.submitButton}`}
-                    disabled={!email.trim() || !resultsConsent || isSubmitting}
+                    disabled={!fullName.trim() || !email.trim() || !resultsConsent || isSubmitting}
                   >
                     {isSubmitting ? 'Unlocking...' : 'Unlock My Results'}
                   </button>

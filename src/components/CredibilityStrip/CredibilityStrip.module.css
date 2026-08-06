@@ -25,6 +25,8 @@
   justify-content: center;
   width: 130px;
   height: 130px;
+  flex: 0 0 auto;
+  aspect-ratio: 1 / 1;
   border-radius: 50%;
   background: var(--bg-primary);
   border: 3px solid white;
@@ -61,6 +63,7 @@
 .credentialIcon {
   width: 120px;
   height: 120px;
+  aspect-ratio: 1 / 1;
   object-fit: cover;
   border-radius: 50%;
   filter: none;
@@ -110,8 +113,8 @@
   
   .iconsGrid {
     gap: 0.5rem;
-    flex-wrap: nowrap;
-    justify-content: space-between;
+    flex-wrap: wrap;
+    justify-content: center;
   }
   
   .credentialItem {
@@ -136,6 +139,7 @@
 @media (max-width: 480px) {
   .iconsGrid {
     gap: 0.25rem;
+    justify-content: center;
   }
   
   .credentialItem {

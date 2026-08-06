@@ -7,7 +7,7 @@
   <!-- Homepage -->
   <url>
     <loc>https://yoananincoaching.com/</loc>
-    <lastmod>2026-06-15</lastmod>
+    <lastmod>2026-08-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
@@ -15,7 +15,7 @@
   <!-- Primary service page -->
   <url>
     <loc>https://yoananincoaching.com/coaching</loc>
-    <lastmod>2026-06-15</lastmod>
+    <lastmod>2026-08-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.95</priority>
   </url>
@@ -23,7 +23,7 @@
   <!-- ADHD Self-Assessment — high conversion page -->
   <url>
     <loc>https://yoananincoaching.com/assessment</loc>
-    <lastmod>2026-06-15</lastmod>
+    <lastmod>2026-08-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.90</priority>
   </url>
@@ -31,7 +31,7 @@
   <!-- About / Trust-building -->
   <url>
     <loc>https://yoananincoaching.com/my-story</loc>
-    <lastmod>2026-06-15</lastmod>
+    <lastmod>2026-08-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.80</priority>
   </url>
@@ -39,7 +39,7 @@
   <!-- Blog index -->
   <url>
     <loc>https://yoananincoaching.com/blog</loc>
-    <lastmod>2026-06-15</lastmod>
+    <lastmod>2026-08-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
@@ -47,7 +47,7 @@
   <!-- Events / Speaking -->
   <url>
     <loc>https://yoananincoaching.com/events</loc>
-    <lastmod>2026-06-15</lastmod>
+    <lastmod>2026-08-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
   </url>
@@ -55,7 +55,7 @@
   <!-- Resources / Book Now -->
   <url>
     <loc>https://yoananincoaching.com/resources</loc>
-    <lastmod>2026-06-15</lastmod>
+    <lastmod>2026-08-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.70</priority>
   </url>
@@ -63,9 +63,24 @@
   <!-- Contact — conversion page -->
   <url>
     <loc>https://yoananincoaching.com/contact</loc>
-    <lastmod>2026-06-15</lastmod>
+    <lastmod>2026-08-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
+  </url>
+
+  <!-- Legal pages -->
+  <url>
+    <loc>https://yoananincoaching.com/privacy</loc>
+    <lastmod>2026-08-05</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.40</priority>
+  </url>
+
+  <url>
+    <loc>https://yoananincoaching.com/terms</loc>
+    <lastmod>2026-08-05</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.40</priority>
   </url>
 
   <!-- Blog Posts -->

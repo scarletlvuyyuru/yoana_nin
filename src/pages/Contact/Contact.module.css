@@ -405,6 +405,18 @@
   transform: translateY(-1px);
 }
 
+.captchaNote {
+  margin: 0.25rem 0 0;
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.captchaNote a {
+  color: var(--text-accent);
+  text-decoration: underline;
+}
+
 /* Contact Info */
 .contactInfo {
   text-align: center;

@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import styles from './Navigation.module.css';
-import logo from '../../assets/yoana_nin_coaching_logo.webp';
+import desktopLogo from '../../assets/yoana_nin_coaching_logo.webp';
+import mobileLogo from '../../assets/yoana_nin_coaching_logomobile.webp';
 import facebookIcon from '../../assets/images/icon_fb_wht.webp';
 import instagramIcon from '../../assets/images/icon_instagram.webp';
 import linkedinIcon from '../../assets/images/icon_linkedin.webp';
@@ -19,11 +20,9 @@ const navigationItems: NavigationItem[] = [
     name: 'Coaching',
     path: '/coaching',
     sections: [
-      { name: 'Coaching Overview', id: 'coaching-overview' },
-      { name: 'Phase 1: Personal Development', id: 'phase1-details' },
-      { name: 'Phase 2: Planning', id: 'phase2-details' },
-      { name: 'Phase 3: Execution', id: 'phase3-details' },
-      { name: 'Coaching Pricing', id: 'coaching-pricing' }
+      { name: 'Coaching Offers', id: 'coaching-offers' },
+      { name: 'Group Coaching', id: 'group-offer' },
+      { name: '6-Month 1:1 Coaching', id: 'private-offer' }
     ]
   },
   {
@@ -50,6 +49,7 @@ const Navigation: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const [isScrolled, setIsScrolled] = useState(false);
+  const isScrolledRef = useRef(false);
   const location = useLocation();
 
   useEffect(() => {
@@ -58,12 +58,33 @@ const Navigation: React.FC = () => {
   }, [location]);
 
   useEffect(() => {
-    const handleScroll = () => {
+    let ticking = false;
+    const SCROLL_DOWN_THRESHOLD = 72;
+    const SCROLL_UP_THRESHOLD = 28;
+
+    const updateScrollState = () => {
       const scrollTop = window.scrollY;
-      setIsScrolled(scrollTop > 50);
+      const nextScrolled = isScrolledRef.current
+        ? scrollTop > SCROLL_UP_THRESHOLD
+        : scrollTop > SCROLL_DOWN_THRESHOLD;
+
+      if (nextScrolled !== isScrolledRef.current) {
+        isScrolledRef.current = nextScrolled;
+        setIsScrolled(nextScrolled);
+      }
+
+      ticking = false;
     };
 
-    window.addEventListener('scroll', handleScroll);
+    const handleScroll = () => {
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(updateScrollState);
+      }
+    };
+
+    handleScroll();
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -155,7 +176,7 @@ const Navigation: React.FC = () => {
               <img src={linkedinIcon} alt="LinkedIn" className={styles.socialIconImage} />
             </a>
             <a 
-              href="https://www.tiktok.com/@yoananincoaching" 
+              href="https://www.tiktok.com/@adhdcoachyoana?is_from_webapp=1&sender_device=pc" 
               className={styles.socialIcon}
               aria-label="Follow us on TikTok"
               target="_blank"
@@ -276,13 +297,16 @@ const Navigation: React.FC = () => {
             aria-label="Yoana - Home"
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
           >
-            <img 
-              src={logo} 
-              alt="Yoana Coaching Logo" 
-              className={styles.logoImage}
-              width="300"
-              height="200"
-            />
+            <picture>
+              <source media="(max-width: 768px)" srcSet={mobileLogo} />
+              <img 
+                src={desktopLogo} 
+                alt="Yoana Coaching Logo" 
+                className={styles.logoImage}
+                width="300"
+                height="200"
+              />
+            </picture>
           </Link>
 
           <Link
@@ -311,7 +335,7 @@ const Navigation: React.FC = () => {
                 ADHD Quiz
               </Link>
               <a
-                href="https://sendlink.co/documents/doc-form/69b2d898993c38a3c094ca2b?locale=en-US"
+                href="https://link.fastpaydirect.com/payment-link/6a73adcc7b99151a5404288d"
                 className={styles.joinCommunityLink}
                 target="_blank"
                 rel="noopener noreferrer"

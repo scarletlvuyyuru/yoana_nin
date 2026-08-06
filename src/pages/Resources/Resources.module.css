@@ -165,6 +165,18 @@
   cursor: not-allowed;
 }
 
+.captchaNote {
+  margin: 0;
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.captchaNote a {
+  color: var(--text-accent);
+  text-decoration: underline;
+}
+
 @media (max-width: 768px) {
   .formRow {
     grid-template-columns: 1fr;
@@ -191,6 +203,10 @@
 [data-theme="dark"] .input::placeholder {
   color: var(--text-secondary);
   opacity: 0.7;
+}
+
+[data-theme="dark"] .captchaNote {
+  color: var(--text-secondary);
 }
 
 [data-theme="dark"] .input:focus-visible {

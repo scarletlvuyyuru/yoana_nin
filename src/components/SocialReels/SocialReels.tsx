@@ -31,7 +31,7 @@ const SOCIALS = [
     label: 'TikTok',
     handle: '@yoananincoaching',
     caption: 'Real talk on ADHD, real estate & reinvention',
-    url: 'https://www.tiktok.com/@yoananincoaching',
+    url: 'https://www.tiktok.com/@adhdcoachyoana?is_from_webapp=1&sender_device=pc',
     image: imgTiktok,
     icon: iconTiktok,
   },

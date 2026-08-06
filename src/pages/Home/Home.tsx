@@ -28,7 +28,7 @@ const Home: React.FC = () => {
     },
     {
       question: "Do you work with clients virtually or in-person?",
-      answer: "I offer both! Virtual sessions allow me to work with expats and clients worldwide, while in-person sessions are available for Triangle area residents. Real estate services are focused on the North Carolina Triangle area."
+      answer: "I offer both! Virtual sessions are available for clients worldwide, while in-person sessions are available for Triangle area residents looking for private coaching."
     },
     {
       question: "What can I expect from the free 30-minute call?",
@@ -43,10 +43,6 @@ const Home: React.FC = () => {
       answer: "Absolutely! I take a holistic approach because your business and personal life are interconnected. Whether you're scaling your business, navigating a major life transition, or both, we address the whole picture."
     },
     {
-      question: "What areas do you serve for real estate?",
-      answer: "I serve the North Carolina Triangle area (Raleigh, Durham, Chapel Hill, and surrounding communities). I specialize in helping relocating families and individuals find not just a house, but a home that supports their lifestyle and long-term goals."
-    },
-    {
       question: "Have a different question?",
       answer: "Submit a question here and I'll get back to you personally.",
       hasButton: true
@@ -55,8 +51,8 @@ const Home: React.FC = () => {
   return (
     <>
       <SEO 
-        title="Yoana Nin - ADHD Entrepreneur Coach & Real Estate Expert | Raleigh NC Area"
-        description="ADHD Entrepreneur Coach & Raleigh Real Estate Expert | Transform Your ADHD Into Your Business Superpower | Fix the System, Not You | Raleigh NC Area"
+        title="Yoana Nin - ADHD Entrepreneur Coach | Virtual Across the U.S. + Raleigh NC"
+        description="ADHD Entrepreneur Coach offering virtual coaching across the U.S. plus Raleigh-area support | Transform Your ADHD Into Your Business Superpower | Fix the System, Not You"
         schema={[
           JSON.stringify({
             "@context": "https://schema.org",
@@ -70,7 +66,7 @@ const Home: React.FC = () => {
               "width": 1200,
               "height": 630
             },
-            "description": "ADHD Entrepreneur Coach & Real Estate Expert serving women entrepreneurs and change-makers in the Raleigh NC area",
+            "description": "ADHD entrepreneur coaching for women business owners with virtual sessions across the United States and local support in the Raleigh NC Triangle area.",
             "founder": {
               "@type": "Person",
               "@id": "https://yoananincoaching.com/#person",
@@ -83,6 +79,7 @@ const Home: React.FC = () => {
               "addressCountry": "US"
             },
             "areaServed": [
+              { "@type": "Country", "name": "United States" },
               { "@type": "City", "name": "Raleigh" },
               { "@type": "City", "name": "Cary" },
               { "@type": "City", "name": "Apex" },
@@ -91,11 +88,16 @@ const Home: React.FC = () => {
               { "@type": "City", "name": "Chapel Hill" }
             ],
             "knowsAbout": [
-              "ADHD Coaching",
+              "ADHD Coach for women entrepreneurs",
+              "ADHD productivity coach for women business owners",
+              "ADHD Support Group for Women Entrepreneurs",
+              "Women Entrepreneurs with ADHD Support",
+              "Foggy Brain Coaching",
               "Business Coaching",
               "Life Coaching",
               "Mindset Coaching",
-              "Real Estate",
+              "Entrepreneur Coaching",
+              "Virtual Coaching",
               "Expat Coaching"
             ],
             "sameAs": [
@@ -104,7 +106,7 @@ const Home: React.FC = () => {
               "https://www.facebook.com/Nin.Yoana/",
               "https://www.instagram.com/yoananincoaching/",
               "https://www.linkedin.com/in/yoananin",
-              "https://www.tiktok.com/@yoananincoaching"
+              "https://www.tiktok.com/@adhdcoachyoana?is_from_webapp=1&sender_device=pc"
             ]
           }),
           JSON.stringify({
@@ -114,7 +116,7 @@ const Home: React.FC = () => {
             "name": "Yoana Nin Coaching",
             "url": "https://yoananincoaching.com",
             "image": "https://yoananincoaching.com/metaOG.png",
-            "description": "ADHD Entrepreneur Coach & Real Estate Expert serving the Raleigh NC Triangle area",
+            "description": "ADHD entrepreneur coaching delivered virtually across the U.S., with local in-person support available in the Raleigh NC Triangle area.",
             "address": {
               "@type": "PostalAddress",
               "addressLocality": "Cary",
@@ -122,6 +124,7 @@ const Home: React.FC = () => {
               "addressCountry": "US"
             },
             "areaServed": [
+              { "@type": "Country", "name": "United States" },
               { "@type": "City", "name": "Raleigh" },
               { "@type": "City", "name": "Cary" },
               { "@type": "City", "name": "Apex" },
@@ -129,13 +132,30 @@ const Home: React.FC = () => {
               { "@type": "City", "name": "Durham" },
               { "@type": "City", "name": "Chapel Hill" }
             ],
+            "availableChannel": [
+              {
+                "@type": "ServiceChannel",
+                "serviceUrl": "https://yoananincoaching.com/resources",
+                "serviceLocation": {
+                  "@type": "Country",
+                  "name": "United States"
+                }
+              },
+              {
+                "@type": "ServiceChannel",
+                "serviceLocation": {
+                  "@type": "Place",
+                  "name": "Raleigh NC Triangle Area"
+                }
+              }
+            ],
             "priceRange": "$$",
             "sameAs": [
               "https://www.youtube.com/@ElevatewithYoanaNin",
               "https://www.facebook.com/Nin.Yoana/",
               "https://www.instagram.com/yoananincoaching/",
               "https://www.linkedin.com/in/yoananin",
-              "https://www.tiktok.com/@yoananincoaching"
+              "https://www.tiktok.com/@adhdcoachyoana?is_from_webapp=1&sender_device=pc"
             ]
           }),
           JSON.stringify({
@@ -161,7 +181,7 @@ const Home: React.FC = () => {
           <div className={styles.heroImageSection}>
             <img 
               src={heroImage}
-              alt="Yoana Nin - ADHD Powerhouse Coach and Raleigh Real Estate Expert"
+              alt="Yoana Nin - ADHD Women Entrepreneurs Coach "
               className={styles.heroImage}
               loading="eager"
               fetchPriority="high"

@@ -14,7 +14,7 @@ const MyStory: React.FC = () => {
     <>
       <SEO 
         title="My Story | Yoana Nin - From Romania to NC"
-        description="Learn how I rebuilt my life from the ground up, becoming a certified ADHD life coach, energetic healer, and real estate entrepreneur in Raleigh."
+        description="Learn how I rebuilt my life from the ground up and became a certified ADHD coach and energetic healer supporting women entrepreneurs across the U.S. and in Raleigh NC."
         url="https://yoananincoaching.com/my-story"
         schema={JSON.stringify({
           "@context": "https://schema.org",
@@ -23,7 +23,7 @@ const MyStory: React.FC = () => {
           "name": "Yoana Nin",
           "url": "https://yoananincoaching.com",
           "image": "https://yoananincoaching.com/YoanaIseeYou.webp",
-          "jobTitle": "ADHD Entrepreneur Coach & Real Estate Expert",
+          "jobTitle": "ADHD Entrepreneur Coach",
           "description": "Holistic life coach specializing in ADHD entrepreneurs and expat community support, certified through Jay Shetty Certified School of Life Coaching",
           "address": {
             "@type": "PostalAddress",
@@ -50,7 +50,7 @@ const MyStory: React.FC = () => {
             "Life Coaching",
             "Business Coaching",
             "Mindset Coaching",
-            "Real Estate",
+            "Virtual Coaching",
             "Expat Coaching",
             "Energetic Healing",
             "Neurodivergent Entrepreneurship"
@@ -60,11 +60,6 @@ const MyStory: React.FC = () => {
               "@type": "Organization",
               "@id": "https://yoananincoaching.com/#organization",
               "name": "Yoana Nin Coaching"
-            },
-            {
-              "@type": "Organization",
-              "name": "Prosperous Agency",
-              "description": "Boutique Real Estate Agency"
             }
           ],
           "sameAs": [
@@ -72,7 +67,7 @@ const MyStory: React.FC = () => {
             "https://www.facebook.com/Nin.Yoana/",
             "https://www.instagram.com/yoananincoaching/",
             "https://www.linkedin.com/in/yoananin",
-            "https://www.tiktok.com/@yoananincoaching"
+            "https://www.tiktok.com/@adhdcoachyoana?is_from_webapp=1&sender_device=pc"
           ]
         })}
       />

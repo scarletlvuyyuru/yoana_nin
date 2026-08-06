@@ -51,6 +51,13 @@ const Resources: React.FC = () => {
       return;
     }
 
+    const recaptchaToken = formData.get('g-recaptcha-response')?.toString().trim() || '';
+    if (!recaptchaToken) {
+      alert('Please complete the reCAPTCHA check before submitting.');
+      setIsSubmitting(false);
+      return;
+    }
+
     const sanitizedFormData = new FormData();
     for (const [key, value] of formData.entries()) {
       sanitizedFormData.append(
@@ -165,6 +172,7 @@ const Resources: React.FC = () => {
               name="book-now-contact"
               method="POST"
               data-netlify="true"
+              data-netlify-recaptcha="true"
               data-netlify-honeypot="bot-field"
               className={styles.form}
               onSubmit={handleSubmit}
@@ -203,6 +211,12 @@ const Resources: React.FC = () => {
                 <label htmlFor="email" className={styles.label}>Email</label>
                 <input id="email" name="email" type="email" required className={styles.input} autoComplete="email" />
               </div>
+
+              <div data-netlify-recaptcha="true"></div>
+
+              <p className={styles.captchaNote}>
+                This site is protected by reCAPTCHA and the Google <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Privacy Policy</a> and <a href="https://policies.google.com/terms" target="_blank" rel="noopener noreferrer">Terms of Service</a> apply.
+              </p>
 
               <button type="submit" className={styles.submitButton} disabled={isSubmitting}>
                 {isSubmitting ? 'Submitting...' : 'Schedule Consultation'}

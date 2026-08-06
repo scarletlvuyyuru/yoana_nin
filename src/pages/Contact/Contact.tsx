@@ -116,14 +116,14 @@ const Contact: React.FC = () => {
     <div className={styles.contactPage}>
       <SEO
         title="Contact Yoana Nin | Start Your Transformation"
-        description="Ready to begin your journey? Get in touch for ADHD coaching, real estate services, or speaking engagements in the Raleigh Triangle area."
+        description="Ready to begin your journey? Get in touch for ADHD coaching and speaking engagements, with virtual support across the U.S. and local Raleigh Triangle availability."
         url="https://yoananincoaching.com/contact"
         schema={JSON.stringify({
           '@context': 'https://schema.org',
           '@type': 'ContactPage',
           '@id': 'https://yoananincoaching.com/contact',
           'name': 'Contact Yoana Nin',
-          'description': 'Get in touch for ADHD coaching, real estate services, or speaking engagements in the Raleigh Triangle area.',
+          'description': 'Get in touch for ADHD coaching and speaking engagements, with virtual support across the U.S. and local Raleigh Triangle availability.',
           'url': 'https://yoananincoaching.com/contact',
           'mainEntity': {
             '@type': 'Person',
@@ -227,6 +227,10 @@ const Contact: React.FC = () => {
 
                 {/* reCAPTCHA */}
                 <div data-netlify-recaptcha="true"></div>
+
+                <p className={styles.captchaNote}>
+                  This site is protected by reCAPTCHA and the Google <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Privacy Policy</a> and <a href="https://policies.google.com/terms" target="_blank" rel="noopener noreferrer">Terms of Service</a> apply.
+                </p>
 
                 <button type="submit" className={styles.submitButton} disabled={isSubmitting}>
                   {isSubmitting ? 'Sending...' : 'Send Message'}

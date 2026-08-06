@@ -280,6 +280,7 @@ const Events: React.FC = () => {
               name="events-newsletter"
               method="POST"
               data-netlify="true"
+              data-netlify-recaptcha="true"
               data-netlify-honeypot="bot-field"
             >
               <input type="hidden" name="form-name" value="events-newsletter" />
@@ -301,6 +302,12 @@ const Events: React.FC = () => {
                 <input type="checkbox" name="consent" value="Yes" required />
                 <span>I agree to receive event updates, coaching insights, and occasional newsletter emails.</span>
               </label>
+
+              <div data-netlify-recaptcha="true"></div>
+
+              <p className={styles.captchaNote}>
+                This site is protected by reCAPTCHA and the Google <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Privacy Policy</a> and <a href="https://policies.google.com/terms" target="_blank" rel="noopener noreferrer">Terms of Service</a> apply.
+              </p>
 
               <button className={styles.primaryButton} type="submit">
                 Join the list

@@ -36,8 +36,6 @@
   object-fit: cover;
   object-position: center;
   transition: transform 0.8s ease;
-  image-rendering: -webkit-optimize-contrast;
-  image-rendering: crisp-edges;
   backface-visibility: hidden;
   transform: translateZ(0);
 }
@@ -1568,4 +1566,31 @@
 
 [data-theme="dark"] .solutionTitle {
   color: var(--text-primary) !important;
+}
+
+/* Home-specific mobile heading scale */
+@media (max-width: 768px) {
+  .heroTitle {
+    font-size: clamp(1.62rem, 6.2vw, 2.1rem);
+    line-height: 1.15;
+  }
+
+  .problemTitle,
+  .solutionTitle,
+  .proofTitle,
+  .fitTitle,
+  .gettingStartedTitle,
+  .testimonialsHeadline,
+  .iSeeYouTitle,
+  .faqTitle {
+    font-size: clamp(1.35rem, 5vw, 1.8rem);
+    line-height: 1.2;
+  }
+
+  .solutionCardTitle,
+  .stepTitle,
+  .faqQuestion {
+    font-size: clamp(1rem, 3.9vw, 1.18rem);
+    line-height: 1.35;
+  }
 }

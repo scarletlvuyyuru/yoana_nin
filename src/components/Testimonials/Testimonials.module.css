@@ -209,6 +209,16 @@
     padding: 0 1rem;
   }
 
+  .carousel {
+    justify-content: center;
+  }
+
+  .testimonialWrapper {
+    flex: 0 0 80vw;
+    max-width: 80vw;
+    min-width: 75vw;
+  }
+
   .testimonialsSection {
     padding: 3rem 0;
   }
@@ -235,6 +245,26 @@
   .navIcon {
     width: 18px;
     height: 18px;
+  }
+
+  .testimonialContent {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 520px) {
+  .carousel {
+    gap: 0;
+  }
+
+  .navButton {
+    display: none;
+  }
+
+  .testimonialWrapper {
+    flex: 0 0 80vw;
+    max-width: 80vw;
+    min-width: 75vw;
   }
 }
 

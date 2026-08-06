@@ -202,7 +202,7 @@ const Footer: React.FC = () => {
                 <img src={linkedinIcon} alt="LinkedIn" style={{width: '20px', height: '20px'}} />
               </a>
               <a
-                href="https://www.tiktok.com/@yoananincoaching"
+                href="https://www.tiktok.com/@adhdcoachyoana?is_from_webapp=1&sender_device=pc"
                 style={socialLinkStyle}
                 aria-label="TikTok"
                 target="_blank"
@@ -252,7 +252,29 @@ const Footer: React.FC = () => {
           fontSize: 'var(--font-size-sm)'
         }}>
           <p style={{ margin: '0' }}>
-            © {new Date().getFullYear()} Yoana Nin Coaching. All Rights Reserved. 
+            © {new Date().getFullYear()} Yoana Nin Coaching. All Rights Reserved.
+            {' '}|{' '}
+            <Link
+              to="/privacy"
+              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+              style={{
+                color: 'var(--footer-text-secondary)',
+                textDecoration: 'none'
+              }}
+            >
+              Privacy
+            </Link>
+            {' '}|{' '}
+            <Link
+              to="/terms"
+              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+              style={{
+                color: 'var(--footer-text-secondary)',
+                textDecoration: 'none'
+              }}
+            >
+              Terms
+            </Link>
           </p>
           <p style={{ margin: '0' }}>
             <a 

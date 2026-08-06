@@ -26,14 +26,14 @@ const Blog: React.FC = () => {
     <div className={styles.blogPage}>
       <SEO
         title="Journal & Insights | Yoana Nin Coaching"
-        description="Explore insights on ADHD entrepreneurship, holistic life coaching, and relocating to the Raleigh Triangle area."
+        description="Explore insights on ADHD entrepreneurship, executive function, and practical coaching strategies for women entrepreneurs across the U.S. and Raleigh Triangle area."
         url="https://yoananincoaching.com/blog"
         schema={JSON.stringify({
           '@context': 'https://schema.org',
           '@type': 'Blog',
           '@id': 'https://yoananincoaching.com/blog',
           'name': 'Journal & Insights | Yoana Nin Coaching',
-          'description': 'Explore insights on ADHD entrepreneurship, holistic life coaching, and relocating to the Raleigh Triangle area.',
+          'description': 'Explore insights on ADHD entrepreneurship, executive function, and practical coaching strategies for women entrepreneurs across the U.S. and Raleigh Triangle area.',
           'url': 'https://yoananincoaching.com/blog',
           'author': {
             '@type': 'Person',
