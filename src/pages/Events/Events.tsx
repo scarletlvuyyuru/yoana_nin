@@ -286,7 +286,8 @@ const Events: React.FC = () => {
               <input type="hidden" name="form-name" value="events-newsletter" />
               <input type="hidden" name="subject" value="New Newsletter Signup - Yoana Nin" />
               <input type="hidden" name="form-timestamp" value={String(newsletterLoadTime)} />
-              <input type="text" name="bot-field" className={styles.srOnly} tabIndex={-1} autoComplete="off" />
+              <label htmlFor="events-bot-field" className={styles.srOnly}>Do not fill this out if you are human</label>
+              <input id="events-bot-field" type="text" name="bot-field" className={styles.srOnly} tabIndex={-1} autoComplete="off" />
 
               <label className={styles.field}>
                 <span>Name</span>
