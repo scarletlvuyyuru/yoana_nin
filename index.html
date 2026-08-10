@@ -49,32 +49,181 @@
     <title>Yoana Nin - ADHD Life Coach for Women Entrepreneurs | Raleigh NC</title>
     <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
     
-    <!-- Structured Data for Featured Snippets/AEO -->
+    <!-- Structured Data for Featured Snippets/AEO and non-JS crawlers -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "WebSite",
-      "@id": "https://yoananincoaching.com/#website",
-      "url": "https://yoananincoaching.com",
-      "name": "Yoana Nin Coaching",
-      "description": "ADHD Life Coach for Women Entrepreneurs | Raleigh NC — Virtual Worldwide",
-      "publisher": {
-        "@type": "Organization",
-        "@id": "https://yoananincoaching.com/#organization",
-        "name": "Yoana Nin Coaching",
-        "logo": {
-          "@type": "ImageObject",
-          "url": "https://yoananincoaching.com/web-app-manifest-512x512.png",
-          "width": 512,
-          "height": 512
+      "@graph": [
+        {
+          "@type": "WebSite",
+          "@id": "https://yoananincoaching.com/#website",
+          "url": "https://yoananincoaching.com",
+          "name": "Yoana Nin Coaching",
+          "description": "ADHD Life Coach for Women Entrepreneurs | Raleigh NC — Virtual Worldwide",
+          "publisher": {
+            "@id": "https://yoananincoaching.com/#organization"
+          },
+          "inLanguage": "en-US"
+        },
+        {
+          "@type": "Organization",
+          "@id": "https://yoananincoaching.com/#organization",
+          "name": "Yoana Nin Coaching",
+          "url": "https://yoananincoaching.com",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://yoananincoaching.com/web-app-manifest-512x512.png",
+            "width": 512,
+            "height": 512
+          },
+          "description": "ADHD entrepreneur coaching for women business owners with virtual sessions across the United States and local support in the Raleigh NC Triangle area.",
+          "founder": {
+            "@id": "https://yoananincoaching.com/#person"
+          },
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Cary",
+            "addressRegion": "NC",
+            "addressCountry": "US"
+          },
+          "areaServed": [
+            {
+              "@type": "Country",
+              "name": "United States"
+            },
+            {
+              "@type": "City",
+              "name": "Raleigh"
+            },
+            {
+              "@type": "City",
+              "name": "Cary"
+            },
+            {
+              "@type": "City",
+              "name": "Apex"
+            },
+            {
+              "@type": "City",
+              "name": "Holly Springs"
+            },
+            {
+              "@type": "City",
+              "name": "Durham"
+            },
+            {
+              "@type": "City",
+              "name": "Chapel Hill"
+            }
+          ],
+          "sameAs": [
+            "https://yoananincoaching.com",
+            "https://www.youtube.com/@ElevatewithYoanaNin",
+            "https://www.facebook.com/Nin.Yoana/",
+            "https://www.instagram.com/yoananincoaching/",
+            "https://www.linkedin.com/in/yoananin",
+            "https://www.tiktok.com/@adhdcoachyoana?is_from_webapp=1&sender_device=pc"
+          ]
+        },
+        {
+          "@type": ["LocalBusiness", "ProfessionalService"],
+          "@id": "https://yoananincoaching.com/#localbusiness",
+          "name": "Yoana Nin Coaching",
+          "url": "https://yoananincoaching.com",
+          "image": "https://yoananincoaching.com/YoanaIseeYou.webp",
+          "description": "ADHD entrepreneur coaching delivered virtually across the U.S., with local in-person support available in the Raleigh NC Triangle area.",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Cary",
+            "addressRegion": "NC",
+            "addressCountry": "US"
+          },
+          "areaServed": [
+            {
+              "@type": "Country",
+              "name": "United States"
+            },
+            {
+              "@type": "City",
+              "name": "Raleigh"
+            },
+            {
+              "@type": "City",
+              "name": "Cary"
+            },
+            {
+              "@type": "City",
+              "name": "Apex"
+            },
+            {
+              "@type": "City",
+              "name": "Holly Springs"
+            },
+            {
+              "@type": "City",
+              "name": "Durham"
+            },
+            {
+              "@type": "City",
+              "name": "Chapel Hill"
+            }
+          ],
+          "availableChannel": [
+            {
+              "@type": "ServiceChannel",
+              "serviceUrl": "https://yoananincoaching.com/resources",
+              "serviceLocation": {
+                "@type": "Country",
+                "name": "United States"
+              }
+            },
+            {
+              "@type": "ServiceChannel",
+              "serviceLocation": {
+                "@type": "Place",
+                "name": "Raleigh NC Triangle Area"
+              }
+            }
+          ],
+          "priceRange": "$$",
+          "sameAs": [
+            "https://www.youtube.com/@ElevatewithYoanaNin",
+            "https://www.facebook.com/Nin.Yoana/",
+            "https://www.instagram.com/yoananincoaching/",
+            "https://www.linkedin.com/in/yoananin",
+            "https://www.tiktok.com/@adhdcoachyoana?is_from_webapp=1&sender_device=pc"
+          ]
+        },
+        {
+          "@type": "Person",
+          "@id": "https://yoananincoaching.com/#person",
+          "name": "Yoana Nin",
+          "worksFor": {
+            "@id": "https://yoananincoaching.com/#organization"
+          }
         }
-      },
-      "inLanguage": "en-US"
+      ]
     }
     </script>
   </head>
   <body>
     <div id="root"></div>
+    <noscript>
+      <main>
+        <h1>Yoana Nin Coaching</h1>
+        <p>
+          ADHD life coach for women entrepreneurs, based in Cary and Raleigh, North Carolina,
+          with virtual coaching across the United States.
+        </p>
+        <p>
+          Explore key pages:
+          <a href="/coaching">Coaching</a>,
+          <a href="/resources">Resources</a>,
+          <a href="/blog">Blog</a>,
+          <a href="/contact">Contact</a>.
+        </p>
+      </main>
+    </noscript>
     
     <!-- Hidden form for Netlify detection -->
     <form 

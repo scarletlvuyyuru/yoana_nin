@@ -57,9 +57,7 @@ const MyStory: React.FC = () => {
           ],
           "worksFor": [
             {
-              "@type": "Organization",
-              "@id": "https://yoananincoaching.com/#organization",
-              "name": "Yoana Nin Coaching"
+              "@id": "https://yoananincoaching.com/#organization"
             }
           ],
           "sameAs": [

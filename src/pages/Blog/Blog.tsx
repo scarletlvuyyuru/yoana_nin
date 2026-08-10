@@ -41,9 +41,7 @@ const Blog: React.FC = () => {
             'name': 'Yoana Nin',
           },
           'publisher': {
-            '@type': 'Organization',
             '@id': 'https://yoananincoaching.com/#organization',
-            'name': 'Yoana Nin Coaching',
           },
           'inLanguage': 'en-US',
         })}
