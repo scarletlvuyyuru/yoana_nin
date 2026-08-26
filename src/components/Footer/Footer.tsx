@@ -88,13 +88,16 @@ const Footer: React.FC = () => {
               gap: '0.75rem',
               marginBottom: '1rem'
             }}>
-              <img 
-                src={logo} 
-                alt="Yoana Nin Logo" 
+              <img
+                src={logo}
+                alt="Yoana Nin Logo"
+                width={32}
+                height={32}
                 style={{
                   width: '32px',
                   height: '32px',
-                  borderRadius: '50%'
+                  borderRadius: '50%',
+                  objectFit: 'cover'
                 }}
               />
               <h3 style={{ 
@@ -178,7 +181,7 @@ const Footer: React.FC = () => {
                 onMouseOver={(e) => e.currentTarget.style.backgroundColor = 'rgba(13, 37, 71, 0.8)'}
                 onMouseOut={(e) => e.currentTarget.style.backgroundColor = 'var(--color-navy)'}
               >
-                <img src={facebookIcon} alt="Facebook" style={{width: '20px', height: '20px'}} />
+                <img src={facebookIcon} alt="Facebook" width={20} height={20} style={{width: '20px', height: '20px'}} />
               </a>
               <a
                 href="https://www.instagram.com/yoananincoaching/"
@@ -189,7 +192,7 @@ const Footer: React.FC = () => {
                 onMouseOver={(e) => e.currentTarget.style.backgroundColor = 'rgba(13, 37, 71, 0.8)'}
                 onMouseOut={(e) => e.currentTarget.style.backgroundColor = 'var(--color-navy)'}
               >
-                <img src={instagramIcon} alt="Instagram" style={{width: '20px', height: '20px'}} />
+                <img src={instagramIcon} alt="Instagram" width={20} height={20} style={{width: '20px', height: '20px'}} />
               </a>
               <a
                 href="https://www.linkedin.com/in/yoananin"
@@ -200,7 +203,7 @@ const Footer: React.FC = () => {
                 onMouseOver={(e) => e.currentTarget.style.backgroundColor = 'rgba(13, 37, 71, 0.8)'}
                 onMouseOut={(e) => e.currentTarget.style.backgroundColor = 'var(--color-navy)'}
               >
-                <img src={linkedinIcon} alt="LinkedIn" style={{width: '20px', height: '20px'}} />
+                <img src={linkedinIcon} alt="LinkedIn" width={20} height={20} style={{width: '20px', height: '20px'}} />
               </a>
               <a
                 href="https://www.tiktok.com/@adhdcoachyoana?is_from_webapp=1&sender_device=pc"
@@ -211,7 +214,7 @@ const Footer: React.FC = () => {
                 onMouseOver={(e) => e.currentTarget.style.backgroundColor = 'rgba(13, 37, 71, 0.8)'}
                 onMouseOut={(e) => e.currentTarget.style.backgroundColor = 'var(--color-navy)'}
               >
-                <img src={tiktokIcon} alt="TikTok" style={{width: '20px', height: '20px'}} />
+                <img src={tiktokIcon} alt="TikTok" width={20} height={20} style={{width: '20px', height: '20px'}} />
               </a>
               <a
                 href="https://www.youtube.com/@ElevatewithYoanaNin"
@@ -222,7 +225,7 @@ const Footer: React.FC = () => {
                 onMouseOver={(e) => e.currentTarget.style.backgroundColor = 'rgba(13, 37, 71, 0.8)'}
                 onMouseOut={(e) => e.currentTarget.style.backgroundColor = 'var(--color-navy)'}
               >
-                <img src={youtubeIcon} alt="YouTube" style={{width: '20px', height: '20px'}} />
+                <img src={youtubeIcon} alt="YouTube" width={20} height={20} style={{width: '20px', height: '20px'}} />
               </a>
             </div>
             <p style={{ color: 'var(--footer-text-secondary)', fontSize: 'var(--font-size-sm)', marginTop: '0.75rem', lineHeight: 1.45 }}>

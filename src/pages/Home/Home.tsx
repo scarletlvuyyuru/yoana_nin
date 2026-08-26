@@ -385,13 +385,15 @@ const Home: React.FC = () => {
         <div className={styles.container}>
           <div className={styles.iSeeYouContent}>
             <div className={styles.iSeeYouImageSection}>
-              <img 
-                src={lookingThroughFingersImage} 
-                alt="Yoana looking through her fingers in a playful manner" 
+              <img
+                src={lookingThroughFingersImage}
+                alt="Yoana looking through her fingers in a playful manner"
                 className={styles.iSeeYouImage}
                 loading="lazy"
                 decoding="async"
                 fetchPriority="low"
+                width={1002}
+                height={752}
               />
             </div>
             <div className={styles.iSeeYouTextSection}>

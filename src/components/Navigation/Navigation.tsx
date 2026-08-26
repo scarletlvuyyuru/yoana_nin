@@ -155,7 +155,7 @@ const Navigation: React.FC = () => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <img src={facebookIcon} alt="Facebook" className={styles.socialIconImage} />
+              <img src={facebookIcon} alt="Facebook" className={styles.socialIconImage} width={20} height={20} />
             </a>
             <a 
               href="https://www.instagram.com/yoananincoaching/" 
@@ -164,7 +164,7 @@ const Navigation: React.FC = () => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <img src={instagramIcon} alt="Instagram" className={styles.socialIconImage} />
+              <img src={instagramIcon} alt="Instagram" className={styles.socialIconImage} width={20} height={20} />
             </a>
             <a 
               href="https://www.linkedin.com/in/yoananin" 
@@ -173,7 +173,7 @@ const Navigation: React.FC = () => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <img src={linkedinIcon} alt="LinkedIn" className={styles.socialIconImage} />
+              <img src={linkedinIcon} alt="LinkedIn" className={styles.socialIconImage} width={20} height={20} />
             </a>
             <a 
               href="https://www.tiktok.com/@adhdcoachyoana?is_from_webapp=1&sender_device=pc" 
@@ -182,7 +182,7 @@ const Navigation: React.FC = () => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <img src={tiktokIcon} alt="TikTok" className={styles.socialIconImage} />
+              <img src={tiktokIcon} alt="TikTok" className={styles.socialIconImage} width={20} height={20} />
             </a>
             <a
               href="https://www.youtube.com/@ElevatewithYoanaNin"
@@ -191,7 +191,7 @@ const Navigation: React.FC = () => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <img src={youtubeIcon} alt="YouTube" className={styles.socialIconImage} />
+              <img src={youtubeIcon} alt="YouTube" className={styles.socialIconImage} width={20} height={20} />
             </a>
           </div>
 
