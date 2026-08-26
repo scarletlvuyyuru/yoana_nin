@@ -70,6 +70,7 @@ function PrerenderApp() {
 
 export async function prerender({ url }: { url: string }) {
   const helmetContext: { helmet?: HelmetServerState } = {};
+  const includeBlogPostRoutes = import.meta.env.PRERENDER_BLOG_ROUTES === 'true';
 
   const html = renderToString(
     <HelmetProvider context={helmetContext}>
@@ -79,7 +80,9 @@ export async function prerender({ url }: { url: string }) {
     </HelmetProvider>
   );
 
-  const blogLinks = getAllBlogPosts().map((post) => `/blog/${post.slug}`);
+  const blogLinks = includeBlogPostRoutes
+    ? getAllBlogPosts().map((post) => `/blog/${post.slug}`)
+    : [];
 
   return {
     html,

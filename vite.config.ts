@@ -5,25 +5,34 @@ import { vitePrerenderPlugin } from 'vite-prerender-plugin'
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [
-    react(),
-    ...vitePrerenderPlugin({
-      renderTarget: '#root',
-      prerenderScript: resolve(process.cwd(), 'src/prerender.tsx'),
-      additionalPrerenderRoutes: [
-        '/',
-        '/coaching',
-        '/resources',
-        '/blog',
-        '/contact',
-        '/events',
-        '/my-story',
-        '/assessment',
-        '/privacy',
-        '/terms'
-      ]
-    })
-  ],
+  plugins: (() => {
+    const enablePrerender = process.env.ENABLE_PRERENDER === 'true';
+
+    const plugins = [react()];
+
+    if (enablePrerender) {
+      plugins.push(
+        ...vitePrerenderPlugin({
+          renderTarget: '#root',
+          prerenderScript: resolve(process.cwd(), 'src/prerender.tsx'),
+          additionalPrerenderRoutes: [
+            '/',
+            '/coaching',
+            '/resources',
+            '/blog',
+            '/contact',
+            '/events',
+            '/my-story',
+            '/assessment',
+            '/privacy',
+            '/terms'
+          ]
+        })
+      );
+    }
+
+    return plugins;
+  })(),
   build: {
     // Generates smaller CSS files
     cssCodeSplit: true,
