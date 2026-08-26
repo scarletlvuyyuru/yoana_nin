@@ -423,6 +423,70 @@
         (function setupBodySaveGuard() {
           var lastWarnAt = 0;
 
+          function showLeaveAnywayDialog(message) {
+            var existing = document.getElementById('yoana-empty-body-dialog');
+            if (existing) existing.remove();
+
+            var overlay = document.createElement('div');
+            overlay.id = 'yoana-empty-body-dialog';
+            overlay.style.cssText = [
+              'position:fixed',
+              'inset:0',
+              'z-index:10000',
+              'background:rgba(17,24,39,0.42)',
+              'display:flex',
+              'align-items:center',
+              'justify-content:center',
+              'padding:16px'
+            ].join(';');
+
+            var card = document.createElement('div');
+            card.style.cssText = [
+              'width:min(420px,100%)',
+              'background:#fff',
+              'border:1px solid #d1d5db',
+              'border-radius:10px',
+              'padding:16px',
+              'box-shadow:0 12px 28px rgba(0,0,0,0.18)',
+              'font-family:Arial,sans-serif'
+            ].join(';');
+
+            var title = document.createElement('h3');
+            title.textContent = 'Body is empty';
+            title.style.cssText = 'margin:0 0 8px;font-size:16px;color:#111827;';
+            card.appendChild(title);
+
+            var text = document.createElement('p');
+            text.textContent = message || 'Please add blog content before saving or publishing.';
+            text.style.cssText = 'margin:0 0 14px;font-size:14px;line-height:1.45;color:#374151;';
+            card.appendChild(text);
+
+            var actions = document.createElement('div');
+            actions.style.cssText = 'display:flex;gap:8px;justify-content:flex-end;';
+
+            var okBtn = document.createElement('button');
+            okBtn.type = 'button';
+            okBtn.textContent = 'Okay';
+            okBtn.style.cssText = 'border:1px solid #d1d5db;background:#fff;color:#111827;border-radius:6px;padding:7px 10px;font-size:13px;cursor:pointer;';
+            okBtn.onclick = function () { overlay.remove(); };
+            actions.appendChild(okBtn);
+
+            var leaveBtn = document.createElement('button');
+            leaveBtn.type = 'button';
+            leaveBtn.textContent = 'Leave anyway';
+            leaveBtn.style.cssText = 'border:0;background:#111827;color:#fff;border-radius:6px;padding:7px 10px;font-size:13px;cursor:pointer;';
+            leaveBtn.onclick = function () { window.location.href = '/'; };
+            actions.appendChild(leaveBtn);
+
+            card.appendChild(actions);
+            overlay.appendChild(card);
+            overlay.addEventListener('click', function (event) {
+              if (event.target === overlay) overlay.remove();
+            });
+
+            document.body.appendChild(overlay);
+          }
+
           function isSaveActionTarget(target) {
             if (!target || !(target instanceof Element)) return false;
             var actionEl = target.closest('button, [role="button"], a');
@@ -454,7 +518,7 @@
             if (now - lastWarnAt > 1200) {
               lastWarnAt = now;
               createOrUpdatePanel('Cannot save yet: Body is empty. Paste/apply blog content first, then save.', true);
-              window.alert('Body is empty. Please add blog content before saving or publishing.');
+              showLeaveAnywayDialog('Please add blog content before saving or publishing.');
             }
           }, true);
         })();

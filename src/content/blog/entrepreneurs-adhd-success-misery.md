@@ -6,7 +6,7 @@ author: Yoana Nin
 category: Coaching
 is_published: true
 featured: true
-featured_image: /images/uploads/buildyourcommunity.webp
+image: /images/uploads/buildyourcommunity.webp
 key_answer: Entrepreneurs with ADHD often feel miserable in corporate roles due
   to overstimulation and inability to handle prolonged, unfocused demands.
   Quitting corporate work and embracing entrepreneurship or nature can provide

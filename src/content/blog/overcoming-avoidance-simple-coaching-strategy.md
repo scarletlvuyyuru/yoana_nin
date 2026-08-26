@@ -8,7 +8,7 @@ category: Coaching
 is_published: true
 tags: adhd, overwhelm, adhdcoaching, adhdtips, adhdcoach, add, yoananincoaching
 featured: true
-featured_image: /images/uploads/3-pexels-karola-g-8547228.jpg
+image: /images/uploads/3-pexels-karola-g-8547228.jpg
 key_answer: Avoidance happens because fear of doing something badly feels worse
   than the discomfort of not doing it. A simple exercise of writing down the
   worst realistic outcome and doing five minutes of the task helps prove to your

@@ -304,28 +304,10 @@
     <script type="module" src="/src/main.tsx"></script>
     <script>
       (function setupNetlifyIdentityBridge() {
-        function hasIdentityTokenInHash() {
-          return /(^|[&#])(confirmation|recovery|invite|email_change)_token=/i.test(window.location.hash || '');
-        }
-
-        function routeTokenLinksToAdmin() {
-          if (!hasIdentityTokenInHash()) return;
-          if (window.location.pathname.indexOf('/admin/') === 0) return;
-          window.location.replace('/admin/' + window.location.hash);
-        }
-
-        routeTokenLinksToAdmin();
-
         if (window.netlifyIdentity) {
           window.netlifyIdentity.on('init', function (user) {
             if (!user && window.location.pathname.indexOf('/admin/') === 0) {
               window.netlifyIdentity.open('login');
-            }
-          });
-
-          window.netlifyIdentity.on('login', function () {
-            if (window.location.pathname.indexOf('/admin/') !== 0) {
-              document.location.href = '/admin/';
             }
           });
         }

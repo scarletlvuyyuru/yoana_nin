@@ -30,6 +30,61 @@ function normalizeSlug(input) {
     .replace(/-+/g, '-');
 }
 
+function getValidatedSlug(payload) {
+  const slug = normalizeSlug(payload.slug || payload.title);
+  if (!slug || !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug)) {
+    throw new Error('Slug is required and must contain only lowercase letters, numbers, and hyphens.');
+  }
+
+  return slug;
+}
+
+function sanitizeFilenameStem(input) {
+  return String(input || '')
+    .toLowerCase()
+    .replace(/[^a-z0-9\s-]/g, '')
+    .trim()
+    .replace(/\s+/g, '-')
+    .replace(/-+/g, '-')
+    .slice(0, 60);
+}
+
+function getSafeExtension(fileName, mimeType) {
+  const fromName = String(fileName || '').toLowerCase().match(/\.([a-z0-9]{2,8})$/);
+  if (fromName && fromName[1]) {
+    return fromName[1];
+  }
+
+  const mimeMap = {
+    'image/jpeg': 'jpg',
+    'image/jpg': 'jpg',
+    'image/png': 'png',
+    'image/webp': 'webp',
+    'image/gif': 'gif',
+    'image/svg+xml': 'svg',
+    'application/pdf': 'pdf',
+  };
+
+  return mimeMap[String(mimeType || '').toLowerCase()] || 'bin';
+}
+
+function normalizeBase64Payload(value) {
+  const raw = String(value || '').trim();
+  if (!raw) return '';
+
+  const commaIndex = raw.indexOf(',');
+  return commaIndex >= 0 ? raw.slice(commaIndex + 1) : raw;
+}
+
+function normalizeMarkdownBody(rawBody) {
+  const body = String(rawBody || '').replace(/\r\n/g, '\n');
+
+  // Some AI outputs escape markdown heading markers like \##, which renders as plain text.
+  return body
+    .replace(/^\s*\\(#{1,6}\s+)/gm, '$1')
+    .trim();
+}
+
 function parseTags(value) {
   if (!value) return [];
   if (Array.isArray(value)) {
@@ -107,13 +162,10 @@ async function ensureFileDoesNotExist({ owner, repo, branch, token, path }) {
 }
 
 function buildFrontmatter(payload) {
-  const slug = normalizeSlug(payload.slug || payload.title);
-  if (!slug || !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug)) {
-    throw new Error('Slug is required and must contain only lowercase letters, numbers, and hyphens.');
-  }
+  const slug = getValidatedSlug(payload);
 
   const title = String(payload.title || '').trim();
-  const body = String(payload.body || '').trim();
+  const body = normalizeMarkdownBody(payload.body);
   if (!title) throw new Error('Title is required.');
   if (!body) throw new Error('Body is required.');
 
@@ -133,7 +185,7 @@ function buildFrontmatter(payload) {
     is_published: toBoolean(payload.is_published, false),
     tags: parseTags(payload.tags),
     featured: toBoolean(payload.featured, true),
-    featured_image: String(payload.featured_image || '').trim() || undefined,
+    image: String(payload.featured_image || '').trim() || undefined,
     image_alt: String(payload.image_alt || '').trim() || undefined,
     key_answer: String(payload.key_answer || '').trim() || undefined,
     excerpt: String(payload.excerpt || '').trim() || undefined,
@@ -165,6 +217,47 @@ function buildFrontmatter(payload) {
     slug,
     markdown,
   };
+}
+
+async function uploadFeaturedAssetIfProvided({ payload, repoConfig, slug }) {
+  const base64Content = normalizeBase64Payload(payload.featured_file_content_base64);
+  if (!base64Content) {
+    return String(payload.featured_image || '').trim() || undefined;
+  }
+
+  const fileNameFromClient = String(payload.featured_file_name || '').trim();
+  const mimeTypeFromClient = String(payload.featured_file_mime_type || '').trim();
+  const extension = getSafeExtension(fileNameFromClient, mimeTypeFromClient);
+  const stem = sanitizeFilenameStem(fileNameFromClient.replace(/\.[a-z0-9]{2,8}$/i, '')) || `${slug}-featured`;
+  const uniqueSuffix = Date.now();
+  const fileName = `${slug}-${stem}-${uniqueSuffix}.${extension}`;
+  const path = `public/images/uploads/${fileName}`;
+
+  let buffer;
+  try {
+    buffer = Buffer.from(base64Content, 'base64');
+  } catch (error) {
+    throw new Error('Featured file upload is not valid base64 data.');
+  }
+
+  if (!buffer || buffer.length === 0) {
+    throw new Error('Featured file upload is empty.');
+  }
+
+  const maxBytes = 8 * 1024 * 1024;
+  if (buffer.length > maxBytes) {
+    throw new Error('Featured file is too large. Keep it under 8 MB.');
+  }
+
+  await ensureFileDoesNotExist({ ...repoConfig, path });
+  await createFileInGitHub({
+    ...repoConfig,
+    path,
+    contentBase64: buffer.toString('base64'),
+    message: `Upload featured media for: ${slug}`,
+  });
+
+  return `/images/uploads/${fileName}`;
 }
 
 async function createFileInGitHub({ token, owner, repo, branch, path, contentBase64, message }) {
@@ -204,6 +297,17 @@ exports.handler = async (event) => {
   try {
     const body = parseBody(event.body);
     const repoConfig = resolveRepoConfig();
+    const validatedSlug = getValidatedSlug(body);
+    const uploadedFeaturedImagePath = await uploadFeaturedAssetIfProvided({
+      payload: body,
+      repoConfig,
+      slug: validatedSlug,
+    });
+
+    if (uploadedFeaturedImagePath) {
+      body.featured_image = uploadedFeaturedImagePath;
+    }
+
     const { slug, markdown } = buildFrontmatter(body);
 
     const path = `src/content/blog/${slug}.md`;
@@ -226,6 +330,7 @@ exports.handler = async (event) => {
         ok: true,
         slug,
         path,
+        featuredImagePath: body.featured_image || null,
         commitSha: created?.commit?.sha || null,
         githubUrl: created?.content?.html_url || null,
         websitePreviewPath: `/blog/${slug}`,

@@ -17,7 +17,7 @@ is_published: true
 tags:
   - "#adhdlate"
 featured: true
-featured_image: /images/uploads/10mins-late.jpg
+image: /images/uploads/10mins-late.jpg
 geo_focus: Holly Springs, NC
 geo_schema: true
 ---

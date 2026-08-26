@@ -6,7 +6,7 @@ author: Yoana Nin
 category: Coaching
 is_published: true
 featured: true
-featured_image: /images/uploads/gemini_generated_image_5b901y5b901y5b90.webp
+image: /images/uploads/gemini_generated_image_5b901y5b901y5b90.webp
 key_answer: ADHD relationship patterns, particularly rejection sensitivity, can
   hinder your business productivity by making you overthink interactions and
   avoid selling or pitching, but working together with your partner can help

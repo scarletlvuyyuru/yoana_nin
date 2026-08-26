@@ -8,7 +8,7 @@ is_published: true
 tags: adhd, neurodivergent, Yoana Nin coaching, adhdtips, adhdbraing,
   adhdstruggles, adhdinwomen
 featured: true
-featured_image: /images/uploads/1.png
+image: /images/uploads/1.png
 key_answer: Rage during perimenopause and ADHD is often triggered by hormonal
   changes and emotional overload, not the immediate situation. A quick breathing
   exercise can help manage these intense feelings effectively.

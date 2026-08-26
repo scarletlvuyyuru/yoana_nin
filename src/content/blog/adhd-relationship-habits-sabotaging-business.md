@@ -7,7 +7,7 @@ author: Yoana Nin
 category: Coaching
 is_published: true
 featured: true
-featured_image: /images/uploads/adhdsabatoge.webp
+image: /images/uploads/adhdsabatoge.webp
 image_alt: "Image of adhd and buisness stop the sabotage a guy on the computer
   and a women pointing. "
 key_answer: ADHD relationship habits cause emotional flooding that shuts down

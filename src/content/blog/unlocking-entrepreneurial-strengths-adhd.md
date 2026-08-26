@@ -10,7 +10,7 @@ tags:
   - WomenEntrepreneurs
   - Strength
 featured: true
-featured_image: /images/uploads/1.png
+image: /images/uploads/1.png
 image_alt: Women in front of working space with arms crossed looking to the
   right with a smile with the words Entrepreneurial Strengths ADHD
 key_answer: People with ADHD often become powerful entrepreneurs because of

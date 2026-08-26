@@ -19,7 +19,7 @@ geo_focus: Raleigh, NC
 geo_schema: true
 source_url: https://www.tiktok.com/@adhdcoachyoana/video/7673100418762673421?lang=en
 ---
-\## Understanding the Impact of Untreated ADHD
+## Understanding the Impact of Untreated ADHD
 
 
 
@@ -27,7 +27,7 @@ If you've been in therapy for anxiety, depression, or trauma but still find your
 
 
 
-\### The Hidden Challenge
+### The Hidden Challenge
 
 
 
@@ -35,7 +35,7 @@ Even with therapy, you might miss appointments, forget to take medication, or fi
 
 
 
-\## Why ADHD Undermines Other Treatments
+## Why ADHD Undermines Other Treatments
 
 
 
@@ -43,7 +43,7 @@ ADHD affects executive function — the part of your brain that helps carry out 
 
 
 
-\### The Importance of Treating ADHD First
+### The Importance of Treating ADHD First
 
 
 
@@ -51,7 +51,7 @@ You might have been treated for the wrong thing first, and that’s not your fau
 
 
 
-\## Taking Action: What You Can Do Now
+## Taking Action: What You Can Do Now
 
 
 
@@ -59,7 +59,7 @@ At your next appointment, consider asking for a comprehensive ADHD screening. Yo
 
 
 
-\### Moving Forward with Support
+### Moving Forward with Support
 
 
 
@@ -67,7 +67,7 @@ Once ADHD is addressed, you can begin to make real progress not only in therapy 
 
 
 
-\## Final Thoughts
+## Final Thoughts
 
 
 

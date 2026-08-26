@@ -93,6 +93,41 @@
         font-size: 12px;
         color: #6b7280;
       }
+      .modalOverlay {
+        position: fixed;
+        inset: 0;
+        z-index: 10001;
+        background: rgba(17, 24, 39, 0.42);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 16px;
+      }
+      .modalCard {
+        width: min(460px, 100%);
+        background: #ffffff;
+        border: 1px solid #d1d5db;
+        border-radius: 10px;
+        padding: 16px;
+        box-shadow: 0 12px 28px rgba(0, 0, 0, 0.18);
+      }
+      .modalTitle {
+        margin: 0 0 8px;
+        font-size: 18px;
+        color: #111827;
+      }
+      .modalText {
+        margin: 0 0 14px;
+        font-size: 14px;
+        line-height: 1.45;
+        color: #374151;
+      }
+      .modalActions {
+        display: flex;
+        gap: 8px;
+        justify-content: flex-end;
+        flex-wrap: wrap;
+      }
       @media (max-width: 700px) {
         .row {
           grid-template-columns: 1fr;
@@ -192,10 +227,23 @@
           <div>
             <label for="featuredImage">Featured Image Path/URL</label>
             <input id="featuredImage" placeholder="/images/uploads/your-image.webp" />
+            <p class="small" style="margin:6px 0 0;">Optional if you upload a file below.</p>
           </div>
           <div>
             <label for="imageAlt">Image Alt Text</label>
             <input id="imageAlt" placeholder="Describe the featured image for accessibility" />
+          </div>
+        </div>
+
+        <div class="row">
+          <div>
+            <label for="featuredImageFile">Upload Featured Media From Computer</label>
+            <input id="featuredImageFile" type="file" accept="image/*,.svg,.pdf" />
+            <p class="small" style="margin:6px 0 0;">Accepted: images, SVG, or PDF (max 8 MB).</p>
+          </div>
+          <div>
+            <label for="featuredImageFileName">Selected File</label>
+            <input id="featuredImageFileName" readonly placeholder="No file selected" />
           </div>
         </div>
 
@@ -227,6 +275,8 @@
       var tagsEl = document.getElementById('tags');
       var isPublishedEl = document.getElementById('isPublished');
       var featuredImageEl = document.getElementById('featuredImage');
+      var featuredImageFileEl = document.getElementById('featuredImageFile');
+      var featuredImageFileNameEl = document.getElementById('featuredImageFileName');
       var imageAltEl = document.getElementById('imageAlt');
       var bodyEl = document.getElementById('body');
       var transcriptEl = document.getElementById('transcript');
@@ -255,8 +305,162 @@
         };
       }
 
+      function readFileAsDataUrl(file) {
+        return new Promise(function (resolve, reject) {
+          var reader = new FileReader();
+          reader.onload = function () { resolve(reader.result || ''); };
+          reader.onerror = function () { reject(new Error('Could not read selected file.')); };
+          reader.readAsDataURL(file);
+        });
+      }
+
+      featuredImageFileEl.addEventListener('change', function () {
+        var file = featuredImageFileEl.files && featuredImageFileEl.files[0];
+        featuredImageFileNameEl.value = file ? file.name : '';
+      });
+
       function hasGeneratedDraft() {
         return !!titleEl.value.trim() && !!slugEl.value.trim() && !!bodyEl.value.trim();
+      }
+
+      function clearDraftFormForNextPost() {
+        titleEl.value = '';
+        slugEl.value = '';
+        keyAnswerEl.value = '';
+        excerptEl.value = '';
+        metaDescriptionEl.value = '';
+        bodyEl.value = '';
+        transcriptEl.value = '';
+        sourceUrlEl.value = '';
+        tagsEl.value = '';
+        publishDateEl.value = '';
+        featuredImageEl.value = '';
+        featuredImageFileEl.value = '';
+        featuredImageFileNameEl.value = '';
+        imageAltEl.value = '';
+        categoryEl.value = 'Coaching';
+        isPublishedEl.value = 'false';
+        setStatus('', '');
+        pastedTranscriptEl.focus();
+      }
+
+      function showPublishSuccessDialog(resultData) {
+        var existing = document.getElementById('yoana-ai-success-dialog');
+        if (existing) existing.remove();
+
+        var overlay = document.createElement('div');
+        overlay.id = 'yoana-ai-success-dialog';
+        overlay.className = 'modalOverlay';
+
+        var card = document.createElement('div');
+        card.className = 'modalCard';
+
+        var title = document.createElement('h3');
+        title.className = 'modalTitle';
+        title.textContent = 'Your blog was submitted successfully:';
+        card.appendChild(title);
+
+        var details = document.createElement('p');
+        details.className = 'modalText';
+        var detailLine = resultData && resultData.path ? ('\nFile: ' + resultData.path) : '';
+        details.textContent = 'Would you like to:' + detailLine;
+        card.appendChild(details);
+
+        var actions = document.createElement('div');
+        actions.className = 'modalActions';
+
+        var createBtn = document.createElement('button');
+        createBtn.type = 'button';
+        createBtn.className = 'secondary';
+        createBtn.textContent = 'Create another Blog';
+        createBtn.onclick = function () {
+          overlay.remove();
+          clearDraftFormForNextPost();
+        };
+        actions.appendChild(createBtn);
+
+        var homeBtn = document.createElement('button');
+        homeBtn.type = 'button';
+        homeBtn.className = 'primary';
+        homeBtn.textContent = 'Go Home';
+        homeBtn.onclick = function () {
+          window.location.href = '/';
+        };
+        actions.appendChild(homeBtn);
+
+        card.appendChild(actions);
+        overlay.appendChild(card);
+        overlay.addEventListener('click', function (event) {
+          if (event.target === overlay) {
+            overlay.remove();
+          }
+        });
+
+        document.body.appendChild(overlay);
+      }
+
+      function showLeaveAnywayDialog(message) {
+        var existing = document.getElementById('yoana-ai-empty-dialog');
+        if (existing) existing.remove();
+
+        var overlay = document.createElement('div');
+        overlay.id = 'yoana-ai-empty-dialog';
+        overlay.style.cssText = [
+          'position:fixed',
+          'inset:0',
+          'z-index:10000',
+          'background:rgba(17,24,39,0.42)',
+          'display:flex',
+          'align-items:center',
+          'justify-content:center',
+          'padding:16px'
+        ].join(';');
+
+        var card = document.createElement('div');
+        card.style.cssText = [
+          'width:min(420px,100%)',
+          'background:#fff',
+          'border:1px solid #d1d5db',
+          'border-radius:10px',
+          'padding:16px',
+          'box-shadow:0 12px 28px rgba(0,0,0,0.18)',
+          'font-family:Arial,sans-serif'
+        ].join(';');
+
+        var title = document.createElement('h3');
+        title.textContent = 'Draft is empty';
+        title.style.cssText = 'margin:0 0 8px;font-size:16px;color:#111827;';
+        card.appendChild(title);
+
+        var text = document.createElement('p');
+        text.textContent = message || 'Generate a draft first before submitting to the blog.';
+        text.style.cssText = 'margin:0 0 14px;font-size:14px;line-height:1.45;color:#374151;';
+        card.appendChild(text);
+
+        var actions = document.createElement('div');
+        actions.style.cssText = 'display:flex;gap:8px;justify-content:flex-end;';
+
+        var okBtn = document.createElement('button');
+        okBtn.type = 'button';
+        okBtn.textContent = 'Okay';
+        okBtn.style.cssText = 'border:1px solid #d1d5db;background:#fff;color:#111827;border-radius:6px;padding:7px 10px;font-size:13px;cursor:pointer;';
+        okBtn.onclick = function () { overlay.remove(); };
+        actions.appendChild(okBtn);
+
+        var leaveBtn = document.createElement('button');
+        leaveBtn.type = 'button';
+        leaveBtn.textContent = 'Leave anyway';
+        leaveBtn.style.cssText = 'border:0;background:#111827;color:#fff;border-radius:6px;padding:7px 10px;font-size:13px;cursor:pointer;';
+        leaveBtn.onclick = function () { window.location.href = '/'; };
+        actions.appendChild(leaveBtn);
+
+        card.appendChild(actions);
+        overlay.appendChild(card);
+        overlay.addEventListener('click', function (event) {
+          if (event.target === overlay) overlay.remove();
+        });
+
+        document.body.appendChild(overlay);
       }
 
       generateBtn.addEventListener('click', async function () {
@@ -306,11 +510,25 @@
       publishBtn.addEventListener('click', async function () {
         if (!hasGeneratedDraft()) {
           setStatus('Generate a draft first, then submit to Blog.', 'error');
+          showLeaveAnywayDialog('Generate a draft first, then submit to Blog.');
           return;
         }
 
         try {
           var payload = getResultObject();
+          var selectedFile = featuredImageFileEl.files && featuredImageFileEl.files[0];
+
+          if (selectedFile) {
+            if (selectedFile.size > 8 * 1024 * 1024) {
+              throw new Error('Selected file is too large. Keep it under 8 MB.');
+            }
+
+            setStatus('Reading selected media file...', '');
+            payload.featured_file_name = selectedFile.name;
+            payload.featured_file_mime_type = selectedFile.type || '';
+            payload.featured_file_content_base64 = await readFileAsDataUrl(selectedFile);
+          }
+
           publishBtn.disabled = true;
           setStatus('Submitting draft to blog repository...', '');
 
@@ -329,7 +547,12 @@
           if (data.path) {
             successMessage += ' File: ' + data.path;
           }
+          if (data.featuredImagePath) {
+            featuredImageEl.value = data.featuredImagePath;
+            successMessage += ' Featured media: ' + data.featuredImagePath;
+          }
           setStatus(successMessage, 'success');
+          showPublishSuccessDialog(data);
         } catch (error) {
           setStatus(error.message || 'Could not submit draft to blog.', 'error');
         } finally {

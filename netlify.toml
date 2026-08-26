@@ -77,6 +77,15 @@
 [context.production]
   command = "npm run build"
 
+[context.production.environment]
+  ENABLE_PRERENDER = "true"
+
 [context.branch-deploy]
   command = "npm run build"
   ignore = "echo $HEAD | grep -q 'dependabot'"
+
+[context.branch-deploy.environment]
+  ENABLE_PRERENDER = "true"
+
+[context.deploy-preview.environment]
+  ENABLE_PRERENDER = "true"

@@ -8,7 +8,7 @@ is_published: true
 tags: ADHD, NEURODIVERGENT, YOANA NIN COACHING, ADHD TIPS, WOMEN WITH ADHD,
   PERIMENOPAUSE, MENOPAUSE, OVERWHELM, ENTREPRENEURS
 featured: true
-featured_image: /images/uploads/3-pexels-karola-g-8547228.jpg
+image: /images/uploads/3-pexels-karola-g-8547228.jpg
 key_answer: Managing ADHD during perimenopause is challenging but not a
   personality flaw. Understanding hormonal changes and adopting practical
   habits, along with seeking medical or coaching support, can make a significant
