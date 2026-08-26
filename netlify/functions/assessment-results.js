@@ -82,7 +82,10 @@ exports.handler = async (event) => {
 
   try {
     const apiKey = process.env.RESEND_API_KEY;
-    const from = process.env.ASSESSMENT_RESULTS_FROM;
+    const from =
+      process.env.ASSESSMENT_RESULTS_FROM ||
+      process.env.ASSESSMENT_RESULTS_FORM ||
+      process.env.ASSESSMENT_RESULTS_EMAIL;
     const replyTo = process.env.ASSESSMENT_REPLY_TO || 'yoana@yoananin.com';
 
     if (!apiKey || !from) {
@@ -90,7 +93,7 @@ exports.handler = async (event) => {
         statusCode: 500,
         headers,
         body: JSON.stringify({
-          error: 'Missing email configuration. Set RESEND_API_KEY and ASSESSMENT_RESULTS_FROM in Netlify.',
+          error: 'Missing email configuration. Set RESEND_API_KEY and ASSESSMENT_RESULTS_FROM (or ASSESSMENT_RESULTS_FORM) in Netlify.',
         }),
       };
     }

@@ -53,7 +53,7 @@ function toBoolean(value, fallback = false) {
 }
 
 function resolveRepoConfig() {
-  const token = process.env.BLOG_GITHUB_TOKEN || process.env.GITHUB_TOKEN;
+  const token = process.env.BLOG_GITHUB_TOKEN;
   const branch = process.env.BLOG_GITHUB_BRANCH || 'main';
 
   let owner = process.env.BLOG_GITHUB_OWNER || '';
@@ -68,7 +68,7 @@ function resolveRepoConfig() {
   }
 
   if (!token) {
-    throw new Error('Missing BLOG_GITHUB_TOKEN (or GITHUB_TOKEN) environment variable.');
+    throw new Error('Missing BLOG_GITHUB_TOKEN environment variable.');
   }
 
   if (!owner || !repo) {
