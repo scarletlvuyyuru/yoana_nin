@@ -18,6 +18,16 @@
         var PANEL_ID = 'yoana-prefill-panel';
         var QUICK_ACTION_ID = 'yoana-ai-blog-quick-action';
         var COLLECTION_STYLE_ID = 'yoana-blog-collection-style';
+        var didAutoNavigateToNewEntry = false;
+
+        var NEW_ENTRY_ROUTE_PATTERNS = [
+          '/collections/blog/new',
+          '/collections/blog/entries/new'
+        ];
+
+        function hasPendingPrefill() {
+          return localStorage.getItem(PREFILL_PENDING_KEY) === '1';
+        }
 
         function readPrefill() {
           try {
@@ -30,19 +40,24 @@
         }
 
         function isBlogNewRoute() {
-          return !!window.location.hash && window.location.hash.indexOf('/collections/blog/new') !== -1;
+          var hash = window.location.hash || '';
+          return NEW_ENTRY_ROUTE_PATTERNS.some(function (pattern) {
+            return hash.indexOf(pattern) !== -1;
+          });
         }
 
         function isBlogCollectionRoute() {
           var hash = window.location.hash || '';
           return hash.indexOf('/collections/blog') !== -1
             && hash.indexOf('/collections/blog/new') === -1
+            && hash.indexOf('/collections/blog/entries/new') === -1
             && hash.indexOf('/collections/blog/entries/') === -1;
         }
 
         function isBlogEditorRoute() {
           var hash = window.location.hash || '';
           return hash.indexOf('/collections/blog/new') !== -1
+            || hash.indexOf('/collections/blog/entries/new') !== -1
             || hash.indexOf('/collections/blog/entries/') !== -1;
         }
 
@@ -53,8 +68,21 @@
             var href = (el.getAttribute && el.getAttribute('href')) || '';
             return text.indexOf('new blog post') !== -1
               || text.indexOf('new blog posts') !== -1
-              || href.indexOf('/collections/blog/new') !== -1;
+              || href.indexOf('/collections/blog/new') !== -1
+              || href.indexOf('/collections/blog/entries/new') !== -1;
           }) || null;
+        }
+
+        function tryAutoOpenNewEntryFromCollection() {
+          if (!isBlogCollectionRoute() || !hasPendingPrefill()) return false;
+
+          var newPostBtn = findNewBlogPostButton();
+          if (!newPostBtn) return false;
+          if (didAutoNavigateToNewEntry) return true;
+
+          didAutoNavigateToNewEntry = true;
+          newPostBtn.click();
+          return true;
         }
 
         function ensureBlogCollectionStyles() {
@@ -552,8 +580,13 @@
         setInterval(function () {
           attempts += 1;
 
+          if (!hasPendingPrefill()) {
+            didAutoNavigateToNewEntry = false;
+          }
+
           if (isBlogCollectionRoute()) {
             createOrUpdateQuickAction();
+            tryAutoOpenNewEntryFromCollection();
           } else {
             removeQuickAction();
           }
@@ -583,12 +616,17 @@
         }, 600);
 
         window.addEventListener('hashchange', function () {
+          if (!hasPendingPrefill()) {
+            didAutoNavigateToNewEntry = false;
+          }
+
           if (isBlogNewRoute() && localStorage.getItem(PREFILL_PENDING_KEY) === '1') {
             createOrUpdatePanel('AI draft detected. Applying now...', false);
             applyPrefillOnce(false);
             removeQuickAction();
           } else if (isBlogCollectionRoute()) {
             createOrUpdateQuickAction();
+            tryAutoOpenNewEntryFromCollection();
             removePanel();
           } else {
             removePanel();

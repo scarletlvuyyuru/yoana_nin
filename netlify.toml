@@ -7,6 +7,18 @@
   node_bundler = "esbuild"
 
 
+# Ensure Decap CMS admin files are served directly (not rewritten to index.html)
+[[redirects]]
+  from = "/admin/config.yml"
+  to = "/admin/config.yml"
+  status = 200
+
+[[redirects]]
+  from = "/admin/*"
+  to = "/admin/:splat"
+  status = 200
+
+
 # Redirect rules for SPA
 [[redirects]]
   from = "/*"
@@ -29,6 +41,9 @@
 
 [functions.assessment-results]
   timeout = 15
+
+[functions.publish-blog-post]
+  timeout = 20
 
 # Headers for better performance and security
 [[headers]]

@@ -1,0 +1,57 @@
+.pageSection {
+  position: relative;
+  overflow: hidden;
+  padding: 5rem 0;
+  background:
+    radial-gradient(circle at 15% 15%, rgba(255, 107, 107, 0.16), transparent 40%),
+    radial-gradient(circle at 82% 80%, rgba(0, 123, 255, 0.14), transparent 42%),
+    var(--bg-secondary);
+}
+
+.pageSection::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    repeating-linear-gradient(
+      -20deg,
+      rgba(26, 41, 66, 0.08) 0,
+      rgba(26, 41, 66, 0.08) 2px,
+      transparent 2px,
+      transparent 26px
+    ),
+    radial-gradient(rgba(179, 0, 179, 0.1) 1px, transparent 1px);
+  background-size: auto, 20px 20px;
+  opacity: 0.42;
+  pointer-events: none;
+}
+
+.container {
+  position: relative;
+  z-index: 1;
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.kicker {
+  margin: 0;
+  font-size: var(--font-size-xs);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 800;
+  color: var(--color-accessible-magenta);
+}
+
+.title {
+  margin: 0.5rem 0 0;
+  font-size: clamp(2rem, 4vw, 3rem);
+  color: var(--text-primary);
+}
+
+.subtitle {
+  margin: 0.75rem 0 1.3rem;
+  max-width: 680px;
+  color: var(--text-secondary);
+  font-size: var(--font-size-lg);
+}

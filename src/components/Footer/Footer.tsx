@@ -144,6 +144,7 @@ const Footer: React.FC = () => {
             <Link to="/my-story" style={linkStyle} onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>About Yoana</Link>
             <Link to="/coaching" style={linkStyle} onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>Work With Me</Link>
             <Link to="/assessment" style={linkStyle} onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>Free Quiz</Link>
+            <Link to="/free-adhd-guide" style={linkStyle} onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>Free ADHD Guide</Link>
             <Link to="/contact#top" style={linkStyle} onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>Book a Call</Link>
             <Link to="/contact" style={linkStyle} onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>Contact</Link>
           </div>

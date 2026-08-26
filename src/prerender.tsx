@@ -15,6 +15,7 @@ import Resources from './pages/Resources/Resources';
 import BlogPost from './pages/BlogPost/BlogPost';
 import Contact from './pages/Contact/Contact';
 import Assessment from './pages/Assessment/Assessment';
+import FreeGuide from './pages/FreeGuide/FreeGuide';
 import Privacy from './pages/Privacy/Privacy';
 import Terms from './pages/Terms/Terms';
 import NotFound from './pages/NotFound/NotFound';
@@ -29,6 +30,7 @@ const staticRoutes = [
   '/events',
   '/my-story',
   '/assessment',
+  '/free-adhd-guide',
   '/privacy',
   '/terms',
 ] as const;
@@ -53,6 +55,7 @@ function PrerenderApp() {
               <Route path="/blog/:slug" element={<BlogPost />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/assessment" element={<Assessment />} />
+              <Route path="/free-adhd-guide" element={<FreeGuide />} />
               <Route path="/privacy" element={<Privacy />} />
               <Route path="/terms" element={<Terms />} />
               <Route path="*" element={<NotFound />} />

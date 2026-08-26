@@ -47,6 +47,16 @@
   font-size: var(--font-size-lg);
 }
 
+.guideBannerSection {
+  padding: 0 0 1.3rem;
+  background: linear-gradient(180deg, rgba(13, 37, 71, 0.98), rgba(13, 37, 71, 0.92));
+}
+
+.guideBannerSection .container {
+  position: relative;
+  top: -0.8rem;
+}
+
 .offersSection {
   position: relative;
   overflow: hidden;
@@ -457,6 +467,14 @@
 }
 
 @media (max-width: 980px) {
+  .guideBannerSection {
+    padding-bottom: 1rem;
+  }
+
+  .guideBannerSection .container {
+    top: -0.5rem;
+  }
+
   .offersGrid {
     grid-template-columns: 1fr;
   }

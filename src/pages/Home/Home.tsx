@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import styles from './Home.module.css';
@@ -7,9 +7,11 @@ import heroImage from '../../assets/images/YoanaExpo.webp';
 import lookingThroughFingersImage from '/YoanaIseeYou.webp';
 import CredibilityStrip from '../../components/CredibilityStrip/CredibilityStrip';
 import Testimonials from '../../components/Testimonials/Testimonials';
+import LeadMagnetForm from '../../components/LeadMagnet/LeadMagnetForm';
 
 const Home: React.FC = () => {
   const [expandedFaq, setExpandedFaq] = useState<number | null>(null);
+  const [showLeadPopup, setShowLeadPopup] = useState(false);
 
   const toggleFaq = (index: number) => {
     setExpandedFaq(expandedFaq === index ? null : index);
@@ -48,6 +50,69 @@ const Home: React.FC = () => {
       hasButton: true
     }
   ];
+
+  useEffect(() => {
+    if (typeof window === 'undefined') {
+      return;
+    }
+
+    const hasDismissed = window.sessionStorage.getItem('leadMagnetDismissed') === '1';
+    const hasSubmitted = window.sessionStorage.getItem('leadMagnetSubmitted') === '1';
+    const userAgent = window.navigator.userAgent.toLowerCase();
+    const isLikelyBot =
+      /bot|crawler|spider|lighthouse|pagespeed|headless|preview/.test(userAgent) ||
+      window.navigator.webdriver;
+
+    if (hasDismissed || hasSubmitted || isLikelyBot) {
+      return;
+    }
+
+    let hasInteracted = false;
+    let delayPassed = false;
+
+    const maybeOpenPopup = () => {
+      if (!hasInteracted || !delayPassed || document.visibilityState !== 'visible') {
+        return;
+      }
+
+      setShowLeadPopup(true);
+      removeListeners();
+    };
+
+    const onHumanSignal = () => {
+      hasInteracted = true;
+      maybeOpenPopup();
+    };
+
+    const removeListeners = () => {
+      window.removeEventListener('pointerdown', onHumanSignal);
+      window.removeEventListener('keydown', onHumanSignal);
+      window.removeEventListener('scroll', onHumanSignal);
+    };
+
+    const timerId = window.setTimeout(() => {
+      delayPassed = true;
+      maybeOpenPopup();
+    }, 18000);
+
+    window.addEventListener('pointerdown', onHumanSignal, { once: true });
+    window.addEventListener('keydown', onHumanSignal, { once: true });
+    window.addEventListener('scroll', onHumanSignal, { once: true, passive: true });
+
+    return () => {
+      window.clearTimeout(timerId);
+      removeListeners();
+    };
+  }, []);
+
+  const dismissLeadPopup = () => {
+    if (typeof window !== 'undefined') {
+      window.sessionStorage.setItem('leadMagnetDismissed', '1');
+    }
+
+    setShowLeadPopup(false);
+  };
+
   return (
     <>
       <SEO 
@@ -431,6 +496,16 @@ const Home: React.FC = () => {
           </div>
         </div>
       </section>
+
+      {showLeadPopup && (
+        <LeadMagnetForm
+          variant="modal"
+          source="home-popup"
+          showCloseButton={true}
+          onClose={dismissLeadPopup}
+          onSuccess={() => setShowLeadPopup(false)}
+        />
+      )}
 
     </>
   );

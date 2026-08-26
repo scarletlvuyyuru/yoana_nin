@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './Coaching.module.css';
 import SEO from '../../components/SEO/SEO';
+import LeadMagnetForm from '../../components/LeadMagnet/LeadMagnetForm';
 import womenEntrepreneurGroupImage from '../../assets/images/womenentrepreneurgroup.webp';
 import yoanaOneOnOneImage from '../../assets/images/yoana1on1.webp';
 
@@ -257,6 +258,17 @@ const Coaching: React.FC = () => {
         <div className={styles.container}>
           <p className={styles.kicker}>WORK WITH ME</p>
           <h1 className={styles.title}>GROUP + 1:1 COACHING</h1>
+        </div>
+      </section>
+
+      <section className={styles.guideBannerSection}>
+        <div className={styles.container}>
+          <LeadMagnetForm
+            variant="banner"
+            source="coaching-hero-banner"
+            title="Free ADHD SOS Guide"
+            subtitle="Get the practical guide for women entrepreneurs with ADHD."
+          />
         </div>
       </section>
 

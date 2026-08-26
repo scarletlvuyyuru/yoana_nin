@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './MyStory.module.css';
 import SEO from '../../components/SEO/SEO';
@@ -8,8 +8,11 @@ import energeticHealerBadge from '../../assets/images/energeticHealer.webp';
 import tpaLogo from '../../assets/images/TPA_logo.webp';
 import credentialsImage from '../../assets/images/YoanaHero1.webp';
 import heroPortrait from '../../assets/images/YoanaIseeYou.webp';
+import interviewPoster from '../../assets/images/interviewCoverforMeetingWithYoanaNinCoaching.webp';
 
 const MyStory: React.FC = () => {
+  const [showInterviewVideo, setShowInterviewVideo] = useState(false);
+
   return (
     <>
       <SEO 
@@ -91,6 +94,53 @@ const MyStory: React.FC = () => {
                 />
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Interview Reel Section (lazy-loaded on click) */}
+      <section className={styles.interviewSection} aria-label="Interview with Yoana Nin">
+        <div className={styles.container}>
+          <div className={styles.interviewHeader}>
+            <p className={styles.interviewEyebrow}>Watch</p>
+            <h2 className={styles.interviewTitle}>Interview: Meet Yoana Nin Coaching</h2>
+            <p className={styles.interviewDescription}>
+              Press play to watch the full interview. 
+            </p>
+          </div>
+
+          <div className={styles.interviewReelWrap}>
+            {!showInterviewVideo ? (
+              <button
+                type="button"
+                className={styles.interviewPosterButton}
+                onClick={() => setShowInterviewVideo(true)}
+                aria-label="Play interview video"
+              >
+                <img
+                  src={interviewPoster}
+                  alt="Interview cover for Meeting with Yoana Nin Coaching"
+                  className={styles.interviewPosterImage}
+                  loading="lazy"
+                  decoding="async"
+                />
+                <span className={styles.interviewPlayBadge} aria-hidden="true">
+                  <span className={styles.interviewPlayTriangle} />
+                </span>
+              </button>
+            ) : (
+              <video
+                className={styles.interviewVideo}
+                controls
+                playsInline
+                preload="metadata"
+                poster={interviewPoster}
+                autoPlay
+              >
+                <source src="/videos/my-story/YoanaInverviewAboutYoanaCoaching.mp4" type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+            )}
           </div>
         </div>
       </section>

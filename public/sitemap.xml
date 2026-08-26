@@ -68,6 +68,14 @@
     <priority>0.75</priority>
   </url>
 
+  <!-- Free ADHD SOS Guide landing page -->
+  <url>
+    <loc>https://yoananincoaching.com/free-adhd-guide</loc>
+    <lastmod>2026-08-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+
   <!-- Legal pages -->
   <url>
     <loc>https://yoananincoaching.com/privacy</loc>

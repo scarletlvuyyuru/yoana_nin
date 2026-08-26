@@ -1,0 +1,241 @@
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 70;
+  background: rgba(9, 18, 39, 0.64);
+  display: grid;
+  justify-items: center;
+  align-items: start;
+  padding: 1rem;
+  overflow-y: auto;
+}
+
+.modalInner {
+  width: min(760px, 100%);
+  margin-top: clamp(0.75rem, 9vh, 5rem);
+  animation: modalEnter 260ms ease-out both;
+}
+
+@keyframes modalEnter {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.99);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.formShell {
+  position: relative;
+  border-radius: 18px;
+  border: 1px solid color-mix(in srgb, var(--border-color) 72%, transparent);
+  background: linear-gradient(150deg, #ffffff 0%, #f6f8fc 100%);
+  box-shadow: 0 24px 48px rgba(10, 25, 52, 0.28);
+  padding: 1.35rem;
+}
+
+.bannerShell {
+  border-radius: 14px;
+  background: linear-gradient(130deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.02));
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: none;
+  color: #ffffff;
+}
+
+.pageShell {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 1.75rem;
+}
+
+.closeButton {
+  position: absolute;
+  right: 0.85rem;
+  top: 0.85rem;
+  border: 0;
+  border-radius: 999px;
+  width: 34px;
+  height: 34px;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--color-navy);
+  background: color-mix(in srgb, var(--bg-accent) 65%, #ffffff);
+  cursor: pointer;
+}
+
+.eyebrow {
+  margin: 0;
+  font-size: var(--font-size-xs);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 800;
+  color: var(--color-accessible-magenta);
+}
+
+.bannerShell .eyebrow {
+  color: #c5e6ff;
+}
+
+.title {
+  margin: 0.45rem 0 0;
+  font-size: clamp(1.35rem, 3vw, 2rem);
+  color: var(--text-primary);
+}
+
+.bannerShell .title,
+.bannerShell .subtitle,
+.bannerShell .policyText,
+.bannerShell .label,
+.bannerShell .successHint,
+.bannerShell .successTitle {
+  color: #ffffff;
+}
+
+.subtitle {
+  margin: 0.65rem 0 0.9rem;
+  color: var(--text-secondary);
+  font-size: var(--font-size-base);
+}
+
+.form {
+  display: grid;
+  gap: 0.55rem;
+}
+
+.inlineRow {
+  display: flex;
+  align-items: flex-end;
+  gap: 0.6rem;
+  flex-wrap: nowrap;
+}
+
+.fieldGroup {
+  min-width: 0;
+  flex: 1 1 0;
+  display: grid;
+  gap: 0.35rem;
+}
+
+.honeypotField {
+  position: absolute;
+  left: -10000px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.label {
+  font-size: var(--font-size-sm);
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.input {
+  border: 1px solid color-mix(in srgb, var(--border-color) 80%, transparent);
+  border-radius: 10px;
+  padding: 0.75rem 0.9rem;
+  font-size: var(--font-size-base);
+  color: var(--text-primary);
+  background: #ffffff;
+}
+
+.bannerShell .input {
+  background: rgba(255, 255, 255, 0.95);
+  color: var(--color-navy);
+}
+
+.submitButton,
+.downloadButton {
+  margin-top: 0.45rem;
+  border: 0;
+  border-radius: 999px;
+  padding: 0.8rem 1rem;
+  font-weight: 800;
+  font-size: var(--font-size-sm);
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  color: #ffffff;
+  background: linear-gradient(120deg, var(--color-accessible-magenta), var(--color-blue));
+}
+
+.submitButton {
+  margin-top: 0;
+  align-self: flex-end;
+  white-space: nowrap;
+  padding: 0.68rem 0.9rem;
+  min-height: 42px;
+}
+
+.submitButton:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.bannerShell .submitButton,
+.bannerShell .downloadButton {
+  background: #ffffff;
+  color: var(--color-navy);
+}
+
+.policyText {
+  margin: 0.35rem 0 0;
+  font-size: var(--font-size-xs);
+  color: var(--text-tertiary);
+}
+
+.errorText {
+  margin: 0.3rem 0 0;
+  color: #b11a1a;
+  font-size: var(--font-size-sm);
+  font-weight: 700;
+}
+
+.successCard {
+  border-radius: 12px;
+  border: 1px solid color-mix(in srgb, var(--color-blue) 34%, transparent);
+  background: color-mix(in srgb, var(--bg-accent) 40%, transparent);
+  padding: 1rem;
+}
+
+.successTitle {
+  margin: 0;
+  font-size: var(--font-size-lg);
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.successHint {
+  margin: 0.75rem 0 0;
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+}
+
+@media (max-width: 640px) {
+  .formShell {
+    padding: 1rem;
+  }
+
+  .pageShell {
+    padding: 1.1rem;
+  }
+
+  .inlineRow {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.55rem;
+  }
+
+  .submitButton {
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .modalInner {
+    animation: none;
+  }
+}

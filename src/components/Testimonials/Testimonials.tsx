@@ -11,37 +11,37 @@ const Testimonials: React.FC = () => {
   const testimonials: Testimonial[] = [
     {
       id: 1,
-      text: "Not only is Yoana an amazing life coach, she is a wonderful human being who understands the workings of the world and the people in it. She has helped me on my path to success in all that I endeavor to do, and she has been a real 'friend' who cares about the people she works with. Yoana will embrace you and hold you until you're ready to let go. I highly recommend working with her. It was an eye-opening and great experience.",
+      text: "Not only is Yoana an amazing life coach, she is a wonderful human being who understands people deeply. She has helped me on my path to success in everything I set out to do, especially when I felt scattered and overwhelmed. She has been a real 'friend' who truly cares about the people she works with. Yoana will embrace you and hold you until you're ready to let go. I highly recommend working with her. It was an eye-opening and great experience.",
       author: "Lizzie Maxwell"
     },
     {
       id: 2,
-      text: "I went through a rough period in my life and I needed a lot of help. I found out about Yoana Nin through a friend, and she saved my life. Literally. I was lost, not sure which way to go in my relationship, had a lot of major decisions to make, and Yoana was the person that supported me in finding my path, getting back to my true self, and fighting for what matters the most, which is my family. I will forever be grateful for her. She is the best coach out there!",
+      text: "I went through a rough period in my life and I needed a lot of help. I found out about Yoana Nin through a friend, and she saved my life. Literally. I was lost, had major decisions to make, and my thoughts felt all over the place. Yoana supported me in finding my path, getting back to my true self, and fighting for what matters most, which is my family. I will forever be grateful for her. She is the best coach out there!",
       author: "S. Demess"
     },
     {
       id: 3,
-      text: "Yoana Nin is an exceptional transformational life coach who has made a significant impact on my life. With her unique approach and deep understanding of my needs, Yoana helped me remove all my blocks when it comes to professional challenges that I simply was refusing to take on. After one month of one on one coaching, I switched my approach and finally signed up for the job I have always wanted. I am still working actively with her, and I cannot say how amazing her sessions really are.",
+      text: "Yoana Nin is an exceptional transformational life coach who has made a significant impact on my life. With her unique approach and deep understanding of my needs, Yoana helped me remove blocks around professional challenges I kept avoiding. After one month of one-on-one coaching, I changed my approach and finally signed up for the job I have always wanted. Her ADHD-friendly way of breaking things down into clear steps made a huge difference. I am still working actively with her, and I cannot say enough about how amazing her sessions are.",
       author: "Nicoleta Heshley"
     },
     {
       id: 4,
-      text: "I strongly recommend Yoana Nin as Life Coach. It will be a pivotal moment in your life and your future self will thank you for it! During the very first session, Yoana helped me figure out my short and long term goals and priorities. As the sessions progressed, I've discovered that many of my long term dreams and goals were dormant maybe due to the surviving mode inflicted by the global pandemic or maybe I became too comfortable with the status quo. Yoana has good intuition, she asks effective questions and she is a good listener. I feel that I have a clearer vision and a solid road map for the next two decades of my life after the coaching sessions. Many thanks Yoana!",
+      text: "I strongly recommend Yoana Nin as a life coach. It will be a pivotal moment in your life and your future self will thank you for it! During the very first session, Yoana helped me clarify my short and long-term goals and priorities. As sessions progressed, I discovered many long-term dreams had gone dormant. Yoana has strong intuition, asks effective questions, and is an excellent listener. Most importantly, she helped me turn big ideas into an actual step-by-step roadmap I can follow. I now have a clearer vision for the next two decades of my life. Many thanks, Yoana!",
       author: "Adrian Duciuc"
     },
     {
       id: 5,
-      text: "Yoana is an amazing human being and a force of nature! I am grateful to know Yoana and if you are unsure how to navigate the overwhelming areas of your life, then you need a Yoana in your life. She is your best source of support, guidance, strength and motivation. Yoana does everything with so much passion and excitement, and you can see that in her eyes! She walks this life with confidence and a fire in her eyes and I always find it very refreshing to see the results she has and the patience and love for helping others.",
+      text: "Yoana is an amazing human being and a force of nature! I am grateful to know Yoana, and if you are unsure how to navigate the overwhelming areas of your life or business, then you need a Yoana in your life. She is a powerful source of support, guidance, strength, and motivation. Yoana does everything with so much passion and excitement, and you can see it in her eyes. I always find it refreshing to see her results and the patience and love she brings to helping others.",
       author: "Laura Murdorf"
     },
     {
       id: 6,
-      text: "I am a young professional that could not find her path in her career, where I spent way too many years. I was suffering from anxiety, low self esteem and I could not sleep when I hired Yoana. One of the key aspects that sets Yoana apart from other life coaches is her ability to create a safe, supportive but kick ass environment for her clients. She understands that personal growth and transformation can be a vulnerable process, and she ensures that her clients feel comfortable and supported every step of the way. But, she did tell me some hard core truths. Could not thank her enough!",
+      text: "I am a young professional entrepreneur andI was suffering from anxiety, low self-esteem, and I could not sleep when I hired Yoana. One key aspect that sets her apart is her ability to create a safe, supportive, but kick-ass environment. She understands that growth can be vulnerable, especially when your nervous system is overloaded, and she supports you every step of the way. But yes, she will also tell you the hard truths. I could not thank her enough!",
       author: "Ada H."
     },
     {
       id: 7,
-      text: "One of the most remarkable aspects of Yoana's coaching is her ability to uncover and address the root causes of her clients' challenges. She goes beyond surface-level issues and delves deep into the underlying beliefs, patterns, trauma and emotions that may be holding individuals back. I have had my share of really traumatic experiences, and, although I have worked with a therapist for the last 5 years, I found that Yoana's approach led me to discover more about my strengths than I ever did.",
+      text: "One of the most remarkable aspects of Yoana's coaching is her ability to uncover and address root causes, not just surface-level symptoms. She helps you work through underlying beliefs, patterns, and emotions that may be keeping you stuck. I learned so much about myself through her guidance. Yoana's approach helped me discover more about my strengths and how to use them in daily life.",
       author: "Shalini Singh"
     },
     {
@@ -51,12 +51,12 @@ const Testimonials: React.FC = () => {
     },
     {
       id: 9,
-      text: "Yoana's coaching transformed my confidence on camera! I now attract clients effortlessly. Her strategies are practical and effective. Highly recommend her services!",
+      text: "Yoana's coaching transformed my confidence on camera. I now attract clients with much more ease. Her strategies are practical, ADHD-friendly, and effective. Highly recommend her services!",
       author: "Alex Smith"
     },
     {
       id: 10,
-      text: "I'm incredibly grateful to have met Yoana. She's an exceptional coach who helped me grow my business when I relocated to a new area. Thanks to her guidance, I was able to build a strong network and establish myself in the community. I truly appreciate all of her support and can't thank her enough for being such an amazing coach!",
+      text: "I'm incredibly grateful to have met Yoana. She's an exceptional coach who helped me grow my business when I relocated to a new area. Thanks to her guidance, I was able to build a strong network, stay consistent with my action steps, and establish myself in the community. I truly appreciate all of her support and can't thank her enough for being such an amazing coach!",
       author: "Ervin Kulenica"
     }
   ];

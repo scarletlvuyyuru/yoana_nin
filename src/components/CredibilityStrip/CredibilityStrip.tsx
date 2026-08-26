@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './CredibilityStrip.module.css';
 import jayLettyLogo from '../../assets/images/jay_Shetty_Certification.webp';
 import energeticHealerLogo from '../../assets/images/energeticHealer.webp';
-import tpaLogo from '../../assets/images/TPA_logo.webp';
+import wbonLogo from '../../assets/images/WbonLogo.webp';
 import adhdCertificationLogo from '../../assets/images/Adhd_certification_badge.webp';
 import authorBadgeLogo from '../../assets/images/Author_badge.webp';
 
@@ -26,9 +26,9 @@ const CredibilityStrip: React.FC = () => {
       alt: 'Certified Energetic Healer'
     },
     {
-      name: 'TPA Certified',
-      icon: tpaLogo,
-      alt: 'TPA Professional Certification'
+      name: 'WBON Featured',
+      icon: wbonLogo,
+      alt: 'WBON Logo'
     },
     {
       name: 'ADHD Certification',

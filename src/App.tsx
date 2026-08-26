@@ -5,6 +5,7 @@ import Navigation from './components/Navigation/Navigation';
 import Footer from './components/Footer/Footer';
 import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary';
 import LoadingSpinner from './components/UI/LoadingSpinner';
+import SitewideSchema from './components/SEO/SitewideSchema';
 
 // Lazy load pages for performance
 const Home = React.lazy(() => import('./pages/Home/Home'));
@@ -16,6 +17,7 @@ const Resources = React.lazy(() => import('./pages/Resources/Resources'));
 const BlogPost = React.lazy(() => import('./pages/BlogPost/BlogPost'));
 const Contact = React.lazy(() => import('./pages/Contact/Contact'));
 const Assessment = React.lazy(() => import('./pages/Assessment/Assessment'));
+const FreeGuide = React.lazy(() => import('./pages/FreeGuide/FreeGuide'));
 const Privacy = React.lazy(() => import('./pages/Privacy/Privacy'));
 const Terms = React.lazy(() => import('./pages/Terms/Terms'));
 const NotFound = React.lazy(() => import('./pages/NotFound/NotFound'));
@@ -25,6 +27,7 @@ function App() {
 
   return (
     <>
+      <SitewideSchema />
       <a href="#main-content" className="skip-link">
         Skip to main content
       </a>
@@ -43,6 +46,7 @@ function App() {
                 <Route path="/blog/:slug" element={<BlogPost />} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/assessment" element={<Assessment />} />
+                <Route path="/free-adhd-guide" element={<FreeGuide />} />
                 <Route path="/privacy" element={<Privacy />} />
                 <Route path="/terms" element={<Terms />} />
                 {/* Catch-all route for 404 */}

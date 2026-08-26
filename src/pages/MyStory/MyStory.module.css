@@ -129,6 +129,153 @@
   border-radius: 13px;
 }
 
+/* Interview Reel Section */
+.interviewSection {
+  position: relative;
+  overflow: hidden;
+  padding: 2.5rem 1.5rem 3.25rem;
+  border-top: 1px solid rgba(26, 42, 66, 0.08);
+  background:
+    radial-gradient(circle at 12% 18%, rgba(179, 0, 179, 0.13), transparent 34%),
+    radial-gradient(circle at 88% 85%, rgba(0, 123, 255, 0.12), transparent 38%),
+    var(--bg-secondary);
+}
+
+.interviewSection::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    repeating-linear-gradient(
+      18deg,
+      rgba(26, 41, 66, 0.08) 0,
+      rgba(26, 41, 66, 0.08) 2px,
+      transparent 2px,
+      transparent 26px
+    ),
+    radial-gradient(rgba(179, 0, 179, 0.12) 1px, transparent 1px);
+  background-size: auto, 20px 20px;
+  opacity: 0.42;
+  pointer-events: none;
+}
+
+.interviewSection::after {
+  content: '';
+  position: absolute;
+  width: 280px;
+  height: 280px;
+  left: -95px;
+  bottom: -95px;
+  border-radius: 58% 42% 45% 55% / 40% 56% 44% 60%;
+  background: linear-gradient(140deg, rgba(255, 107, 107, 0.16), rgba(0, 123, 255, 0.12));
+  pointer-events: none;
+}
+
+.interviewHeader {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  max-width: 760px;
+  margin: 0 auto 1.5rem;
+}
+
+.interviewEyebrow {
+  font-family: var(--font-heading);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--color-magenta);
+  font-weight: 600;
+  margin: 0 0 0.55rem;
+  font-size: var(--font-size-sm);
+}
+
+.interviewTitle {
+  font-family: var(--font-heading);
+  font-size: clamp(1.6rem, 3.8vw, 2.5rem);
+  margin: 0 0 0.75rem;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+}
+
+.interviewDescription {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: var(--font-size-md);
+  line-height: 1.55;
+}
+
+.interviewReelWrap {
+  position: relative;
+  z-index: 1;
+  max-width: 460px;
+  margin: 0 auto;
+}
+
+.interviewPosterButton {
+  position: relative;
+  display: block;
+  width: 100%;
+  border: 0;
+  background: transparent;
+  padding: 0;
+  border-radius: 18px;
+  overflow: hidden;
+  cursor: pointer;
+  box-shadow: 0 16px 42px rgba(26, 42, 66, 0.18);
+}
+
+.interviewPosterButton:focus-visible {
+  outline: 3px solid var(--color-magenta);
+  outline-offset: 2px;
+}
+
+.interviewPosterImage {
+  display: block;
+  width: 100%;
+  aspect-ratio: 9 / 16;
+  object-fit: cover;
+}
+
+.interviewPlayBadge {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(180deg, rgba(17, 24, 39, 0.04) 0%, rgba(17, 24, 39, 0.28) 100%);
+}
+
+.interviewPlayTriangle {
+  width: 74px;
+  height: 74px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.9);
+  position: relative;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+}
+
+.interviewPlayTriangle::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-35%, -50%);
+  width: 0;
+  height: 0;
+  border-top: 11px solid transparent;
+  border-bottom: 11px solid transparent;
+  border-left: 17px solid var(--color-navy);
+}
+
+.interviewVideo {
+  display: block;
+  width: 100%;
+  aspect-ratio: 9 / 16;
+  border-radius: 18px;
+  object-fit: cover;
+  box-shadow: 0 16px 42px rgba(26, 42, 66, 0.18);
+  background: #000;
+}
+
 /* Film Reel - Hidden on desktop */
 .filmReel {
   margin-top: 3rem;

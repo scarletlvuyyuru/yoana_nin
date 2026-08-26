@@ -132,7 +132,7 @@
 
       <div class="actions">
         <button id="generateBtn" class="primary">Generate AI Draft</button>
-        <button id="sendToCmsBtn" class="secondary" type="button">Send Draft to Blog +</button>
+        <button id="publishBtn" class="secondary" type="button">Submit Draft to Blog</button>
       </div>
 
       <div id="status" class="status"></div>
@@ -158,6 +158,47 @@
         <label for="metaDescription">Meta Description</label>
         <textarea id="metaDescription"></textarea>
 
+        <div class="row">
+          <div>
+            <label for="category">Category</label>
+            <select id="category">
+              <option value="Coaching">Coaching</option>
+              <option value="Community">Community</option>
+              <option value="Real Estate">Real Estate</option>
+              <option value="Personal Growth">Personal Growth</option>
+            </select>
+          </div>
+          <div>
+            <label for="publishDate">Publish Date</label>
+            <input id="publishDate" type="datetime-local" />
+          </div>
+        </div>
+
+        <div class="row">
+          <div>
+            <label for="tags">Tags (comma separated)</label>
+            <input id="tags" placeholder="ADHD, women entrepreneurs, business systems" />
+          </div>
+          <div>
+            <label for="isPublished">Publish To Website</label>
+            <select id="isPublished">
+              <option value="false" selected>Draft (recommended)</option>
+              <option value="true">Published</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row">
+          <div>
+            <label for="featuredImage">Featured Image Path/URL</label>
+            <input id="featuredImage" placeholder="/images/uploads/your-image.webp" />
+          </div>
+          <div>
+            <label for="imageAlt">Image Alt Text</label>
+            <input id="imageAlt" placeholder="Describe the featured image for accessibility" />
+          </div>
+        </div>
+
         <label for="body">Body (Markdown)</label>
         <textarea id="body" style="min-height:220px;"></textarea>
 
@@ -173,7 +214,7 @@
       var sourceUrlEl = document.getElementById('sourceUrl');
       var sourceTypeEl = document.getElementById('sourceType');
       var generateBtn = document.getElementById('generateBtn');
-      var sendToCmsBtn = document.getElementById('sendToCmsBtn');
+      var publishBtn = document.getElementById('publishBtn');
       var statusEl = document.getElementById('status');
 
       var titleEl = document.getElementById('title');
@@ -181,6 +222,12 @@
       var keyAnswerEl = document.getElementById('keyAnswer');
       var excerptEl = document.getElementById('excerpt');
       var metaDescriptionEl = document.getElementById('metaDescription');
+      var categoryEl = document.getElementById('category');
+      var publishDateEl = document.getElementById('publishDate');
+      var tagsEl = document.getElementById('tags');
+      var isPublishedEl = document.getElementById('isPublished');
+      var featuredImageEl = document.getElementById('featuredImage');
+      var imageAltEl = document.getElementById('imageAlt');
       var bodyEl = document.getElementById('body');
       var transcriptEl = document.getElementById('transcript');
 
@@ -199,6 +246,12 @@
           excerpt: excerptEl.value,
           meta_description: metaDescriptionEl.value,
           body: bodyEl.value,
+          category: categoryEl.value,
+          date: publishDateEl.value || null,
+          tags: tagsEl.value,
+          is_published: isPublishedEl.value === 'true',
+          featured_image: featuredImageEl.value.trim(),
+          image_alt: imageAltEl.value.trim(),
         };
       }
 
@@ -242,7 +295,7 @@
           transcriptEl.value = data.transcript || '';
 
           var modeText = data.mode ? (' (mode: ' + data.mode + ')') : '';
-          setStatus('Draft generated' + modeText + '. Send to Blog + or review fields below.', 'success');
+          setStatus('Draft generated' + modeText + '. Review fields below, then click Submit Draft to Blog.', 'success');
         } catch (error) {
           setStatus(error.message || 'Draft generation failed.', 'error');
         } finally {
@@ -250,19 +303,37 @@
         }
       });
 
-      sendToCmsBtn.addEventListener('click', function () {
+      publishBtn.addEventListener('click', async function () {
         if (!hasGeneratedDraft()) {
-          setStatus('Generate a draft first, then send it to Blog +.', 'error');
+          setStatus('Generate a draft first, then submit to Blog.', 'error');
           return;
         }
 
         try {
           var payload = getResultObject();
-          localStorage.setItem('yoana_blog_prefill', JSON.stringify(payload));
-          localStorage.setItem('yoana_blog_prefill_pending', '1');
-          window.location.href = '/admin/#/collections/blog/new';
+          publishBtn.disabled = true;
+          setStatus('Submitting draft to blog repository...', '');
+
+          var response = await fetch('/.netlify/functions/publish-blog-post', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload),
+          });
+
+          var data = await response.json().catch(function () { return {}; });
+          if (!response.ok || !data.ok) {
+            throw new Error(data.error || 'Could not submit the draft to blog.');
+          }
+
+          var successMessage = 'Blog draft submitted successfully.';
+          if (data.path) {
+            successMessage += ' File: ' + data.path;
+          }
+          setStatus(successMessage, 'success');
         } catch (error) {
-          setStatus('Could not send draft to CMS. Use Copy Results JSON instead.', 'error');
+          setStatus(error.message || 'Could not submit draft to blog.', 'error');
+        } finally {
+          publishBtn.disabled = false;
         }
       });
     </script>
