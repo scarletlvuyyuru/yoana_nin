@@ -145,6 +145,15 @@ async function githubRequest(url, token, options = {}) {
   });
 
   const data = await response.json().catch(() => ({}));
+
+  if (response.status === 401) {
+    console.error('publish-blog-post: GitHub rejected BLOG_GITHUB_TOKEN:', data?.message);
+    throw new Error(
+      "The website's connection to GitHub has expired, so the post could not be saved. " +
+        'Please ask your web developer to renew the BLOG_GITHUB_TOKEN. Keep this page open — you can click Submit again once it is fixed.'
+    );
+  }
+
   return { response, data };
 }
 

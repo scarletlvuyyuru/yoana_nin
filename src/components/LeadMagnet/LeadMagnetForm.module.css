@@ -28,6 +28,14 @@
 }
 
 .formShell {
+  /* The card is always white, so pin the light-theme text colors here;
+     otherwise dark mode turns the text light (white on white). */
+  --text-primary: var(--color-navy);
+  --text-secondary: #1b1f25;
+  --text-tertiary: #31353a;
+  --bg-accent: var(--color-pink-light);
+  --border-color: var(--color-pink-soft);
+  color: var(--text-primary);
   position: relative;
   border-radius: 18px;
   border: 1px solid color-mix(in srgb, var(--border-color) 72%, transparent);
