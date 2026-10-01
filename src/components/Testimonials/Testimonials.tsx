@@ -5,10 +5,17 @@ interface Testimonial {
   id: number;
   text: string;
   author: string;
+  role?: string;
 }
 
 const Testimonials: React.FC = () => {
   const testimonials: Testimonial[] = [
+    {
+      id: 4,
+      text: "I strongly recommend Yoana Nin as a life coach. It will be a pivotal moment in your life and your future self will thank you for it! During the very first session, Yoana helped me clarify my short and long-term goals and priorities. As sessions progressed, I discovered many long-term dreams had gone dormant. Yoana has strong intuition, asks effective questions, and is an excellent listener. Most importantly, she helped me turn big ideas into an actual step-by-step roadmap I can follow. I now have a clearer vision for the next two decades of my life. Many thanks, Yoana!",
+      author: "Adrian Duciuc",
+      role: "Realtor"
+    },
     {
       id: 1,
       text: "Not only is Yoana an amazing life coach, she is a wonderful human being who understands people deeply. She has helped me on my path to success in everything I set out to do, especially when I felt scattered and overwhelmed. She has been a real 'friend' who truly cares about the people she works with. Yoana will embrace you and hold you until you're ready to let go. I highly recommend working with her. It was an eye-opening and great experience.",
@@ -23,11 +30,6 @@ const Testimonials: React.FC = () => {
       id: 3,
       text: "Yoana Nin is an exceptional transformational life coach who has made a significant impact on my life. With her unique approach and deep understanding of my needs, Yoana helped me remove blocks around professional challenges I kept avoiding. After one month of one-on-one coaching, I changed my approach and finally signed up for the job I have always wanted. Her ADHD-friendly way of breaking things down into clear steps made a huge difference. I am still working actively with her, and I cannot say enough about how amazing her sessions are.",
       author: "Nicoleta Heshley"
-    },
-    {
-      id: 4,
-      text: "I strongly recommend Yoana Nin as a life coach. It will be a pivotal moment in your life and your future self will thank you for it! During the very first session, Yoana helped me clarify my short and long-term goals and priorities. As sessions progressed, I discovered many long-term dreams had gone dormant. Yoana has strong intuition, asks effective questions, and is an excellent listener. Most importantly, she helped me turn big ideas into an actual step-by-step roadmap I can follow. I now have a clearer vision for the next two decades of my life. Many thanks, Yoana!",
-      author: "Adrian Duciuc"
     },
     {
       id: 5,
@@ -126,6 +128,7 @@ const Testimonials: React.FC = () => {
                     </blockquote>
                     <cite className={styles.testimonialAuthor}>
                       {testimonial.author}
+                      {testimonial.role && `, ${testimonial.role}`}
                     </cite>
                   </div>
                 </div>

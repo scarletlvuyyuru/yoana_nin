@@ -134,7 +134,7 @@ const Events: React.FC = () => {
                 <a className={styles.primaryButton} href="#featured-story">
                   Featured Story
                 </a>
-                <Link className={styles.secondaryButton} to="/contact/">
+                <Link className={styles.secondaryButton} to="/contact">
                   Book Yoana
                 </Link>
               </div>

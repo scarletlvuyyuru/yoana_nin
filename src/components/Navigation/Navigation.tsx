@@ -197,7 +197,7 @@ const Navigation: React.FC = () => {
 
           <div className={styles.topBannerActions}>
             <Link
-              to="/resources/"
+              to="/resources"
               className={`${styles.bannerButton} ${styles.bookNowButton}`}
               onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
             >

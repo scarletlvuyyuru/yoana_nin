@@ -8,7 +8,7 @@ const FreeGuide: React.FC = () => {
     <>
       <SEO
         title="Free ADHD SOS Guide | Yoana Nin Coaching"
-        description="Download Yoana Nin's free ADHD SOS Guide for women entrepreneurs. Submit your name and email for instant access."
+        description="Download Yoana Nin's free ADHD SOS Guide for women entrepreneurs. Enter your name and email and we will send it straight to your inbox."
         url="https://yoananincoaching.com/free-adhd-guide"
       />
 
@@ -24,7 +24,7 @@ const FreeGuide: React.FC = () => {
             variant="page"
             source="free-guide-page"
             title="Download Your Free Guide"
-            subtitle="Enter your details below for instant access."
+            subtitle="Enter your details below and we'll email the guide straight to your inbox."
           />
         </div>
       </section>

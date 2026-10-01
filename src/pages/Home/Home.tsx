@@ -26,7 +26,11 @@ const Home: React.FC = () => {
   const faqData: FaqItem[] = [
     {
       question: "What makes your coaching approach different?",
-      answer: "My approach combines holistic, purpose-driven business strategies, practical mindset tools, and lived experience as an entrepreneur. I specialize in supporting women entrepreneurs with ADHD, helping them build meaningful businesses with systems that match how their brains work."
+      answer: "My approach combines holistic, purpose-driven business strategies, practical mindset tools, and lived experience as an entrepreneur. I specialize in supporting women entrepreneurs and real estate agents with ADHD, helping them build meaningful businesses with systems that match how their brains work."
+    },
+    {
+      question: "Do you work with real estate agents?",
+      answer: "Yes. I built my own real estate business in Cary, NC with ADHD, so I know the pace firsthand — the lead follow-up, the showings, the contract deadlines, the feast-or-famine income. We build systems for all of it, so your business runs on structure instead of adrenaline."
     },
     {
       question: "Do you work with clients virtually or in-person?",
@@ -116,8 +120,8 @@ const Home: React.FC = () => {
   return (
     <>
       <SEO 
-        title="Yoana Nin - ADHD Entrepreneur Coach | Virtual Across the U.S. + Raleigh NC"
-        description="ADHD Entrepreneur Coach offering virtual coaching across the U.S. plus Raleigh-area support | Transform Your ADHD Into Your Business Superpower | Fix the System, Not You"
+        title="ADHD Coach for Women Entrepreneurs & Real Estate Agents | Yoana Nin"
+        description="ADHD coaching for women entrepreneurs and real estate agents who are done playing small. Systems that work with your brain. Virtual across the U.S. + Cary NC."
         schema={[
           JSON.stringify({
             "@context": "https://schema.org",
@@ -142,7 +146,7 @@ const Home: React.FC = () => {
           <div className={styles.heroImageSection}>
             <img 
               src={heroImage}
-              alt="Yoana Nin - ADHD Women Entrepreneurs Coach "
+              alt="Yoana Nin - ADHD coach for women entrepreneurs and real estate agents"
               className={styles.heroImage}
               loading="eager"
               fetchPriority="high"
@@ -160,11 +164,11 @@ const Home: React.FC = () => {
               Your Brain Isn't Broken. Your System Is.
             </h1>
             <p className={styles.heroSubtitle}>
-              ADHD Coaching for Women Entrepreneurs Who Are Done Playing Small.
+              ADHD Coaching for Women Entrepreneurs &amp; Real Estate Agents Who Are Done Playing Small.
             </p>
             <div className={styles.heroValueProps}>
               <div className={styles.valueItem}>
-                <span className={styles.valueHighlight}>You have the ideas. The drive. The vision.</span>
+                <span className={styles.valueHighlight}>You have the drive. The vision. The people who need what you offer.</span>
               </div>
               <div className={styles.valueItem}>
                 <span className={styles.valueHighlight}>What you need is a system that works with your brain — not against it.</span>
@@ -176,7 +180,7 @@ const Home: React.FC = () => {
            
             <div className={styles.heroCtas}>
               <Link
-                to="/resources/"
+                to="/resources"
                 className={`btn btn-primary ${styles.primaryCta}`}
                 onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
               >
@@ -202,9 +206,11 @@ const Home: React.FC = () => {
             <ul className={styles.problemList}>
               <li>You start strong... then lose momentum halfway through</li>
               <li>Your to-do list is a mile long but nothing gets done</li>
-              <li>You feel like you're always "almost there" but never quite arriving</li>
+              <li>Leads slip through the cracks because follow-up never became a habit</li>
+              <li>Contracts, deadlines, and paperwork pile up until something almost falls apart</li>
+              <li>Your income swings from feast to famine because your pipeline only gets attention when it's empty</li>
               <li>You've been told to "just focus" — as if it were that simple</li>
-              <li>You're brilliant in your head but scattered in execution</li>
+              <li>You're brilliant with people but scattered with everything behind the scenes</li>
               <li>You wonder if everyone else has a secret you don't</li>
             </ul>
             <p className={styles.problemClose}>
@@ -229,7 +235,7 @@ const Home: React.FC = () => {
               <article className={styles.solutionCard}>
                 <h3 className={styles.solutionCardTitle}>SYSTEMS</h3>
                 <p className={styles.solutionCardText}>
-                  We build simple, repeatable systems designed for your ADHD brain — not a neurotypical template.
+                  We build simple, repeatable systems for your ADHD brain — for your leads, your follow-up, your calendar, and your cash flow. Not a neurotypical template.
                 </p>
               </article>
               <article className={styles.solutionCard}>
@@ -252,14 +258,13 @@ const Home: React.FC = () => {
               <strong>I'm not a coach who learned ADHD from a textbook.</strong>
             </p>
             <p className={styles.proofText}>
-              I've sat across from brilliant women entrepreneurs who felt exhausted from fighting their own brains.
+              I've sat across from brilliant women entrepreneurs and real estate agents who felt exhausted from fighting their own brains.
             </p>
             <ul className={styles.proofList}>
+              <li><strong>I've lived it:</strong> I built a thriving real estate business in Cary, NC with ADHD — using the same systems I teach. I know this industry from the inside.</li>
               <li><strong>Every tool, still stuck:</strong> They had planners, strategies, and advice, but no real momentum.</li>
               <li><strong>The real gap:</strong> It was not motivation. It was a system built for how their brain actually works.</li>
-              <li><strong>What I specialize in:</strong> Turning chaos into clarity, structure, and consistent execution.</li>
-              <li><strong>Real-world proof:</strong> I built a thriving real estate business in Raleigh using the same systems I teach.</li>
-            </ul>
+              <li><strong>What I specialize in:</strong> Turning chaos into clarity, structure, and consistent execution.</li>            </ul>
 
             <p className={styles.proofTextStrong}>And the results speak for themselves.</p>
 
@@ -269,7 +274,7 @@ const Home: React.FC = () => {
 
             <div className={styles.proofCtaWrap}>
               <Link
-                to="/resources/"
+                to="/resources"
                 className={`btn btn-primary ${styles.proofCta}`}
                 onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
               >
@@ -301,7 +306,12 @@ const Home: React.FC = () => {
               </article>
 
               <article className={styles.fitRow}>
-                <p className={styles.fitWho}><strong>A business owner who suspects ADHD</strong></p>
+                <p className={styles.fitWho}><strong>A real estate agent with ADHD</strong></p>
+                <p className={styles.fitPain}><strong>Consistent lead follow-up, time blocking,</strong> and hitting every contract deadline</p>
+              </article>
+
+              <article className={styles.fitRow}>
+                <p className={styles.fitWho}><strong>A business owner or agent who suspects ADHD</strong></p>
                 <p className={styles.fitPain}><strong>Overwhelm, procrastination, and decision fatigue</strong></p>
               </article>
 
@@ -368,13 +378,13 @@ const Home: React.FC = () => {
             </div>
 
             <div className={styles.gettingStartedCtaWrap}>
-              <a
-                href=""
+              <Link
+                to="/resources"
                 className={`btn btn-primary ${styles.gettingStartedCta}`}
-                onClick={(event) => event.preventDefault()}
+                onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
               >
-                 BOOK YOUR FREE CALL NOW ✨
-              </a>
+                BOOK YOUR FREE CALL NOW ✨
+              </Link>
             </div>
           </div>
         </div>
@@ -399,7 +409,7 @@ const Home: React.FC = () => {
             <div className={styles.iSeeYouTextSection}>
               <h2 className={styles.iSeeYouTitle}>I See You</h2>
               <p className={styles.iSeeYouText}>
-                I've been where you are—overloaded, brilliant, and ready for a system that actually works.
+                I've been where you are — building a real estate business with an ADHD brain, overloaded, brilliant, and ready for a system that actually works.
               </p>
               <p className={styles.iSeeYouTransition}>
                 Today, I use these tools to help you build your next chapter:
@@ -432,7 +442,7 @@ const Home: React.FC = () => {
                 Not Sure Where to Start?
               </h2>
               <p className={styles.ctaText}>
-                <span className={styles.ctaGradientText}>Take the free 2-minute ADHD Entrepreneur Quiz.</span>
+                <span className={styles.ctaGradientText}>Take the free 2-minute ADHD Quiz.</span>
               </p>
               <p className={styles.ctaText}>
                 Find out exactly how ADHD is showing up in your business - and what to do about it.
@@ -505,7 +515,6 @@ const Home: React.FC = () => {
           source="home-popup"
           showCloseButton={true}
           onClose={dismissLeadPopup}
-          onSuccess={() => setShowLeadPopup(false)}
         />
       )}
 

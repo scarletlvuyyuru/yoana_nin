@@ -3,8 +3,12 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex" />
     <title>Video to Blog Generator</title>
+    <script src="https://unpkg.com/marked@12.0.2/marked.min.js"></script>
+    <script src="https://unpkg.com/turndown@7.2.0/dist/turndown.js"></script>
     <style>
+      * { box-sizing: border-box; }
       body {
         font-family: Arial, sans-serif;
         margin: 0;
@@ -12,87 +16,173 @@
         background: #f9fafb;
         color: #111827;
       }
-      .card {
-        max-width: 920px;
+      .layout {
+        max-width: 1440px;
         margin: 0 auto;
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        gap: 24px;
+        align-items: start;
+      }
+      .card {
         background: #ffffff;
         border: 1px solid #e5e7eb;
         border-radius: 10px;
         padding: 20px;
       }
-      h1 {
-        margin-top: 0;
-        font-size: 24px;
-      }
-      .hint {
-        color: #4b5563;
-        margin-bottom: 16px;
-      }
+      h1 { margin-top: 0; font-size: 24px; }
+      .hint { color: #4b5563; margin-bottom: 16px; }
       label {
         display: block;
         margin-top: 14px;
         margin-bottom: 6px;
         font-weight: 600;
       }
-      input,
-      select,
-      textarea {
+      .optional { font-weight: 400; color: #6b7280; }
+      input, select, textarea {
         width: 100%;
-        box-sizing: border-box;
         border: 1px solid #d1d5db;
         border-radius: 8px;
         padding: 10px;
         font-size: 14px;
+        font-family: inherit;
       }
-      textarea {
-        min-height: 140px;
-        resize: vertical;
-      }
+      textarea { min-height: 90px; resize: vertical; }
       .row {
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 12px;
       }
-      .actions {
-        margin-top: 16px;
-        display: flex;
-        gap: 10px;
-        flex-wrap: wrap;
-      }
-      button {
+      .inline { display: flex; gap: 8px; align-items: center; }
+      .inline input { flex: 1; }
+      .actions { margin-top: 16px; display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+      button, .buttonLike {
         border: 0;
         border-radius: 8px;
         padding: 10px 14px;
         font-weight: 600;
-        cursor: pointer;
-      }
-      .primary {
-        background: #111827;
-        color: #ffffff;
-      }
-      .secondary {
-        background: #e5e7eb;
-        color: #111827;
-      }
-      .status {
-        margin-top: 12px;
         font-size: 14px;
+        cursor: pointer;
+        white-space: nowrap;
       }
-      .error {
-        color: #b91c1c;
-      }
-      .success {
-        color: #065f46;
-      }
-      .section {
-        margin-top: 18px;
-        border-top: 1px solid #e5e7eb;
-        padding-top: 16px;
-      }
-      .small {
-        font-size: 12px;
+      button:disabled { opacity: 0.55; cursor: progress; }
+      .primary { background: #111827; color: #ffffff; }
+      .secondary { background: #e5e7eb; color: #111827; }
+      .ghost { background: transparent; color: #b91c1c; padding: 10px 6px; }
+      .status { margin-top: 12px; font-size: 14px; min-height: 1em; }
+      .error { color: #b91c1c; }
+      .success { color: #065f46; }
+      .section { margin-top: 22px; border-top: 1px solid #e5e7eb; padding-top: 6px; }
+      .sectionTitle { margin: 14px 0 0; font-size: 16px; color: #374151; text-transform: uppercase; letter-spacing: 0.06em; }
+      .small { font-size: 12px; color: #6b7280; margin: 6px 0 0; }
+
+      /* Featured image */
+      .imageBox {
+        position: relative;
+        aspect-ratio: 1200 / 630;
+        border: 2px dashed #d1d5db;
+        border-radius: 10px;
+        background: #f3f4f6 center / cover no-repeat;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         color: #6b7280;
+        font-size: 14px;
+        text-align: center;
+        padding: 12px;
       }
+      .imageBox.hasImage { border-style: solid; border-color: #e5e7eb; }
+      .imageBox.hasImage .imageEmpty { display: none; }
+      .imageBox.loading::after {
+        content: 'Creating your image… this takes about 20 seconds';
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(255, 255, 255, 0.85);
+        border-radius: 8px;
+        font-weight: 600;
+        color: #374151;
+      }
+      .imageMeta { font-size: 12px; color: #065f46; margin-top: 6px; min-height: 1em; }
+
+      /* Visual body editor */
+      .toolbar {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 4px;
+        border: 1px solid #d1d5db;
+        border-bottom: 0;
+        border-radius: 8px 8px 0 0;
+        padding: 6px;
+        background: #f9fafb;
+        position: sticky;
+        top: 0;
+        z-index: 2;
+      }
+      .toolbar button {
+        background: #ffffff;
+        border: 1px solid #e5e7eb;
+        padding: 6px 10px;
+        font-size: 13px;
+      }
+      .toolbar button:hover { background: #f3f4f6; }
+      .editor {
+        min-height: 360px;
+        border: 1px solid #d1d5db;
+        border-radius: 0 0 8px 8px;
+        padding: 14px 16px;
+        font-size: 16px;
+        line-height: 1.65;
+        outline: none;
+        background: #ffffff;
+      }
+      .editor:focus { border-color: #b300b3; box-shadow: 0 0 0 2px rgba(179, 0, 179, 0.15); }
+      .editor:empty::before { content: attr(data-placeholder); color: #9ca3af; }
+      .editor h2 { font-size: 24px; margin: 1.2em 0 0.4em; }
+      .editor h3 { font-size: 19px; margin: 1em 0 0.3em; }
+      .editor p { margin: 0 0 0.9em; }
+      .editor blockquote { border-left: 4px solid #b300b3; margin: 1em 0; padding-left: 14px; color: #4b5563; font-style: italic; }
+      .editor a { color: #004aad; }
+
+      /* Submit bar */
+      .submitBar {
+        margin-top: 24px;
+        padding: 16px;
+        border-radius: 10px;
+        background: #f9fafb;
+        border: 1px solid #e5e7eb;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        align-items: flex-end;
+      }
+      .submitBar label { margin-top: 0; }
+      .submitBar .statusPick { min-width: 220px; }
+      .submitBar .primary { padding: 11px 32px; font-size: 15px; }
+
+      /* Live preview — mirrors the blog post page styles */
+      .previewCol { position: sticky; top: 24px; max-height: calc(100vh - 48px); overflow: auto; }
+      .previewLabel { font-size: 12px; font-weight: 700; color: #6b7280; text-transform: uppercase; letter-spacing: 0.08em; margin: 0 0 12px; }
+      .preview { color: #1a2a42; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif; line-height: 1.75; }
+      .pMeta { display: flex; gap: 10px; align-items: center; font-size: 13px; color: #6b7280; }
+      .pTitle { font-family: 'New York', Charter, Baskerville, 'Times New Roman', serif; font-size: 34px; line-height: 1.2; margin: 10px 0 8px; color: #1a2a42; }
+      .pTitle.empty { color: #9ca3af; }
+      .pInfo { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; font-size: 14px; color: #4b5563; margin-bottom: 20px; }
+      .pTag { background: #f3e8ff; color: #6b21a8; border-radius: 999px; padding: 2px 10px; font-size: 12px; }
+      .pImage { border-radius: 12px; overflow: hidden; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12); margin-bottom: 24px; }
+      .pImage img { display: block; width: 100%; max-height: 460px; object-fit: cover; }
+      .pBody h1 { display: none; }
+      .pBody h2 { font-size: 26px; margin: 1.8em 0 0.6em; font-weight: 600; }
+      .pBody h3 { font-size: 21px; margin: 1.5em 0 0.5em; font-weight: 600; }
+      .pBody p { margin: 0 0 1.2em; }
+      .pBody ul, .pBody ol { padding-left: 1.5rem; }
+      .pBody li { margin-bottom: 0.6em; }
+      .pBody blockquote { border-left: 4px solid #b300b3; padding-left: 1.2rem; margin: 1.5rem 0; font-style: italic; color: #4b5563; }
+      .pBody a { color: #004aad; }
+      .pEmpty { color: #9ca3af; font-style: italic; }
+
       .modalOverlay {
         position: fixed;
         inset: 0;
@@ -111,366 +201,487 @@
         padding: 16px;
         box-shadow: 0 12px 28px rgba(0, 0, 0, 0.18);
       }
-      .modalTitle {
-        margin: 0 0 8px;
-        font-size: 18px;
-        color: #111827;
-      }
-      .modalText {
-        margin: 0 0 14px;
-        font-size: 14px;
-        line-height: 1.45;
-        color: #374151;
-      }
-      .modalActions {
-        display: flex;
-        gap: 8px;
-        justify-content: flex-end;
-        flex-wrap: wrap;
+      .modalTitle { margin: 0 0 8px; font-size: 18px; color: #111827; }
+      .modalText { margin: 0 0 14px; font-size: 14px; line-height: 1.45; color: #374151; white-space: pre-line; }
+      .modalActions { display: flex; gap: 8px; justify-content: flex-end; flex-wrap: wrap; }
+
+      @media (max-width: 1100px) {
+        .layout { grid-template-columns: 1fr; }
+        .previewCol { position: static; max-height: none; }
       }
       @media (max-width: 700px) {
-        .row {
-          grid-template-columns: 1fr;
-        }
+        body { padding: 12px; }
+        .row { grid-template-columns: 1fr; }
       }
     </style>
   </head>
   <body>
-    <div class="card">
-      <p style="margin-top:0;margin-bottom:12px;"><a href="/admin/workflow.html">← Back to Workflow Dashboard</a></p>
-      <h1>Video to Blog Generator</h1>
-      <p class="hint">Turn your Instagram content into a blog draft in two steps:</p>
-      <ol class="hint" style="margin-top:4px;padding-left:20px;">
-        <li>Go to <strong><a href="https://www.getthescript.app" target="_blank" rel="noopener">getthescript.app</a></strong>, paste your Instagram URL, and copy the transcript text.</li>
-        <li>Paste the transcript below and click <strong>Generate Draft</strong>.</li>
-      </ol>
+    <div class="layout">
+      <div class="card">
+        <p style="margin-top:0;margin-bottom:12px;"><a href="/admin/workflow.html">← Back to Workflow Dashboard</a></p>
+        <h1>Video to Blog Generator</h1>
+        <p class="hint">Turn your Instagram content into a blog post in two steps:</p>
+        <ol class="hint" style="margin-top:4px;padding-left:20px;">
+          <li>Go to <strong><a href="https://www.getthescript.app" target="_blank" rel="noopener">getthescript.app</a></strong>, paste your Instagram URL, and copy the transcript text.</li>
+          <li>Paste the transcript below and click <strong>Generate AI Draft</strong>. A featured image is created for you automatically.</li>
+        </ol>
 
-      <label for="pastedTranscript">Transcript (paste from getthescript.app)</label>
-      <textarea id="pastedTranscript" style="min-height:180px;" placeholder="Paste the full transcript text here..."></textarea>
+        <label for="pastedTranscript">Transcript (paste from getthescript.app)</label>
+        <textarea id="pastedTranscript" style="min-height:180px;" placeholder="Paste the full transcript text here..."></textarea>
 
-      <div class="row" style="margin-top:14px;">
-        <div>
-          <label for="sourceUrl">Source URL <span style="font-weight:400;color:#6b7280;">(optional, for your records)</span></label>
-          <input id="sourceUrl" placeholder="https://www.instagram.com/reel/..." />
-        </div>
-        <div>
-          <label for="sourceType">Source Type</label>
-          <select id="sourceType">
-            <option value="instagram">instagram</option>
-            <option value="facebook">facebook</option>
-            <option value="tiktok">tiktok</option>
-            <option value="youtube">youtube</option>
-            <option value="other">other</option>
-          </select>
-        </div>
-      </div>
-
-      <div class="actions">
-        <button id="generateBtn" class="primary">Generate AI Draft</button>
-        <button id="publishBtn" class="secondary" type="button">Submit Draft to Blog</button>
-      </div>
-
-      <div id="status" class="status"></div>
-
-      <div class="section">
-        <label for="title">Title</label>
-        <input id="title" />
-
-        <div class="row">
+        <div class="row" style="margin-top:2px;">
           <div>
-            <label for="slug">Slug</label>
-            <input id="slug" />
+            <label for="sourceUrl">Source URL <span class="optional">(optional, for your records)</span></label>
+            <input id="sourceUrl" placeholder="https://www.instagram.com/reel/..." />
           </div>
           <div>
-            <label for="keyAnswer">Key Answer</label>
-            <input id="keyAnswer" />
-          </div>
-        </div>
-
-        <label for="excerpt">Excerpt</label>
-        <textarea id="excerpt"></textarea>
-
-        <label for="metaDescription">Meta Description</label>
-        <textarea id="metaDescription"></textarea>
-
-        <div class="row">
-          <div>
-            <label for="category">Category</label>
-            <select id="category">
-              <option value="Coaching">Coaching</option>
-              <option value="Community">Community</option>
-              <option value="Real Estate">Real Estate</option>
-              <option value="Personal Growth">Personal Growth</option>
-            </select>
-          </div>
-          <div>
-            <label for="publishDate">Publish Date</label>
-            <input id="publishDate" type="datetime-local" />
-          </div>
-        </div>
-
-        <div class="row">
-          <div>
-            <label for="tags">Tags (comma separated)</label>
-            <input id="tags" placeholder="ADHD, women entrepreneurs, business systems" />
-          </div>
-          <div>
-            <label for="isPublished">Publish To Website</label>
-            <select id="isPublished">
-              <option value="false" selected>Draft (recommended)</option>
-              <option value="true">Published</option>
+            <label for="sourceType">Source Type</label>
+            <select id="sourceType">
+              <option value="instagram">instagram</option>
+              <option value="facebook">facebook</option>
+              <option value="tiktok">tiktok</option>
+              <option value="youtube">youtube</option>
+              <option value="other">other</option>
             </select>
           </div>
         </div>
 
-        <div class="row">
-          <div>
-            <label for="featuredImage">Featured Image Path/URL</label>
-            <input id="featuredImage" placeholder="/images/uploads/your-image.webp" />
-            <p class="small" style="margin:6px 0 0;">Optional if you upload a file below.</p>
+        <div class="actions">
+          <button id="generateBtn" class="primary" type="button">Generate AI Draft</button>
+        </div>
+        <div id="draftStatus" class="status"></div>
+
+        <!-- Article details -->
+        <div class="section">
+          <h2 class="sectionTitle">Article</h2>
+
+          <label for="title">Title</label>
+          <input id="title" />
+
+          <div class="row">
+            <div>
+              <label for="slug">Slug <span class="optional">(web address)</span></label>
+              <input id="slug" />
+            </div>
+            <div>
+              <label for="keyAnswer">Key Answer</label>
+              <input id="keyAnswer" />
+            </div>
           </div>
-          <div>
-            <label for="imageAlt">Image Alt Text</label>
-            <input id="imageAlt" placeholder="Describe the featured image for accessibility" />
+
+          <label for="excerpt">Excerpt</label>
+          <textarea id="excerpt"></textarea>
+
+          <label for="metaDescription">Meta Description</label>
+          <textarea id="metaDescription"></textarea>
+
+          <div class="row">
+            <div>
+              <label for="publishDate">Publish Date</label>
+              <div class="inline">
+                <input id="publishDate" type="datetime-local" />
+                <button id="nowBtn" class="secondary" type="button">Today / Now</button>
+              </div>
+            </div>
+            <div>
+              <label for="tags">Tags <span class="optional">(comma separated)</span></label>
+              <input id="tags" placeholder="ADHD, women entrepreneurs, real estate agents" />
+            </div>
           </div>
         </div>
 
-        <div class="row">
-          <div>
-            <label for="featuredImageFile">Upload Featured Media From Computer</label>
-            <input id="featuredImageFile" type="file" accept="image/*,.svg,.pdf" />
-            <p class="small" style="margin:6px 0 0;">Accepted: images, SVG, or PDF (max 8 MB).</p>
+        <!-- Featured image -->
+        <div class="section">
+          <h2 class="sectionTitle">Featured Image</h2>
+          <p class="small">Created automatically from your article. Every image (generated or uploaded) is cropped to 1200×630, compressed, and saved as WebP for you.</p>
+
+          <div id="imageBox" class="imageBox" style="margin-top:12px;">
+            <span class="imageEmpty">No image yet — generate a draft, or click <strong>&nbsp;Generate Image&nbsp;</strong> below.</span>
           </div>
-          <div>
-            <label for="featuredImageFileName">Selected File</label>
-            <input id="featuredImageFileName" readonly placeholder="No file selected" />
+          <div id="imageMeta" class="imageMeta"></div>
+
+          <label for="imageIdea">Image idea <span class="optional">(optional — e.g. "a woman showing a home to a young couple")</span></label>
+          <input id="imageIdea" placeholder="Leave blank and the image will be based on your article" />
+
+          <div class="actions">
+            <button id="generateImageBtn" class="secondary" type="button">Generate Image</button>
+            <label for="featuredImageFile" class="buttonLike secondary" style="margin:0;font-weight:600;">Upload My Own</label>
+            <input id="featuredImageFile" type="file" accept="image/*" hidden />
+            <button id="removeImageBtn" class="ghost" type="button" hidden>Remove image</button>
           </div>
+          <div id="imageStatus" class="status"></div>
+
+          <label for="imageAlt">Image Alt Text <span class="optional">(filled in automatically — describes the image for accessibility &amp; SEO)</span></label>
+          <input id="imageAlt" placeholder="Describe the featured image" />
         </div>
 
-        <label for="body">Body (Markdown)</label>
-        <textarea id="body" style="min-height:220px;"></textarea>
+        <!-- Body -->
+        <div class="section">
+          <h2 class="sectionTitle">Article Body</h2>
+          <p class="small">Edit the text just like a document. Select words and use the buttons to format them.</p>
+          <div id="toolbar" class="toolbar" style="margin-top:10px;">
+            <button type="button" data-block="h2" title="Large section heading">Heading</button>
+            <button type="button" data-block="h3" title="Smaller heading">Subheading</button>
+            <button type="button" data-block="p" title="Normal text">Normal text</button>
+            <button type="button" data-cmd="bold" title="Bold"><b>B</b></button>
+            <button type="button" data-cmd="italic" title="Italic"><i>I</i></button>
+            <button type="button" data-cmd="insertUnorderedList" title="Bulleted list">• List</button>
+            <button type="button" data-cmd="insertOrderedList" title="Numbered list">1. List</button>
+            <button type="button" data-block="blockquote" title="Quote">“ Quote</button>
+            <button type="button" data-cmd="createLink" title="Add a link">Link</button>
+            <button type="button" data-cmd="unlink" title="Remove a link">Unlink</button>
+          </div>
+          <div id="bodyEditor" class="editor" contenteditable="true" data-placeholder="Your article will appear here after you generate a draft. You can also type or paste it here."></div>
+          <textarea id="bodyFallback" style="min-height:360px;" hidden placeholder="Body (Markdown)"></textarea>
+        </div>
 
-        <label for="transcript">Transcript</label>
-        <textarea id="transcript" style="min-height:220px;"></textarea>
-
-        <p class="small">Review these values before publishing in Decap CMS.</p>
+        <!-- Submit -->
+        <div class="submitBar">
+          <div class="statusPick">
+            <label for="publishStatus">Status</label>
+            <select id="publishStatus">
+              <option value="draft" selected>Draft — save, not visible on the site</option>
+              <option value="publish">Publish — goes live on the publish date</option>
+            </select>
+          </div>
+          <button id="publishBtn" class="primary" type="button">Submit</button>
+        </div>
+        <div id="submitStatus" class="status"></div>
       </div>
+
+      <!-- Live preview -->
+      <aside class="card previewCol" aria-label="Live preview">
+        <p class="previewLabel">Live preview — how your post will look</p>
+        <article class="preview">
+          <div class="pMeta"><span id="pDate"></span><span id="pBadge"></span></div>
+          <h2 id="pTitle" class="pTitle empty">Your title will appear here</h2>
+          <div class="pInfo"><span>By Yoana Nin</span><span id="pTags"></span></div>
+          <div id="pImage" class="pImage" hidden><img id="pImageImg" alt="" /></div>
+          <div id="pBody" class="pBody"><p class="pEmpty">Your article will appear here.</p></div>
+        </article>
+      </aside>
     </div>
 
     <script>
-      var pastedTranscriptEl = document.getElementById('pastedTranscript');
-      var sourceUrlEl = document.getElementById('sourceUrl');
-      var sourceTypeEl = document.getElementById('sourceType');
-      var generateBtn = document.getElementById('generateBtn');
-      var publishBtn = document.getElementById('publishBtn');
-      var statusEl = document.getElementById('status');
+      var $ = function (id) { return document.getElementById(id); };
 
-      var titleEl = document.getElementById('title');
-      var slugEl = document.getElementById('slug');
-      var keyAnswerEl = document.getElementById('keyAnswer');
-      var excerptEl = document.getElementById('excerpt');
-      var metaDescriptionEl = document.getElementById('metaDescription');
-      var categoryEl = document.getElementById('category');
-      var publishDateEl = document.getElementById('publishDate');
-      var tagsEl = document.getElementById('tags');
-      var isPublishedEl = document.getElementById('isPublished');
-      var featuredImageEl = document.getElementById('featuredImage');
-      var featuredImageFileEl = document.getElementById('featuredImageFile');
-      var featuredImageFileNameEl = document.getElementById('featuredImageFileName');
-      var imageAltEl = document.getElementById('imageAlt');
-      var bodyEl = document.getElementById('body');
-      var transcriptEl = document.getElementById('transcript');
+      var pastedTranscriptEl = $('pastedTranscript');
+      var sourceUrlEl = $('sourceUrl');
+      var sourceTypeEl = $('sourceType');
+      var generateBtn = $('generateBtn');
+      var publishBtn = $('publishBtn');
+      var titleEl = $('title');
+      var slugEl = $('slug');
+      var keyAnswerEl = $('keyAnswer');
+      var excerptEl = $('excerpt');
+      var metaDescriptionEl = $('metaDescription');
+      var publishDateEl = $('publishDate');
+      var tagsEl = $('tags');
+      var publishStatusEl = $('publishStatus');
+      var imageAltEl = $('imageAlt');
+      var imageIdeaEl = $('imageIdea');
+      var imageBox = $('imageBox');
+      var imageMetaEl = $('imageMeta');
+      var featuredImageFileEl = $('featuredImageFile');
+      var generateImageBtn = $('generateImageBtn');
+      var removeImageBtn = $('removeImageBtn');
+      var bodyEditor = $('bodyEditor');
+      var bodyFallback = $('bodyFallback');
 
-      function setStatus(message, type) {
-        statusEl.className = 'status ' + (type || '');
-        statusEl.textContent = message || '';
+      function setStatus(el, message, type) {
+        el.className = 'status ' + (type || '');
+        el.textContent = message || '';
       }
 
-      function getResultObject() {
-        return {
-          source_url: sourceUrlEl.value.trim(),
-          source_type: sourceTypeEl.value,
-          title: titleEl.value,
-          slug: slugEl.value,
-          key_answer: keyAnswerEl.value,
-          excerpt: excerptEl.value,
-          meta_description: metaDescriptionEl.value,
-          body: bodyEl.value,
-          category: categoryEl.value,
-          date: publishDateEl.value || null,
-          tags: tagsEl.value,
-          is_published: isPublishedEl.value === 'true',
-          featured_image: featuredImageEl.value.trim(),
-          image_alt: imageAltEl.value.trim(),
-        };
+      // ---------- Body: visual editor that stores Markdown ----------
+      var hasEditorLibs = typeof window.marked !== 'undefined' && typeof window.TurndownService !== 'undefined';
+      var turndown = null;
+
+      if (hasEditorLibs) {
+        turndown = new TurndownService({ headingStyle: 'atx', bulletListMarker: '-', emDelimiter: '*' });
+        turndown.remove(['script', 'style', 'meta']);
+      } else {
+        // CDN unavailable: fall back to plain Markdown so the page still works.
+        bodyEditor.hidden = true;
+        $('toolbar').hidden = true;
+        bodyFallback.hidden = false;
       }
 
-      function readFileAsDataUrl(file) {
-        return new Promise(function (resolve, reject) {
-          var reader = new FileReader();
-          reader.onload = function () { resolve(reader.result || ''); };
-          reader.onerror = function () { reject(new Error('Could not read selected file.')); };
-          reader.readAsDataURL(file);
-        });
+      function stripLeadingH1(markdown) {
+        // The site shows the title separately and drops a leading "# Title".
+        return String(markdown || '').replace(/^\s*#\s+.+(\r?\n)+/, '');
       }
 
-      featuredImageFileEl.addEventListener('change', function () {
-        var file = featuredImageFileEl.files && featuredImageFileEl.files[0];
-        featuredImageFileNameEl.value = file ? file.name : '';
+      function markdownToHtml(markdown) {
+        return hasEditorLibs ? window.marked.parse(stripLeadingH1(markdown)) : '';
+      }
+
+      function setBodyMarkdown(markdown) {
+        if (hasEditorLibs) {
+          bodyEditor.innerHTML = markdownToHtml(markdown);
+        } else {
+          bodyFallback.value = markdown || '';
+        }
+        updatePreview();
+      }
+
+      function getBodyMarkdown() {
+        if (!hasEditorLibs) return bodyFallback.value.trim();
+        var text = (bodyEditor.textContent || '').trim();
+        return text ? turndown.turndown(bodyEditor.innerHTML).trim() : '';
+      }
+
+      function getBodyHtml() {
+        if (hasEditorLibs) return (bodyEditor.textContent || '').trim() ? bodyEditor.innerHTML : '';
+        return bodyFallback.value.trim() ? '<pre style="white-space:pre-wrap">' + escapeHtml(bodyFallback.value) + '</pre>' : '';
+      }
+
+      $('toolbar').addEventListener('mousedown', function (event) {
+        // Keep the text selection in the editor while clicking toolbar buttons.
+        if (event.target.closest('button')) event.preventDefault();
       });
 
-      function hasGeneratedDraft() {
-        return !!titleEl.value.trim() && !!slugEl.value.trim() && !!bodyEl.value.trim();
+      $('toolbar').addEventListener('click', function (event) {
+        var btn = event.target.closest('button');
+        if (!btn) return;
+        bodyEditor.focus();
+        if (btn.dataset.block) {
+          document.execCommand('formatBlock', false, btn.dataset.block);
+        } else if (btn.dataset.cmd === 'createLink') {
+          var url = window.prompt('Paste the link address (https://...)');
+          if (url) document.execCommand('createLink', false, url);
+        } else {
+          document.execCommand(btn.dataset.cmd, false, null);
+        }
+        updatePreview();
+      });
+
+      bodyEditor.addEventListener('paste', function (event) {
+        // Clean up pasted content (Word/Google Docs styles) by round-tripping through Markdown.
+        if (!hasEditorLibs) return;
+        var html = event.clipboardData && event.clipboardData.getData('text/html');
+        var text = event.clipboardData && event.clipboardData.getData('text/plain');
+        event.preventDefault();
+        if (html) {
+          document.execCommand('insertHTML', false, markdownToHtml(turndown.turndown(html)));
+        } else if (text) {
+          document.execCommand('insertText', false, text);
+        }
+      });
+
+      bodyEditor.addEventListener('input', updatePreview);
+      bodyFallback.addEventListener('input', updatePreview);
+
+      // ---------- Publish date ----------
+      function toLocalInputValue(date) {
+        var pad = function (n) { return String(n).padStart(2, '0'); };
+        return date.getFullYear() + '-' + pad(date.getMonth() + 1) + '-' + pad(date.getDate()) +
+          'T' + pad(date.getHours()) + ':' + pad(date.getMinutes());
       }
 
-      function clearDraftFormForNextPost() {
-        titleEl.value = '';
-        slugEl.value = '';
-        keyAnswerEl.value = '';
-        excerptEl.value = '';
-        metaDescriptionEl.value = '';
-        bodyEl.value = '';
-        transcriptEl.value = '';
-        sourceUrlEl.value = '';
-        tagsEl.value = '';
-        publishDateEl.value = '';
-        featuredImageEl.value = '';
-        featuredImageFileEl.value = '';
-        featuredImageFileNameEl.value = '';
-        imageAltEl.value = '';
-        categoryEl.value = 'Coaching';
-        isPublishedEl.value = 'false';
-        setStatus('', '');
-        pastedTranscriptEl.focus();
+      $('nowBtn').addEventListener('click', function () {
+        publishDateEl.value = toLocalInputValue(new Date());
+        updatePreview();
+      });
+
+      // ---------- Featured image: generate or upload, then crop/compress to WebP ----------
+      var TARGET_W = 1200;
+      var TARGET_H = 630;
+      var imageData = null; // { dataUrl, mimeType, fileName, bytes }
+
+      function loadImage(src) {
+        return new Promise(function (resolve, reject) {
+          var img = new Image();
+          img.onload = function () { resolve(img); };
+          img.onerror = function () { reject(new Error('That image could not be opened. Try a JPG, PNG, or WebP file.')); };
+          img.src = src;
+        });
       }
 
-      function showPublishSuccessDialog(resultData) {
-        var existing = document.getElementById('yoana-ai-success-dialog');
-        if (existing) existing.remove();
+      function canvasToBlob(canvas, type, quality) {
+        return new Promise(function (resolve) { canvas.toBlob(resolve, type, quality); });
+      }
 
-        var overlay = document.createElement('div');
-        overlay.id = 'yoana-ai-success-dialog';
-        overlay.className = 'modalOverlay';
+      function blobToDataUrl(blob) {
+        return new Promise(function (resolve, reject) {
+          var reader = new FileReader();
+          reader.onload = function () { resolve(reader.result); };
+          reader.onerror = function () { reject(new Error('Could not process the image.')); };
+          reader.readAsDataURL(blob);
+        });
+      }
 
-        var card = document.createElement('div');
-        card.className = 'modalCard';
+      // Center-crop to 1200x630 and encode as WebP (JPEG if the browser can't make WebP),
+      // stepping quality down until the file is under ~250 KB.
+      async function optimizeImage(src) {
+        var img = await loadImage(src);
+        var scale = Math.max(TARGET_W / img.naturalWidth, TARGET_H / img.naturalHeight);
+        var drawW = img.naturalWidth * scale;
+        var drawH = img.naturalHeight * scale;
+        var canvas = document.createElement('canvas');
+        canvas.width = TARGET_W;
+        canvas.height = TARGET_H;
+        var ctx = canvas.getContext('2d');
+        ctx.imageSmoothingQuality = 'high';
+        ctx.drawImage(img, (TARGET_W - drawW) / 2, (TARGET_H - drawH) / 2, drawW, drawH);
 
-        var title = document.createElement('h3');
-        title.className = 'modalTitle';
-        title.textContent = 'Your blog was submitted successfully:';
-        card.appendChild(title);
-
-        var details = document.createElement('p');
-        details.className = 'modalText';
-        var detailLine = resultData && resultData.path ? ('\nFile: ' + resultData.path) : '';
-        details.textContent = 'Would you like to:' + detailLine;
-        card.appendChild(details);
-
-        var actions = document.createElement('div');
-        actions.className = 'modalActions';
-
-        var createBtn = document.createElement('button');
-        createBtn.type = 'button';
-        createBtn.className = 'secondary';
-        createBtn.textContent = 'Create another Blog';
-        createBtn.onclick = function () {
-          overlay.remove();
-          clearDraftFormForNextPost();
-        };
-        actions.appendChild(createBtn);
-
-        var homeBtn = document.createElement('button');
-        homeBtn.type = 'button';
-        homeBtn.className = 'primary';
-        homeBtn.textContent = 'Go Home';
-        homeBtn.onclick = function () {
-          window.location.href = '/';
-        };
-        actions.appendChild(homeBtn);
-
-        card.appendChild(actions);
-        overlay.appendChild(card);
-        overlay.addEventListener('click', function (event) {
-          if (event.target === overlay) {
-            overlay.remove();
+        var blob = null;
+        var qualities = [0.82, 0.74, 0.66, 0.58];
+        for (var i = 0; i < qualities.length; i += 1) {
+          blob = await canvasToBlob(canvas, 'image/webp', qualities[i]);
+          if (blob && blob.type !== 'image/webp') {
+            blob = await canvasToBlob(canvas, 'image/jpeg', qualities[i]);
           }
-        });
+          if (blob && blob.size <= 250 * 1024) break;
+        }
+        if (!blob) throw new Error('Could not process the image.');
 
-        document.body.appendChild(overlay);
+        return {
+          dataUrl: await blobToDataUrl(blob),
+          mimeType: blob.type,
+          bytes: blob.size,
+          ext: blob.type === 'image/webp' ? 'webp' : 'jpg',
+        };
       }
 
-      function showLeaveAnywayDialog(message) {
-        var existing = document.getElementById('yoana-ai-empty-dialog');
-        if (existing) existing.remove();
+      function setImage(result, sourceLabel) {
+        imageData = {
+          dataUrl: result.dataUrl,
+          mimeType: result.mimeType,
+          // The server prefixes the slug and a timestamp: <slug>-featured-<time>.webp
+          fileName: 'featured.' + result.ext,
+        };
+        imageBox.style.backgroundImage = 'url("' + result.dataUrl + '")';
+        imageBox.classList.add('hasImage');
+        removeImageBtn.hidden = false;
+        generateImageBtn.textContent = 'Regenerate Image';
+        imageMetaEl.textContent = '✓ ' + sourceLabel + ' · ' + TARGET_W + '×' + TARGET_H + ' · ' +
+          result.ext.toUpperCase() + ' · ' + Math.round(result.bytes / 1024) + ' KB — ready';
+        updatePreview();
+      }
 
-        var overlay = document.createElement('div');
-        overlay.id = 'yoana-ai-empty-dialog';
-        overlay.style.cssText = [
-          'position:fixed',
-          'inset:0',
-          'z-index:10000',
-          'background:rgba(17,24,39,0.42)',
-          'display:flex',
-          'align-items:center',
-          'justify-content:center',
-          'padding:16px'
-        ].join(';');
+      function clearImage() {
+        imageData = null;
+        imageBox.style.backgroundImage = '';
+        imageBox.classList.remove('hasImage');
+        removeImageBtn.hidden = true;
+        featuredImageFileEl.value = '';
+        generateImageBtn.textContent = 'Generate Image';
+        imageMetaEl.textContent = '';
+        updatePreview();
+      }
 
-        var card = document.createElement('div');
-        card.style.cssText = [
-          'width:min(420px,100%)',
-          'background:#fff',
-          'border:1px solid #d1d5db',
-          'border-radius:10px',
-          'padding:16px',
-          'box-shadow:0 12px 28px rgba(0,0,0,0.18)',
-          'font-family:Arial,sans-serif'
-        ].join(';');
+      removeImageBtn.addEventListener('click', function () {
+        clearImage();
+        setStatus($('imageStatus'), 'Image removed. The post can be submitted without one.', '');
+      });
 
-        var title = document.createElement('h3');
-        title.textContent = 'Draft is empty';
-        title.style.cssText = 'margin:0 0 8px;font-size:16px;color:#111827;';
-        card.appendChild(title);
+      featuredImageFileEl.addEventListener('change', async function () {
+        var file = featuredImageFileEl.files && featuredImageFileEl.files[0];
+        if (!file) return;
+        var objectUrl = URL.createObjectURL(file);
+        try {
+          setStatus($('imageStatus'), 'Optimizing ' + file.name + '…', '');
+          setImage(await optimizeImage(objectUrl), 'Your upload');
+          setStatus($('imageStatus'), '', '');
+          if (!imageAltEl.value.trim()) imageAltEl.value = titleEl.value.trim();
+        } catch (error) {
+          setStatus($('imageStatus'), 'Could not open "' + file.name + '". If it is in OneDrive, right-click it and choose "Always keep on this device", then try again.', 'error');
+        } finally {
+          URL.revokeObjectURL(objectUrl);
+          featuredImageFileEl.value = '';
+        }
+      });
 
-        var text = document.createElement('p');
-        text.textContent = message || 'Generate a draft first before submitting to the blog.';
-        text.style.cssText = 'margin:0 0 14px;font-size:14px;line-height:1.45;color:#374151;';
-        card.appendChild(text);
+      var isGeneratingImage = false;
+      async function generateImage() {
+        if (isGeneratingImage) return;
+        if (!titleEl.value.trim()) {
+          setStatus($('imageStatus'), 'Add a title first so the image matches your article.', 'error');
+          return;
+        }
+        isGeneratingImage = true;
+        generateImageBtn.disabled = true;
+        imageBox.classList.add('loading');
+        setStatus($('imageStatus'), '', '');
 
-        var actions = document.createElement('div');
-        actions.style.cssText = 'display:flex;gap:8px;justify-content:flex-end;';
+        try {
+          var response = await fetch('/.netlify/functions/generate-blog-image', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              title: titleEl.value.trim(),
+              summary: keyAnswerEl.value.trim() || excerptEl.value.trim(),
+              idea: imageIdeaEl.value.trim(),
+            }),
+          });
+          var data = await response.json().catch(function () { return {}; });
+          if (!response.ok || !data.ok) {
+            throw new Error(data.error || (response.status === 504
+              ? 'The image took too long to create. Please click Generate Image again.'
+              : 'Image generation failed. Please try again.'));
+          }
+          setImage(await optimizeImage('data:' + data.mimeType + ';base64,' + data.imageBase64), 'AI generated');
+          if (data.alt) imageAltEl.value = data.alt;
+        } catch (error) {
+          setStatus($('imageStatus'), error.message, 'error');
+        } finally {
+          isGeneratingImage = false;
+          generateImageBtn.disabled = false;
+          imageBox.classList.remove('loading');
+        }
+      }
 
-        var okBtn = document.createElement('button');
-        okBtn.type = 'button';
-        okBtn.textContent = 'Okay';
-        okBtn.style.cssText = 'border:1px solid #d1d5db;background:#fff;color:#111827;border-radius:6px;padding:7px 10px;font-size:13px;cursor:pointer;';
-        okBtn.onclick = function () { overlay.remove(); };
-        actions.appendChild(okBtn);
+      generateImageBtn.addEventListener('click', generateImage);
 
-        var leaveBtn = document.createElement('button');
-        leaveBtn.type = 'button';
-        leaveBtn.textContent = 'Leave anyway';
-        leaveBtn.style.cssText = 'border:0;background:#111827;color:#fff;border-radius:6px;padding:7px 10px;font-size:13px;cursor:pointer;';
-        leaveBtn.onclick = function () { window.location.href = '/'; };
-        actions.appendChild(leaveBtn);
-
-        card.appendChild(actions);
-        overlay.appendChild(card);
-        overlay.addEventListener('click', function (event) {
-          if (event.target === overlay) overlay.remove();
+      // ---------- Live preview ----------
+      function escapeHtml(value) {
+        return String(value).replace(/[&<>"]/g, function (c) {
+          return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c];
         });
+      }
 
-        document.body.appendChild(overlay);
+      function updatePreview() {
+        var title = titleEl.value.trim();
+        $('pTitle').textContent = title || 'Your title will appear here';
+        $('pTitle').classList.toggle('empty', !title);
+
+        var date = publishDateEl.value ? new Date(publishDateEl.value) : new Date();
+        $('pDate').textContent = date.toLocaleDateString();
+        $('pBadge').innerHTML = publishStatusEl.value === 'publish'
+          ? '<span class="pTag" style="background:#dcfce7;color:#166534">Will publish</span>'
+          : '<span class="pTag" style="background:#f3f4f6;color:#4b5563">Draft</span>';
+
+        $('pTags').innerHTML = tagsEl.value.split(',').map(function (t) { return t.trim(); }).filter(Boolean)
+          .map(function (t) { return '<span class="pTag">' + escapeHtml(t) + '</span>'; }).join(' ');
+
+        $('pImage').hidden = !imageData;
+        if (imageData) {
+          $('pImageImg').src = imageData.dataUrl;
+          $('pImageImg').alt = imageAltEl.value || title;
+        }
+
+        var html = getBodyHtml();
+        $('pBody').innerHTML = html || '<p class="pEmpty">Your article will appear here.</p>';
+      }
+
+      [titleEl, tagsEl, publishDateEl, imageAltEl].forEach(function (el) { el.addEventListener('input', updatePreview); });
+      publishStatusEl.addEventListener('change', updatePreview);
+
+      // ---------- Generate draft ----------
+      function hasGeneratedDraft() {
+        return !!titleEl.value.trim() && !!slugEl.value.trim() && !!getBodyMarkdown();
       }
 
       generateBtn.addEventListener('click', async function () {
         var transcript = pastedTranscriptEl.value.trim();
+        var draftStatus = $('draftStatus');
         if (!transcript) {
-          setStatus('Please paste a transcript first.', 'error');
+          setStatus(draftStatus, 'Please paste a transcript first.', 'error');
           return;
         }
 
-        setStatus('Generating draft...', '');
+        setStatus(draftStatus, 'Generating draft...', '');
         generateBtn.disabled = true;
 
         try {
@@ -490,48 +701,119 @@
             throw new Error(data.error || 'Draft generation failed.');
           }
 
-          titleEl.value = (data.draft && data.draft.title) || '';
-          slugEl.value = (data.draft && data.draft.slug) || '';
-          keyAnswerEl.value = (data.draft && data.draft.key_answer) || '';
-          excerptEl.value = (data.draft && data.draft.excerpt) || '';
-          metaDescriptionEl.value = (data.draft && data.draft.meta_description) || '';
-          bodyEl.value = (data.draft && data.draft.body) || '';
-          transcriptEl.value = data.transcript || '';
+          var draft = data.draft || {};
+          titleEl.value = draft.title || '';
+          slugEl.value = draft.slug || '';
+          keyAnswerEl.value = draft.key_answer || '';
+          excerptEl.value = draft.excerpt || '';
+          metaDescriptionEl.value = draft.meta_description || '';
+          setBodyMarkdown(draft.body || '');
 
-          var modeText = data.mode ? (' (mode: ' + data.mode + ')') : '';
-          setStatus('Draft generated' + modeText + '. Review fields below, then click Submit Draft to Blog.', 'success');
+          setStatus(draftStatus, 'Draft ready! Review it below — your featured image is being created.', 'success');
+
+          // Automatically create the featured image unless one is already chosen.
+          if (!imageData) generateImage();
         } catch (error) {
-          setStatus(error.message || 'Draft generation failed.', 'error');
+          setStatus(draftStatus, error.message || 'Draft generation failed.', 'error');
         } finally {
           generateBtn.disabled = false;
         }
       });
 
+      // ---------- Submit ----------
+      function clearDraftFormForNextPost() {
+        [titleEl, slugEl, keyAnswerEl, excerptEl, metaDescriptionEl, sourceUrlEl, tagsEl,
+          publishDateEl, imageAltEl, imageIdeaEl, pastedTranscriptEl].forEach(function (el) { el.value = ''; });
+        publishStatusEl.value = 'draft';
+        setBodyMarkdown('');
+        clearImage();
+        ['draftStatus', 'imageStatus', 'submitStatus'].forEach(function (id) { setStatus($(id), '', ''); });
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        pastedTranscriptEl.focus();
+      }
+
+      function showDialog(titleText, message, buttons) {
+        var existing = document.getElementById('yoana-ai-dialog');
+        if (existing) existing.remove();
+
+        var overlay = document.createElement('div');
+        overlay.id = 'yoana-ai-dialog';
+        overlay.className = 'modalOverlay';
+        var card = document.createElement('div');
+        card.className = 'modalCard';
+
+        var title = document.createElement('h3');
+        title.className = 'modalTitle';
+        title.textContent = titleText;
+        card.appendChild(title);
+
+        var text = document.createElement('p');
+        text.className = 'modalText';
+        text.textContent = message;
+        card.appendChild(text);
+
+        var actions = document.createElement('div');
+        actions.className = 'modalActions';
+        buttons.forEach(function (b) {
+          var btn = document.createElement('button');
+          btn.type = 'button';
+          btn.className = b.primary ? 'primary' : 'secondary';
+          btn.textContent = b.label;
+          btn.onclick = function () { overlay.remove(); if (b.onClick) b.onClick(); };
+          actions.appendChild(btn);
+        });
+        card.appendChild(actions);
+        overlay.appendChild(card);
+        overlay.addEventListener('click', function (event) { if (event.target === overlay) overlay.remove(); });
+        document.body.appendChild(overlay);
+      }
+
       publishBtn.addEventListener('click', async function () {
+        var submitStatus = $('submitStatus');
+
         if (!hasGeneratedDraft()) {
-          setStatus('Generate a draft first, then submit to Blog.', 'error');
-          showLeaveAnywayDialog('Generate a draft first, then submit to Blog.');
+          setStatus(submitStatus, 'Generate a draft first (title, slug, and body are required).', 'error');
+          showDialog('Draft is empty', 'Generate a draft first, then submit.', [
+            { label: 'Okay' },
+            { label: 'Leave anyway', primary: true, onClick: function () { window.location.href = '/'; } },
+          ]);
           return;
         }
 
+        if (isGeneratingImage) {
+          setStatus(submitStatus, 'Your image is still being created — please wait a moment, then click Submit.', 'error');
+          return;
+        }
+
+        var isPublish = publishStatusEl.value === 'publish';
+        var payload = {
+          source_url: sourceUrlEl.value.trim(),
+          source_type: sourceTypeEl.value,
+          title: titleEl.value.trim(),
+          slug: slugEl.value.trim(),
+          key_answer: keyAnswerEl.value.trim(),
+          excerpt: excerptEl.value.trim(),
+          meta_description: metaDescriptionEl.value.trim(),
+          body: getBodyMarkdown(),
+          // Convert local time to ISO so the server stores the time the user picked.
+          date: publishDateEl.value ? new Date(publishDateEl.value).toISOString() : null,
+          tags: tagsEl.value,
+          is_published: isPublish,
+          image_alt: imageAltEl.value.trim() || titleEl.value.trim(),
+        };
+
+        if (imageData) {
+          payload.featured_file_name = imageData.fileName;
+          payload.featured_file_mime_type = imageData.mimeType;
+          payload.featured_file_content_base64 = imageData.dataUrl;
+        } else {
+          payload.image_alt = '';
+        }
+
+        publishBtn.disabled = true;
+        setStatus(submitStatus, 'Submitting...', '');
+
         try {
-          var payload = getResultObject();
-          var selectedFile = featuredImageFileEl.files && featuredImageFileEl.files[0];
-
-          if (selectedFile) {
-            if (selectedFile.size > 8 * 1024 * 1024) {
-              throw new Error('Selected file is too large. Keep it under 8 MB.');
-            }
-
-            setStatus('Reading selected media file...', '');
-            payload.featured_file_name = selectedFile.name;
-            payload.featured_file_mime_type = selectedFile.type || '';
-            payload.featured_file_content_base64 = await readFileAsDataUrl(selectedFile);
-          }
-
-          publishBtn.disabled = true;
-          setStatus('Submitting draft to blog repository...', '');
-
           var response = await fetch('/.netlify/functions/publish-blog-post', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -540,25 +822,29 @@
 
           var data = await response.json().catch(function () { return {}; });
           if (!response.ok || !data.ok) {
-            throw new Error(data.error || 'Could not submit the draft to blog.');
+            throw new Error(data.error || 'Could not submit the post.');
           }
 
-          var successMessage = 'Blog draft submitted successfully.';
-          if (data.path) {
-            successMessage += ' File: ' + data.path;
-          }
-          if (data.featuredImagePath) {
-            featuredImageEl.value = data.featuredImagePath;
-            successMessage += ' Featured media: ' + data.featuredImagePath;
-          }
-          setStatus(successMessage, 'success');
-          showPublishSuccessDialog(data);
+          setStatus(submitStatus, isPublish ? 'Submitted for publishing!' : 'Draft saved!', 'success');
+          showDialog(
+            isPublish ? 'Your post was submitted for publishing' : 'Your draft was saved',
+            (isPublish
+              ? 'It will appear on the website in a few minutes (after the site rebuilds), on or after the publish date.'
+              : 'It is saved as a draft and is not visible on the website yet.') +
+              (data.path ? '\n\nFile: ' + data.path : '') + '\n\nWould you like to:',
+            [
+              { label: 'Create another Blog', onClick: clearDraftFormForNextPost },
+              { label: 'Go Home', primary: true, onClick: function () { window.location.href = '/'; } },
+            ]
+          );
         } catch (error) {
-          setStatus(error.message || 'Could not submit draft to blog.', 'error');
+          setStatus(submitStatus, error.message || 'Could not submit the post.', 'error');
         } finally {
           publishBtn.disabled = false;
         }
       });
+
+      updatePreview();
     </script>
   </body>
 </html>

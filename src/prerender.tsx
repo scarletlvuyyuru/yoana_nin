@@ -81,8 +81,28 @@ export async function prerender({ url }: { url: string }) {
 
   const blogLinks = getAllBlogPosts().map((post) => `/blog/${post.slug}`);
 
+  // Put each page's own <title>, meta, canonical and JSON-LD into the static
+  // HTML so crawlers don't see the homepage's head on every page. The
+  // template's generic duplicates are stripped in vite.config.ts.
+  const { helmet } = helmetContext;
+  const titleText = (helmet?.title.toString() ?? '')
+    .replace(/^<title[^>]*>|<\/title>$/g, '')
+    .replace(/&quot;/g, '"')
+    .replace(/&#x27;|&#39;/g, "'")
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&amp;/g, '&');
+  const headTags = helmet
+    ? [helmet.meta.toString(), helmet.link.toString(), helmet.script.toString()]
+    : [];
+
   return {
     html,
     links: new Set([...staticRoutes, ...blogLinks]),
+    head: {
+      title: titleText,
+      // The plugin serializes plain strings as-is.
+      elements: new Set(headTags.filter(Boolean)) as unknown as Set<{ type: string; props: Record<string, string> }>,
+    },
   };
 }

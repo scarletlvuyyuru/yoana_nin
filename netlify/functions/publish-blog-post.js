@@ -190,12 +190,12 @@ function buildFrontmatter(payload) {
     key_answer: String(payload.key_answer || '').trim() || undefined,
     excerpt: String(payload.excerpt || '').trim() || undefined,
     meta_description: String(payload.meta_description || '').trim() || undefined,
-    geo_focus: String(payload.geo_focus || 'Raleigh, NC').trim(),
+    geo_focus: String(payload.geo_focus || 'Cary, NC').trim(),
     geo_schema: toBoolean(payload.geo_schema, true),
     source_url: String(payload.source_url || '').trim() || undefined,
     source_type: String(payload.source_type || '').trim() || undefined,
     creation_mode: 'video',
-    workflow_stage: 'draft_ready',
+    workflow_stage: toBoolean(payload.is_published, false) ? 'published' : 'draft_ready',
   };
 
   // Remove undefined keys so frontmatter stays clean.

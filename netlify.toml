@@ -19,11 +19,36 @@
   status = 200
 
 
-# Redirect rules for SPA
+# Blog posts that were deleted — send their old URLs to the closest live content
+[[redirects]]
+  from = "/blog/managing-overwhelm-adhd-simple-strategy"
+  to = "/blog/overcoming-avoidance-simple-coaching-strategy"
+  status = 301
+
+[[redirects]]
+  from = "/blog/overcome-starting-problem-adhd"
+  to = "/blog/overcoming-avoidance-simple-coaching-strategy"
+  status = 301
+
+# Old trailing-slash URLs → canonical no-slash URLs
+[[redirects]]
+  from = "/:page/"
+  to = "/:page"
+  status = 301
+
+[[redirects]]
+  from = "/blog/:slug/"
+  to = "/blog/:slug"
+  status = 301
+
+# Every real page is prerendered to its own .html file, so anything that
+# reaches this rule doesn't exist: serve the prerendered 404 page with a
+# real 404 status (previously this returned 200, which Google treats as a
+# "soft 404" and refuses to index).
 [[redirects]]
   from = "/*"
-  to = "/index.html"
-  status = 200
+  to = "/404.html"
+  status = 404
   force = false
 
 # Function-specific settings
@@ -44,6 +69,9 @@
 
 [functions.publish-blog-post]
   timeout = 20
+
+[functions.generate-blog-image]
+  timeout = 26
 
 # Headers for better performance and security
 [[headers]]

@@ -410,7 +410,7 @@ const Coaching: React.FC = () => {
                     </p>
 
                     <div className={styles.secondaryCtas}>
-                      <Link to="/resources/" className={`${styles.secondaryCta} ${styles.discoveryCallCta}`}>Book a Free Discovery Call</Link>
+                      <Link to="/resources" className={`${styles.secondaryCta} ${styles.discoveryCallCta}`}>Book a Free Discovery Call</Link>
                     </div>
                   </div>
                 </div>
@@ -446,7 +446,7 @@ const Coaching: React.FC = () => {
                   </ul>
                 </div>
                 <p className={styles.offerPrice}>$4,777</p>
-                <Link to="/resources/" className={styles.primaryCta}>
+                <Link to="/resources" className={styles.primaryCta}>
                   Book Your Free Discovery Call
                 </Link>
               </div>
@@ -544,7 +544,7 @@ const Coaching: React.FC = () => {
                   </p>
 
                   <div className={styles.secondaryCtas}>
-                    <Link to="/resources/" className={`${styles.secondaryCta} ${styles.secondaryCtaStrong}`}>Book Your Free Discovery Call</Link>
+                    <Link to="/resources" className={`${styles.secondaryCta} ${styles.secondaryCtaStrong}`}>Book Your Free Discovery Call</Link>
                   </div>
                 </div>
               </div>

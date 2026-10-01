@@ -10,7 +10,7 @@ const sitewideSchema = {
       url: 'https://yoananincoaching.com',
       name: 'Yoana Nin Coaching',
       description:
-        'ADHD coaching and business strategy for women entrepreneurs, serving clients virtually across the U.S. and locally in North Carolina.',
+        'ADHD coaching and business strategy for women entrepreneurs and real estate agents, serving clients virtually across the U.S. and locally in Cary, North Carolina.',
       inLanguage: 'en-US',
       publisher: {
         '@id': 'https://yoananincoaching.com/#organization',
@@ -24,7 +24,7 @@ const sitewideSchema = {
       image: 'https://yoananincoaching.com/metaOG.png',
       logo: 'https://yoananincoaching.com/web-app-manifest-512x512.png',
       description:
-        'ADHD coaching and business strategy for women entrepreneurs, offered virtually across the U.S. and in person in the Raleigh-Durham Triangle area.',
+        'ADHD coaching and business strategy for women entrepreneurs and real estate agents, offered virtually across the U.S. and in person in Cary, NC and the Triangle area.',
       email: 'yoana@yoananin.com',
       telephone: '+1-919-530-1252',
       priceRange: '$$$',
@@ -79,6 +79,7 @@ const sitewideSchema = {
         'ADHD Coaching',
         'Executive Function Support',
         'Women Entrepreneurship',
+        'Real Estate Agent Coaching',
         'Business Strategy',
       ],
       sameAs: [
@@ -187,7 +188,7 @@ const sitewideSchema = {
       '@type': 'Person',
       '@id': 'https://yoananincoaching.com/#person',
       name: 'Yoana Nin',
-      jobTitle: 'ADHD Entrepreneur Coach',
+      jobTitle: 'ADHD Coach for Women Entrepreneurs & Real Estate Agents',
       url: 'https://yoananincoaching.com/my-story',
       image: 'https://yoananincoaching.com/YoanaIseeYou.webp',
       knowsLanguage: ['en', 'hu', 'ro'],

@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import styles from './LeadMagnetForm.module.css';
 
 type LeadMagnetVariant = 'modal' | 'banner' | 'page';
@@ -12,7 +11,6 @@ interface LeadMagnetFormProps {
   showCloseButton?: boolean;
   onClose?: () => void;
   onSuccess?: () => void;
-  downloadUrl?: string;
 }
 
 const FORM_NAME = 'free-guide-download';
@@ -33,12 +31,12 @@ const LeadMagnetForm: React.FC<LeadMagnetFormProps> = ({
   variant,
   source,
   title = 'Free ADHD SOS Guide',
-  subtitle = 'Enter your name and email to get instant access.',
+  subtitle = "Enter your name and email and we'll send the guide straight to your inbox.",
   showCloseButton = false,
   onClose,
   onSuccess,
-  downloadUrl = '/downloads/adhd-sos-guide-yoana-nin.pdf',
 }) => {
+  const [submittedEmail, setSubmittedEmail] = useState('');
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [botField, setBotField] = useState('');
@@ -115,9 +113,22 @@ const LeadMagnetForm: React.FC<LeadMagnetFormProps> = ({
       });
 
       if (!response.ok) {
-        throw new Error('Form submission failed');
+        throw new Error('Submission failed. Please try again.');
       }
 
+      // Send the "Confirm subscription" email; its button downloads the guide.
+      const emailResponse = await fetch('/.netlify/functions/guide-signup', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name: cleanName, email: cleanEmail }),
+      });
+
+      if (!emailResponse.ok) {
+        const data = await emailResponse.json().catch(() => ({}));
+        throw new Error(data.error || 'We could not send your email. Please try again.');
+      }
+
+      setSubmittedEmail(cleanEmail);
       handleSuccess();
     } catch (submitError) {
       const isLocalhost =
@@ -127,7 +138,9 @@ const LeadMagnetForm: React.FC<LeadMagnetFormProps> = ({
       setError(
         isLocalhost
           ? 'This form posts to Netlify Forms. Test submissions on your Netlify deploy or with netlify dev.'
-          : 'Submission failed. Please try again.'
+          : submitError instanceof Error
+            ? submitError.message
+            : 'Submission failed. Please try again.'
       );
     } finally {
       setIsSubmitting(false);
@@ -153,13 +166,19 @@ const LeadMagnetForm: React.FC<LeadMagnetFormProps> = ({
 
       {isSubmitted ? (
         <div className={styles.successCard} role="status" aria-live="polite">
-          <p className={styles.successTitle}>You are in. Your download is ready.</p>
-          <a className={styles.downloadButton} href={downloadUrl} download>
-            Download The Guide
-          </a>
+          <p className={styles.successTitle}>Check your inbox!</p>
           <p className={styles.successHint}>
-            If your download does not start, use this direct page: <Link to="/free-adhd-guide">Free Guide</Link>
+            We sent an email to <strong>{submittedEmail}</strong>. Click <strong>Confirm Subscription</strong> in
+            that email and your guide will download right away.
           </p>
+          <p className={styles.successHint}>
+            Don't see it in a few minutes? Check your spam or promotions folder.
+          </p>
+          {isModal && onClose && (
+            <button type="button" className={styles.downloadButton} onClick={onClose}>
+              Got It
+            </button>
+          )}
         </div>
       ) : (
         <form
