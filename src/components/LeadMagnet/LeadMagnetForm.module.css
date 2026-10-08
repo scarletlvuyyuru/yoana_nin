@@ -36,6 +36,8 @@
   --bg-accent: var(--color-pink-light);
   --border-color: var(--color-pink-soft);
   color: var(--text-primary);
+  /* Render form controls (and browser autofill) in light mode on this white card */
+  color-scheme: light;
   position: relative;
   border-radius: 18px;
   border: 1px solid color-mix(in srgb, var(--border-color) 72%, transparent);
@@ -153,6 +155,17 @@
 .bannerShell .input {
   background: rgba(255, 255, 255, 0.95);
   color: var(--color-navy);
+}
+
+/* Chrome/Edge autofill paints its own background and light text in dark mode;
+   keep autofilled fields white with dark, readable text. */
+.input:-webkit-autofill,
+.input:-webkit-autofill:hover,
+.input:-webkit-autofill:focus {
+  -webkit-text-fill-color: var(--color-navy);
+  caret-color: var(--color-navy);
+  box-shadow: 0 0 0 1000px #ffffff inset;
+  transition: background-color 9999s ease-out 0s;
 }
 
 .submitButton,
