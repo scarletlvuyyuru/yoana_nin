@@ -80,6 +80,10 @@
 [functions.guide-confirm]
   timeout = 26
 
+# Runs on every verified form submission; may wait on Apps Script or Resend
+[functions.submission-created]
+  timeout = 26
+
 # Headers for better performance and security
 [[headers]]
   for = "/*"

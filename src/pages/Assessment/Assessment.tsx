@@ -555,7 +555,7 @@ const Assessment: React.FC = () => {
                   <h3 className={styles.formTitle}>Results sent to your inbox.</h3>
                   <p className={styles.formCopy}>
                     {marketingConsent
-                      ? 'A copy is on the way, and you opted in for future updates and offers.'
+                      ? 'A copy is on the way. You will also get a second email: click "Confirm Your Subscription" in it to start receiving updates and offers.'
                       : 'A copy is on the way, along with one follow-up email related to your results.'}
                   </p>
                 </div>
