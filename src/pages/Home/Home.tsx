@@ -409,7 +409,7 @@ const Home: React.FC = () => {
             <div className={styles.iSeeYouTextSection}>
               <h2 className={styles.iSeeYouTitle}>I See You</h2>
               <p className={styles.iSeeYouText}>
-                I've been where you are — building a real estate business with an ADHD brain, overloaded, brilliant, and ready for a system that actually works.
+               I See You and I’ve walked alongside so many agents in your shoes. I know the reality of building a real estate business and how much harder it is with an ADHD brain, feeling both brilliant and overloaded, and needing a system tailored to how you actually operate. That's why I created a framework that works with your unique strengths and challenges.
               </p>
               <p className={styles.iSeeYouTransition}>
                 Today, I use these tools to help you build your next chapter:
