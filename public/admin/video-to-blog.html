@@ -147,8 +147,9 @@
       .editor a { color: #004aad; }
 
       /* Submit bar */
+      .finishCard { grid-column: 1 / -1; }
       .submitBar {
-        margin-top: 24px;
+        margin-top: 12px;
         padding: 16px;
         border-radius: 10px;
         background: #f9fafb;
@@ -159,7 +160,9 @@
         align-items: flex-end;
       }
       .submitBar label { margin-top: 0; }
-      .submitBar .statusPick { min-width: 220px; }
+      .submitBar .datePick { flex: 1 1 300px; }
+      .submitBar .tagsPick { flex: 1 1 220px; }
+      .submitBar .statusPick { flex: 0 1 240px; min-width: 200px; }
       .submitBar .primary { padding: 11px 32px; font-size: 15px; }
 
       /* Live preview — mirrors the blog post page styles */
@@ -274,20 +277,6 @@
 
           <label for="metaDescription">Meta Description</label>
           <textarea id="metaDescription"></textarea>
-
-          <div class="row">
-            <div>
-              <label for="publishDate">Publish Date</label>
-              <div class="inline">
-                <input id="publishDate" type="datetime-local" />
-                <button id="nowBtn" class="secondary" type="button">Today / Now</button>
-              </div>
-            </div>
-            <div>
-              <label for="tags">Tags <span class="optional">(comma separated)</span></label>
-              <input id="tags" placeholder="ADHD, women entrepreneurs, real estate agents" />
-            </div>
-          </div>
         </div>
 
         <!-- Featured image -->
@@ -335,18 +324,6 @@
           <textarea id="bodyFallback" style="min-height:360px;" hidden placeholder="Body (Markdown)"></textarea>
         </div>
 
-        <!-- Submit -->
-        <div class="submitBar">
-          <div class="statusPick">
-            <label for="publishStatus">Status</label>
-            <select id="publishStatus">
-              <option value="draft" selected>Draft — save, not visible on the site</option>
-              <option value="publish">Publish — goes live on the publish date</option>
-            </select>
-          </div>
-          <button id="publishBtn" class="primary" type="button">Submit</button>
-        </div>
-        <div id="submitStatus" class="status"></div>
       </div>
 
       <!-- Live preview -->
@@ -360,6 +337,33 @@
           <div id="pBody" class="pBody"><p class="pEmpty">Your article will appear here.</p></div>
         </article>
       </aside>
+
+      <div class="card finishCard">
+        <h2 class="sectionTitle" style="margin-top:0;">Finish &amp; Submit</h2>
+          <!-- Finish: date, tags, status, submit -->
+          <div class="submitBar">
+            <div class="datePick">
+              <label for="publishDate">Publish Date</label>
+              <div class="inline">
+                <input id="publishDate" type="datetime-local" />
+                <button id="nowBtn" class="secondary" type="button">Today / Now</button>
+              </div>
+            </div>
+            <div class="tagsPick">
+              <label for="tags">Tags <span class="optional">(comma separated)</span></label>
+              <input id="tags" placeholder="ADHD, women entrepreneurs, real estate agents" />
+            </div>
+            <div class="statusPick">
+              <label for="publishStatus">Status</label>
+              <select id="publishStatus">
+                <option value="draft" selected>Draft — not on the site yet</option>
+                <option value="publish">Publish — live on publish date</option>
+              </select>
+            </div>
+            <button id="publishBtn" class="primary" type="button">Submit</button>
+          </div>
+          <div id="submitStatus" class="status"></div>
+      </div>
     </div>
 
     <script>
