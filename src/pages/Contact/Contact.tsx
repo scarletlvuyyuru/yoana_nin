@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import styles from './Contact.module.css';
 import SEO from '../../components/SEO/SEO';
+import Recaptcha, { hasRecaptchaToken, resetRecaptcha } from '../../components/Recaptcha/Recaptcha';
 
 const Contact: React.FC = () => {
   const [showSuccess, setShowSuccess] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [captchaError, setCaptchaError] = useState('');
   const [formLoadTime] = useState(Date.now()); // Track when form loads
 
   // Auto-dismiss success message after 8 seconds
@@ -53,6 +55,13 @@ const Contact: React.FC = () => {
       setIsSubmitting(false);
       return;
     }
+
+    if (!hasRecaptchaToken(formData)) {
+      setCaptchaError('Please tick the "I\'m not a robot" box before sending.');
+      setIsSubmitting(false);
+      return;
+    }
+    setCaptchaError('');
 
     // Sanitize all form data
     const sanitizedFormData = new FormData();
@@ -108,6 +117,7 @@ const Contact: React.FC = () => {
         'There was an error submitting your message. Please try again or email directly.'
       );
     } finally {
+      resetRecaptcha();
       setIsSubmitting(false);
     }
   };
@@ -226,7 +236,8 @@ const Contact: React.FC = () => {
                 </div>
 
                 {/* reCAPTCHA */}
-                <div data-netlify-recaptcha="true"></div>
+                <Recaptcha />
+                {captchaError && <p className={styles.captchaNote} role="alert" style={{ color: '#b11a1a', fontWeight: 700 }}>{captchaError}</p>}
 
                 <p className={styles.captchaNote}>
                   This site is protected by reCAPTCHA and the Google <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Privacy Policy</a> and <a href="https://policies.google.com/terms" target="_blank" rel="noopener noreferrer">Terms of Service</a> apply.

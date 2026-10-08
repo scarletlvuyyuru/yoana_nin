@@ -19,6 +19,13 @@ function dedupeHeadMeta(html: string): string {
 
 // https://vite.dev/config/
 export default defineConfig({
+  define: {
+    // reCAPTCHA site key (public). Netlify uses the same SITE_RECAPTCHA_KEY plus
+    // SITE_RECAPTCHA_SECRET to verify form submissions.
+    'import.meta.env.VITE_RECAPTCHA_SITE_KEY': JSON.stringify(
+      process.env.VITE_RECAPTCHA_SITE_KEY || process.env.SITE_RECAPTCHA_KEY || ''
+    ),
+  },
   plugins: (() => {
     const enablePrerender = process.env.ENABLE_PRERENDER === 'true';
 

@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './Assessment.module.css';
 import SEO from '../../components/SEO/SEO';
+import Recaptcha, { hasRecaptchaToken, resetRecaptcha } from '../../components/Recaptcha/Recaptcha';
 
 interface Question {
   id: number;
@@ -190,7 +191,6 @@ const Assessment: React.FC = () => {
 
     const submittedName = formData.get('fullName')?.toString().trim() || '';
     const submittedEmail = formData.get('email')?.toString().trim() || '';
-    const recaptchaToken = formData.get('g-recaptcha-response')?.toString().trim() || '';
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     if (!resultsConsent || !submittedName || !submittedEmail) {
@@ -203,8 +203,8 @@ const Assessment: React.FC = () => {
       return;
     }
 
-    if (!recaptchaToken) {
-      setSubmitError('Please complete the reCAPTCHA check before submitting.');
+    if (!hasRecaptchaToken(formData)) {
+      setSubmitError('Please tick the "I\'m not a robot" box before submitting.');
       return;
     }
 
@@ -290,6 +290,8 @@ const Assessment: React.FC = () => {
       const defaultError = 'There was a problem sending your results. Please try again in a moment.';
       const message = error instanceof Error ? error.message : defaultError;
       setSubmitError(message || defaultError);
+      // Tokens are single-use; make them tick the box again before retrying.
+      resetRecaptcha();
     } finally {
       setIsSubmitting(false);
     }
@@ -505,7 +507,7 @@ const Assessment: React.FC = () => {
                     This site is protected by reCAPTCHA and the Google <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Privacy Policy</a> and <a href="https://policies.google.com/terms" target="_blank" rel="noopener noreferrer">Terms of Service</a> apply.
                   </p>
 
-                  <div data-netlify-recaptcha="true"></div>
+                  <Recaptcha />
 
                   {submitError && <p className={styles.formError}>{submitError}</p>}
 

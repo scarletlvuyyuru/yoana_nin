@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import SEO from '../../components/SEO/SEO';
+import Recaptcha, { hasRecaptchaToken, resetRecaptcha } from '../../components/Recaptcha/Recaptcha';
 import styles from './Resources.module.css';
 
 const Resources: React.FC = () => {
@@ -51,9 +52,8 @@ const Resources: React.FC = () => {
       return;
     }
 
-    const recaptchaToken = formData.get('g-recaptcha-response')?.toString().trim() || '';
-    if (!recaptchaToken) {
-      alert('Please complete the reCAPTCHA check before submitting.');
+    if (!hasRecaptchaToken(formData)) {
+      alert('Please tick the "I\'m not a robot" box before submitting.');
       setIsSubmitting(false);
       return;
     }
@@ -111,6 +111,7 @@ const Resources: React.FC = () => {
           : 'There was an issue submitting the form. Please try again.'
       );
     } finally {
+      resetRecaptcha();
       setIsSubmitting(false);
     }
   };
@@ -212,7 +213,7 @@ const Resources: React.FC = () => {
                 <input id="email" name="email" type="email" required className={styles.input} autoComplete="email" />
               </div>
 
-              <div data-netlify-recaptcha="true"></div>
+              <Recaptcha />
 
               <p className={styles.captchaNote}>
                 This site is protected by reCAPTCHA and the Google <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Privacy Policy</a> and <a href="https://policies.google.com/terms" target="_blank" rel="noopener noreferrer">Terms of Service</a> apply.

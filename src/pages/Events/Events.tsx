@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './Events.module.css';
 import SEO from '../../components/SEO/SEO';
+import Recaptcha, { hasRecaptchaToken } from '../../components/Recaptcha/Recaptcha';
 
 const podcastHeroImage = '/images/events/podcast/Adhd_Advantage_Podcast.webp';
 const womensDayPressImage = '/images/events/womens-day-expo/Yoana_Giving_Speech_KeynoteSpeaker.webp';
@@ -96,6 +97,7 @@ const eventSections = [
 
 const Events: React.FC = () => {
   const [newsletterLoadTime] = useState(() => Date.now());
+  const [newsletterCaptchaError, setNewsletterCaptchaError] = useState('');
 
   return (
     <>
@@ -282,6 +284,13 @@ const Events: React.FC = () => {
               data-netlify="true"
               data-netlify-recaptcha="true"
               data-netlify-honeypot="bot-field"
+              onSubmit={(event) => {
+                // Native submit (Netlify shows its thank-you page); just make sure the box is ticked.
+                if (!hasRecaptchaToken(new FormData(event.currentTarget))) {
+                  event.preventDefault();
+                  setNewsletterCaptchaError('Please tick the "I\'m not a robot" box before joining.');
+                }
+              }}
             >
               <input type="hidden" name="form-name" value="events-newsletter" />
               <input type="hidden" name="subject" value="New Newsletter Signup - Yoana Nin" />
@@ -304,7 +313,12 @@ const Events: React.FC = () => {
                 <span>I agree to receive event updates, coaching insights, and occasional newsletter emails.</span>
               </label>
 
-              <div data-netlify-recaptcha="true"></div>
+              <Recaptcha />
+              {newsletterCaptchaError && (
+                <p className={styles.captchaNote} role="alert" style={{ color: '#b11a1a', fontWeight: 700 }}>
+                  {newsletterCaptchaError}
+                </p>
+              )}
 
               <p className={styles.captchaNote}>
                 This site is protected by reCAPTCHA and the Google <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Privacy Policy</a> and <a href="https://policies.google.com/terms" target="_blank" rel="noopener noreferrer">Terms of Service</a> apply.
