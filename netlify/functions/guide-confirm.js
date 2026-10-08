@@ -50,7 +50,9 @@ const addToGoogleSheet = async ({ email, name, source }) => {
   const response = await fetch(url, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ secret: process.env.GOOGLE_SHEET_SECRET || '', email, name, source }),
+    body: JSON.stringify({ secret: (process.env.GOOGLE_SHEET_SECRET || '').trim(), email, name, source }),
+    // Cap the wait so the confirmation page always loads within the function's time limit.
+    timeout: 20000,
   });
   const data = await response.json().catch(() => ({}));
   if (!response.ok || !data.ok) {
@@ -68,6 +70,7 @@ const addToResendAudience = async ({ email, name }) => {
     method: 'POST',
     headers: { Authorization: `Bearer ${apiKey}`, 'Content-Type': 'application/json' },
     body: JSON.stringify({ email, first_name: firstName, last_name: rest.join(' '), unsubscribed: false }),
+    timeout: 8000,
   });
   if (!response.ok) {
     throw new Error(`Resend audience add failed (${response.status}): ${await response.text()}`);

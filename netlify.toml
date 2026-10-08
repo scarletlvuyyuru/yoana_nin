@@ -73,6 +73,13 @@
 [functions.generate-blog-image]
   timeout = 26
 
+[functions.guide-signup]
+  timeout = 15
+
+# Waits on Google Apps Script, which can take several seconds to cold-start
+[functions.guide-confirm]
+  timeout = 26
+
 # Headers for better performance and security
 [[headers]]
   for = "/*"
