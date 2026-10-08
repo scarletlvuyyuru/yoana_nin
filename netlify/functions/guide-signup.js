@@ -11,6 +11,16 @@ const LINK_TTL_MS = 30 * 24 * 60 * 60 * 1000; // confirm links work for 30 days
 const signLink = ({ email, name, source, expires, secret }) =>
   crypto.createHmac('sha256', secret).update(`${email}|${name}|${source}|${expires}`).digest('hex');
 
+// Tolerate common paste mistakes in Netlify settings: surrounding quotes,
+// stray whitespace/newlines, and smart quotes around a display name.
+const cleanAddress = (value) =>
+  String(value || '')
+    .replace(/[“”‘’]/g, '"')
+    .trim()
+    .replace(/^(['"])(.*)\1$/s, '$2')
+    .replace(/\s+/g, ' ')
+    .trim();
+
 const escapeHtml = (value) =>
   String(value)
     .replace(/&/g, '&amp;')
@@ -67,11 +77,12 @@ exports.handler = async (event) => {
   try {
     const apiKey = process.env.RESEND_API_KEY;
     const secret = process.env.GUIDE_LINK_SECRET;
-    const from =
+    const from = cleanAddress(
       process.env.GUIDE_EMAIL_FROM ||
-      process.env.ASSESSMENT_RESULTS_FROM ||
-      process.env.ASSESSMENT_RESULTS_FORM;
-    const replyTo = process.env.ASSESSMENT_REPLY_TO || 'yoana@yoananin.com';
+        process.env.ASSESSMENT_RESULTS_FROM ||
+        process.env.ASSESSMENT_RESULTS_FORM
+    );
+    const replyTo = cleanAddress(process.env.ASSESSMENT_REPLY_TO) || 'yoana@yoananin.com';
 
     if (!apiKey || !secret || !from) {
       console.error(
@@ -116,7 +127,13 @@ exports.handler = async (event) => {
     });
 
     if (!response.ok) {
-      console.error('guide-signup: Resend error', response.status, await response.text());
+      console.error(
+        'guide-signup: Resend error',
+        response.status,
+        await response.text(),
+        '| from:', JSON.stringify(from),
+        '| reply_to:', JSON.stringify(replyTo)
+      );
       return { statusCode: 502, headers, body: JSON.stringify({ error: 'We could not send the email. Please try again.' }) };
     }
 
