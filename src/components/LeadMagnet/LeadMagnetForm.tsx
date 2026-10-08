@@ -120,7 +120,7 @@ const LeadMagnetForm: React.FC<LeadMagnetFormProps> = ({
       const emailResponse = await fetch('/.netlify/functions/guide-signup', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name: cleanName, email: cleanEmail }),
+        body: JSON.stringify({ name: cleanName, email: cleanEmail, source }),
       });
 
       if (!emailResponse.ok) {
@@ -168,8 +168,8 @@ const LeadMagnetForm: React.FC<LeadMagnetFormProps> = ({
         <div className={styles.successCard} role="status" aria-live="polite">
           <p className={styles.successTitle}>Check your inbox!</p>
           <p className={styles.successHint}>
-            We sent an email to <strong>{submittedEmail}</strong>. Click <strong>Confirm Subscription</strong> in
-            that email and your guide will download right away.
+            Your guide is on its way to <strong>{submittedEmail}</strong>. Open the email to download it, and
+            click <strong>Confirm Your Subscription</strong> so we can stay in touch.
           </p>
           <p className={styles.successHint}>
             Don't see it in a few minutes? Check your spam or promotions folder.
