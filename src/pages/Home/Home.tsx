@@ -30,7 +30,7 @@ const Home: React.FC = () => {
     },
     {
       question: "Do you work with real estate agents?",
-      answer: "Yes. I built my own real estate business in Cary, NC with ADHD, so I know the pace firsthand — the lead follow-up, the showings, the contract deadlines, the feast-or-famine income. We build systems for all of it, so your business runs on structure instead of adrenaline."
+      answer: "Yes. I built my own real estate business in Cary, NC, so I know the pace firsthand — the lead follow-up, the showings, the contract deadlines, the feast-or-famine income. We build systems for all of it, so your business runs on structure instead of adrenaline."
     },
     {
       question: "Do you work with clients virtually or in-person?",
@@ -261,7 +261,7 @@ const Home: React.FC = () => {
               I've sat across from brilliant women entrepreneurs and real estate agents who felt exhausted from fighting their own brains.
             </p>
             <ul className={styles.proofList}>
-              <li><strong>I've lived it:</strong> I built a thriving real estate business in Cary, NC with ADHD — using the same systems I teach. I know this industry from the inside.</li>
+              
               <li><strong>Every tool, still stuck:</strong> They had planners, strategies, and advice, but no real momentum.</li>
               <li><strong>The real gap:</strong> It was not motivation. It was a system built for how their brain actually works.</li>
               <li><strong>What I specialize in:</strong> Turning chaos into clarity, structure, and consistent execution.</li>            </ul>
