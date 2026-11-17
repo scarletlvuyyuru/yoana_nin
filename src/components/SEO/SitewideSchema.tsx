@@ -139,12 +139,6 @@ const sitewideSchema = {
         serviceUrl: 'https://yoananincoaching.com/coaching',
         availableLanguage: 'en',
       },
-      offers: {
-        '@type': 'Offer',
-        url: 'https://yoananincoaching.com/coaching#private-offer',
-        availability: 'https://schema.org/LimitedAvailability',
-        priceCurrency: 'USD',
-      },
     },
     {
       '@type': 'Person',

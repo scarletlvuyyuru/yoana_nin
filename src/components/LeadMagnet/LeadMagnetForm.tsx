@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { createPortal } from 'react-dom';
 import styles from './LeadMagnetForm.module.css';
 
 type LeadMagnetVariant = 'modal' | 'banner' | 'page';
@@ -255,11 +256,15 @@ const LeadMagnetForm: React.FC<LeadMagnetFormProps> = ({
     return formMarkup;
   }
 
-  return (
+  const modal = (
     <div className={styles.modalOverlay} role="dialog" aria-modal="true" aria-label="Free guide signup">
       <div className={styles.modalInner}>{formMarkup}</div>
     </div>
   );
+
+  // Render into <body>: the page wrapper (.main-content) uses `contain: layout`, which
+  // would otherwise pin this fixed overlay to the top of the page instead of the screen.
+  return typeof document === 'undefined' ? modal : createPortal(modal, document.body);
 };
 
 export default LeadMagnetForm;

@@ -1,7 +1,8 @@
 .modalOverlay {
   position: fixed;
   inset: 0;
-  z-index: 70;
+  /* Above the sticky header (100) and its dropdowns (1000) */
+  z-index: 1100;
   background: rgba(9, 18, 39, 0.64);
   display: grid;
   justify-items: center;
@@ -12,7 +13,8 @@
 
 .modalInner {
   width: min(760px, 100%);
-  margin-top: clamp(0.75rem, 9vh, 5rem);
+  /* Centred vertically; auto margins keep the top reachable if the screen is short */
+  margin: auto 0;
   animation: modalEnter 260ms ease-out both;
 }
 
