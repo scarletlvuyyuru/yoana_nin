@@ -11,7 +11,6 @@ const Footer: React.FC = () => {
   const footerStyle = {
     backgroundColor: 'var(--bg-secondary)',
     borderTop: '1px solid var(--border-color)',
-    marginTop: '4rem',
     padding: '3rem 0'
   };
 

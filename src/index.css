@@ -500,3 +500,75 @@ a[aria-label*="Home"]:focus-visible {
   -webkit-text-fill-color: transparent;
   text-shadow: none;
 }
+
+/* Geometric texture for section backgrounds (Home, Coaching). Add .geo-pattern to a
+   section; add .geo-pattern--flip to alternate line direction and corner shape. */
+
+.geo-pattern {
+  position: relative;
+  overflow: hidden;
+}
+
+.geo-pattern::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    repeating-linear-gradient(
+      18deg,
+      rgba(26, 41, 66, 0.08) 0,
+      rgba(26, 41, 66, 0.08) 2px,
+      transparent 2px,
+      transparent 26px
+    ),
+    radial-gradient(rgba(179, 0, 179, 0.12) 1px, transparent 1px);
+  background-size: auto, 20px 20px;
+  opacity: 0.42;
+  pointer-events: none;
+}
+
+.geo-pattern::after {
+  content: '';
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  left: -100px;
+  bottom: -100px;
+  border-radius: 58% 42% 45% 55% / 40% 56% 44% 60%;
+  background: linear-gradient(140deg, rgba(226, 18, 226, 0.14), rgba(0, 74, 173, 0.12));
+  pointer-events: none;
+}
+
+.geo-pattern--flip::before {
+  background-image:
+    repeating-linear-gradient(
+      -18deg,
+      rgba(179, 0, 179, 0.08) 0,
+      rgba(179, 0, 179, 0.08) 2px,
+      transparent 2px,
+      transparent 30px
+    ),
+    radial-gradient(rgba(26, 41, 66, 0.09) 1px, transparent 1px);
+  background-size: auto, 18px 18px;
+  opacity: 0.45;
+}
+
+.geo-pattern--flip::after {
+  left: auto;
+  bottom: auto;
+  right: -90px;
+  top: -80px;
+  width: 320px;
+  height: 320px;
+  border-radius: 38% 62% 57% 43% / 42% 38% 62% 58%;
+  background: linear-gradient(140deg, rgba(119, 195, 234, 0.2), rgba(226, 18, 226, 0.12));
+}
+
+[data-theme='dark'] .geo-pattern::before {
+  opacity: 0.3;
+}
+
+.geo-pattern > * {
+  position: relative;
+  z-index: 1;
+}

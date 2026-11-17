@@ -45,6 +45,7 @@ const CredibilityStrip: React.FC = () => {
   return (
     <section className={styles.credibilityStrip}>
       <div className={styles.container}>
+        <p className={styles.label}>Certified &amp; featured</p>
         <div className={styles.iconsGrid}>
           {credentials.map((item, index) => (
             <div key={index} className={styles.credentialItem}>
@@ -53,6 +54,8 @@ const CredibilityStrip: React.FC = () => {
                 alt={item.alt}
                 className={styles.credentialIcon}
                 loading="lazy"
+                width={96}
+                height={96}
               />
             </div>
           ))}

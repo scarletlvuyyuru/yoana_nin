@@ -99,12 +99,6 @@ const sitewideSchema = {
         {
           '@type': 'Offer',
           itemOffered: {
-            '@id': 'https://yoananincoaching.com/coaching#group-service',
-          },
-        },
-        {
-          '@type': 'Offer',
-          itemOffered: {
             '@id': 'https://yoananincoaching.com/coaching#private-service',
           },
         },
@@ -116,48 +110,16 @@ const sitewideSchema = {
       name: 'Yoana Nin Coaching Offers',
       url: 'https://yoananincoaching.com/coaching',
       itemListOrder: 'https://schema.org/ItemListOrderAscending',
-      numberOfItems: 2,
+      numberOfItems: 1,
       itemListElement: [
         {
           '@type': 'Offer',
           position: 1,
           itemOffered: {
-            '@id': 'https://yoananincoaching.com/coaching#group-service',
-          },
-        },
-        {
-          '@type': 'Offer',
-          position: 2,
-          itemOffered: {
             '@id': 'https://yoananincoaching.com/coaching#private-service',
           },
         },
       ],
-    },
-    {
-      '@type': 'Service',
-      '@id': 'https://yoananincoaching.com/coaching#group-service',
-      name: 'A Daily Healing Diary Circle',
-      serviceType: 'Group ADHD Coaching',
-      url: 'https://yoananincoaching.com/coaching#group-offer',
-      provider: {
-        '@id': 'https://yoananincoaching.com/#organization',
-      },
-      areaServed: {
-        '@type': 'Country',
-        name: 'United States',
-      },
-      availableChannel: {
-        '@type': 'ServiceChannel',
-        serviceUrl: 'https://yoananincoaching.com/coaching',
-        availableLanguage: 'en',
-      },
-      offers: {
-        '@type': 'Offer',
-        url: 'https://yoananincoaching.com/coaching#group-offer',
-        availability: 'https://schema.org/InStock',
-        priceCurrency: 'USD',
-      },
     },
     {
       '@type': 'Service',

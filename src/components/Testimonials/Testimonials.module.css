@@ -1,5 +1,10 @@
 .testimonialsSection {
-  background: linear-gradient(135deg, #1a1a1a 0%, #2d2d30 50%, #1a1a1a 100%);
+  background:
+    radial-gradient(circle at 12% 15%, rgba(226, 18, 226, 0.22), transparent 42%),
+    radial-gradient(circle at 88% 85%, rgba(119, 195, 234, 0.18), transparent 42%),
+    linear-gradient(135deg, var(--color-navy), #0d2547);
+  border-radius: 28px;
+  box-shadow: 0 26px 52px rgba(26, 42, 66, 0.22);
   padding: 4rem 0;
   position: relative;
   overflow: hidden;
@@ -20,11 +25,11 @@
 
 .tagline {
   font-size: var(--font-size-sm);
-  color: var(--color-orange-amber);
+  color: var(--color-pink-soft);
   text-transform: uppercase;
-  letter-spacing: 2px;
+  letter-spacing: 0.16em;
   margin: 0 0 1rem 0;
-  font-weight: 500;
+  font-weight: 700;
   font-family: var(--font-body);
 }
 
@@ -54,8 +59,8 @@
 }
 
 .navButton {
-  background: var(--color-blue-light);
-  border: 2px solid var(--color-blue-light);
+  background: linear-gradient(135deg, var(--color-magenta), var(--color-blue));
+  border: 0;
   border-radius: 50%;
   width: 60px;
   height: 60px;
@@ -70,8 +75,7 @@
 }
 
 .navButton:hover {
-  background: var(--color-blue);
-  border-color: var(--color-blue);
+  background: linear-gradient(135deg, var(--color-accessible-magenta), var(--color-blue));
   transform: translateY(-2px);
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
 }
@@ -276,7 +280,7 @@
   left: 0;
   width: 100%;
   height: 2px;
-  background: linear-gradient(90deg, var(--color-yellow-brand), var(--color-pink-brand));
+  background: linear-gradient(90deg, var(--color-magenta), var(--color-blue-light));
   animation: progress 4s linear infinite;
   opacity: 0.3;
 }
@@ -292,7 +296,12 @@
 
 /* Dark Mode Overrides */
 [data-theme="dark"] .testimonialsSection {
-  background: linear-gradient(135deg, #1a1a1a 0%, #2d2d30 50%, #1a1a1a 100%);
+  background:
+    radial-gradient(circle at 12% 15%, rgba(226, 18, 226, 0.22), transparent 42%),
+    radial-gradient(circle at 88% 85%, rgba(119, 195, 234, 0.18), transparent 42%),
+    linear-gradient(135deg, var(--color-navy), #0d2547);
+  border-radius: 28px;
+  box-shadow: 0 26px 52px rgba(26, 42, 66, 0.22);
   border-top: 1px solid var(--border-color);
   border-bottom: 1px solid var(--border-color);
 }

@@ -20,9 +20,10 @@ const navigationItems: NavigationItem[] = [
     name: 'Coaching',
     path: '/coaching',
     sections: [
-      { name: 'Coaching Offers', id: 'coaching-offers' },
-      { name: 'Group Coaching', id: 'group-offer' },
-      { name: '6-Month 1:1 Coaching', id: 'private-offer' }
+      { name: 'Is This You?', id: 'is-this-you' },
+      { name: 'How I Help', id: 'how-i-help' },
+      { name: '6-Month 1:1 Coaching', id: 'private-offer' },
+      { name: 'FAQ', id: 'coaching-faq' }
     ]
   },
   {
@@ -334,15 +335,6 @@ const Navigation: React.FC = () => {
               >
                 ADHD Quiz
               </Link>
-              <a
-                href="https://link.fastpaydirect.com/payment-link/6a73adcc7b99151a5404288d"
-                className={styles.joinCommunityLink}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Join Community
-                <span className={styles.textLinkIcon} aria-hidden="true">↗</span>
-              </a>
             </div>
           </div>
 
