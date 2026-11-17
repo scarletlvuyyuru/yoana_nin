@@ -6,7 +6,7 @@ import LeadMagnetForm from '../../components/LeadMagnet/LeadMagnetForm';
 import Testimonials from '../../components/Testimonials/Testimonials';
 import yoanaOneOnOneImage from '../../assets/images/yoana1on1.webp';
 import yoanaPortrait from '../../assets/images/yoana-nin-blue-shirt-pose.webp';
-import adhdBadge from '../../assets/images/Adhd_certification_badge.webp';
+import adhdBadge from '../../assets/images/Adhd_certification_badge-72.webp';
 import { HelpCarousel, SelfCheckDeck, StickyCallBar, useReveal } from '../../components/MobileInteractions/MobileInteractions';
 
 // The discovery call is requested through the contact form.

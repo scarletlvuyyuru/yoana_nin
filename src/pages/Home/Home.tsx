@@ -4,7 +4,7 @@ import { Helmet } from 'react-helmet-async';
 import styles from './Home.module.css';
 import SEO from '../../components/SEO/SEO';
 import heroImage from '../../assets/images/YoanaExpo.webp';
-import adhdBadge from '../../assets/images/Adhd_certification_badge.webp';
+import adhdBadge from '../../assets/images/Adhd_certification_badge-72.webp';
 import lookingThroughFingersImage from '/YoanaIseeYou.webp';
 import CredibilityStrip from '../../components/CredibilityStrip/CredibilityStrip';
 import Testimonials from '../../components/Testimonials/Testimonials';

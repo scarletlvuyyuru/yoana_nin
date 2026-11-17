@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import logo from '../../assets/yoana_nin_coaching_logo.webp';
+import logo from '../../assets/yoana_nin_coaching_logo-96.webp';
 import facebookIcon from '../../assets/images/icon_fb_wht.webp';
 import instagramIcon from '../../assets/images/icon_instagram.webp';
 import linkedinIcon from '../../assets/images/icon_linkedin.webp';
@@ -262,7 +262,8 @@ const Footer: React.FC = () => {
               onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
               style={{
                 color: 'var(--footer-text-secondary)',
-                textDecoration: 'none'
+                textDecoration: 'underline',
+                textUnderlineOffset: '3px'
               }}
             >
               Privacy
@@ -273,7 +274,8 @@ const Footer: React.FC = () => {
               onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
               style={{
                 color: 'var(--footer-text-secondary)',
-                textDecoration: 'none'
+                textDecoration: 'underline',
+                textUnderlineOffset: '3px'
               }}
             >
               Terms
